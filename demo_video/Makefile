@@ -1,2 +1,6 @@
-text: text.c
-	gcc -o text text.c -lwiringPi
+
+AccesingGPIOS: AccesingGPIOS.c
+	gcc -o AccesingGPIOS AccesingGPIOS.c -lwiringPi
+
+clean:
+	rm AccesingGPIOS
