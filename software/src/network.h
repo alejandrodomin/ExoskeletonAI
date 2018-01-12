@@ -8,6 +8,7 @@ class Net
       int **nodes;
    public:
       Net();
+      ~Net(); // destructor deletes heap memory
       bool rand_node();
       bool rand_connection();
 };

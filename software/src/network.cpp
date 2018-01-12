@@ -7,6 +7,10 @@ Net::Net(){
    return 0;
 }
 
+Net::~Net(){
+   return 0;
+}
+
 bool Net::rand_node(){
 
 }
