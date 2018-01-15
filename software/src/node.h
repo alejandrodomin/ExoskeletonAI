@@ -5,7 +5,7 @@ using namespace std;
 #ifndef NODE_H
 #define NODE_H
 
-class Node: public Network
+class Node 
 {
     private:
         Node *inputs;
@@ -13,6 +13,7 @@ class Node: public Network
         float output_func;
         float *weights_input;
         float bias;
+        int node_id;
 
     public:
         Node();

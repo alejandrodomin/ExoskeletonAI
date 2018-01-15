@@ -5,14 +5,15 @@ using namespace std;
 #ifndef NETWORK_H
 #define NETWORK_H
 
-class Network: public Species
+class Network 
 {
    private:
       Node **inputs;
       Node **outputs;
+      int numNodes;
       // outputs
    protected:
-      Node **nodes;
+      Node *nodes;
    public:
       Network();
       ~Network(); // destructor deletes heap memory
