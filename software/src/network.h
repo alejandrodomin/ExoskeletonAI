@@ -1,14 +1,25 @@
-#ifdef
-#ifndef  // this iffy
+#include <iostream>
 
-class Net
+using namespace std;
+
+#ifndef NETWORK_H
+#define NETWORK_H
+
+class Network: public Species
 {
    private:
+      Node **inputs;
+      Node **outputs;
+      // outputs
    protected:
-      int **nodes;
+      Node **nodes;
    public:
-      Net();
-      ~Net(); // destructor deletes heap memory
+      Network();
+      ~Network(); // destructor deletes heap memory
+
+      void get_input();       // names for these can be changed later
+      void use_output();
+
       bool rand_node();
       bool rand_connection();
 };
