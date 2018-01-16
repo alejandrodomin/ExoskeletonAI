@@ -14,7 +14,8 @@ class Node
         float *weights_input;
         float bias;
         int node_id;
-
+    protected:
+        void set_nodeid(int);
     public:
         Node();
         ~Node();
@@ -22,9 +23,8 @@ class Node
         void out_func(Node **, float *, float);
 
         int get_nodeid();
-        void set_nodeid();
 
-        int get_outputfunc();
+        float get_outputfunc();
         void set_outputfunc(float);
 
         void add_input(Node *);
