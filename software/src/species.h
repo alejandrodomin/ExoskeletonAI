@@ -9,9 +9,9 @@ class Species
 {
    private:
    protected:
-      int **   gen_fitness;
+      int **   net_fitness;
       int      max_fitness;
-      Net **   net_ptr;
+      Net **   networks;
       Net *    fittest_net;
    public:
       Species();
