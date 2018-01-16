@@ -3,7 +3,7 @@ SRC := src
 OBJ := build
 INC := include
 
-PROJ = ExoSAI
+PROJ = ExoHAI
 
 SOURCES := $(wildcard $(SRC)/*.cpp)
 OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))

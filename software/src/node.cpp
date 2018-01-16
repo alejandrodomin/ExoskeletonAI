@@ -13,17 +13,24 @@ Node::~Node()
 
 }
 
-void Node::out_func(Node *inputs, float *weights_input, float bias)
+void Node::out_func(Node **inputs, float *weights_input, float bias)
 {
     int index = 0;
     float total = 0;
     
-    while (inputs[i] != NULL) 
+    while (inputs[index] != NULL) 
     {
-       total += input[index].output_func * weights_input[index];
+       total += inputs[index]->get_outputfunc() * weights_input[index];
        index++;
     }
 
     total += bias;
-    this.output_func = total;
+    this->set_outputfunc(total);
 }
+
+int Node::get_nodeid(){}
+void Node::set_nodeid(){}
+int Node::get_outputfunc(){}
+void Node::set_outputfunc(float num){}
+void Node::add_input(Node *node){}
+void Node::add_output(Node *node){}

@@ -19,7 +19,14 @@ class Node
         Node();
         ~Node();
 
-        void out_func(Node *, float *, float);
+        void out_func(Node **, float *, float);
+
+        int get_nodeid();
+        void set_nodeid();
+
+        int get_outputfunc();
+        void set_outputfunc(float);
+
         void add_input(Node *);
         void add_output(Node *);
 };

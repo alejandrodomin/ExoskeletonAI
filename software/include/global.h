@@ -5,6 +5,4 @@
 #include "node.h"
 #include "species.h"
 
-int innova_num;
-
 #endif

@@ -1,9 +1,11 @@
 #include <iostream>
+#include "global.h"
 
 using namespace std;
 
 #ifndef NETWORK_H
 #define NETWORK_H
+class Node;
 
 class Network 
 {

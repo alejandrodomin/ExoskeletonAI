@@ -9,8 +9,8 @@ using namespace std;
 
 Network::Network()
 {
-   inputs  = new Node[NUM_INPUTS];
-   outputs = new Node[NUM_OUTPUTS];
+   inputs  = new Node*[NUM_INPUTS];
+   outputs = new Node*[NUM_OUTPUTS];
 }
 
 Network::~Network()
@@ -36,19 +36,19 @@ bool Network::rand_node(){}
 
 bool Network::rand_connection()
 {
-   int node_one = rand()% numNodes;
-   int node_two = rand()% numNodes;
+   int node_one = rand()% num_nodes;
+   int node_two = rand()% num_nodes;
 
    if(node_one == node_two) 
-      node_two = rand()% numNodes;
+      node_two = rand()% num_nodes;
    
    int index = 0;
    Node *one, *two;
    while (nodes[index] != NULL)
    {
-      if (nodes[index]->node_id == node_one)
+      if (nodes[index]->get_nodeid() == node_one)
          one = nodes[index];
-      else if (nodes[index]->node_id == node_two)
+      else if (nodes[index]->get_nodeid() == node_two)
          two = nodes[index];
 
       index++;
