@@ -15,12 +15,13 @@ Node::~Node()
 
 void Node::out_func(Node *inputs, float *weights_input, float bias)
 {
-    int i;
+    int index = 0;
     float total = 0;
+    
     while (inputs[i] != NULL) 
     {
-       total += input[i].output_func * weights_input[i];
-       i++;
+       total += input[index].output_func * weights_input[index];
+       index++;
     }
 
     total += bias;

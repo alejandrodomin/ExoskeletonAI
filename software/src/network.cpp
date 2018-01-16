@@ -38,21 +38,22 @@ bool Network::rand_connection()
 {
    int node_one = rand()% numNodes;
    int node_two = rand()% numNodes;
-   while(node_one == node_two) 
-   {
+
+   if(node_one == node_two) 
       node_two = rand()% numNodes;
-   }
-   int i;
-   Node one;
-   Node two;
-   while (nodes[i] != NULL)
+   
+   int index = 0;
+   Node *one, *two;
+   while (nodes[index] != NULL)
    {
-      if (nodes[i].node_id == node_one)
-         one = nodes[i];
-      else if (nodes[i].node_id == node_two)
-         two = nodes[i];
+      if (nodes[index]->node_id == node_one)
+         one = nodes[index];
+      else if (nodes[index]->node_id == node_two)
+         two = nodes[index];
+
+      index++;
    }
 
-   one.outputs = two;
-   two.inputs = one;  
+   one->add_output(two);
+   two->add_input(one);  
 }

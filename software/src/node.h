@@ -8,8 +8,8 @@ using namespace std;
 class Node 
 {
     private:
-        Node *inputs;
-        Node *outputs;
+        Node **inputs;
+        Node **outputs;
         float output_func;
         float *weights_input;
         float bias;
@@ -20,6 +20,7 @@ class Node
         ~Node();
 
         void out_func(Node *, float *, float);
-
+        void add_input(Node *);
+        void add_output(Node *);
 };
 #endif

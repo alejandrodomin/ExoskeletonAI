@@ -10,10 +10,10 @@ class Network
    private:
       Node **inputs;
       Node **outputs;
-      int numNodes;
+      int num_nodes;
       // outputs
    protected:
-      Node *nodes;
+      Node **nodes;     // points to all the nodes in a network
    public:
       Network();
       ~Network(); // destructor deletes heap memory
