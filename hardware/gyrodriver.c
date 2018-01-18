@@ -4,6 +4,7 @@
 #include <linux/init.h>
 #include <linux/module.h>
 #include <linux/kernel.h>
+#include <linux/fs.h>
 
 MODULE_LICENSE("GPL");
 MODULE_AUTHOR("Alejandro Dominguez");
@@ -18,26 +19,15 @@ static struct class*	gyroClass  = NULL;
 static struct device* gyroDevice = NULL;
 
 int register_device(void);
+static int gyro_open(struct inode *i, struct file *f);
+static ssize_t gyro_read(struct file *, char *, size_t, loff_t *);
+static ssize_t gyro_write(struct file *, const char *, size_t, loff_t *);
 
 struct file_operations fops = {
-    .owner = THIS_MODULE,
     .open = gyro_open,
-    .read = gyro_read
-}; 
-
-static int gyro_open(struct inode *i, struct file *f)
-{
-   printk(KERN_INFO "[GYRODRIVER]: Device opened succesfully.");
-
-   
-
-   return 0;
-}
-
-static int gyro_read(struct file *, char *, size_t, loff_t *)
-{
-
-}
+    .read = gyro_read,
+	 .write = gyro_write
+};
 
 static int __init gyro_init(void)
 {
@@ -89,4 +79,34 @@ int register_device(void)
 	else printk(KERN_INFO "[GYRODRIVER]: Device class created correctly\n");
 
    return 0;
+}
+
+static int gyro_open(struct inode *i, struct file *f)
+{
+   printk(KERN_INFO "[GYRODRIVER]: Device opened succesfully.");
+   return 0;
+}
+
+static ssize_t gyro_read(struct file *filep, char *buffer, size_t len, loff_t *offset) // not done
+{
+	int error_count = 0;
+   // copy_to_user has the format ( * to, *from, size) and returns 0 on success
+   error_count = copy_to_user(buffer, message, size_of_message);
+ 
+   if (error_count==0){            // if true then have success
+      printk(KERN_INFO "TESTChar: Sent %d characters to the user\n", size_of_message);
+      return (size_of_message=0);  // clear the position to the start and return 0
+   }
+   else {
+      printk(KERN_INFO "TESTChar: Failed to send %d characters to the user\n", error_count);
+      return -EFAULT;              // Failed -- return a bad address message (i.e. -14)
+   }
+}
+
+static ssize_t gyro_write(struct file *filep, const char *buffer, size_t len, loff_t *offset) // not done
+{
+	sprintf(message, "%s(%lu letters)", buffer, len);   // appending received string with its length, We use %lu because len is a size_t 
+   size_of_message = strlen(message);                 // store the length of the stored message
+   printk(KERN_INFO "TESTChar: Received %lu characters from the user\n", len); // We use %lu because len is an long unsigned int
+   return len;
 }

@@ -1,18 +1,7 @@
-CC = c++
-SRC := src
-OBJ := build
-INC := include
+obj-m += gyrodriver.o
 
-PROJ = ExoHAI
-
-SOURCES := $(wildcard $(SRC)/*.cpp)
-OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
-
-$(PROJ): $(OBJECTS)
-	$(CC) $^ -o $@
-
-$(OBJ)/%.o: $(SRC)/%.cpp
-	$(CC) -I$(INC) -c $< -o $@
+all:
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
 
 clean:
-	rm build/*.o $(PROJ)
+	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
