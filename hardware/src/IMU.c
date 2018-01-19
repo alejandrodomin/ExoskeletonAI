@@ -7,6 +7,8 @@
     http://ozzmaker.com/
 */
 
+#ifndef IMU_C
+#define IMU_C
 
 
 #include <stdio.h>
@@ -232,3 +234,5 @@ void enableIMU()
 	}
 
 }
+
+#endif IMU_C
