@@ -9,9 +9,10 @@
 
 
 
-
+#include <stdio.h>
 #include <stdint.h>
-#include "linux/i2c-dev.h"
+#include <linux/i2c-dev.h>
+#include <fcntl.h>
 #include "LSM9DS0.h"
 #include "LSM9DS1.h"
 
@@ -24,7 +25,7 @@ void  readBlock(uint8_t command, uint8_t size, uint8_t *data)
     int result = i2c_smbus_read_i2c_block_data(file, command, size, data);
     if (result != size){
 		printf("Failed to read block from I2C.");
-		exit(1);
+		return;
 	}
 }
 
@@ -45,9 +46,9 @@ void readACC(int  *a)
 	}
 	else if (LSM9DS1){
 		selectDevice(file,LSM9DS1_ACC_ADDRESS);
-		readBlock(0x80 |  LSM9DS1_OUT_X_L_XL, sizeof(block), block);       
+		readBlock(0x80 |  LSM9DS1_OUT_X_L_XL, sizeof(block), block);
 	}
-	
+
 	// Combine readings for each axis.
 	*a = (int16_t)(block[0] | block[1] << 8);
 	*(a+1) = (int16_t)(block[2] | block[3] << 8);
@@ -105,7 +106,7 @@ void writeAccReg(uint8_t reg, uint8_t value)
 	int result = i2c_smbus_write_byte_data(file, reg, value);
 	if (result == -1){
 		printf ("Failed to write byte to I2C Acc.");
-        exit(1);
+        return;
     }
 }
 
@@ -119,7 +120,7 @@ void writeMagReg(uint8_t reg, uint8_t value)
 	int result = i2c_smbus_write_byte_data(file, reg, value);
 	if (result == -1){
 		printf("Failed to write byte to I2C Mag.");
-		exit(1);
+		return;
 	}
 }
 
@@ -134,7 +135,7 @@ void writeGyrReg(uint8_t reg, uint8_t value)
 	int result = i2c_smbus_write_byte_data(file, reg, value);
 	if (result == -1){
 		printf("Failed to write byte to I2C Gyr.");
-		exit(1);
+		return;
 	}
 }
 
@@ -153,7 +154,7 @@ void detectIMU()
 	file = open(filename, O_RDWR);
 	if (file<0) {
 		printf("Unable to open I2C bus!");
-			exit(1);
+			return;
 	}
 
 	//Detect if BerryIMUv1 (Which uses a LSM9DS0) is connected
@@ -187,7 +188,7 @@ void detectIMU()
 
 	if (!LSM9DS0 && !LSM9DS1){
 		printf ("NO IMU DETECTED\n");
-		exit(1);
+		return;
 	}
 }
 
