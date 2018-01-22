@@ -31,11 +31,11 @@
 #include <sys/ioctl.h>
 #include <fcntl.h>
 #include "LSM9DS0.h"
-#include "LSM9DS1.h"
+//#include "LSM9DS1.h"
 
 int file;
-int LSM9DS0 = 0;
-int LSM9DS1 = 0;
+int LSM9DS0 = 1;
+//int LSM9DS1 = 0;
 
 void  readBlock(uint8_t command, uint8_t size, uint8_t *data)
 {
@@ -53,7 +53,7 @@ void selectDevice(int file, int addr)
 	}
 }
 
-
+/*
 void readACC(int  *a)
 {
 	uint8_t block[6];
@@ -92,6 +92,7 @@ void readMAG(int  *m)
 	*(m+2) = (int16_t)(block[4] | block[5] << 8);
 
 }
+*/
 
 void readGYR(int *g)
 {
@@ -112,7 +113,7 @@ void readGYR(int *g)
 	*(g+2) = (int16_t)(block[4] | block[5] << 8);
 }
 
-
+/*
 void writeAccReg(uint8_t reg, uint8_t value)
 {
 	if (LSM9DS0)
@@ -140,7 +141,7 @@ void writeMagReg(uint8_t reg, uint8_t value)
 		return;
 	}
 }
-
+*/
 
 void writeGyrReg(uint8_t reg, uint8_t value)
 {
@@ -216,6 +217,7 @@ void enableIMU()
 {
 
 	if (LSM9DS0){//For BerryIMUv1
+		/*
 		// Enable accelerometer.
 		writeAccReg(LSM9DS0_CTRL_REG1_XM, 0b01100111); //  z,y,x axis enabled, continuous update,  100Hz data rate
 		writeAccReg(LSM9DS0_CTRL_REG2_XM, 0b00100000); // +/- 16G full scale
@@ -224,13 +226,13 @@ void enableIMU()
 		writeMagReg(LSM9DS0_CTRL_REG5_XM, 0b11110000); // Temp enable, M data rate = 50Hz
 		writeMagReg(LSM9DS0_CTRL_REG6_XM, 0b01100000); // +/-12gauss
 		writeMagReg(LSM9DS0_CTRL_REG7_XM, 0b00000000); // Continuous-conversion mode
-
+		*/
 		// Enable Gyro
 		writeGyrReg(LSM9DS0_CTRL_REG1_G, 0b00001111); // Normal power mode, all axes enabled
 		writeGyrReg(LSM9DS0_CTRL_REG4_G, 0b00110000); // Continuos update, 2000 dps full scale
 	}
 
-	if (LSM9DS1){//For BerryIMUv2      
+	/*if (LSM9DS1){//For BerryIMUv2      
 		// Enable the gyroscope
 		writeGyrReg(LSM9DS1_CTRL_REG4,0b00111000);      // z, y, x axis enabled for gyro
 		writeGyrReg(LSM9DS1_CTRL_REG1_G,0b10111000);    // Gyro ODR = 476Hz, 2000 dps
@@ -246,7 +248,7 @@ void enableIMU()
 		writeMagReg(LSM9DS1_CTRL_REG3_M, 0b00000000);   // continuos update
 		writeMagReg(LSM9DS1_CTRL_REG4_M, 0b00000000);   // lower power mode for Z axis
 	}
-
+	*/
 }
 
 
@@ -279,8 +281,9 @@ int main(int argc, char *argv[])
 	float rate_gyr_x = 0.0;   // [deg/s]
 	float rate_gyr_z = 0.0;   // [deg/s]
 
-	int  accRaw[3];
+	/*int  accRaw[3];
 	int  magRaw[3];
+	*/
 	int  gyrRaw[3];
 
 
@@ -288,10 +291,12 @@ int main(int argc, char *argv[])
 	float gyroXangle = 0.0;
 	float gyroYangle = 0.0;
 	float gyroZangle = 0.0;
+	/*
 	float AccYangle = 0.0;
 	float AccXangle = 0.0;
 	float CFangleX = 0.0;
 	float CFangleY = 0.0;
+	*/
 
 	int startInt  = mymillis();
 	struct  timeval tvBegin, tvEnd,tvDiff;
@@ -311,7 +316,7 @@ int main(int argc, char *argv[])
 
 
 		//read ACC and GYR data
-		readACC(accRaw);
+		//readACC(accRaw);
 		readGYR(gyrRaw);
 
 		//Convert Gyro raw to degrees per second
@@ -330,8 +335,8 @@ int main(int argc, char *argv[])
 
 
 		//Convert Accelerometer values to degrees
-		AccXangle = (float) (atan2(accRaw[1],accRaw[2])+M_PI)*RAD_TO_DEG;
-		AccYangle = (float) (atan2(accRaw[2],accRaw[0])+M_PI)*RAD_TO_DEG;
+		//AccXangle = (float) (atan2(accRaw[1],accRaw[2])+M_PI)*RAD_TO_DEG;
+		//AccYangle = (float) (atan2(accRaw[2],accRaw[0])+M_PI)*RAD_TO_DEG;
 
 		//Change the rotation value of the accelerometer to -/+ 180 and move the Y axis '0' point to up.
 		//Two different pieces of code are used depending on how your IMU is mounted.
@@ -353,11 +358,12 @@ int main(int argc, char *argv[])
 
 
 		//Complementary filter used to combine the accelerometer and gyro values.
-		CFangleX=AA*(CFangleX+rate_gyr_x*DT) +(1 - AA) * AccXangle;
-		CFangleY=AA*(CFangleY+rate_gyr_y*DT) +(1 - AA) * AccYangle;
+		//CFangleX=AA*(CFangleX+rate_gyr_x*DT) +(1 - AA) * AccXangle;
+		//CFangleY=AA*(CFangleY+rate_gyr_y*DT) +(1 - AA) * AccYangle;
 
 
-		printf ("   GyroX  %7.3f \t AccXangle \e[m %7.3f \t \033[22;31mCFangleX %7.3f\033[0m\t GyroY  %7.3f \t AccYangle %7.3f \t \033[22;36mCFangleY %7.3f\t\033[0m\n",gyroXangle,AccXangle,CFangleX,gyroYangle,AccYangle,CFangleY);
+		//printf ("   GyroX  %7.3f \t AccXangle \e[m %7.3f \t \033[22;31mCFangleX %7.3f\033[0m\t GyroY  %7.3f \t AccYangle %7.3f \t \033[22;36mCFangleY %7.3f\t\033[0m\n",gyroXangle,AccXangle,CFangleX,gyroYangle,AccYangle,CFangleY);
+		printf ("   GyroX  %7.3f \t GyroY  %7.3f\n",gyroXangle,gyroYangle);
 
 		//Each loop should be at least 20ms.
 		while(mymillis() - startInt < (DT*1000)){
