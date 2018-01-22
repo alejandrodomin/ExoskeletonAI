@@ -327,9 +327,9 @@ int main(int argc, char *argv[])
 
 
 		//Calculate the angles from the gyro
-		gyroXangle+=rate_gyr_x*DT;
-		gyroYangle+=rate_gyr_y*DT;
-		gyroZangle+=rate_gyr_z*DT;
+		gyroXangle=rate_gyr_x*DT;
+		gyroYangle=rate_gyr_y*DT;
+		gyroZangle=rate_gyr_z*DT;
 
 
 
