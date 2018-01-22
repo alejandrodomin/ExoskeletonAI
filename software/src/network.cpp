@@ -1,6 +1,7 @@
 #include "network.h"
 #include <iostream>
 #include <cstdlib>
+#include <thread>
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
@@ -41,6 +42,46 @@ int Network::get_num_nodes(){
 void Network::set_num_nodes(int num_nodes)
 {
     this.num_nodes = num_nodes;
+}
+bool Network::add_input_node(int num_nodes)
+{
+int index = 0;
+while(num_nodes > 0)
+{
+    Node* ptr = new Node();
+    inputs[index] = ptr;
+    num_nodes--;
+    index++;
+    if (ptr != NULL)
+    {
+        delete [] ptr;
+        ptr = NULL;
+    }
+}
+}
+bool Network::add_output_nodes(int num_nodes)
+{
+int index = 0;
+while(num_nodes > 0)
+{
+    Node* ptr = new Node();
+    outputs[index] = ptr;
+    num_nodes--;
+    index++;
+    if (ptr != NULL)
+    {
+        delete [] ptr;
+        ptr = NULL;
+    }
+}
+}
+void Network::run()
+{
+    for (int index = 0; index < 9; index++)
+    {
+        thread(inputs[index]->out_func());
+        
+    }
 }
 
 

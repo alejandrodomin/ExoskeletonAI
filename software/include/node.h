@@ -15,19 +15,19 @@ class Node
         float bias;
         int node_id;
     protected:
-        void set_nodeid(int);
+        
     public:
         Node();
         ~Node();
 
-        void out_func(Node **, float *, float);
+        void out_func();
 
         int get_nodeid();
 
         float get_outputfunc();
         void set_outputfunc(float);
 
-        void add_input(Node *);
-        void add_output(Node *);
+        virtual void add_input(Node *)=0;
+        virtual add_output(Node *)=0;
 };
 #endif

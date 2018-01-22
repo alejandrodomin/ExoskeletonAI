@@ -22,6 +22,9 @@ class Network
 
       void get_input();       // names for these can be changed later
       void use_output();
+      bool add_input_node();
+      bool add_output_nodes();
+      void run();
 
       bool rand_node();
       bool rand_connection();

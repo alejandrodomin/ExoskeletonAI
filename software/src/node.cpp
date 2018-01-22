@@ -13,7 +13,7 @@ Node::~Node()
 
 }
 
-void Node::out_func(Node **inputs, float *weights_input, float bias)
+void Node::out_func()
 {
     int index = 0;
     float total = 0;
@@ -33,10 +33,6 @@ int Node::get_nodeid()
     return node_id;
 }
 
-void Node::set_nodeid(int newid)
-{
-    node_id = newid;
-}
 
 float Node::get_outputfunc()
 {
@@ -48,12 +44,3 @@ void Node::set_outputfunc(float num)
     output_func = num;
 }
 
-void Node::add_input(Node *node)
-{
-
-}
-
-void Node::add_output(Node *node)
-{
-    
-}
