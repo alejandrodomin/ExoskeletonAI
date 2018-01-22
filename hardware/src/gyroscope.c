@@ -363,7 +363,7 @@ int main(int argc, char *argv[])
 
 
 		//printf ("   GyroX  %7.3f \t AccXangle \e[m %7.3f \t \033[22;31mCFangleX %7.3f\033[0m\t GyroY  %7.3f \t AccYangle %7.3f \t \033[22;36mCFangleY %7.3f\t\033[0m\n",gyroXangle,AccXangle,CFangleX,gyroYangle,AccYangle,CFangleY);
-		printf ("   GyroX  %7.3f \t GyroY  %7.3f\n",gyroXangle,gyroYangle);
+		printf ("   GyroX  %7.3f \t GyroY  %7.3f \t GyroZ  %7.3f \n",gyroXangle,gyroYangle,gyroZangle);
 
 		//Each loop should be at least 20ms.
 		while(mymillis() - startInt < (DT*1000)){
