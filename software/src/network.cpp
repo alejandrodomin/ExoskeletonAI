@@ -28,7 +28,9 @@ Network::~Network()
 
 }
 
-void Network::get_input(){}
+void Network::get_input(){
+    return **inputs;
+} 
 
 void Network::use_output(){}
 
