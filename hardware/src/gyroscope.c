@@ -6,7 +6,7 @@
 #include <fcntl.h>
 #include <string.h>
 #include <time.h>
-
+#include <sys/time.h>
 
 #define DT 0.02         // [s/loop] loop period. 20ms
 #define AA 0.97         // complementary filter constant
@@ -26,7 +26,6 @@
 */
 
 
-#include <stdio.h>
 #include <stdint.h>
 #include <linux/i2c-dev.h>
 #include <sys/ioctl.h>
