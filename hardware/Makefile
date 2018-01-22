@@ -1,7 +1,18 @@
-obj-m += gyrodriver.o
+CC = gcc
+SRC := src
+OBJ := build
+INC := include
 
-all:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) modules
+PROJ = ExoHAI
+
+SOURCES := $(wildcard $(SRC)/*.c)
+OBJECTS := $(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SOURCES))
+
+$(PROJ): $(OBJECTS)
+	$(CC) $^ -o $@
+
+$(OBJ)/%.o: $(SRC)/%.c
+	$(CC) -I$(INC) -c $< -o $@
 
 clean:
-	make -C /lib/modules/$(shell uname -r)/build M=$(PWD) clean
+	rm build/*.o $(PROJ)
