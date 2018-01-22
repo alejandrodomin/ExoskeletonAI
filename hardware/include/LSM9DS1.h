@@ -1,3 +1,6 @@
+#ifndef LSM9DS1_H
+#define LSM9DS1_H
+
 #define LSM9DS1_MAG_ADDRESS 0x1C	//Would be 0x1E if SDO_M is HIGH		
 #define LSM9DS1_ACC_ADDRESS 0x6A  
 #define LSM9DS1_GYR_ADDRESS 0x6A  //Would be 0x6B if SDO_AG is HIGH
@@ -89,3 +92,5 @@
 #////////////////////////////////
 #define LSM9DS1_WHO_AM_I_AG_RSP	 0x68
 #define LSM9DS1_WHO_AM_I_M_RSP	0x3D
+
+#endif

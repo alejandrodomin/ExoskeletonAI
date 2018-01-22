@@ -1,3 +1,6 @@
+#ifndef LSM9DS0_H
+#define LSM9DS0_H
+
 #define LSM9DS0_MAG_ADDRESS		0x1E			
 #define LSM9DS0_ACC_ADDRESS		0x1E			
 #define LSM9DS0_GYR_ADDRESS     0x6A
@@ -84,3 +87,5 @@
 #define LSM9DS0_TIME_LIMIT	0x3B			
 #define LSM9DS0_TIME_LATENCY	0x3C			
 #define LSM9DS0_TIME_WINDOW	0x3D	
+
+#endif
