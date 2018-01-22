@@ -11,6 +11,8 @@ private:
     Node **inputs;
     Node ** outputs;
 public:
+    Hidden();
+   ~Hidden();
     virtual void add_input(Node *node);
     virtual void add_output(Node *node);
 
