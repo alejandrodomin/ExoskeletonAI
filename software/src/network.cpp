@@ -28,7 +28,21 @@ Network::~Network()
 
 }
 
-void Network::get_input(){}
+ Network::get_input(){
+    return **inputs;
+} 
+void Network::set_input(**input)
+{
+    this.**inputs = **input;
+}
+int Network::get_num_nodes(){
+    return num_nodes;
+} 
+void Network::set_num_nodes(int num_nodes)
+{
+    this.num_nodes = num_nodes;
+}
+
 
 void Network::use_output(){}
 
