@@ -3,6 +3,8 @@ SRC := src
 OBJ := build
 INC := include
 
+CFLAGS = -std=c++11
+
 PROJ = ExoSAI
 
 SOURCES := $(wildcard $(SRC)/*.cpp)
@@ -12,7 +14,7 @@ $(PROJ): $(OBJECTS)
 	$(CC) $^ -o $@
 
 $(OBJ)/%.o: $(SRC)/%.cpp
-	$(CC) -I$(INC) -c $< -o $@
+	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
 	rm build/*.o $(PROJ)

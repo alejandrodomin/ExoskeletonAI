@@ -1,11 +1,10 @@
 #include <iostream>
-#include "global.h"
+
+#include "node.h"
 
 using namespace std;
 #ifndef INPUT_H
 #define INPUT_H
-
-enum gyro {gyroX, gyroY, gyroZ} gyro_values;
 
 class Input: public Node 
 {

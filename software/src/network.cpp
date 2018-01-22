@@ -1,7 +1,10 @@
-#include "network.h"
 #include <iostream>
 #include <cstdlib>
 #include <thread>
+
+#include "network.h"
+#include "input.h"
+#include "output.h"
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
@@ -10,78 +13,86 @@ using namespace std;
 
 Network::Network()
 {
-   inputs  = new Node*[NUM_INPUTS];
-   outputs = new Node*[NUM_OUTPUTS];
+   in_nodes  = new Input*[NUM_INPUTS];
+   out_nodes = new Output*[NUM_OUTPUTS];
 }
 
 Network::~Network()
 {
-   if(inputs != NULL)
+   if(this->in_nodes != NULL)
    {
-      delete [] inputs;
-      inputs = NULL;
+      delete [] this->in_nodes;
+      in_nodes = NULL;
    }
-   if(outputs != NULL)
+   if(out_nodes != NULL)
    {
-      delete [] outputs;
-      outputs = NULL;
+      delete [] out_nodes;
+      in_nodes = NULL;
    }
 
 }
 
- Network::get_input(){
-    return **inputs;
+Input** Network::get_input(){
+    return in_nodes;
 } 
-void Network::set_input(**input)
+
+int Network::get_num_nodes()
 {
-    this.**inputs = **input;
-}
-int Network::get_num_nodes(){
     return num_nodes;
-} 
+}
+
 void Network::set_num_nodes(int num_nodes)
 {
-    this.num_nodes = num_nodes;
+    this->num_nodes = num_nodes;
 }
+
 bool Network::add_input_node(int num_nodes)
 {
-int index = 0;
-while(num_nodes > 0)
-{
-    Node* ptr = new Node();
-    inputs[index] = ptr;
-    num_nodes--;
-    index++;
-    if (ptr != NULL)
+    int index = 0;
+    while(num_nodes > 0)
     {
-        delete [] ptr;
-        ptr = NULL;
+        Input* ptr = new Input();
+        in_nodes[index] = ptr;
+        
+        num_nodes--;
+        index++;
+        
+        if (ptr != NULL)
+        {
+            delete [] ptr;
+            ptr = NULL;
+        }
     }
+
+    return true;
 }
-}
+
 bool Network::add_output_nodes(int num_nodes)
 {
-int index = 0;
-while(num_nodes > 0)
-{
-    Node* ptr = new Node();
-    outputs[index] = ptr;
-    num_nodes--;
-    index++;
-    if (ptr != NULL)
+    int index = 0;
+    while(num_nodes > 0)
     {
-        delete [] ptr;
-        ptr = NULL;
+        Output* ptr = new Output();
+        out_nodes[index] = ptr;
+        
+        num_nodes--;
+        index++;
+        
+        if (ptr != NULL)
+        {
+            delete [] ptr;
+            ptr = NULL;
+        }
     }
-}
+
+    return true;
 }
 void Network::run()
 {
-    for (int index = 0; index < 9; index++)
-    {
-        thread(inputs[index]->out_func());
-        
-    }
+    // for (int index = 0; index < 9; index++)
+    // {
+    //     thread threads(in_nodes[index]->out_func());
+    // }
 }
 
 
@@ -91,24 +102,24 @@ bool Network::rand_node(){}
 
 bool Network::rand_connection()
 {
-   int node_one = rand()% num_nodes;
-   int node_two = rand()% num_nodes;
+//    int node_one = rand()% num_nodes;
+//    int node_two = rand()% num_nodes;
 
-   if(node_one == node_two) 
-      node_two = rand()% num_nodes;
+//    if(node_one == node_two) 
+//       node_two = rand()% num_nodes;
    
-   int index = 0;
-   Node *one, *two;
-   while (nodes[index] != NULL)
-   {
-      if (nodes[index]->get_nodeid() == node_one)
-         one = nodes[index];
-      else if (nodes[index]->get_nodeid() == node_two)
-         two = nodes[index];
+//    int index = 0;
+//    Node *one, *two;
+//    while (nodes[index] != NULL)
+//    {
+//       if (nodes[index]->get_nodeid() == node_one)
+//          one = nodes[index];
+//       else if (nodes[index]->get_nodeid() == node_two)
+//          two = nodes[index];
 
-      index++;
-   }
+//       index++;
+//    }
 
-   one->add_output(two);
-   two->add_input(one);  
+//    one->add_output(two);
+//    two->add_input(one);  
 }

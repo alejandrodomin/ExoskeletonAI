@@ -2,6 +2,7 @@ CC = gcc
 SRC := src
 OBJ := build
 INC := include
+
 LDFLAGS = -lm
 
 PROJ = ExoHAI

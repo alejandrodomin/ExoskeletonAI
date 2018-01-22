@@ -1,5 +1,6 @@
 #include <iostream>
-#include "global.h"
+
+#include "node.h"
 
 using namespace std;
 #ifndef OUTPUT_H

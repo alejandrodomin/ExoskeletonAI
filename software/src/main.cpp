@@ -1,6 +1,6 @@
-#include "global.h"
-
 #include <iostream>
+
+#include "network.h"
 
 using namespace std;
 

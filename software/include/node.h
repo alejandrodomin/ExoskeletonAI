@@ -28,6 +28,6 @@ class Node
         void set_outputfunc(float);
 
         virtual void add_input(Node *)=0;
-        virtual add_output(Node *)=0;
+        virtual void add_output(Node *)=0;
 };
 #endif

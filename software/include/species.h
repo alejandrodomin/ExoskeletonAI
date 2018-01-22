@@ -1,11 +1,11 @@
 #include <iostream>
-#include "global.h"
+
+#include "network.h"
 
 using namespace std;
 
 #ifndef SPECIES_H
 #define SPECIES_H
-class Net;
 
 class Species
 {
@@ -13,8 +13,8 @@ class Species
    protected:
       int **   net_fitness;
       int      max_fitness;
-      Net **   networks;
-      Net *    fittest_net;
+      Network **   networks;
+      Network *    fittest_net;
    public:
       Species();
       ~Species();
