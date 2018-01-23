@@ -8,7 +8,8 @@ enum gyro {gyroX = 0,
             gyroY,
             gyroZ};
 
-Input::Input()
+Input::Input():Node()			// the :Node() after the constructor calls the parent
+					// constructor implicitly
 {
    this->inputs = new float[3];
 }
