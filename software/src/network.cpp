@@ -32,7 +32,8 @@ Network::~Network()
 
 }
 
-Input** Network::get_input(){
+Input** Network::get_input()
+{
     return in_nodes;
 } 
 
@@ -87,12 +88,15 @@ bool Network::add_output_nodes(int num_nodes)
 
     return true;
 }
-void Network::run()
+
+void Network::run()					// there is alot of safety measures that need to be put into here
 {
-    // for (int index = 0; index < 9; index++)
-    // {
-    //     thread threads(in_nodes[index]->out_func());
-    // }
+    for (int index = 0; index < 9; index++)
+    {
+        thread threads(in_nodes[index]->out_func);	// syntax is thread name_th (function) if you need to send 
+	thread.detach(); // lets the system delete heap memory prevents memory leaks	
+							//parameters then syntax is thread name_th (function,param)
+    }
 }
 
 
