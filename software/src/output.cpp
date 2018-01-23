@@ -4,7 +4,7 @@
 
 using namespace std;
 
-Output::Output():Node(){}
+Output::Output(): Node(output){}
 
 Output::~Output(){}
 

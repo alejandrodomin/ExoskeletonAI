@@ -11,9 +11,12 @@ class Input: public Node
 
 private:
     float* inputs;
+
+    typedef Node super;
 public:
     Input();
    ~Input();
+
     virtual void add_input(Node *node);
     virtual void add_output(Node *node);
 };

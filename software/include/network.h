@@ -1,4 +1,5 @@
 #include <iostream>
+#include <thread>
 
 #include "input.h"
 #include "hidden.h"
@@ -17,6 +18,8 @@ class Network
       Input  **in_nodes; // the input nodes
       Hidden **hid_nodes; // the hidden nodes
       Output **out_nodes; // output nodes
+
+      thread **threads;
       // outputs
    protected:
    public:
