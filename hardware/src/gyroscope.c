@@ -286,11 +286,21 @@ int main(int argc, char *argv[])
 	*/
 	int  gyrRaw[3];
 
-
+	//drift calculators
+	float driftx = 0.0;
+	float drifty = 0.0;
+	float driftz = 0.0;
+	float gyroXprev = 0.0;
+	float gyroYprev = 0.0;
+	float gyroZprev = 0.0;
+	int count = 0;
 
 	float gyroXangle = 0.0;
 	float gyroYangle = 0.0;
 	float gyroZangle = 0.0;
+	float est_drift_x = 0.0;
+	float est_drift_y = 0.0;
+	float est_drift_z = 0.0;
 	/*
 	float AccYangle = 0.0;
 	float AccXangle = 0.0;
@@ -299,6 +309,7 @@ int main(int argc, char *argv[])
 	*/
 
 	int startInt  = mymillis();
+	int startTime = startInt;
 	struct  timeval tvBegin, tvEnd,tvDiff;
 
 
@@ -310,7 +321,7 @@ int main(int argc, char *argv[])
 	gettimeofday(&tvBegin, NULL);
 
 
-	while(1)
+	while(mymillis()-startTime <= 60000)
 	{
 		startInt = mymillis();
 
@@ -324,15 +335,20 @@ int main(int argc, char *argv[])
 		rate_gyr_y = (float) gyrRaw[1]  * G_GAIN;
 		rate_gyr_z = (float) gyrRaw[2]  * G_GAIN;
 
-
+		//store prev values of each angle
+		gyroXprev = gyroXangle;
+		gyroYprev = gyroYangle;
+		gyroZprev = gyroZangle;
 
 		//Calculate the angles from the gyro
-		gyroXangle=rate_gyr_x*DT;
-		gyroYangle=rate_gyr_y*DT;
-		gyroZangle=rate_gyr_z*DT;
+		gyroXangle+=rate_gyr_x*DT - est_drift_x;
+		gyroYangle+=rate_gyr_y*DT - est_drift_y;
+		gyroZangle+=rate_gyr_z*DT - est_drift_z;
 
-
-
+		//calculate relative drift over time
+		driftx += gyroXangle - gyroXprev;
+		drifty += gyroYangle - gyroYprev;
+		driftz += gyroZangle - gyroZprev;
 
 		//Convert Accelerometer values to degrees
 		//AccXangle = (float) (atan2(accRaw[1],accRaw[2])+M_PI)*RAD_TO_DEG;
@@ -363,13 +379,14 @@ int main(int argc, char *argv[])
 
 
 		//printf ("   GyroX  %7.3f \t AccXangle \e[m %7.3f \t \033[22;31mCFangleX %7.3f\033[0m\t GyroY  %7.3f \t AccYangle %7.3f \t \033[22;36mCFangleY %7.3f\t\033[0m\n",gyroXangle,AccXangle,CFangleX,gyroYangle,AccYangle,CFangleY);
-		printf ("   GyroX  %7.3f \t GyroY  %7.3f \t GyroZ  %7.3f \n\r",gyroXangle,gyroYangle,gyroZangle);
+		printf ("   GyroX  %7.3f \t GyroY  %7.3f \t GyroZ  %7.3f \n",gyroXangle,gyroYangle,gyroZangle);
 
 		//Each loop should be at least 20ms.
 		while(mymillis() - startInt < (DT*1000)){
 				usleep(100);
 		}
-
+		count++;
 		printf("Loop Time %d\t", mymillis()- startInt);
     }
+    printf("average Xdrift = %f \t Ydrift = %f \t Zdrift = %f \n", driftx/count, drifty/count, driftz/count);
 }
