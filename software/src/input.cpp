@@ -1,14 +1,12 @@
 #include <iostream>
 
+#include "node.h"
 #include "input.h"
 
 using namespace std;
 
-enum gyro {gyroX = 0, 
-            gyroY,
-            gyroZ};
-
-Input::Input()
+Input::Input(): Node(input)			// the :Node() after the constructor calls the parent
+					// constructor implicitly
 {
    this->inputs = new float[3];
 }

@@ -10,12 +10,14 @@ using namespace std;
 class Hidden: public Node 
 {
     private:
-        Node **inputs;
-        Node ** outputs;
+        int layer;
+
     public:
         Hidden();
         ~Hidden();
-    
+
+        void find_layer();
+
         virtual void add_input(Node *node);
         virtual void add_output(Node *node);    
 };
