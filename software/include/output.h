@@ -15,7 +15,7 @@ public:
     Output();
    ~Output();
     
-    virtual void add_input(Node *node);
-    virtual void add_output(Node *node);
+    virtual void add_input(Node *);
+    virtual void add_output(Node *);
 };
 #endif

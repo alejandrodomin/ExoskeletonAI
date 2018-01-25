@@ -6,8 +6,7 @@
 using namespace std;
 
 Input::Input(): Node(input)			// the :Node() after the constructor calls the parent
-					// constructor implicitly
-{
+{                                   // constructor implicitly
    this->inputs = new float[3];
 }
 
@@ -19,6 +18,12 @@ Input::~Input()
    }
 }
 
-void Input::add_input(Node *node){}
+void Input::add_input(Node *node)
+{
+    inputs.push_back(node);
+}
 
-void Input::add_output(Node *node){}
+void Input::add_output(Node *node)
+{
+    outputs.push_back(node);
+}

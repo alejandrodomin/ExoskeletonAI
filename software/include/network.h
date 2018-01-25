@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <list>
 
 #include "input.h"
 #include "hidden.h"
@@ -16,7 +17,7 @@ class Network
       int num_nodes;
 
       Input  **in_nodes; // the input nodes
-      Hidden **hid_nodes; // the hidden nodes
+      list<Hidden> *hid_nodes; // the hidden nodes
       Output **out_nodes; // output nodes
 
       thread **threads;

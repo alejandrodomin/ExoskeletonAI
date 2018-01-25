@@ -1,6 +1,7 @@
 #include <iostream>
 #include <mutex>
 #include <thread>
+#include <list>
 
 using namespace std;
 
@@ -13,8 +14,8 @@ enum type {input = 0, hidden, output};
 class Node 
 {
     private:
-        Node **inputs;
-        Node **outputs;
+        list<Node> *inputs;
+        list<Node> *outputs;
 
         float output_func;
         float *weights_input;

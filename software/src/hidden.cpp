@@ -4,7 +4,10 @@
 
 using namespace std;
 
-Hidden::Hidden(): Node(hidden){}
+Hidden::Hidden(): Node(hidden)
+{
+    
+}
 
 Hidden::~Hidden(){}
 
@@ -26,6 +29,12 @@ int Hidden::get_layer()
     return layer;
 }
 
-void Hidden::add_input(Node *node){}
+void Hidden::add_input(Node *node)
+{
+    inputs.push_back(node);
+}
 
-void Hidden::add_output(Node *node){}
+void Hidden::add_output(Node *node)
+{
+    outputs.push_back(node);
+}

@@ -10,9 +10,9 @@ Node::Node()
 
 }
 
-Node::Node(int type)
+Node::Node(int new_type)
 {
-    this->type = type;
+    type = new_type;
 }
 
 Node::~Node()
