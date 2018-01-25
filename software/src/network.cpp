@@ -8,6 +8,7 @@
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
+#define MAX_THREADS 10
 
 using namespace std;
 
@@ -15,20 +16,25 @@ Network::Network()
 {
    in_nodes  = new Input*[NUM_INPUTS];
    out_nodes = new Output*[NUM_OUTPUTS];
-   threads   = new thread*[NUM_INPUTS];
+   threads   = new thread*[MAX_THREADS];
 }
 
 Network::~Network()
 {
-   if(this->in_nodes != NULL)
+   if(in_nodes != NULL)
    {
-      delete [] this->in_nodes;
+      delete [] in_nodes;
       in_nodes = NULL;
    }
    if(out_nodes != NULL)
    {
       delete [] out_nodes;
       in_nodes = NULL;
+   }
+   if(threads != NULL)
+   {
+       delete [] threads;
+       threads = NULL;
    }
 
 }
@@ -92,13 +98,121 @@ bool Network::add_output_nodes(int num_nodes)
 
 void Network::run()					// there is alot of safety measures that need to be put into here
 {
-    for (int index = 0; index < 9; index++)
+    input_run();
+    hidden_run();
+    output_run();
+
+}
+
+void Network::input_run()
+{
+    for (int index = 0; index < NUM_INPUTS; index++)
     {
         threads[index] = in_nodes[index]->spawn_thread();
     }
-    
+
+    int found = 0;          // checks to see if the above threads are done executing
+    while(found < NUM_INPUTS)
+    {
+        if(in_nodes[index]->get_outputfunc() != 0)
+        {
+            found++;
+        }
+    }
+
+    if(threads != NULL)
+    {
+        delete [] threads;
+        threads = NULL;
+    }
 }
 
+void Network::hidden_run()
+{
+    int layer = 1;
+    int index = 0;
+    int thread_count = 0;
+    int num_exenodes = 0; // number of nodes executed per layer
+    bool free_thread = false;
+    bool done = false;
+
+    while(!done)
+    {
+        while(hid_nodes[index] != NULL)
+        {
+            if(hid_nodes[index]->get_layer() == layer)
+            {
+                if(thread_count < MAX_THREADS)
+                {
+                    threads[index] = hid_nodes[index]->spawn_thread();  // index for threads is all wrong
+                    thread_count++;
+                }
+                else
+                {
+                    while(!free_thread)
+                    {
+                        for(int indx = 0; indx < MAX_THREADS; indx++)
+                        {    
+                            if(threads[indx]->get_outputfunc() != 0)
+                            {
+                                free_thread = true;
+
+                                if(threads[indx] != NULL)
+                                {
+                                    delete threads[indx];
+                                    threads = NULL;
+                                }
+
+                                thread_count--;
+                            }
+                        }
+                    }
+                }
+
+                num_exenodes++;
+                index++;
+            }
+            else index++;
+        }
+
+        if(num_exenodes == 0)
+        {
+            done = true;
+        }
+        else num_exenodes = 0;
+
+        layer++;
+    }
+
+    if(threads != NULL)
+    {
+        delete [] threads;
+        threads = NULL;
+    }
+}
+
+void Network::output_run()
+{
+    for (int index = 0; index < NUM_OUTPUTS; index++)
+    {
+        threads[index] = out_nodes[index]->spawn_thread();
+    }
+
+    int found = 0;          // checks to see if the above threads are done executing
+    while(found < NUM_INPUTS)
+    {
+        if(out_nodes[index]->get_outputfunc() != 0)
+        {
+            found++;
+        }
+    }
+
+    if(threads != NULL)
+    {
+        delete [] threads;
+        threads = NULL;
+    }
+}
 
 void Network::use_output(){}
 

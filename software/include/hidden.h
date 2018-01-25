@@ -18,6 +18,8 @@ class Hidden: public Node
 
         void find_layer();
 
+        int get_layer();
+
         virtual void add_input(Node *node);
         virtual void add_output(Node *node);    
 };

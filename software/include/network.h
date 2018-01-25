@@ -22,6 +22,10 @@ class Network
       thread **threads;
       // outputs
    protected:
+      void input_run();
+      void hidden_run();
+      void output_run();
+
    public:
       Network();
       ~Network(); // destructor deletes heap memory

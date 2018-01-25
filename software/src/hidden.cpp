@@ -8,7 +8,7 @@ Hidden::Hidden(): Node(hidden){}
 
 Hidden::~Hidden(){}
 
-void Hidden::find_layer()
+void Hidden::find_layer()   // the logic in this function seems iffy check it later
 {
    int index = 0;
    while(inputs[index] != NULL)
@@ -19,6 +19,11 @@ void Hidden::find_layer()
       }
       else layer = 1;
    }
+}
+
+int Hidden::get_layer()
+{
+    return layer;
 }
 
 void Hidden::add_input(Node *node){}
