@@ -10,14 +10,9 @@ class Input: public Node
 {
 
 private:
-    float* inputs;
-
-    typedef Node super;
+    float* hardware_inputs;
 public:
     Input();
    ~Input();
-
-    virtual void add_input(Node *);
-    virtual void add_output(Node *);
 };
 #endif

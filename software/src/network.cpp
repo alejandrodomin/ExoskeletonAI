@@ -106,18 +106,22 @@ void Network::run()					// there is alot of safety measures that need to be put 
 
 void Network::input_run()
 {
-    for (int index = 0; index < NUM_INPUTS; index++)
+    int index;
+    for (index = 0; index < NUM_INPUTS; index++)
     {
         threads[index] = in_nodes[index]->spawn_thread();
     }
 
     int found = 0;          // checks to see if the above threads are done executing
+    index = 0;
     while(found < NUM_INPUTS)
     {
         if(in_nodes[index]->get_outputfunc() != 0)
         {
             found++;
         }
+
+        index++;
     }
 
     if(threads != NULL)
@@ -129,66 +133,7 @@ void Network::input_run()
 
 void Network::hidden_run()
 {
-    int layer = 1;
-    int index = 0;
-    int thread_count = 0;
-    int num_exenodes = 0; // number of nodes executed per layer
-    bool free_thread = false;
-    bool done = false;
-
-    while(!done)
-    {
-        while(hid_nodes[index] != NULL)
-        {
-            if(hid_nodes[index]->get_layer() == layer)
-            {
-                if(thread_count < MAX_THREADS)
-                {
-                    threads[index] = hid_nodes[index]->spawn_thread();  // index for threads is all wrong
-                    thread_count++;
-                }
-                else
-                {
-                    while(!free_thread)
-                    {
-                        for(int indx = 0; indx < MAX_THREADS; indx++)
-                        {    
-                            if(threads[indx]->get_outputfunc() != 0)
-                            {
-                                free_thread = true;
-
-                                if(threads[indx] != NULL)
-                                {
-                                    delete threads[indx];
-                                    threads = NULL;
-                                }
-
-                                thread_count--;
-                            }
-                        }
-                    }
-                }
-
-                num_exenodes++;
-                index++;
-            }
-            else index++;
-        }
-
-        if(num_exenodes == 0)
-        {
-            done = true;
-        }
-        else num_exenodes = 0;
-
-        layer++;
-    }
-
-    if(threads != NULL)
-    {
-        delete [] threads;
-        threads = NULL;
-    }
+    
 }
 
 void Network::output_run()
@@ -198,13 +143,15 @@ void Network::output_run()
         threads[index] = out_nodes[index]->spawn_thread();
     }
 
-    int found = 0;          // checks to see if the above threads are done executing
+    int found = 0, index = 0;          // checks to see if the above threads are done executing
     while(found < NUM_INPUTS)
     {
         if(out_nodes[index]->get_outputfunc() != 0)
         {
             found++;
         }
+
+        index++;
     }
 
     if(threads != NULL)

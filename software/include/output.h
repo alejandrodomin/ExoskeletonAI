@@ -9,13 +9,8 @@ using namespace std;
 class Output: public Node 
 {
 private:
-    
-
 public:
     Output();
    ~Output();
-    
-    virtual void add_input(Node *);
-    virtual void add_output(Node *);
 };
 #endif

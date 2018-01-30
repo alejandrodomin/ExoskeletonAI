@@ -14,8 +14,8 @@ enum type {input = 0, hidden, output};
 class Node 
 {
     private:
-        list<Node> *inputs;
-        list<Node> *outputs;
+        list<Node *> inputs;
+        list<Node *> outputs;
 
         float output_func;
         float *weights_input;
@@ -29,7 +29,7 @@ class Node
         
     public:
         Node();
-        Node(int type);
+        Node(int);
         ~Node();
 
         thread* spawn_thread();
@@ -41,7 +41,7 @@ class Node
         float get_outputfunc();
         void set_outputfunc(float);
 
-        virtual void add_input(Node *)=0;
-        virtual void add_output(Node *)=0;
+        void add_input(Node *);
+        void add_output(Node *);
 };
 #endif

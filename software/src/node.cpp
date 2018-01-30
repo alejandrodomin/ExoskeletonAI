@@ -1,5 +1,7 @@
 #include <iostream>
 #include <thread>
+#include <list>
+#include <iterator>
 
 #include "node.h"
 
@@ -32,14 +34,11 @@ void Node::out_func()
     int index = 0;
     float total = 0;
     
-    while (inputs[index] != NULL) 
-    {
-       total += inputs[index]->get_outputfunc() * weights_input[index];
-       index++;
-    }
+    for(list<Node *>::iterator it = inputs.begin(); it != inputs.end(); ++it)
+        total += (*it)->get_outputfunc() * weights_input[index];
 
     total += bias;
-    this->set_outputfunc(total);
+    set_outputfunc(total);
 
     out_mut.unlock();
 }
@@ -62,5 +61,15 @@ float Node::get_outputfunc()
 void Node::set_outputfunc(float num)
 {
     output_func = num;
+}
+
+void Node::add_input(Node *node)
+{
+    inputs.push_back(node);
+}
+
+void Node::add_output(Node *node)
+{
+    outputs.push_back(node);
 }
 
