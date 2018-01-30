@@ -29,19 +29,20 @@ class Network
       Network();
       ~Network(); // destructor deletes heap memory
 
-      Node** get_input();       // names for these can be changed later
-      void use_output();
-
       void run();
-
+      void mutate();
+      void use_output();
       void set_num_nodes(int);
+      
       int get_num_nodes();
 
+      bool fitness();
+      bool rand_node();
+      bool rand_connection();
       bool add_input_node(int);
       bool add_output_nodes(int);
 
-      bool rand_node();
-      bool rand_connection();
+      Node** get_input();       // names for these can be changed later
 };
 
 #endif

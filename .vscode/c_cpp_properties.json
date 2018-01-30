@@ -35,7 +35,8 @@
                 "/usr/include/x86_64-linux-gnu",
                 "/usr/include",
                 "${workspaceRoot}",
-                "${workspaceRoot}/software/include"
+                "${workspaceRoot}/software/include",
+                "/usr/include/nodejs/src"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",

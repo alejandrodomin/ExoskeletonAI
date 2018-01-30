@@ -37,55 +37,11 @@ Network::~Network()
 
 }
 
-Node** Network::get_input()
-{
-    return in_nodes;
-} 
-
-int Network::get_num_nodes()
-{
-    return num_nodes;
-}
-
-void Network::set_num_nodes(int num_nodes)
-{
-    this->num_nodes = num_nodes;
-}
-
-bool Network::add_input_node(int num_nodes)
-{
-    int index = 0;
-    while(num_nodes > 0)
-    {
-        in_nodes[index] = new Node(input);
-        
-        num_nodes--;
-        index++;
-    }
-
-    return true;
-}
-
-bool Network::add_output_nodes(int num_nodes)
-{
-    int index = 0;
-    while(num_nodes > 0)
-    {
-        out_nodes[index] = new Node(output);
-        
-        num_nodes--;
-        index++;
-    }
-
-    return true;
-}
-
 void Network::run()					// there is alot of safety measures that need to be put into here
 {
     input_run();
     hidden_run();
     output_run();
-
 }
 
 void Network::input_run()
@@ -145,30 +101,83 @@ void Network::output_run()
     }
 }
 
+void Network::mutate()
+{
+
+}
+
 void Network::use_output(){}
+
+void Network::set_num_nodes(int num_nodes)
+{
+    this->num_nodes = num_nodes;
+}
+
+int Network::get_num_nodes()
+{
+    return num_nodes;
+}
+
+bool Network::fitness()
+{
+
+}
 
 bool Network::rand_node(){}
 
 bool Network::rand_connection()
 {
-//    int node_one = rand()% num_nodes;
-//    int node_two = rand()% num_nodes;
+   int node_one = rand()% num_nodes;
+   int node_two = rand()% num_nodes;
 
-//    if(node_one == node_two) 
-//       node_two = rand()% num_nodes;
+   if(node_one == node_two) 
+      node_two = rand()% num_nodes;
    
-//    int index = 0;
-//    Node *one, *two;
-//    while (in_nodes[index] != NULL)
-//    {
-//       if (in_nodes[index]->get_nodeid() == node_one)
-//          one = in_nodes[index];
-//       else if (in_nodes[index]->get_nodeid() == node_two)
-//          two = in_nodes[index];
+   int index = 0;
+   Node *one, *two;
+   while (in_nodes[index] != NULL)
+   {
+      if (in_nodes[index]->get_nodeid() == node_one)
+         one = in_nodes[index];
+      else if (in_nodes[index]->get_nodeid() == node_two)
+         two = in_nodes[index];
 
-//       index++;
-//    }
+      index++;
+   }
 
-//    one->add_output(two);
-//    two->add_input(one);  
+   one->add_output(two);
+   two->add_input(one);  
 }
+
+bool Network::add_input_node(int num_nodes)
+{
+    int index = 0;
+    while(num_nodes > 0)
+    {
+        in_nodes[index] = new Node(input);
+        
+        num_nodes--;
+        index++;
+    }
+
+    return true;
+}
+
+bool Network::add_output_nodes(int num_nodes)
+{
+    int index = 0;
+    while(num_nodes > 0)
+    {
+        out_nodes[index] = new Node(output);
+        
+        num_nodes--;
+        index++;
+    }
+
+    return true;
+}
+
+Node** Network::get_input()
+{
+    return in_nodes;
+} 

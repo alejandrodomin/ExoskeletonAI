@@ -3,6 +3,7 @@ SRC := src
 OBJ := build
 INC := include
 
+DEBUG = -g
 LFLAGS = -pthread
 CFLAGS = -std=c++11 
 
@@ -12,7 +13,7 @@ SOURCES := $(wildcard $(SRC)/*.cpp)
 OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
 
 $(PROJ): $(OBJECTS)
-	$(CC) $(LFLAGS) $^ -o $@
+	$(CC) $(DEBUG) $(LFLAGS) $^ -o $@
 
 $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@

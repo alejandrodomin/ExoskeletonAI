@@ -23,6 +23,7 @@ class Node
         
         int node_id;
         int type;
+        int layer;
 
         mutex out_mut;
     protected:
@@ -34,6 +35,8 @@ class Node
 
         thread* spawn_thread();
         void out_func();
+
+        void find_layer();
 
         int get_nodeid();
         int get_type();

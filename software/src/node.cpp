@@ -73,3 +73,27 @@ void Node::add_output(Node *node)
     outputs.push_back(node);
 }
 
+void Node::find_layer()   // the logic in this function seems iffy check it later
+{
+    bool allInput = true;
+    int maxLayer = 0;
+    int index = 0;
+   
+    for(list<Node *>::iterator it = inputs.begin(); it != inputs.end(); ++it)
+    {
+        if((*it)->get_type() == hidden)
+        {
+            allInput = false;
+         
+            if (maxLayer < (*it)->layer) 
+            {
+                maxLayer = (*it)->layer;
+            }
+        }
+        index++;
+    }
+    
+    if (allInput)
+        layer = 1;
+    else layer = maxLayer + 1;
+}
