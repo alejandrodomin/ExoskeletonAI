@@ -3,8 +3,6 @@
 #include <thread>
 
 #include "network.h"
-#include "input.h"
-#include "output.h"
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
@@ -14,8 +12,8 @@ using namespace std;
 
 Network::Network()
 {
-   in_nodes  = new Input*[NUM_INPUTS];
-   out_nodes = new Output*[NUM_OUTPUTS];
+   in_nodes  = new Node*[NUM_INPUTS];
+   out_nodes = new Node*[NUM_OUTPUTS];
    threads   = new thread*[MAX_THREADS];
 }
 
@@ -39,7 +37,7 @@ Network::~Network()
 
 }
 
-Input** Network::get_input()
+Node** Network::get_input()
 {
     return in_nodes;
 } 
@@ -59,17 +57,10 @@ bool Network::add_input_node(int num_nodes)
     int index = 0;
     while(num_nodes > 0)
     {
-        Input* ptr = new Input();
-        in_nodes[index] = ptr;
+        in_nodes[index] = new Node(input);
         
         num_nodes--;
         index++;
-        
-        if (ptr != NULL)
-        {
-            delete [] ptr;
-            ptr = NULL;
-        }
     }
 
     return true;
@@ -80,17 +71,10 @@ bool Network::add_output_nodes(int num_nodes)
     int index = 0;
     while(num_nodes > 0)
     {
-        Output* ptr = new Output();
-        out_nodes[index] = ptr;
+        out_nodes[index] = new Node(output);
         
         num_nodes--;
         index++;
-        
-        if (ptr != NULL)
-        {
-            delete [] ptr;
-            ptr = NULL;
-        }
     }
 
     return true;

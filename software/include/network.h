@@ -2,9 +2,7 @@
 #include <thread>
 #include <list>
 
-#include "input.h"
-#include "hidden.h"
-#include "output.h"
+#include "node.h"
 
 using namespace std;
 
@@ -16,9 +14,9 @@ class Network
    private:
       int num_nodes;
 
-      Input  **in_nodes; // the input nodes
-      list<Hidden> *hid_nodes; // the hidden nodes
-      Output **out_nodes; // output nodes
+      Node **in_nodes; // the input nodes
+      list<Node *> hidden_nodes;
+      Node **out_nodes; // output nodes
 
       thread **threads;
       // outputs
@@ -31,7 +29,7 @@ class Network
       Network();
       ~Network(); // destructor deletes heap memory
 
-      Input** get_input();       // names for these can be changed later
+      Node** get_input();       // names for these can be changed later
       void use_output();
 
       void run();
