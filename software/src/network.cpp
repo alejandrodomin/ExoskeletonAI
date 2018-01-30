@@ -181,3 +181,8 @@ Node** Network::get_input()
 {
     return in_nodes;
 } 
+
+list<Network*> Network::reproduce()
+{
+
+}

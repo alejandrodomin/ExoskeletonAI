@@ -4,20 +4,42 @@
 
 using namespace std;
 
+void network_run(Network *net);
+static bool deleteAll(Network * theElement); 
+
 int main()
 {
    // create a network;
    Network *net1 = new Network();
 
-   bool stagnant = false;
-   while(!stagnant)
-   {
-      net1->run();
-      stagnant = net1->fitness();
-   }
+   network_run(net1);
 
    net1->mutate();
+   list<Network *> networks = net1->reproduce();
 
+   for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it)
+      network_run(*it);
 
    delete net1;
+   networks.remove_if(deleteAll);
+}
+
+void network_run(Network *net)
+{
+   int stagnantCount = 0;
+
+   while(stagnantCount < 15)
+   {
+      net->run();
+      
+      if(net->fitness())
+         stagnantCount++;
+      else stagnantCount = 0;
+   }
+}
+
+static bool deleteAll(Network * theElement ) 
+{ 
+   delete theElement; 
+   return true; 
 }
