@@ -175,12 +175,12 @@ bool Network::rand_connection()
    
 //    int index = 0;
 //    Node *one, *two;
-//    while (nodes[index] != NULL)
+//    while (in_nodes[index] != NULL)
 //    {
-//       if (nodes[index]->get_nodeid() == node_one)
-//          one = nodes[index];
-//       else if (nodes[index]->get_nodeid() == node_two)
-//          two = nodes[index];
+//       if (in_nodes[index]->get_nodeid() == node_one)
+//          one = in_nodes[index];
+//       else if (in_nodes[index]->get_nodeid() == node_two)
+//          two = in_nodes[index];
 
 //       index++;
 //    }

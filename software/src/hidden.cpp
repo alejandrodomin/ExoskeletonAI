@@ -13,15 +13,27 @@ Hidden::~Hidden(){}
 
 void Hidden::find_layer()   // the logic in this function seems iffy check it later
 {
+   bool isHidden = false;
+   int maxLayer = 0;
    int index = 0;
    while(inputs[index] != NULL)
    {
       if(inputs[index]->get_type() == hidden)
       {
-         layer = inputs[index]->layer++;
+          isHidden = true;
+         
+         if (maxLayer < inputs[index]->layer) 
+         {
+             maxLayer = inputs[index]->layer++;
+         }
       }
-      else layer = 1;
-   }
+        index++;
+}
+    
+     if (isHidden == false)
+          {
+              layer = 1;
+          }
 }
 
 int Hidden::get_layer()
