@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "species.h"
+#include "species.hpp"
 
 using namespace std;
 

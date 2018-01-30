@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "network.h"
+#include "network.hpp"
 
 using namespace std;
 

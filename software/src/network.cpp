@@ -2,7 +2,7 @@
 #include <cstdlib>
 #include <thread>
 
-#include "network.h"
+#include "network.hpp"
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
