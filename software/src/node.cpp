@@ -24,16 +24,19 @@ Node::~Node()
 
 thread* Node::spawn_thread()
 {
+    cout << "Entering Node::spawn_thread" << endl;
+    cout << "Exiting Node::spawn_thread" << endl;
     return new thread(&Node::out_func, this);
 }
 
 void Node::out_func()
 {
+    cout << "Entering Node::out_func" << endl;
     out_mut.lock();
 
     int index = 0;
     float total = 0;
-    
+
     for(list<Node *>::iterator it = inputs.begin(); it != inputs.end(); ++it)
         total += (*it)->get_outputfunc() * weights_input[index];
 
@@ -41,6 +44,7 @@ void Node::out_func()
     set_outputfunc(total);
 
     out_mut.unlock();
+    cout << "Exiting Node::out_func()" << endl;
 }
 
 int Node::get_nodeid()
@@ -55,6 +59,8 @@ int Node::get_type()
 
 float Node::get_outputfunc()
 {
+    cout << "Entering Node::get_outputfunc" << endl;
+    cout << "Exiting Node::get_outputfunc" << endl;
     return output_func;
 }
 

@@ -9,6 +9,7 @@ static bool deleteAll(Network * theElement);
 
 int main()
 {
+   cout << "Entered main." << endl;
    // create a network;
    Network *net1 = new Network();
 
@@ -22,6 +23,9 @@ int main()
 
    delete net1;
    networks.remove_if(deleteAll);
+
+   cout << "Exiting main." << endl;
+   return 0;
 }
 
 void network_run(Network *net)

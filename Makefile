@@ -1,4 +1,6 @@
 all:
+	@echo "Exoskeleton brain, and hardware compiling."
+
 	+$(MAKE) -C lib
 	+$(MAKE) -C software
 	+$(MAKE) -C hardware

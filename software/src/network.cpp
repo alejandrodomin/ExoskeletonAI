@@ -12,13 +12,16 @@ using namespace std;
 
 Network::Network()
 {
+   cout << "Entered network constructor." << endl;
    in_nodes  = new Node*[NUM_INPUTS];
    out_nodes = new Node*[NUM_OUTPUTS];
    threads   = new thread*[MAX_THREADS];
+   cout << "Exiting network constructor." << endl;
 }
 
 Network::~Network()
 {
+   cout << "Entering network destrcutor." << endl;
    if(in_nodes != NULL)
    {
       delete [] in_nodes;
@@ -35,17 +38,21 @@ Network::~Network()
        threads = NULL;
    }
 
+  cout << "Exiting network destructor." << endl;
 }
 
 void Network::run()					// there is alot of safety measures that need to be put into here
 {
+    cout << "Entering Network::run" << endl;
     input_run();
     hidden_run();
     output_run();
+    cout << "Exiting Network::run" << endl;
 }
 
 void Network::input_run()
 {
+    cout << "Entering Network::input_run" << endl;
     int index;
     for (index = 0; index < NUM_INPUTS; index++)
     {
@@ -69,6 +76,8 @@ void Network::input_run()
         delete [] threads;
         threads = NULL;
     }
+
+    cout << "Exiting Network::intput_run()" << endl;
 }
 
 void Network::hidden_run()
