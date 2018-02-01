@@ -4,6 +4,6 @@ all:
 	+$(MAKE) -C hardware
 
 clean:
-	+$(MAKE) clean _C lib
+	+$(MAKE) clean -C lib
 	+$(MAKE) clean -C software
 	+$(MAKE) clean -C hardware
