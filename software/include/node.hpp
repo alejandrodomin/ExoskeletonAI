@@ -14,37 +14,36 @@ enum type {input = 0, hidden, output};
 class Node 
 {
     private:
-        list<Node *> inputs;
-        list<Node *> outputs;
-
-        float output_func;
-        float *weights_input;
-        float bias;
-        
         int node_id;
         int type;
         int layer;
 
-        mutex out_mut;
-    protected:
+        float bias;
+        float output_func;
         
+        float* weights_input;
+
+        mutex out_mut;
+
+        list<Node *> inputs;
+        list<Node *> outputs;
+    protected:
     public:
         Node();
         Node(int);
         ~Node();
 
-        thread* spawn_thread();
         void out_func();
-
         void find_layer();
-
-        int get_nodeid();
-        int get_type();
-
-        float get_outputfunc();
-        void set_outputfunc(float);
-
         void add_input(Node *);
         void add_output(Node *);
+        void set_outputfunc(float);
+
+        int get_type();
+        int get_nodeid();
+
+        float get_outputfunc();
+
+        thread* spawn_thread();
 };
 #endif

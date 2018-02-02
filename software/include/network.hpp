@@ -14,17 +14,17 @@ class Network
    private:
       int num_nodes;
 
+      float compatibility_distance;
+
       Node **in_nodes; // the input nodes
-      list<Node *> hidden_nodes;
       Node **out_nodes; // output nodes
+      list<Node *> hidden_nodes; // hidden nodes
 
       thread **threads;
-      // outputs
    protected:
       void input_run();
       void hidden_run();
       void output_run();
-
    public:
       Network();
       ~Network(); // destructor deletes heap memory
@@ -33,7 +33,8 @@ class Network
       void mutate();
       void use_output();
       void set_num_nodes(int);
-      
+      void set_compatibility_distance(float);
+
       int get_num_nodes();
 
       bool fitness();

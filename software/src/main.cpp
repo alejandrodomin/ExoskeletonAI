@@ -1,49 +1,32 @@
 #include <iostream>
 
+#include "species.hpp"
 #include "network.hpp"
 
-using namespace std;
-
-void network_run(Network *net);
-static bool deleteAll(Network * theElement); 
+using namespace std; 
 
 int main()
 {
-   cout << "Entered main." << endl;
-   // create a network;
-   Network *net1 = new Network();
+   cout << "[INFO][MAIN_CPP]: Entered main." << endl;
+   
+   list<Species *> exoAI;
+   exoAI.push_back(new Species());
 
-   network_run(net1);
+   while(true){   
+      for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
+         (*it)->add_network(new Network());
+         (*it)->run_networks();
 
-   net1->mutate();
-   list<Network *> networks = net1->reproduce();
+         if((*it)->stale()){
+            (*it)->mutate();
+         }
 
-   for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it)
-      network_run(*it);
-
-   delete net1;
-   networks.remove_if(deleteAll);
-
-   cout << "Exiting main." << endl;
-   return 0;
-}
-
-void network_run(Network *net)
-{
-   int stagnantCount = 0;
-
-   while(stagnantCount < 15)
-   {
-      net->run();
-      
-      if(net->fitness())
-         stagnantCount++;
-      else stagnantCount = 0;
+         if((*it)->test_species()){
+            exoAI.push_back((*it)->new_species());
+         }
+      }
    }
-}
 
-static bool deleteAll(Network * theElement ) 
-{ 
-   delete theElement; 
-   return true; 
+   cout << "[INFO][MAIN_CPP]: Exiting main." << endl;
+   return 0;
 }

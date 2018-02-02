@@ -10,14 +10,28 @@ using namespace std;
 class Species
 {
    private:
+      int max_fitness;
+      int** net_fitness;
+
+      Network* fittest_net;
+
+      list<Network *> networks;
    protected:
-      int **   net_fitness;
-      int      max_fitness;
-      Network **   networks;
-      Network *    fittest_net;
+      float compute_excess(Network *, Network *);
+      float compute_disjoint(Network *, Network *);
+      float weight_diff_match_genes(Network *, Network *);
    public:
       Species();
       ~Species();
+
+      void mutate();
+      void run_networks();
+      void add_network(Network *);
+
+      bool stale();
+      bool test_species();
+
+      Species* new_species();
 };
 
 #endif

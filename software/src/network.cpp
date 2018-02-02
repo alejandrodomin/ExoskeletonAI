@@ -122,6 +122,10 @@ void Network::set_num_nodes(int num_nodes)
     this->num_nodes = num_nodes;
 }
 
+void Network::set_compatibility_distance(float newcomp_distance){
+    compatibility_distance = newcomp_distance;
+}
+
 int Network::get_num_nodes()
 {
     return num_nodes;
