@@ -6,15 +6,18 @@
 using namespace std;
 
 Species::Species(){
-
+   stale = 0;
+   max_fitness = 0;
 }
 
 Species::~Species(){
-   
+
 }
 
 void Species::mutate(){
-
+   for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
+      (*it)->mutate();
+   }
 }
 
 void Species::run_networks(){
@@ -28,7 +31,17 @@ void Species::add_network(Network *net){
 }
 
 bool Species::stale(){
-   
+   for(list<Network *>::iterator it = networks.begin(); it != networks.edn(), ++it){
+      if((*it)->get_fitness() > max_fitness){
+         stale = 0;
+         return false;
+      }
+   }
+
+   stale++;
+   if(stale >= 15)
+      return true;
+   else return false;
 }
 
 bool Species::test_species(){

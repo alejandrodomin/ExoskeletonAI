@@ -5,8 +5,7 @@
 
 using namespace std; 
 
-int main()
-{
+int main(int argc, char **argv, char **env){
    cout << "[INFO][MAIN_CPP]: Entered main." << endl;
    
    list<Species *> exoAI;

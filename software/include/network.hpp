@@ -9,9 +9,9 @@ using namespace std;
 #ifndef NETWORK_H
 #define NETWORK_H
 
-class Network 
-{
+class Network{
    private:
+      int fitness;
       int num_nodes;
 
       float compatibility_distance;
@@ -35,6 +35,7 @@ class Network
       void set_num_nodes(int);
       void set_compatibility_distance(float);
 
+      int get_fitness();
       int get_num_nodes();
 
       bool fitness();

@@ -11,8 +11,7 @@ using namespace std;
 enum gyro {gyroX = 0, gyroY, gyroZ};
 enum type {input = 0, hidden, output};
 
-class Node 
-{
+class Node{
     private:
         int node_id;
         int type;

@@ -1,4 +1,5 @@
 #include <iostream>
+#include <list>
 
 #include "network.hpp"
 
@@ -7,11 +8,10 @@ using namespace std;
 #ifndef SPECIES_H
 #define SPECIES_H
 
-class Species
-{
+class Species{
    private:
+      int stale;
       int max_fitness;
-      int** net_fitness;
 
       Network* fittest_net;
 
