@@ -5,8 +5,8 @@
 
 using namespace std;
 
-#ifndef SPECIES_H
-#define SPECIES_H
+#ifndef SPECIES_HPP
+#define SPECIES_HPP
 
 class Species{
    private:

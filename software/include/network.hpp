@@ -6,8 +6,8 @@
 
 using namespace std;
 
-#ifndef NETWORK_H
-#define NETWORK_H
+#ifndef NETWORK_HPP
+#define NETWORK_HPP
 
 class Network{
    private:
@@ -19,6 +19,8 @@ class Network{
       Node **in_nodes; // the input nodes
       Node **out_nodes; // output nodes
       list<Node *> hidden_nodes; // hidden nodes
+
+      list<Gene *> genes;
 
       thread **threads;
    protected:

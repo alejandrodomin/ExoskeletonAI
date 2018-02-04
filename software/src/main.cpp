@@ -3,7 +3,9 @@
 #include "species.hpp"
 #include "network.hpp"
 
-using namespace std; 
+using namespace std;
+
+extern static global_innovation_id = 0; 
 
 int main(int argc, char **argv, char **env){
    cout << "[INFO][MAIN_CPP]: Entered main." << endl;
