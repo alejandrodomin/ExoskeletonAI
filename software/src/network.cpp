@@ -70,7 +70,7 @@ void Network::input_run(){
 }
 
 void Network::hidden_run(){
-    
+
 }
 
 void Network::output_run(){
@@ -117,7 +117,7 @@ int Network::get_num_nodes(){
     return num_nodes;
 }
 
-bool Network::fitness(){
+bool Network::is_fitness(){
 
 }
 
@@ -129,9 +129,9 @@ bool Network::rand_connection(){
    int node_one = rand()% num_nodes;
    int node_two = rand()% num_nodes;
 
-   if(node_one == node_two) 
+   if(node_one == node_two)
       node_two = rand()% num_nodes;
-   
+
    int index = 0;
    Node *one, *two;
    while (in_nodes[index] != NULL){
@@ -144,14 +144,14 @@ bool Network::rand_connection(){
    }
 
    one->add_output(two);
-   two->add_input(one);  
+   two->add_input(one);
 }
 
 bool Network::add_input_node(int num_nodes){
     int index = 0;
     while(num_nodes > 0){
         in_nodes[index] = new Node(input);
-        
+
         num_nodes--;
         index++;
     }
@@ -163,7 +163,7 @@ bool Network::add_output_nodes(int num_nodes){
     int index = 0;
     while(num_nodes > 0){
         out_nodes[index] = new Node(output);
-        
+
         num_nodes--;
         index++;
     }
@@ -173,7 +173,7 @@ bool Network::add_output_nodes(int num_nodes){
 
 Node** Network::get_input(){
     return in_nodes;
-} 
+}
 
 list<Network*> Network::reproduce(){
 

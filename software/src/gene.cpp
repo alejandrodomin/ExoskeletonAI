@@ -20,3 +20,11 @@ void Gene::set_weight(float newweight){
 float Gene::get_weight(){
    return weight;
 }
+
+Node* Gene::get_output_gene(){
+   return output_gene;
+}
+
+Node* Gene::get_starting_gene(){
+   return starting_gene;
+}

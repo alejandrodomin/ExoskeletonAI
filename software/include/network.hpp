@@ -3,6 +3,7 @@
 #include <list>
 
 #include "node.hpp"
+#include "gene.hpp"
 
 using namespace std;
 
@@ -40,7 +41,7 @@ class Network{
       int get_fitness();
       int get_num_nodes();
 
-      bool fitness();
+      bool is_fitness();
       bool rand_node();
       bool rand_connection();
       bool add_input_node(int);
