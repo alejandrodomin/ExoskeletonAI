@@ -143,8 +143,10 @@ bool Network::rand_connection(){
       index++;
    }
 
-   one->add_output(two);
-   two->add_input(one);
+   one->add_gene(one, two);
+
+//    one->add_output(two);
+//    two->add_input(one);
 }
 
 bool Network::add_input_node(int num_nodes){

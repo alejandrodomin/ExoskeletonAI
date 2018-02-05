@@ -30,8 +30,8 @@ void Species::add_network(Network *net){
    networks.push_back(net);
 }
 
-bool Species::stale(){
-   for(list<Network *>::iterator it = networks.begin(); it != networks.edn(), ++it){
+bool Species::is_stale(){
+   for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
       if((*it)->get_fitness() > max_fitness){
          stale = 0;
          return false;
@@ -45,7 +45,7 @@ bool Species::stale(){
 }
 
 bool Species::test_species(){
-   float c1, c2, c3;
+   float c1 = 0.5, c2 = 0.5, c3 = 0.5;
    float disjoint_genes, excess_genes;
    float compatibility_distance = 0.0;
 
@@ -64,7 +64,7 @@ bool Species::test_species(){
 }
 
 Species* Species::new_species(){
-
+   return new Species();
 }
 
 float Species::compute_excess(Network *net1, Network *net2){

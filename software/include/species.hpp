@@ -1,12 +1,12 @@
+#ifndef SPECIES_HPP
+#define SPECIES_HPP
+
 #include <iostream>
 #include <list>
 
 #include "network.hpp"
 
 using namespace std;
-
-#ifndef SPECIES_HPP
-#define SPECIES_HPP
 
 class Species{
    private:
@@ -28,7 +28,7 @@ class Species{
       void run_networks();
       void add_network(Network *);
 
-      bool stale();
+      bool is_stale();
       bool test_species();
 
       Species* new_species();

@@ -5,7 +5,7 @@
 
 using namespace std;
 
-extern static global_innovation_id = 0; 
+static int global_innovation_id = 0; 
 
 int main(int argc, char **argv, char **env){
    cout << "[INFO][MAIN_CPP]: Entered main." << endl;
@@ -18,7 +18,7 @@ int main(int argc, char **argv, char **env){
          (*it)->add_network(new Network());
          (*it)->run_networks();
 
-         if((*it)->stale()){
+         if((*it)->is_stale()){
             (*it)->mutate();
          }
 

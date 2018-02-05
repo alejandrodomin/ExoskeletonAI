@@ -11,7 +11,7 @@ Node::Node(){
 
 }
 
-Node::Node(int new_type{
+Node::Node(int new_type){
     type = new_type;
 }
 
@@ -26,20 +26,24 @@ thread* Node::spawn_thread(){
 }
 
 void Node::out_func(){
-    cout << "Entering Node::out_func" << endl;
-    out_mut.lock();
+    // cout << "Entering Node::out_func" << endl;
+    // out_mut.lock();
 
-    int index = 0;
-    float total = 0;
+    // int index = 0;
+    // float total = 0;
 
-    for(list<Node *>::iterator it = inputs.begin(); it != inputs.end(); ++it)
-        total += (*it)->get_outputfunc() * weights_input[index];
+    // for(list<Node *>::iterator it = inputs.begin(); it != inputs.end(); ++it)
+    //     total += (*it)->get_outputfunc() * weights_input[index];
 
-    total += bias;
-    set_outputfunc(total);
+    // total += bias;
+    // set_outputfunc(total);
 
-    out_mut.unlock();
-    cout << "Exiting Node::out_func()" << endl;
+    // out_mut.unlock();
+    // cout << "Exiting Node::out_func()" << endl;
+}
+
+void Node::add_gene(Node *snode, Node * onode){
+    genes.push_back(new Gene(snode, onode));
 }
 
 int Node::get_nodeid(){
@@ -60,30 +64,22 @@ void Node::set_outputfunc(float num){
     output_func = num;
 }
 
-void Node::add_input(Node *node){
-    inputs.push_back(node);
-}
-
-void Node::add_output(Node *node){
-    outputs.push_back(node);
-}
-
 void Node::find_layer(){   // the logic in this function seems iffy check it later
-    bool allInput = true;
-    int maxLayer = 0;
-    int index = 0;
+    // bool allInput = true;
+    // int maxLayer = 0;
+    // int index = 0;
    
-    for(list<Node *>::iterator it = inputs.begin(); it != inputs.end(); ++it){
-        if((*it)->get_type() == hidden){
-            allInput = false;
+    // for(list<Node *>::iterator it = inputs.begin(); it != inputs.end(); ++it){
+    //     if((*it)->get_type() == hidden){
+    //         allInput = false;
          
-            if (maxLayer < (*it)->layer)
-                maxLayer = (*it)->layer;
-        }
-        index++;
-    }
+    //         if (maxLayer < (*it)->layer)
+    //             maxLayer = (*it)->layer;
+    //     }
+    //     index++;
+    // }
     
-    if (allInput)
-        layer = 1;
-    else layer = maxLayer + 1;
+    // if (allInput)
+    //     layer = 1;
+    // else layer = maxLayer + 1;
 }

@@ -1,3 +1,6 @@
+#ifndef NODE_HPP
+#define NODE_HPP
+
 #include <iostream>
 #include <mutex>
 #include <thread>
@@ -5,8 +8,8 @@
 
 using namespace std;
 
-#ifndef NODE_HPP
-#define NODE_HPP
+#include "gene.hpp"
+class Gene;
 
 enum gyro {gyroX = 0, 
             gyroY, gyroZ};
@@ -22,6 +25,8 @@ class Node{
         float bias;
         float output_func;
 
+        list<Gene *> genes;
+
         mutex out_mut;
     protected:
     public:
@@ -32,6 +37,7 @@ class Node{
         void out_func();
         void find_layer();
         void set_outputfunc(float);
+        void add_gene(Node *, Node *);
 
         int get_type();
         int get_nodeid();

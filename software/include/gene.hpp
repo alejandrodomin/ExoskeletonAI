@@ -1,9 +1,12 @@
+#ifndef GENE_HPP
+#define GENE_HPP
+
 #include <iostream>
 
 using namespace std;
 
-#ifndef GENE_HPP
-#define GENE_HPP
+#include "node.hpp"
+class Node;
 
 class Gene{
    private:
