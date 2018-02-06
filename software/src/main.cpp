@@ -8,7 +8,7 @@ using namespace std;
 static int global_innovation_id = 0; 
 
 int main(int argc, char **argv, char **env){
-   cout << "[INFO][MAIN_CPP]: Entered main." << endl;
+   cout << "[INFO][MAIN]:\t Entered main." << endl;
    
    list<Species *> exoAI;
    exoAI.push_back(new Species());
@@ -28,6 +28,6 @@ int main(int argc, char **argv, char **env){
       }
    }
 
-   cout << "[INFO][MAIN_CPP]: Exiting main." << endl;
+   cout << "[INFO][MAIN]:\t Exiting main." << endl;
    return 0;
 }

@@ -6,20 +6,20 @@
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
-#define MAX_THREADS 10
+#define MAX_THREADS 5
 
 using namespace std;
 
 Network::Network(){
-   cout << "Entered network constructor." << endl;
+   cout << "[INFO][NETWORK]: Entered Network::Network()." << endl;
    in_nodes  = new Node*[NUM_INPUTS];
    out_nodes = new Node*[NUM_OUTPUTS];
    threads   = new thread*[MAX_THREADS];
-   cout << "Exiting network constructor." << endl;
+   cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
 }
 
 Network::~Network(){
-   cout << "Entering network destrcutor." << endl;
+   cout << "[INFO][NETWORK]: Entered Network::~Network()." << endl;
    if(in_nodes != NULL){
       delete [] in_nodes;
       in_nodes = NULL;
@@ -33,19 +33,19 @@ Network::~Network(){
        threads = NULL;
    }
 
-  cout << "Exiting network destructor." << endl;
+   cout << "[INFO][NETWORK]: Exiting Network::~Network()." << endl;
 }
 
 void Network::run(){				// there is alot of safety measures that need to be put into here
-    cout << "Entering Network::run" << endl;
+    cout << "[INFO][NETWORK]: Entered Network::run()." << endl;
     input_run();
     hidden_run();
     output_run();
-    cout << "Exiting Network::run" << endl;
+    cout << "[INFO][NETWORK]: Exiting Network::run()." << endl;
 }
 
 void Network::input_run(){
-    cout << "Entering Network::input_run" << endl;
+    cout << "[INFO][NETWORK]: Entering Network::input_run()" << endl;
     int index;
     for (index = 0; index < NUM_INPUTS; index++){
         threads[index] = in_nodes[index]->spawn_thread();
@@ -66,7 +66,7 @@ void Network::input_run(){
         threads = NULL;
     }
 
-    cout << "Exiting Network::intput_run()" << endl;
+    cout << "[INFO][NETWORK]: Exiting Network::intput_run()" << endl;
 }
 
 void Network::hidden_run(){
@@ -94,7 +94,11 @@ void Network::output_run(){
 }
 
 void Network::mutate(){
+    int num = (rand() % 3) + 1;
 
+    if(num % 3 == 0)
+        rand_node();
+    else rand_connection();
 }
 
 void Network::use_output(){
@@ -117,12 +121,8 @@ int Network::get_num_nodes(){
     return num_nodes;
 }
 
-bool Network::is_fitness(){
-
-}
-
 bool Network::rand_node(){
-
+    hidden_nodes.push_back(new Node(hidden));
 }
 
 bool Network::rand_connection(){
@@ -144,9 +144,6 @@ bool Network::rand_connection(){
    }
 
    one->add_gene(one, two);
-
-//    one->add_output(two);
-//    two->add_input(one);
 }
 
 bool Network::add_input_node(int num_nodes){

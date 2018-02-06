@@ -25,9 +25,9 @@ class Node{
         float bias;
         float output_func;
 
-        list<Gene *> genes;
-
         mutex out_mut;
+
+        list<Gene *> genes;
     protected:
     public:
         Node();
