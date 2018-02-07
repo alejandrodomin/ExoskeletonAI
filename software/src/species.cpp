@@ -11,7 +11,16 @@ Species::Species(){
 }
 
 Species::~Species(){
-
+    if(fittest_net != NULL){
+        delete [] fittest_net;
+        fittest_net = NULL;
+    }
+    for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
+        if(*it != NULL){
+            delete [] *it;
+            *it = NULL;
+        }
+    }
 }
 
 void Species::mutate(){
