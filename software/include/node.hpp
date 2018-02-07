@@ -6,28 +6,30 @@
 #include <thread>
 #include <list>
 
-using namespace std;
-
 #include "gene.hpp"
 class Gene;
 
+using namespace std;
+
 enum gyro {gyroX = 0, 
-            gyroY, gyroZ};
+            gyroY, gyroZ};   /**<Enumerated list for 
+                             the x,y, and z positions for the gyro. */
 enum type {input = 0, 
-            hidden, output};
+            hidden, output}; /**<Enumerated list for 
+                             the different kinds of nodes.*/ 
 
 class Node{
     private:
-        int type;
-        int layer;
-        int node_id;
+        int type;       /**<The type of node it is depending on the enum type. */
+        int layer;      /**<If it is a hidden node this says which layer it is in. */
+        int node_id;    /**<The identification number for the node. */
 
-        float bias;
-        float output_func;
+        float bias;         /**<The weight we put on a node in the network. */
+        float output_func;  /**<The output of the node after we apply forward propogation. */
 
-        mutex out_mut;
+        mutex out_mut;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
 
-        list<Gene *> genes;
+        list<Gene *> genes; /**<List for all of the genes associated with the node. */
     protected:
     public:
         Node();
