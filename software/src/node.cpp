@@ -24,7 +24,12 @@ Node::Node(int new_type){
 /** Destructor dealocates memory from the heap related to this class.
 */
 Node::~Node(){
-
+    for(list<Gene *>::iterator it = genes.begin(); it != genes.edn(); ++it){
+        if(*it != NULL){
+            delete [] *it;
+            *it = NULL;
+        }
+    }
 }
 
 /** My function doing something...
