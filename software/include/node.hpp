@@ -1,6 +1,14 @@
 #ifndef NODE_HPP
 #define NODE_HPP
 
+/** @brief Class for the nodes in a network.
+
+    This class will hold of the functions that deal
+    with nodes, and their necessary actions.
+    @author Dominguez, Alejandro
+    @date Feburary, 2018
+    */
+
 #include <iostream>
 #include <mutex>
 #include <thread>

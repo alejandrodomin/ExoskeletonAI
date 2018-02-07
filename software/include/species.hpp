@@ -1,6 +1,14 @@
 #ifndef SPECIES_HPP
 #define SPECIES_HPP
 
+/** @brief Class for the species.
+
+    This class will hold of the functions that deal
+    with species, and their necessary actions.
+    @author Dominguez, Alejandro
+    @date Feburary, 2018
+    */
+
 #include <iostream>
 #include <list>
 

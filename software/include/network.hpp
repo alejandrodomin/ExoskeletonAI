@@ -1,6 +1,14 @@
 #ifndef NETWORK_HPP
 #define NETWORK_HPP
 
+/** @brief Class for the Networks in a species.
+
+    This class will hold of the functions that deal
+    with networks, and their necessary actions.
+    @author Dominguez, Alejandro
+    @date Feburary, 2018
+    */
+
 #include <iostream>
 #include <thread>
 #include <list>
