@@ -20,6 +20,7 @@ Network::Network(){
 
 Network::~Network(){
    cout << "[INFO][NETWORK]: Entered Network::~Network()." << endl;
+
    if(in_nodes != NULL){
       delete [] in_nodes;
       in_nodes = NULL;
@@ -31,6 +32,12 @@ Network::~Network(){
    if(threads != NULL){
        delete [] threads;
        threads = NULL;
+   }
+   for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); ++it){
+       if(*it != NULL){
+           delete [] *it;
+           *it = NULL;
+       }
    }
 
    cout << "[INFO][NETWORK]: Exiting Network::~Network()." << endl;
@@ -196,9 +203,4 @@ Node** Network::get_input(){
     cout << "[INFO][NETWORK]: Entered Network::get_input()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_input()." << endl;
     return in_nodes;
-}
-
-list<Network*> Network::reproduce(){
-    cout << "[INFO][NETWORK]: Entered Network::reproduce()." << endl;
-    cout << "[INFO][NETWORK]: Exiting Network::reproduce()." << endl;
 }
