@@ -20,6 +20,16 @@ Gene::Gene(Node* newinput_node, Node* newyou_node){
 
 Gene::~Gene(){
    cout << "[INFO][GENE]: Entered Gene::~Gene()." << endl;
+
+    if(input_node != NULL){
+        delete [] input_node;
+        input_node = NULL;
+    }
+    if(you_node != NULL){
+        delete [] you_node;
+        you_node = NULL;
+    }
+
    cout << "[INFO][GENE]: Exited  Gene::~Gene()." << endl;
 }
 

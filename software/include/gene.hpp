@@ -14,8 +14,8 @@ class Gene{
 
       float weight;
 
-      Node* input_node;
       Node* you_node;
+      Node* input_node;
    protected:
    public:
       Gene();
@@ -26,8 +26,8 @@ class Gene{
 
       float get_weight();
 
-      Node* get_input_node();
       Node* get_you_node();
+      Node* get_input_node();
 };
 
 #endif
