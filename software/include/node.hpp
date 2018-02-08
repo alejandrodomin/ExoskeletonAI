@@ -37,7 +37,8 @@ class Node{
 
         mutex out_mut;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
 
-        list<Gene *> genes; /**<List for all of the genes associated with the node. */
+        list<Gene *> in_genes; /**<List for all of the genes associated with the node. */
+	list<Gene *> out_genes;
     protected:
     public:
         Node();

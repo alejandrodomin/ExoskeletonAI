@@ -4,11 +4,16 @@
 
 using namespace std;
 
+extern static int global_innovation_id;
+
 /** Empty constructor, creates a Gene object.
 */
 Gene::Gene(){
    cout << "[INFO][GENE]: Entered Gene::Gene()." << endl;
    cout << "[INFO][GENE]: Exited  Gene::Gene()." << endl;
+
+   innovation_number = global_innovation_id;
+   global_innovation_id++;
 }
 
 /** Gene constructor, creates a Gene
