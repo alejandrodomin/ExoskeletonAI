@@ -36,9 +36,6 @@ class Node{
         float output_func;  /**<The output of the node after we apply forward propogation. */
 
         mutex out_mut;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
-
-        list<Gene *> in_genes; /**<List for all of the genes associated with the node. */
-	list<Gene *> out_genes;
     protected:
     public:
         Node();
@@ -48,7 +45,6 @@ class Node{
         void out_func();
         void find_layer();
         void set_outputfunc(float);
-        void add_gene(Node *, Node *);
 
         int get_type();
         int get_nodeid();

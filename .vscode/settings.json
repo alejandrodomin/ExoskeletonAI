@@ -2,5 +2,6 @@
    "files.associations": {
       "iostream": "cpp",
       "thread": "cpp"
-   }
+},
+"editor.tabSize": 3
 }

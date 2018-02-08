@@ -4,10 +4,6 @@
 
 #include "network.hpp"
 
-#define NUM_INPUTS  9
-#define NUM_OUTPUTS 6
-#define MAX_THREADS 5
-
 using namespace std;
 
 Network::Network(){

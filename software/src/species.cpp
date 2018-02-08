@@ -76,12 +76,157 @@ Species* Species::new_species(){
    return new Species();
 }
 
-float Species::compute_excess(Network *net1, Network *net2){
-   return 0.0;
+int Species::compute_excess(Network *net1, Network *net2){
+   int excess = 0;
+   
+   int biggestnet1 = 0;
+   int biggestnet2 = 0;
+   
+   for(list<Gene *>::iterator it = net1->genes.begin(); it != net1->genes.end(); ++it){
+       if(*it->get_inov_id() > biggestnet1)
+          biggestnet1 = *it->get_inoov_id();
+   }
+   
+   for(list<Gene *>::iterator it = net2->genes.begin(); it != net2->genes.end(); ++it){
+       if(*it->get_inov_id() > biggestnet2)
+          biggestnet2 = *it->get_inoov_id();
+   }
+
+   int *net1Arry, *net2Arry; 
+   if(biggestnet1 > biggestnet2){
+       net1Arry = new int[biggestnet1];
+       net2Arry = new int[biggestnet1];
+   }
+   else{
+       net1Arry = new int[biggestnet2];
+       net2Arry = new int[biggestnet2];
+   }
+
+   for(list<Gene *>::iterator it = net1->genes.begin(); it != net1->genes.end(); ++it){
+       net1Arry[*it->get_inov_id] = *it->get_inov_id; 
+   }
+   
+   for(list<Gene *>::iterator it = net2->genes.begin(); it != net2->genes.end(); ++it){
+       net1Arry[*it->get_inov_id] = *it->get_inov_id;
+   }
+
+   if(biggestnet1 > biggestnet2){
+       if(net1Arry[biggestnet1] == 0){
+          for(int index = biggestnet1; index > 0; index--){
+              if(net1Arry[index] != net2Arr[index] && net1Arry[index] == 0)
+                 excess++;
+              else return excess;   
+          }
+       }
+       else if(net2Arry[biggestnet1] == 0){
+           for(int index = biggestnet1; index > 0; index--){
+              if(net2Arry[index] != net1Arry[index] && net2Arry[index] == 0)
+                 excess++;
+              else return excess;   
+          }
+       }
+   }
+   else{
+       if(net1Arry[biggestnet2] == 0){
+          for(int index = biggestnet1; index > 0; index--){
+              if(net1Arry[index] != net2Arr[index] && net1Arry[index] == 0)
+                 excess++;
+              else return excess;   
+          }
+       }
+       else if(net2Arry[biggestnet2] == 0){
+           for(int index = biggestnet2; index > 0; index--){
+              if(net2Arry[index] != net1Arry[index] && net2Arry[index] == 0)
+                 excess++;
+              else return excess;   
+          }
+       }
+   }
+
+   return excess;
 }
 
-float Species::compute_disjoint(Network *net1, Network *net2){
-   return 0.0;
+int Species::compute_disjoint(Network *net1, Network *net2){
+   int disjoint;
+   int excess = 0;
+   
+   int biggestnet1 = 0;
+   int biggestnet2 = 0;
+   
+   for(list<Gene *>::iterator it = net1->genes.begin(); it != net1->genes.end(); ++it){
+       if(*it->get_inov_id() > biggestnet1)
+          biggestnet1 = *it->get_inoov_id();
+   }
+   
+   for(list<Gene *>::iterator it = net2->genes.begin(); it != net2->genes.end(); ++it){
+       if(*it->get_inov_id() > biggestnet2)
+          biggestnet2 = *it->get_inoov_id();
+   }
+
+   int *net1Arry, *net2Arry; 
+   if(biggestnet1 > biggestnet2){
+       net1Arry = new int[biggestnet1];
+       net2Arry = new int[biggestnet1];
+   }
+   else{
+       net1Arry = new int[biggestnet2];
+       net2Arry = new int[biggestnet2];
+   }
+
+   for(list<Gene *>::iterator it = net1->genes.begin(); it != net1->genes.end(); ++it){
+       net1Arry[*it->get_inov_id] = *it->get_inov_id; 
+   }
+   
+   for(list<Gene *>::iterator it = net2->genes.begin(); it != net2->genes.end(); ++it){
+       net1Arry[*it->get_inov_id] = *it->get_inov_id;
+   }
+
+   if(biggestnet1 > biggestnet2){
+       if(net1Arry[biggestnet1] == 0){
+          for(int index = biggestnet1; index > 0; index--){
+              if(net1Arry[index] != net2Arr[index] && net1Arry[index] == 0)
+                 excess++;
+              else if(net2Arry[index] != net1Arry[index]){
+                  disjoint++
+              }
+              else return disjoint;  
+          }
+       }
+       else if(net2Arry[biggestnet1] == 0){
+           for(int index = biggestnet1; index > 0; index--){
+              if(net2Arry[index] != net1Arry[index] && net2Arry[index] == 0)
+                 excess++;
+              else if(net2Arry[index] != net1Arry[index]){
+                  disjoint++
+              }
+              else return disjoint;   
+          }
+       }
+   }
+   else{
+       if(net1Arry[biggestnet2] == 0){
+          for(int index = biggestnet1; index > 0; index--){
+              if(net1Arry[index] != net2Arr[index] && net1Arry[index] == 0)
+                 excess++;
+              else if(net2Arry[index] != net1Arry[index]){
+                  disjoint++
+              }
+              else return disjoint;  
+          }
+       }
+       else if(net2Arry[biggestnet2] == 0){
+           for(int index = biggestnet2; index > 0; index--){
+              if(net2Arry[index] != net1Arry[index] && net2Arry[index] == 0)
+                 excess++;
+              else if(net2Arry[index] != net1Arry[index]){
+                  disjoint++
+              }
+              else return disjoint;   
+          }
+       }
+   }
+
+   return disjoint;
 }
 
 float Species::weight_diff_match_genes(Network *net1, Network *net2){
