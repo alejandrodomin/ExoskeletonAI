@@ -25,8 +25,9 @@ class Species{
 
       list<Network *> networks;
    protected:
-      float compute_excess(Network *, Network *);
-      float compute_disjoint(Network *, Network *);
+      int compute_excess(Network *, Network *);
+      int compute_disjoint(Network *, Network *);
+      
       float weight_diff_match_genes(Network *, Network *);
    public:
       Species();

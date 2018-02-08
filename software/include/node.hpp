@@ -42,8 +42,8 @@ class Node{
         Node(int);
         ~Node();
 
-        void out_func();
-        void find_layer();
+        void out_func(list<Gene *>);
+        void find_layer(list<Gene *>);
         void set_outputfunc(float);
 
         int get_type();
@@ -51,6 +51,6 @@ class Node{
 
         float get_outputfunc();
 
-        thread* spawn_thread();
+        thread* spawn_thread(list<Gene *>);
 };
 #endif

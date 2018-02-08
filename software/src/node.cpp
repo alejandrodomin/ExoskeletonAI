@@ -24,27 +24,22 @@ Node::Node(int new_type){
 /** Destructor dealocates memory from the heap related to this class.
 */
 Node::~Node(){
-    for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it){
-        if(*it != NULL){
-            delete [] *it;
-            *it = NULL;
-        }
-    }
+
 }
 
 /** My function doing something...
     @return thread* returns a pointer to a new thread.
 */
-thread* Node::spawn_thread(){
+thread* Node::spawn_thread(list<Gene *> genes){
     cout << "[INFO][NODE]:\t Entered Node::spawn_thread()" << endl;
     cout << "[INFO][NODE]:\t Exiting Node::spawn_thread()" << endl;
-    return new thread(&Node::out_func, this);
+    return new thread(&Node::out_func, this, genes);
 }
 
 /** Calculates the value of the node
  *  based on the forward propagation function.
 */
-void Node::out_func(){
+void Node::out_func(list<Gene *> genes){
     cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
     out_mut.lock();
 
@@ -59,15 +54,6 @@ void Node::out_func(){
 
     out_mut.unlock();
     cout << "[INFO][NODE]:\t Exiting Node::out_func()" << endl;
-}
-
-/** My function doing something...
-    @param snode* pointer to the starting node
-    @param onode* pointer to the output node usually the node that 
-                    calls this function.
-*/
-void Node::add_gene(Node *snode, Node * onode){
-    genes.push_back(new Gene(snode, onode));
 }
 
 /** Returns the node identification number.
@@ -104,7 +90,7 @@ void Node::set_outputfunc(float num){
 /** Finds the layer the node is located in, 
  *  if it is a hidden node.
 */
-void Node::find_layer(){   // the logic in this function seems iffy check it later
+void Node::find_layer(list<Gene *> genes){   // the logic in this function seems iffy check it later
     bool allInput = true;
     int maxLayer = 0;
     int index = 0;

@@ -2,6 +2,7 @@
 #include <cstdlib>
 #include <thread>
 
+#include "common.hpp"
 #include "network.hpp"
 
 using namespace std;
@@ -35,6 +36,12 @@ Network::~Network(){
            *it = NULL;
        }
    }
+   for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it){
+        if(*it != NULL){
+            delete [] *it;
+            *it = NULL;
+        }
+    }
 
    cout << "[INFO][NETWORK]: Exiting Network::~Network()." << endl;
 }
@@ -51,7 +58,7 @@ void Network::input_run(){
     cout << "[INFO][NETWORK]: Entering Network::input_run()" << endl;
     int index;
     for (index = 0; index < NUM_INPUTS; index++){
-        threads[index] = in_nodes[index]->spawn_thread();
+        threads[index] = in_nodes[index]->spawn_thread(genes);
     }
 
     int found = 0;          // checks to see if the above threads are done executing
@@ -80,7 +87,7 @@ void Network::hidden_run(){
 void Network::output_run(){
     cout << "[INFO][NETWORK]: Entered Network::output_run()." << endl;
     for (int index = 0; index < NUM_OUTPUTS; index++){
-        threads[index] = out_nodes[index]->spawn_thread();
+        threads[index] = out_nodes[index]->spawn_thread(genes);
     }
 
     int found = 0, index = 0;          // checks to see if the above threads are done executing
@@ -126,6 +133,15 @@ void Network::set_compatibility_distance(float newcomp_distance){
     cout << "[INFO][NETWORK]: Exiting Network::set_compatibility_distance(float)." << endl;
 }
 
+/** My function doing something...
+    @param snode* pointer to the starting node
+    @param onode* pointer to the output node usually the node that 
+                    calls this function.
+*/
+void Network::add_gene(Node *snode, Node * onode){
+    genes.push_back(new Gene(snode, onode));
+}
+
 int Network::get_fitness(){
     cout << "[INFO][NETWORK]: Entered Network::get_fitness()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_fitness()." << endl;
@@ -163,7 +179,7 @@ bool Network::rand_connection(){
       index++;
    }
 
-   one->add_gene(one, two);
+   add_gene(one, two);
    cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
 }
 
@@ -199,4 +215,8 @@ Node** Network::get_input(){
     cout << "[INFO][NETWORK]: Entered Network::get_input()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_input()." << endl;
     return in_nodes;
+}
+
+list<Gene *> Network::get_genes(){
+    return genes;
 }

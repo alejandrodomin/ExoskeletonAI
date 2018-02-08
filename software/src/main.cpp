@@ -3,10 +3,6 @@
 #include "species.hpp"
 #include "network.hpp"
 
-#define NUM_INPUTS  9
-#define NUM_OUTPUTS 6
-#define MAX_THREADS 5
-
 using namespace std;
 
 static int global_innovation_id = 0; // this shit needs to be in the network.

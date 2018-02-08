@@ -56,6 +56,8 @@ class Network{
       bool add_output_nodes(int);
 
       Node** get_input();       // names for these can be changed later
+
+      list<Gene *> get_genes();  
 };
 
 #endif

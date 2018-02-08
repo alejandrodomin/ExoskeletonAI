@@ -1,10 +1,9 @@
 #include <iostream>
 
+#include "common.hpp"
 #include "gene.hpp"
 
 using namespace std;
-
-extern static int global_innovation_id;
 
 /** Empty constructor, creates a Gene object.
 */
@@ -19,11 +18,11 @@ Gene::Gene(){
 /** Gene constructor, creates a Gene
  *  that knows which two nodes it ties together.
 */
-Gene::Gene(Node* newinput_node, Node* newyou_node){
+Gene::Gene(Node* newinput_node, Node* newoutput_node){
    cout << "[INFO][GENE]: Entered Gene::Gene(Node *, Node *)." << endl;
 
    input_node = newinput_node;
-   you_node = newyou_node;
+   output_node = newoutput_node;
 
    cout << "[INFO][GENE]: Exited  Gene::Gene(Node *, Node *)." << endl;
 }
@@ -38,9 +37,9 @@ Gene::~Gene(){
         delete [] input_node;
         input_node = NULL;
     }
-    if(you_node != NULL){
-        delete [] you_node;
-        you_node = NULL;
+    if(output_node != NULL){
+        delete [] output_node;
+        output_node = NULL;
     }
 
    cout << "[INFO][GENE]: Exited  Gene::~Gene()." << endl;
@@ -55,6 +54,10 @@ void Gene::set_weight(float newweight){
    weight = newweight;
 
    cout << "[INFO][GENE]: Exited  Gene::set_weight(float)." << endl;
+}
+
+int Gene::get_inov_id(){
+    return innovation_number;
 }
 
 /** Returns the value of the weight variable.
@@ -79,8 +82,8 @@ Node* Gene::get_input_node(){
  *  gene function.
     @return Node* node pointer
 */
-Node* Gene::get_you_node(){
+Node* Gene::get_ouput_node(){
    cout << "[INFO][GENE]: Entered Gene::get_you_node()." << endl;
    cout << "[INFO][GENE]: Exited  Gene::get_you_node()." << endl;
-   return you_node;
+   return output_node;
 }
