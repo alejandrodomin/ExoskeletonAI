@@ -29,6 +29,8 @@ class Network{
       Node **out_nodes; // output nodes
       list<Node *> hidden_nodes; // hidden nodes
 
+      list<Gene *> genes; /**<List for all of the genes associated with the node. */
+
       thread **threads;
    protected:
       void input_run();
@@ -43,6 +45,7 @@ class Network{
       void use_output();
       void set_num_nodes(int);
       void set_compatibility_distance(float);
+      void add_gene(Node *, Node *);
 
       int get_fitness();
       int get_num_nodes();

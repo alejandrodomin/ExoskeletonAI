@@ -22,8 +22,8 @@ class Gene{
 
       float weight;     /**<The weight a gene carries in the forward propagation function. */
 
-      Node* you_node;   /**<A pointer corresponding to the node that holds this gene. */
-      Node* input_node; /**<A pointer to the Node that is connected to the you_node. */
+      Node* input_node;   /**<A pointer corresponding to the node that holds this gene. */
+      Node* output_node; /**<A pointer to the Node that is connected to the you_node. */
    protected:
    public:
       Gene();
@@ -32,10 +32,12 @@ class Gene{
 
       void set_weight(float);
 
+      int get_inov_id();
+
       float get_weight();
 
-      Node* get_you_node();
       Node* get_input_node();
+      Node* get_ouput_node();
 };
 
 #endif
