@@ -139,7 +139,9 @@ void Network::set_compatibility_distance(float newcomp_distance){
                     calls this function.
 */
 void Network::add_gene(Node *snode, Node * onode){
+    cout << "[INFO][NETWORK]: Entered Network::add_gene(Node*, Node*)" << endl;
     genes.push_back(new Gene(snode, onode));
+    cout << "[INFO][NETOWRK]: Exiting Network::add_gene(Node*, Node*)" << endl;
 }
 
 int Network::get_fitness(){
@@ -218,5 +220,7 @@ Node** Network::get_input(){
 }
 
 list<Gene *> Network::get_genes(){
+    cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
+    cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
     return genes;
 }

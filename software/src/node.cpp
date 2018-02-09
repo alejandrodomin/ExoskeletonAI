@@ -11,20 +11,24 @@ using namespace std;
  *  Creates a new node with nothing initialized.
 */
 Node::Node(){
-
+    cout << "[INFO][NODE]:\t Entered Node::Node()." << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::Node()." << endl;
 }
 
 /** Constructor that sets the type of node it is.
     @param new_type type of node it is, based on the enum list.    
 */
 Node::Node(int new_type){
+    cout << "[INFO][NODE]:\t Entered Node::Node(int)." << endl;
     type = new_type;
+    cout << "[INFO][NODE]:\t Exiting Node::Node(int)." << endl;
 }
 
 /** Destructor dealocates memory from the heap related to this class.
 */
 Node::~Node(){
-
+    cout << "[INFO][NODE]:\t Entered Node::~Node()." << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::~Node()." << endl;
 }
 
 /** My function doing something...
@@ -60,6 +64,8 @@ void Node::out_func(list<Gene *> genes){
     @return int identification number
 */
 int Node::get_nodeid(){
+    cout << "[INFO][NODE]:\t Entered Node::get_nodeid()." << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::get_nodeid()." << endl;
     return node_id;
 }
 
@@ -67,6 +73,8 @@ int Node::get_nodeid(){
  *  @return int type
 */
 int Node::get_type(){
+    cout << "[INFO][NODE]:\t Entered Node::get_type()." << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::get_type()." << endl;
     return type;
 }
 
@@ -75,8 +83,8 @@ int Node::get_type(){
     @return float output value of the node
 */
 float Node::get_outputfunc(){
-    cout << "Entering Node::get_outputfunc" << endl;
-    cout << "Exiting Node::get_outputfunc" << endl;
+    cout << "[INFO][NODE]:\t Entered Node::get_outputfunc()." << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::get_outputfunc()." << endl;
     return output_func;
 }
 
@@ -84,13 +92,16 @@ float Node::get_outputfunc(){
     @param num the number for the output_func
 */
 void Node::set_outputfunc(float num){
+    cout << "[INFO][NODE]:\t Entered Node::set_outputfunc(float)." << endl;
     output_func = num;
+    cout << "[INFO][NODE]:\t Exiting Node::set_outputfunc(float)." << endl;
 }
 
 /** Finds the layer the node is located in, 
  *  if it is a hidden node.
 */
 void Node::find_layer(list<Gene *> genes){   // the logic in this function seems iffy check it later
+    cout << "[INFO][NODE]:\t Entered Node::find_layer(list<Gene*>)." << endl;
     bool allInput = true;
     int maxLayer = 0;
     int index = 0;
@@ -108,4 +119,5 @@ void Node::find_layer(list<Gene *> genes){   // the logic in this function seems
     if (allInput)
         layer = 1;
     else layer = maxLayer + 1;
+    cout << "[INFO][NODE]:\t Exiting Node::find_layer(list<Gene*>)." << endl;
 }
