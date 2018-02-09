@@ -81,7 +81,15 @@ void Network::input_run(){
 
 void Network::hidden_run(){
     cout << "[INFO][NETWORK]: Entered Network::hidden_run()." << endl;
+    hidden_nodes.sort(compare);
+    for (list<Node* >::iterator it = hidden_nodes.begin(); it != hidden_nodes.end();++it){
+        (*it)->out_func();
+    }
     cout << "[INFO][NETWORK]: Exiting Network::hidden_run()." << endl;
+}
+
+bool Network::compare(const Node &one,const Node &two){
+    return one->get_layer() < two->get_layer();
 }
 
 void Network::output_run(){

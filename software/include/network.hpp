@@ -54,6 +54,7 @@ class Network{
       bool rand_connection();
       bool add_input_node(int);
       bool add_output_nodes(int);
+      bool compare(Node *, Node *);
 
       Node** get_input();       // names for these can be changed later
 

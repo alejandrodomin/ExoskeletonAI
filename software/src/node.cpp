@@ -78,6 +78,12 @@ int Node::get_type(){
     return type;
 }
 
+int Node::get_layer(){
+    cout << "[INFO][NODE]:\t Entered Node::get_layer()." << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::get_layer()." << endl;
+    return layer;
+}
+
 /** Returns the ouput value of a node
  *  based on forward propogation.
     @return float output value of the node
