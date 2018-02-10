@@ -63,7 +63,7 @@ void Node::out_func(list<Gene *> genes){
 /** Returns the node identification number.
     @return int identification number
 */
-int Node::get_nodeid(){
+int Node::get_nodeid() const{
     cout << "[INFO][NODE]:\t Entered Node::get_nodeid()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_nodeid()." << endl;
     return node_id;
@@ -72,13 +72,13 @@ int Node::get_nodeid(){
 /** Returns what type of node it is.
  *  @return int type
 */
-int Node::get_type(){
+int Node::get_type() const{
     cout << "[INFO][NODE]:\t Entered Node::get_type()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_type()." << endl;
     return type;
 }
 
-int Node::get_layer(){
+int Node::get_layer() const{
     cout << "[INFO][NODE]:\t Entered Node::get_layer()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_layer()." << endl;
     return layer;

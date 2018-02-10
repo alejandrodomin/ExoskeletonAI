@@ -25,11 +25,11 @@ class Network{
 
       float compatibility_distance;
 
+      list<Gene *> genes; /**<List for all of the genes associated with the node. */
+
       Node **in_nodes; // the input nodes
       Node **out_nodes; // output nodes
       list<Node *> hidden_nodes; // hidden nodes
-
-      list<Gene *> genes; /**<List for all of the genes associated with the node. */
 
       thread **threads;
    protected:
@@ -54,7 +54,8 @@ class Network{
       bool rand_connection();
       bool add_input_node(int);
       bool add_output_nodes(int);
-      bool compare(Node *, Node *);
+      
+      static bool compare(Node *, Node *);
 
       Node** get_input();       // names for these can be changed later
 

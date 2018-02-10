@@ -46,9 +46,9 @@ class Node{
         void find_layer(list<Gene *>);
         void set_outputfunc(float);
 
-        int get_layer();
-        int get_type();
-        int get_nodeid();
+        int get_layer() const;
+        int get_type() const;
+        int get_nodeid() const;
 
         float get_outputfunc();
 
