@@ -1,7 +1,8 @@
 {
-   "files.associations": {
+"files.associations": {
       "iostream": "cpp",
-      "thread": "cpp"
+      "thread": "cpp",
+      "mutex": "cpp"
 },
 "editor.tabSize": 3
 }

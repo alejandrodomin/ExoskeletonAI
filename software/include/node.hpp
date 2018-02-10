@@ -35,7 +35,7 @@ class Node{
         float bias;         /**<The weight we put on a node in the network. */
         float output_func;  /**<The output of the node after we apply forward propogation. */
 
-        mutex out_mut;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
+        static mutex mtx;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
     protected:
     public:
         Node();
@@ -50,7 +50,8 @@ class Node{
         int get_type() const;
         int get_nodeid() const;
 
-        float get_outputfunc();
+        float get_bias() const;
+        float get_outputfunc() const;
 
         thread* spawn_thread(list<Gene *>);
 };

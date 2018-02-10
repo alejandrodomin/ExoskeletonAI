@@ -11,7 +11,7 @@ Network::Network(){
    cout << "[INFO][NETWORK]: Entered Network::Network()." << endl;
    in_nodes  = new Node*[NUM_INPUTS];
    out_nodes = new Node*[NUM_OUTPUTS];
-   threads   = new thread*[MAX_THREADS];
+   threads   = new thread*[NUM_INPUTS];
    cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
 }
 
@@ -56,18 +56,25 @@ void Network::run(){				// there is alot of safety measures that need to be put 
 
 void Network::input_run(){
     cout << "[INFO][NETWORK]: Entering Network::input_run()" << endl;
-    int index;
-    for (index = 0; index < NUM_INPUTS; index++){
-        threads[index] = in_nodes[index]->spawn_thread(genes);
-    }
 
-    int found = 0;          // checks to see if the above threads are done executing
-    index = 0;
-    while(found < NUM_INPUTS){
-        if(in_nodes[index]->get_outputfunc() != 0){
-            found++;
+    int index = 0;
+    int thread_ind = 0;
+    
+    while(index < NUM_INPUTS){
+        if(thread_ind >= MAX_THREADS){
+            for(int indx = 0; indx < MAX_THREADS; indx++){
+                cout << "[INFO][NETWORK]: Waiting for thread." << endl;
+                threads[indx]->join();
+            }
+            
+            thread_ind = 0;
+            threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
+        }
+        else{
+            threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
         }
 
+        thread_ind++;
         index++;
     }
 
@@ -76,7 +83,7 @@ void Network::input_run(){
         threads = NULL;
     }
 
-    cout << "[INFO][NETWORK]: Exiting Network::intput_run()" << endl;
+    cout << "[INFO][NETWORK]: Exiting Network::input_run()" << endl;
 }
 
 void Network::hidden_run(){

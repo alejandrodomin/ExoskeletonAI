@@ -1,17 +1,15 @@
 #include <iostream>
+#include <fstream>
 
+#include "common.hpp"
 #include "species.hpp"
 #include "network.hpp"
 
 using namespace std;
 
-static int global_innovation_id = 0; // this shit needs to be in the network.
-					// every network need to have their own global
-					// innovation id, shits wrong.
-
 int main(int argc, char **argv, char **env){
    cout << "[INFO][MAIN]:\t Entered main." << endl;
-   
+
    list<Species *> exoAI;
    exoAI.push_back(new Species());
 

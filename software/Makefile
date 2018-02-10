@@ -16,7 +16,7 @@ $(PROJ): $(OBJECTS)
 	$(CC) $(DEBUG) $(LFLAGS) $^ -o $@
 
 $(OBJ)/%.o: $(SRC)/%.cpp
-	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
+	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
 	rm build/*.o $(PROJ)

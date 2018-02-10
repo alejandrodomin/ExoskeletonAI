@@ -7,6 +7,8 @@
 
 using namespace std;
 
+mutex Node::mtx;    // because it is static this tells the compiler it exists.
+
 /** Constructor with no parameters.
  *  Creates a new node with nothing initialized.
 */
@@ -45,18 +47,17 @@ thread* Node::spawn_thread(list<Gene *> genes){
 */
 void Node::out_func(list<Gene *> genes){
     cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
-    out_mut.lock();
+    std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
 
     int index = 0;
-    float total = 0;
+    double total = 0;
 
     for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
         total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
 
-    total += bias;
-    set_outputfunc(total);
-
-    out_mut.unlock();
+    total += get_bias();
+    set_outputfunc(total);      // problem in seg fault lies here
+                                // goes out of scope mutex is unlocked others try to acces the same data, seg fault
     cout << "[INFO][NODE]:\t Exiting Node::out_func()" << endl;
 }
 
@@ -88,7 +89,7 @@ int Node::get_layer() const{
  *  based on forward propogation.
     @return float output value of the node
 */
-float Node::get_outputfunc(){
+float Node::get_outputfunc() const{
     cout << "[INFO][NODE]:\t Entered Node::get_outputfunc()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_outputfunc()." << endl;
     return output_func;
@@ -126,4 +127,10 @@ void Node::find_layer(list<Gene *> genes){   // the logic in this function seems
         layer = 1;
     else layer = maxLayer + 1;
     cout << "[INFO][NODE]:\t Exiting Node::find_layer(list<Gene*>)." << endl;
+}
+
+float Node::get_bias() const{
+    cout << "[INFO][NODE]:\t Entered Node::get_bias()." << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::get_bias()." << endl;
+    return bias;
 }
