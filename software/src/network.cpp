@@ -7,6 +7,9 @@
 
 using namespace std;
 
+/**Network constructor, initializes input nodes,
+ * output nodes, and threads.
+ */
 Network::Network(){
    cout << "[INFO][NETWORK]: Entered Network::Network()." << endl;
    in_nodes  = new Node*[NUM_INPUTS];
@@ -15,6 +18,10 @@ Network::Network(){
    cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
 }
 
+/**Network destructor, deletes memory allocated to
+ * input nodes, output nodes, threads, hidden nodes,
+ * and genes.
+ */ 
 Network::~Network(){
    cout << "[INFO][NETWORK]: Entered Network::~Network()." << endl;
 
@@ -46,6 +53,9 @@ Network::~Network(){
    cout << "[INFO][NETWORK]: Exiting Network::~Network()." << endl;
 }
 
+/**Network run function runs the input,
+ * hidden, and output nodes.
+ */ 
 void Network::run(){				// there is alot of safety measures that need to be put into here
     cout << "[INFO][NETWORK]: Entered Network::run()." << endl;
     input_run();
@@ -54,6 +64,8 @@ void Network::run(){				// there is alot of safety measures that need to be put 
     cout << "[INFO][NETWORK]: Exiting Network::run()." << endl;
 }
 
+/** Network input_run spawns threads that run the input nodes.
+ */ 
 void Network::input_run(){
     cout << "[INFO][NETWORK]: Entering Network::input_run()" << endl;
 
@@ -86,6 +98,8 @@ void Network::input_run(){
     cout << "[INFO][NETWORK]: Exiting Network::input_run()" << endl;
 }
 
+/**Network hidden_run sorts the hidden nodes by layer and runs them.
+ */ 
 void Network::hidden_run(){
     cout << "[INFO][NETWORK]: Entered Network::hidden_run()." << endl;
     hidden_nodes.sort(compare);
@@ -95,6 +109,8 @@ void Network::hidden_run(){
     cout << "[INFO][NETWORK]: Exiting Network::hidden_run()." << endl;
 }
 
+/**Network output_run spawns threads that run the output nodes.
+ */ 
 void Network::output_run(){
     cout << "[INFO][NETWORK]: Entered Network::output_run()." << endl;
     for (int index = 0; index < NUM_OUTPUTS; index++){
@@ -117,6 +133,8 @@ void Network::output_run(){
     cout << "[INFO][NETWORK]: Exiting Network::output_run()." << endl;
 }
 
+/**Network mutate assigns a random value.
+ */ 
 void Network::mutate(){
     cout << "[INFO][NETWORK]: Entered Network::mutate()." << endl;
     int num = (rand() % 3) + 1;
@@ -127,17 +145,25 @@ void Network::mutate(){
     cout << "[INFO][NETWORK]: Exiting Network::mutate()." << endl;
 }
 
+/**Network use_output has not been implemented.
+ */ 
 void Network::use_output(){
     cout << "[INFO][NETWORK]: Entered Network::use_output()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::use_output()." << endl;
 }
 
+/**Network set_num_nodes sets the number of nodes.
+ * @param num_nodes the number of nodes.
+ */ 
 void Network::set_num_nodes(int num_nodes){
     cout << "[INFO][NETWORK]: Entered Network::set_num_nodes(int)." << endl;
     this->num_nodes = num_nodes;
     cout << "[INFO][NETWORK]: Exiting Network::set_num_nodes(int)." << endl;
 }
 
+/**Network set_compatibility_distance sets the compatibility distance.
+ * @param newcomp_distance the new compatibility distance.
+ */ 
 void Network::set_compatibility_distance(float newcomp_distance){
     cout << "[INFO][NETWORK]: Entered Network::set_compatibility_distance(float)." << endl;
     compatibility_distance = newcomp_distance;

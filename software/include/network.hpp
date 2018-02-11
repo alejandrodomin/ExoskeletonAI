@@ -20,18 +20,18 @@ using namespace std;
 
 class Network{
    private:
-      int fitness;
-      int num_nodes;
+      int fitness; /**<The fitness level of a set of input nodes.*/
+      int num_nodes; /**<The number of nodes.*/
 
-      float compatibility_distance;
+      float compatibility_distance;/**<Measures how compatible a set of nodes is.*/
 
       list<Gene *> genes; /**<List for all of the genes associated with the node. */
 
-      Node **in_nodes; // the input nodes
-      Node **out_nodes; // output nodes
-      list<Node *> hidden_nodes; // hidden nodes
+      Node **in_nodes; /**<the input nodes*/
+      Node **out_nodes; /**<output nodes*/
+      list<Node *> hidden_nodes; /**<hidden nodes*/
 
-      thread **threads;
+      thread **threads;/**<A double pointer to the threads that have been created.*/
    protected:
       void input_run();
       void hidden_run();

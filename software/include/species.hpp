@@ -19,11 +19,11 @@ using namespace std;
 class Species{
    private:
       int stale;
-      int max_fitness;
+      int max_fitness;/**<The maximum fitness of a species.*/
 
-      Network* fittest_net;
+      Network* fittest_net;/**<Network pointer to the fittest network.*/
 
-      list<Network *> networks;
+      list<Network *> networks;/**<A list of network pointers that stores networks.*/
    protected:
       int compute_excess(Network *, Network *);
       int compute_disjoint(Network *, Network *);

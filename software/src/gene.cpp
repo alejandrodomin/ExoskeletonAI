@@ -46,7 +46,7 @@ Gene::~Gene(){
 }
 
 /** Sets the weight variable to a new value.
-    @param neweight the new weight
+    @param newweight the new weight
 */
 void Gene::set_weight(float newweight){
    cout << "[INFO][GENE]: Entered Gene::set_weight(float)." << endl;
@@ -56,6 +56,9 @@ void Gene::set_weight(float newweight){
    cout << "[INFO][GENE]: Exited  Gene::set_weight(float)." << endl;
 }
 
+/** Returns the value of the innovation number variable.
+ * @return int returns innovation_number
+ */
 int Gene::get_inov_id(){
     return innovation_number;
 }

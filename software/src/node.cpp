@@ -79,6 +79,9 @@ int Node::get_type() const{
     return type;
 }
 
+/** Returns the layer.
+ * @return int type
+ */ 
 int Node::get_layer() const{
     cout << "[INFO][NODE]:\t Entered Node::get_layer()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_layer()." << endl;
@@ -129,6 +132,9 @@ void Node::find_layer(list<Gene *> genes){   // the logic in this function seems
     cout << "[INFO][NODE]:\t Exiting Node::find_layer(list<Gene*>)." << endl;
 }
 
+/** Returns the bias.
+ * @return float output value of bias.
+ */ 
 float Node::get_bias() const{
     cout << "[INFO][NODE]:\t Entered Node::get_bias()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_bias()." << endl;
