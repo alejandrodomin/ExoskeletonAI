@@ -181,24 +181,34 @@ void Network::add_gene(Node *snode, Node * onode){
     cout << "[INFO][NETOWRK]: Exiting Network::add_gene(Node*, Node*)" << endl;
 }
 
+/** Returns fitness value.
+ * @return int type.
+ */ 
 int Network::get_fitness(){
     cout << "[INFO][NETWORK]: Entered Network::get_fitness()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_fitness()." << endl;
     return fitness;
 }
 
+/** Returns number of nodes.
+ * @return int type.
+ */ 
 int Network::get_num_nodes(){
     cout << "[INFO][NETWORK]: Entered Network::get_num_nodes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_num_nodes()." << endl;
     return num_nodes;
 }
 
+/** Network rand_node creates a random hidden node.
+ */ 
 bool Network::rand_node(){
     cout << "[INFO][NETWORK]: Entered Network::rand_node()." << endl;
     hidden_nodes.push_back(new Node(hidden));
     cout << "[INFO][NETWORK]: Exiting Network::rand_node()." << endl;
 }
 
+/** Network rand_connection creates a random connection between two nodes.
+ */ 
 bool Network::rand_connection(){
     cout << "[INFO][NETWORK]: Entered Network::rand_connection()." << endl;
    int node_one = rand()% num_nodes;
@@ -222,6 +232,10 @@ bool Network::rand_connection(){
    cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
 }
 
+/** Network add_input_node adds new input nodes.
+ * @param num_nodes the number of nodes
+ * @return bool true.
+ */ 
 bool Network::add_input_node(int num_nodes){
     cout << "[INFO][NETWORK]: Entered Network::add_input_node(int)." << endl;
     int index = 0;
@@ -236,6 +250,10 @@ bool Network::add_input_node(int num_nodes){
     return true;
 }
 
+/** Network add_output_nodes adds new output nodes.
+ * @param num_nodes the number of nodes.
+ * @return bool true.
+ */ 
 bool Network::add_output_nodes(int num_nodes){
     cout << "[INFO][NETWORK]: Entered Network::add_output_nodes(int)." << endl;
     int index = 0;
@@ -250,16 +268,28 @@ bool Network::add_output_nodes(int num_nodes){
     return true;
 }
 
+/** Network compare checks if layer of first node is 
+ * less than layer of second node.
+ * @param Node *one first node
+ * @param Node *two second node
+ * @return bool
+ */ 
 bool Network::compare(Node *one,Node *two){
     return one->get_layer() < two->get_layer();
 }
 
+/** Returns the number of input nodes.
+ * @return Node**
+ */ 
 Node** Network::get_input(){
     cout << "[INFO][NETWORK]: Entered Network::get_input()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_input()." << endl;
     return in_nodes;
 }
 
+/** Returns the list of gene pointers.
+ * @return list<Gene *>
+ */ 
 list<Gene *> Network::get_genes(){
     cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
