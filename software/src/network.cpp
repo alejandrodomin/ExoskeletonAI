@@ -37,31 +37,29 @@ Network::~Network(){
    if(in_nodes != NULL){
       delete [] in_nodes;
       in_nodes = NULL;
+      cout << "[INFO][NETWORK]: Dealocated in_nodes." << endl;
    }
    if(out_nodes != NULL){
       delete [] out_nodes;
-      in_nodes = NULL;
+      out_nodes = NULL;
+      cout << "[INFO][NETWORK]: Dealocated out_nodes." << endl;
    }
    if(in_threads != NULL){
        delete [] in_threads;
        in_threads = NULL;
+       cout << "[INFO][NETWORK]: Dealocated in_threads." << endl;
    }
    if(out_threads != NULL){
        delete [] out_threads;
        out_threads = NULL;
+       cout << "[INFO][NETWORK]: Dealocated out_threads." << endl;
    }
-   for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); ++it){
-       if(*it != NULL){
-           delete [] *it;
-           *it = NULL;
-       }
-   }
-   for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it){
-        if(*it != NULL){
-            delete [] *it;
-            *it = NULL;
-        }
-    }
+   
+   hidden_nodes.clear();
+   cout << "[INFO][NETWORK]: Dealocated hidden_nodes." << endl;
+   genes.clear();
+   cout << "[INFO][NETWORK]: Dealocated genes." << endl;
+    
 
    cout << "[INFO][NETWORK]: Exiting Network::~Network()." << endl;
 }
@@ -270,7 +268,7 @@ bool Network::compare(Node *one,Node *two){
 /** Returns the number of input nodes.
  * @return Node**
  */ 
-Node** Network::get_input(){
+Node** Network::get_input() const{
     cout << "[INFO][NETWORK]: Entered Network::get_input()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_input()." << endl;
     return in_nodes;
@@ -279,7 +277,7 @@ Node** Network::get_input(){
 /** Returns the list of gene pointers.
  * @return list<Gene *>
  */ 
-list<Gene *> Network::get_genes(){
+list<Gene *> Network::get_genes() const{
     cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
     return genes;

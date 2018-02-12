@@ -19,4 +19,4 @@ $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
-	rm build/*.o $(PROJ)
+	rm $(OBJECTS) $(PROJ)

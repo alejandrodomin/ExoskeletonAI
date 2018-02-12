@@ -35,11 +35,25 @@ Species::~Species(){
 
 /** Mutate function which mutates every item in list<Network *>
 */
-void Species::mutate(){
+Network* Species::mutate(){
     cout << "[INFO][SPECIES]: Entered Species::mutate()." << endl;
+    fittest_net = networks.front();
    for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
-      (*it)->mutate();
+      if((*it)->get_fitness() > fittest_net->get_fitness()){
+          fittest_net = *it;
+      }
    }
+
+   for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
+       if(*it != NULL){
+        delete [] *it;
+        *it = NULL;
+       }
+   }
+   networks.clear();
+
+   fittest_net->mutate();
+   return fittest_net;
    cout << "[INFO][SPECIES]: Exiting Species::mutate()." << endl;
 }
 
@@ -314,4 +328,8 @@ float Species::weight_diff_match_genes(Network *net1, Network *net2){
    average = sum / total; 
     cout << "[INFO][SPECIES]: Exiting Species::weight_diff_math_genes(Network*,Network*)." << endl;
    return average; 
+}
+
+list<Network *> Species::get_networks(){
+    return networks;
 }

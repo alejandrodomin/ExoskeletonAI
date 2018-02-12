@@ -6,7 +6,8 @@
       "array": "cpp",
       "hash_map": "cpp",
       "slist": "cpp",
-      "initializer_list": "cpp"
+      "initializer_list": "cpp",
+      "utility": "cpp"
 },
 "editor.tabSize": 3
 }

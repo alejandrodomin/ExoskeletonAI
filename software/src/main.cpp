@@ -16,14 +16,13 @@ int main(int argc, char **argv, char **env){
 
    while(true){   
       for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
-         (*it)->add_network(new Network());
          (*it)->run_networks();
 
          if((*it)->is_stale()){
-            (*it)->mutate();
+            (*it)->add_network((*it)->mutate());
          }
 
-         if(exoAI.size() > 1){
+         if((*it)->get_networks().size() > 1){
             if((*it)->test_species()){
                exoAI.push_back((*it)->new_species());
             }

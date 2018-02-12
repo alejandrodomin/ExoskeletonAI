@@ -33,7 +33,7 @@ class Species{
       Species();
       ~Species();
 
-      void mutate();
+      Network* mutate();
       void run_networks();
       void add_network(Network *);
 
@@ -41,6 +41,8 @@ class Species{
       bool test_species();
 
       Species* new_species();
+
+      list<Network *> get_networks();
 };
 
 #endif

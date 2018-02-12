@@ -56,9 +56,9 @@ class Network{
       
       static bool compare(Node *, Node *);
 
-      Node** get_input();       // names for these can be changed later
+      Node** get_input() const;       // names for these can be changed later
 
-      list<Gene *> get_genes();  
+      list<Gene *> get_genes() const;  
 };
 
 #endif
