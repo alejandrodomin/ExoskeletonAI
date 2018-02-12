@@ -54,12 +54,14 @@ Network::~Network(){
        out_threads = NULL;
        cout << "[INFO][NETWORK]: Dealocated out_threads." << endl;
    }
-   
-   hidden_nodes.clear();
-   cout << "[INFO][NETWORK]: Dealocated hidden_nodes." << endl;
-   genes.clear();
-   cout << "[INFO][NETWORK]: Dealocated genes." << endl;
-    
+   if(hidden_nodes.size() != 0){
+        cout << "[INFO][NETWORK]: Dealocated hidden_nodes." << endl;
+        hidden_nodes.clear();
+   }
+   if(genes.size() != 0){
+        cout << "[INFO][NETWORK]: Dealocated genes." << endl;
+        genes.clear();
+   }
 
    cout << "[INFO][NETWORK]: Exiting Network::~Network()." << endl;
 }
@@ -234,7 +236,7 @@ bool Network::rand_connection(){
 
    int index = 0;
    Node *one, *two;
-   while (in_nodes[index] != NULL){
+   while (in_nodes[index + 1] != NULL){
       if (in_nodes[index]->get_nodeid() == node_one)
          one = in_nodes[index];
       else if (in_nodes[index]->get_nodeid() == node_two)

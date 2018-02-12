@@ -44,13 +44,8 @@ Network* Species::mutate(){
       }
    }
 
-   for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
-       if(*it != NULL){
-        delete [] *it;
-        *it = NULL;
-       }
-   }
-   networks.clear();
+    if(networks.size() != 0)
+        networks.clear();
 
    fittest_net->mutate();
    return fittest_net;
