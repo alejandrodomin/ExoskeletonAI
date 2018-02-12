@@ -37,6 +37,10 @@ int file;
 int LSM9DS0 = 0;
 int LSM9DS1 = 0;
 float q[4];
+float GyroMeasError = PI * (40.0f / 180.0f);   // gyroscope measurement error in rads/s (start at 40 deg/s)
+float GyroMeasDrift = PI * (0.0f  / 180.0f);   // gyroscope measurement drift in rad/s/s (start at 0.0 deg/s/s)
+float beta = sqrt(3.0f / 4.0f) * GyroMeasError;   // compute beta
+float zeta = sqrt(3.0f / 4.0f) * GyroMeasDrift;   // compute zeta, the other free parameter in the Madgwick scheme usually set to a small or zero value
 
 void  readBlock(uint8_t command, uint8_t size, uint8_t *data)
 {
@@ -169,12 +173,12 @@ void detectIMU()
 	file = open(filename, O_RDWR);
 	if (file<0) {
 		printf("Unable to open I2C bus!");
-			return;
+		return;
 	}
 
 	//Detect if BerryIMUv1 (Which uses a LSM9DS0) is connected
 	selectDevice(file,LSM9DS0_ACC_ADDRESS);
-	int LSM9DS0_WHO_XM_response = i2c_smbus_read_byte_data(file, LSM9DS0_WHO_AM_I_XM);*/
+	int LSM9DS0_WHO_XM_response = i2c_smbus_read_byte_data(file, LSM9DS0_WHO_AM_I_XM);
 
 	selectDevice(file,LSM9DS0_GYR_ADDRESS);
 	int LSM9DS0_WHO_G_response = i2c_smbus_read_byte_data(file, LSM9DS0_WHO_AM_I_G);
@@ -462,10 +466,10 @@ void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, 
             qDot4 = 0.5f * (q1 * gz + q2 * gy - q3 * gx) - beta * s4;
 
             // Integrate to yield quaternion
-            q1 += qDot1 * deltat;
-            q2 += qDot2 * deltat;
-            q3 += qDot3 * deltat;
-            q4 += qDot4 * deltat;
+            q1 += qDot1 * DT;
+            q2 += qDot2 * DT;
+            q3 += qDot3 * DT;
+            q4 += qDot4 * DT;
             norm = sqrt(q1 * q1 + q2 * q2 + q3 * q3 + q4 * q4);    // normalise quaternion
             norm = 1.0f/norm;
             q[0] = q1 * norm;
