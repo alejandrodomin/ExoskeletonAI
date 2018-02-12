@@ -31,7 +31,8 @@ class Network{
       Node **out_nodes; /**<output nodes*/
       list<Node *> hidden_nodes; /**<hidden nodes*/
 
-      thread **threads;/**<A double pointer to the threads that have been created.*/
+      thread **in_threads;/**<A double pointer to the threads that have been created.*/
+      thread **out_threads;  
    protected:
       void input_run();
       void hidden_run();
@@ -43,17 +44,15 @@ class Network{
       void run();
       void mutate();
       void use_output();
-      void set_num_nodes(int);
+      void add_num_nodes(int);
       void set_compatibility_distance(float);
       void add_gene(Node *, Node *);
 
-      int get_fitness();
-      int get_num_nodes();
+      int get_fitness() const;
+      int get_num_nodes() const;
 
       bool rand_node();
       bool rand_connection();
-      bool add_input_node(int);
-      bool add_output_nodes(int);
       
       static bool compare(Node *, Node *);
 

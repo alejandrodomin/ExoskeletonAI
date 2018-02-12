@@ -12,9 +12,18 @@ using namespace std;
  */
 Network::Network(){
    cout << "[INFO][NETWORK]: Entered Network::Network()." << endl;
+   num_nodes = NUM_INPUTS + NUM_OUTPUTS;
+
    in_nodes  = new Node*[NUM_INPUTS];
+   for(int i = 0; i < NUM_INPUTS; i++)
+       in_nodes[i] = new Node(input);
+
    out_nodes = new Node*[NUM_OUTPUTS];
-   threads   = new thread*[NUM_INPUTS];
+   for(int i = 0; i < NUM_INPUTS; i++)
+        out_nodes[i] = new Node(output);
+
+   in_threads   = new thread*[NUM_INPUTS];
+   out_threads   = new thread*[NUM_OUTPUTS];
    cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
 }
 
@@ -33,9 +42,13 @@ Network::~Network(){
       delete [] out_nodes;
       in_nodes = NULL;
    }
-   if(threads != NULL){
-       delete [] threads;
-       threads = NULL;
+   if(in_threads != NULL){
+       delete [] in_threads;
+       in_threads = NULL;
+   }
+   if(out_threads != NULL){
+       delete [] out_threads;
+       out_threads = NULL;
    }
    for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); ++it){
        if(*it != NULL){
@@ -75,26 +88,21 @@ void Network::input_run(){
     while(index < NUM_INPUTS){
         if(thread_ind >= MAX_THREADS){
             for(int indx = 0; indx < MAX_THREADS; indx++){
-                cout << "[INFO][NETWORK]: Waiting for thread." << endl;
-                threads[indx]->join();
+                cout << "[INFO][NETWORK]: Waiting for thread to join." << endl;
+                if(in_threads[indx]->joinable())
+                    in_threads[indx]->join();
             }
             
             thread_ind = 0;
-            threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
+            in_threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
         }
         else{
-            threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
+            in_threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
         }
 
         thread_ind++;
         index++;
     }
-
-    if(threads != NULL){
-        delete [] threads;
-        threads = NULL;
-    }
-
     cout << "[INFO][NETWORK]: Exiting Network::input_run()" << endl;
 }
 
@@ -113,22 +121,25 @@ void Network::hidden_run(){
  */ 
 void Network::output_run(){
     cout << "[INFO][NETWORK]: Entered Network::output_run()." << endl;
-    for (int index = 0; index < NUM_OUTPUTS; index++){
-        threads[index] = out_nodes[index]->spawn_thread(genes);
-    }
-
-    int found = 0, index = 0;          // checks to see if the above threads are done executing
-    while(found < NUM_INPUTS){
-        if(out_nodes[index]->get_outputfunc() != 0){
-            found++;
+    int index = 0;
+    int thread_ind = 0;
+    
+    while(index < NUM_OUTPUTS){
+        if(thread_ind >= MAX_THREADS){
+            for(int indx = 0; indx < MAX_THREADS; indx++){
+                cout << "[INFO][NETWORK]: Waiting for thread to join." << endl;
+                out_threads[indx]->join();
+            }
+            
+            thread_ind = 0;
+            out_threads[thread_ind] = out_nodes[index]->spawn_thread(genes);
+        }
+        else{
+            out_threads[thread_ind] = out_nodes[index]->spawn_thread(genes);
         }
 
+        thread_ind++;
         index++;
-    }
-
-    if(threads != NULL){
-        delete [] threads;
-        threads = NULL;
     }
     cout << "[INFO][NETWORK]: Exiting Network::output_run()." << endl;
 }
@@ -155,9 +166,9 @@ void Network::use_output(){
 /**Network set_num_nodes sets the number of nodes.
  * @param num_nodes the number of nodes.
  */ 
-void Network::set_num_nodes(int num_nodes){
+void Network::add_num_nodes(int num_nodes){
     cout << "[INFO][NETWORK]: Entered Network::set_num_nodes(int)." << endl;
-    this->num_nodes = num_nodes;
+    this->num_nodes += num_nodes;
     cout << "[INFO][NETWORK]: Exiting Network::set_num_nodes(int)." << endl;
 }
 
@@ -184,7 +195,7 @@ void Network::add_gene(Node *snode, Node * onode){
 /** Returns fitness value.
  * @return int type.
  */ 
-int Network::get_fitness(){
+int Network::get_fitness() const{
     cout << "[INFO][NETWORK]: Entered Network::get_fitness()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_fitness()." << endl;
     return fitness;
@@ -193,7 +204,7 @@ int Network::get_fitness(){
 /** Returns number of nodes.
  * @return int type.
  */ 
-int Network::get_num_nodes(){
+int Network::get_num_nodes() const{
     cout << "[INFO][NETWORK]: Entered Network::get_num_nodes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_num_nodes()." << endl;
     return num_nodes;
@@ -204,6 +215,7 @@ int Network::get_num_nodes(){
 bool Network::rand_node(){
     cout << "[INFO][NETWORK]: Entered Network::rand_node()." << endl;
     hidden_nodes.push_back(new Node(hidden));
+    add_num_nodes(1);
     cout << "[INFO][NETWORK]: Exiting Network::rand_node()." << endl;
 }
 
@@ -211,8 +223,13 @@ bool Network::rand_node(){
  */ 
 bool Network::rand_connection(){
     cout << "[INFO][NETWORK]: Entered Network::rand_connection()." << endl;
-   int node_one = rand()% num_nodes;
-   int node_two = rand()% num_nodes;
+   int node_one, node_two;
+   
+   if(num_nodes > 0){
+        node_one = rand()% num_nodes;
+        node_two = rand()% num_nodes;
+   }
+   else exit(1);
 
    if(node_one == node_two)
       node_two = rand()% num_nodes;
@@ -224,48 +241,20 @@ bool Network::rand_connection(){
          one = in_nodes[index];
       else if (in_nodes[index]->get_nodeid() == node_two)
          two = in_nodes[index];
-
       index++;
    }
 
    add_gene(one, two);
+   
+   if(one != NULL){
+       delete one;
+       one = NULL;
+   }
+   if(two != NULL){
+       delete two;
+       two = NULL;
+   }
    cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
-}
-
-/** Network add_input_node adds new input nodes.
- * @param num_nodes the number of nodes
- * @return bool true.
- */ 
-bool Network::add_input_node(int num_nodes){
-    cout << "[INFO][NETWORK]: Entered Network::add_input_node(int)." << endl;
-    int index = 0;
-    while(num_nodes > 0){
-        in_nodes[index] = new Node(input);
-
-        num_nodes--;
-        index++;
-    }
-
-    cout << "[INFO][NETWORK]: Exiting Network::add_input_node(int)." << endl;
-    return true;
-}
-
-/** Network add_output_nodes adds new output nodes.
- * @param num_nodes the number of nodes.
- * @return bool true.
- */ 
-bool Network::add_output_nodes(int num_nodes){
-    cout << "[INFO][NETWORK]: Entered Network::add_output_nodes(int)." << endl;
-    int index = 0;
-    while(num_nodes > 0){
-        out_nodes[index] = new Node(output);
-
-        num_nodes--;
-        index++;
-    }
-
-    cout << "[INFO][NETWORK]: Exiting Network::add_output_nodes(int)." << endl;
-    return true;
 }
 
 /** Network compare checks if layer of first node is 

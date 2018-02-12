@@ -2,7 +2,11 @@
 "files.associations": {
       "iostream": "cpp",
       "thread": "cpp",
-      "mutex": "cpp"
+      "mutex": "cpp",
+      "array": "cpp",
+      "hash_map": "cpp",
+      "slist": "cpp",
+      "initializer_list": "cpp"
 },
 "editor.tabSize": 3
 }

@@ -46,8 +46,8 @@ thread* Node::spawn_thread(list<Gene *> genes){
  *  based on the forward propagation function.
 */
 void Node::out_func(list<Gene *> genes){
-    cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
     std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
+    cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
 
     int index = 0;
     double total = 0;
@@ -58,7 +58,7 @@ void Node::out_func(list<Gene *> genes){
     total += get_bias();
     set_outputfunc(total);      // problem in seg fault lies here
                                 // goes out of scope mutex is unlocked others try to acces the same data, seg fault
-    cout << "[INFO][NODE]:\t Exiting Node::out_func()" << endl;
+    cout << "[INFO][NODE]:\t Exiting Node::out_func()." << endl;
 }
 
 /** Returns the node identification number.

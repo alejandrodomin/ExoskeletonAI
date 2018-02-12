@@ -12,6 +12,7 @@ int main(int argc, char **argv, char **env){
 
    list<Species *> exoAI;
    exoAI.push_back(new Species());
+   exoAI.front()->add_network(new Network());
 
    while(true){   
       for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
@@ -22,8 +23,10 @@ int main(int argc, char **argv, char **env){
             (*it)->mutate();
          }
 
-         if((*it)->test_species()){
-            exoAI.push_back((*it)->new_species());
+         if(exoAI.size() > 1){
+            if((*it)->test_species()){
+               exoAI.push_back((*it)->new_species());
+            }
          }
       }
    }
