@@ -52,12 +52,15 @@ void Node::out_func(list<Gene *> genes){
     int index = 0;
     double total = 0;
 
-    for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
-        total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
+    if(genes.size() > 0){
+        for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
+            total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
+    
 
-    total += get_bias();
-    set_outputfunc(total);      // problem in seg fault lies here
+        total += get_bias();
+        set_outputfunc(total);      // problem in seg fault lies here
                                 // goes out of scope mutex is unlocked others try to acces the same data, seg fault
+    }
     cout << "[INFO][NODE]:\t Exiting Node::out_func()." << endl;
 }
 

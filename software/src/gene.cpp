@@ -59,14 +59,14 @@ void Gene::set_weight(float newweight){
 /** Returns the value of the innovation number variable.
  * @return int returns innovation_number
  */
-int Gene::get_inov_id(){
+int Gene::get_inov_id() const{
     return innovation_number;
 }
 
 /** Returns the value of the weight variable.
     @return float returns weight 
 */
-float Gene::get_weight(){
+float Gene::get_weight() const{
    cout << "[INFO][GENE]:\t Entered Gene::get_weight()." << endl;
    cout << "[INFO][GENE]:\t Exited  Gene::get_weight()." << endl;
    return weight;
@@ -75,7 +75,7 @@ float Gene::get_weight(){
 /** Returns a node pointer to the input node.
     @return Node* node pointer
 */
-Node* Gene::get_input_node(){
+Node* Gene::get_input_node() const{
    cout << "[INFO][GENE]:\t Entered Gene::get_input_node()." << endl;
    cout << "[INFO][GENE]:\t Exited  Gene::get_input_node()." << endl;
    return input_node;
@@ -85,7 +85,7 @@ Node* Gene::get_input_node(){
  *  gene function.
     @return Node* node pointer
 */
-Node* Gene::get_ouput_node(){
+Node* Gene::get_ouput_node() const{
    cout << "[INFO][GENE]:\t Entered Gene::get_you_node()." << endl;
    cout << "[INFO][GENE]:\t Exited  Gene::get_you_node()." << endl;
    return output_node;

@@ -245,15 +245,6 @@ bool Network::rand_connection(){
    }
 
    add_gene(one, two);
-   
-   if(one != NULL){
-       delete one;
-       one = NULL;
-   }
-   if(two != NULL){
-       delete two;
-       two = NULL;
-   }
    cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
 }
 

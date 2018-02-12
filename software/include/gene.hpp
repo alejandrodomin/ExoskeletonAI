@@ -32,12 +32,12 @@ class Gene{
 
       void set_weight(float);
 
-      int get_inov_id();
+      int get_inov_id() const;
 
-      float get_weight();
+      float get_weight() const;
 
-      Node* get_input_node();
-      Node* get_ouput_node();
+      Node* get_input_node() const;
+      Node* get_ouput_node() const;
 };
 
 #endif
