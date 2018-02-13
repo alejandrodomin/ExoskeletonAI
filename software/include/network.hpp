@@ -31,8 +31,7 @@ class Network{
       Node **out_nodes; /**<output nodes*/
       list<Node *> hidden_nodes; /**<hidden nodes*/
 
-      thread **in_threads;/**<A double pointer to the threads that have been created.*/
-      thread **out_threads;  
+      list<thread *> threads;/**<A double pointer to the threads that have been created.*/  
    protected:
       void input_run();
       void hidden_run();

@@ -7,13 +7,12 @@ using namespace std;
 
 /** Empty constructor, creates a Gene object.
 */
-Gene::Gene(){
-   cout << "[INFO][GENE]:\t Entered Gene::Gene()." << endl;
-   cout << "[INFO][GENE]:\t Exited  Gene::Gene()." << endl;
+// Gene::Gene(){
+//    cout << "[INFO][GENE]:\t Entered Gene::Gene()." << endl;
+//    cout << "[INFO][GENE]:\t Exited  Gene::Gene()." << endl;
 
-   innovation_number = global_innovation_id;
-   global_innovation_id++;
-}
+   
+// }
 
 /** Gene constructor, creates a Gene
  *  that knows which two nodes it ties together.
@@ -23,6 +22,9 @@ Gene::Gene(Node* newinput_node, Node* newoutput_node){
 
    input_node = newinput_node;
    output_node = newoutput_node;
+
+   innovation_number = global_innovation_id;
+   global_innovation_id++;
 
    cout << "[INFO][GENE]:\t Exited  Gene::Gene(Node *, Node *)." << endl;
 }

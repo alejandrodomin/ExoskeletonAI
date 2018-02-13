@@ -54,8 +54,10 @@ void Node::out_func(list<Gene *> genes){
 
     if(genes.size() > 0){
         for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
-            total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
-    
+            if((*it)->get_input_node() != NULL){
+                total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
+            }
+            else return;
 
         total += get_bias();
         set_outputfunc(total);      // problem in seg fault lies here

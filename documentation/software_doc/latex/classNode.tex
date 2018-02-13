@@ -3,33 +3,148 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Node} (int)\hypertarget{classNode_aff71d952af8363f046a67a8b12194e46}{}\label{classNode_aff71d952af8363f046a67a8b12194e46}
-
+\hyperlink{classNode_ad7a34779cad45d997bfd6d3d8043c75f}{Node} ()
 \item 
-void {\bfseries out\+\_\+func} ()\hypertarget{classNode_a56cce09345b35818732eb14bbd155681}{}\label{classNode_a56cce09345b35818732eb14bbd155681}
-
+\hyperlink{classNode_aff71d952af8363f046a67a8b12194e46}{Node} (int)
 \item 
-void {\bfseries find\+\_\+layer} ()\hypertarget{classNode_adf8eb42b06ec971b693851d0877f74d5}{}\label{classNode_adf8eb42b06ec971b693851d0877f74d5}
-
+\hyperlink{classNode_aa0840c3cb5c7159be6d992adecd2097c}{$\sim$\+Node} ()
 \item 
-void {\bfseries set\+\_\+outputfunc} (float)\hypertarget{classNode_aee405792704c95b3e6b4be9dcaa87ac0}{}\label{classNode_aee405792704c95b3e6b4be9dcaa87ac0}
-
+void \hyperlink{classNode_a62682fdb6f8d50b879ea2fa61b8727de}{out\+\_\+func} (list$<$ \hyperlink{classGene}{Gene} $\ast$ $>$)
 \item 
-void {\bfseries add\+\_\+gene} (\hyperlink{classNode}{Node} $\ast$, \hyperlink{classNode}{Node} $\ast$)\hypertarget{classNode_ab263a0702e33662e21cfbd0dffea8eb6}{}\label{classNode_ab263a0702e33662e21cfbd0dffea8eb6}
-
+void \hyperlink{classNode_aa860272972118d49b36c5791bc2e4f47}{find\+\_\+layer} (list$<$ \hyperlink{classGene}{Gene} $\ast$ $>$)
 \item 
-int {\bfseries get\+\_\+type} ()\hypertarget{classNode_a7d7b400dbc03f38514e6f7b24d6a9be6}{}\label{classNode_a7d7b400dbc03f38514e6f7b24d6a9be6}
-
+void \hyperlink{classNode_aee405792704c95b3e6b4be9dcaa87ac0}{set\+\_\+outputfunc} (float)
 \item 
-int {\bfseries get\+\_\+nodeid} ()\hypertarget{classNode_ad0a9d74b00035704851696bfbbb1ad44}{}\label{classNode_ad0a9d74b00035704851696bfbbb1ad44}
-
+int \hyperlink{classNode_aa82caef196b838bfda3ac5bfc5c06108}{get\+\_\+layer} () const 
 \item 
-float {\bfseries get\+\_\+outputfunc} ()\hypertarget{classNode_a9790c6b3cb6e82054cdda1663026fc21}{}\label{classNode_a9790c6b3cb6e82054cdda1663026fc21}
-
+int \hyperlink{classNode_acb81e6d489ba89f47c37c00977a29937}{get\+\_\+type} () const 
 \item 
-thread $\ast$ {\bfseries spawn\+\_\+thread} ()\hypertarget{classNode_ae5a550bbe528f423799541c965b963c4}{}\label{classNode_ae5a550bbe528f423799541c965b963c4}
-
+int \hyperlink{classNode_a9944e1ed6dcecb558a2612dbee6b1bcf}{get\+\_\+nodeid} () const 
+\item 
+float \hyperlink{classNode_a4bc9591d26874c667d2823baa70f1317}{get\+\_\+bias} () const 
+\item 
+float \hyperlink{classNode_a2c71d5b1eb30e2569e24317c07faf814}{get\+\_\+outputfunc} () const 
+\item 
+thread $\ast$ \hyperlink{classNode_ab87adc5bb0779015e43a1494d7286ad9}{spawn\+\_\+thread} (list$<$ \hyperlink{classGene}{Gene} $\ast$ $>$)
 \end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection[{\texorpdfstring{Node()}{Node()}}]{\setlength{\rightskip}{0pt plus 5cm}Node\+::\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classNode_ad7a34779cad45d997bfd6d3d8043c75f}{}\label{classNode_ad7a34779cad45d997bfd6d3d8043c75f}
+Constructor with no parameters. Creates a new node with nothing initialized. \index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection[{\texorpdfstring{Node(int)}{Node(int)}}]{\setlength{\rightskip}{0pt plus 5cm}Node\+::\+Node (
+\begin{DoxyParamCaption}
+\item[{int}]{new\+\_\+type}
+\end{DoxyParamCaption}
+)}\hypertarget{classNode_aff71d952af8363f046a67a8b12194e46}{}\label{classNode_aff71d952af8363f046a67a8b12194e46}
+Constructor that sets the type of node it is. 
+\begin{DoxyParams}{Parameters}
+{\em new\+\_\+type} & type of node it is, based on the enum list. \\
+\hline
+\end{DoxyParams}
+\index{Node@{Node}!````~Node@{$\sim$\+Node}}
+\index{````~Node@{$\sim$\+Node}!Node@{Node}}
+\subsubsection[{\texorpdfstring{$\sim$\+Node()}{~Node()}}]{\setlength{\rightskip}{0pt plus 5cm}Node\+::$\sim$\+Node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classNode_aa0840c3cb5c7159be6d992adecd2097c}{}\label{classNode_aa0840c3cb5c7159be6d992adecd2097c}
+Destructor dealocates memory from the heap related to this class. 
+
+\subsection{Member Function Documentation}
+\index{Node@{Node}!find\+\_\+layer@{find\+\_\+layer}}
+\index{find\+\_\+layer@{find\+\_\+layer}!Node@{Node}}
+\subsubsection[{\texorpdfstring{find\+\_\+layer(list$<$ Gene $\ast$ $>$)}{find_layer(list< Gene * >)}}]{\setlength{\rightskip}{0pt plus 5cm}void Node\+::find\+\_\+layer (
+\begin{DoxyParamCaption}
+\item[{list$<$ {\bf Gene} $\ast$ $>$}]{genes}
+\end{DoxyParamCaption}
+)}\hypertarget{classNode_aa860272972118d49b36c5791bc2e4f47}{}\label{classNode_aa860272972118d49b36c5791bc2e4f47}
+Finds the layer the node is located in, if it is a hidden node. \index{Node@{Node}!get\+\_\+bias@{get\+\_\+bias}}
+\index{get\+\_\+bias@{get\+\_\+bias}!Node@{Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+bias() const }{get_bias() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Node\+::get\+\_\+bias (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNode_a4bc9591d26874c667d2823baa70f1317}{}\label{classNode_a4bc9591d26874c667d2823baa70f1317}
+Returns the bias. \begin{DoxyReturn}{Returns}
+float output value of bias. 
+\end{DoxyReturn}
+\index{Node@{Node}!get\+\_\+layer@{get\+\_\+layer}}
+\index{get\+\_\+layer@{get\+\_\+layer}!Node@{Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+layer() const }{get_layer() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Node\+::get\+\_\+layer (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNode_aa82caef196b838bfda3ac5bfc5c06108}{}\label{classNode_aa82caef196b838bfda3ac5bfc5c06108}
+Returns the layer. \begin{DoxyReturn}{Returns}
+int type 
+\end{DoxyReturn}
+\index{Node@{Node}!get\+\_\+nodeid@{get\+\_\+nodeid}}
+\index{get\+\_\+nodeid@{get\+\_\+nodeid}!Node@{Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+nodeid() const }{get_nodeid() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Node\+::get\+\_\+nodeid (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNode_a9944e1ed6dcecb558a2612dbee6b1bcf}{}\label{classNode_a9944e1ed6dcecb558a2612dbee6b1bcf}
+Returns the node identification number. \begin{DoxyReturn}{Returns}
+int identification number 
+\end{DoxyReturn}
+\index{Node@{Node}!get\+\_\+outputfunc@{get\+\_\+outputfunc}}
+\index{get\+\_\+outputfunc@{get\+\_\+outputfunc}!Node@{Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+outputfunc() const }{get_outputfunc() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Node\+::get\+\_\+outputfunc (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNode_a2c71d5b1eb30e2569e24317c07faf814}{}\label{classNode_a2c71d5b1eb30e2569e24317c07faf814}
+Returns the ouput value of a node based on forward propogation. \begin{DoxyReturn}{Returns}
+float output value of the node 
+\end{DoxyReturn}
+\index{Node@{Node}!get\+\_\+type@{get\+\_\+type}}
+\index{get\+\_\+type@{get\+\_\+type}!Node@{Node}}
+\subsubsection[{\texorpdfstring{get\+\_\+type() const }{get_type() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Node\+::get\+\_\+type (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classNode_acb81e6d489ba89f47c37c00977a29937}{}\label{classNode_acb81e6d489ba89f47c37c00977a29937}
+Returns what type of node it is. \begin{DoxyReturn}{Returns}
+int type 
+\end{DoxyReturn}
+\index{Node@{Node}!out\+\_\+func@{out\+\_\+func}}
+\index{out\+\_\+func@{out\+\_\+func}!Node@{Node}}
+\subsubsection[{\texorpdfstring{out\+\_\+func(list$<$ Gene $\ast$ $>$)}{out_func(list< Gene * >)}}]{\setlength{\rightskip}{0pt plus 5cm}void Node\+::out\+\_\+func (
+\begin{DoxyParamCaption}
+\item[{list$<$ {\bf Gene} $\ast$ $>$}]{genes}
+\end{DoxyParamCaption}
+)}\hypertarget{classNode_a62682fdb6f8d50b879ea2fa61b8727de}{}\label{classNode_a62682fdb6f8d50b879ea2fa61b8727de}
+Calculates the value of the node based on the forward propagation function. \index{Node@{Node}!set\+\_\+outputfunc@{set\+\_\+outputfunc}}
+\index{set\+\_\+outputfunc@{set\+\_\+outputfunc}!Node@{Node}}
+\subsubsection[{\texorpdfstring{set\+\_\+outputfunc(float)}{set_outputfunc(float)}}]{\setlength{\rightskip}{0pt plus 5cm}void Node\+::set\+\_\+outputfunc (
+\begin{DoxyParamCaption}
+\item[{float}]{num}
+\end{DoxyParamCaption}
+)}\hypertarget{classNode_aee405792704c95b3e6b4be9dcaa87ac0}{}\label{classNode_aee405792704c95b3e6b4be9dcaa87ac0}
+Sets the value of the variable output\+\_\+func 
+\begin{DoxyParams}{Parameters}
+{\em num} & the number for the output\+\_\+func \\
+\hline
+\end{DoxyParams}
+\index{Node@{Node}!spawn\+\_\+thread@{spawn\+\_\+thread}}
+\index{spawn\+\_\+thread@{spawn\+\_\+thread}!Node@{Node}}
+\subsubsection[{\texorpdfstring{spawn\+\_\+thread(list$<$ Gene $\ast$ $>$)}{spawn_thread(list< Gene * >)}}]{\setlength{\rightskip}{0pt plus 5cm}thread $\ast$ Node\+::spawn\+\_\+thread (
+\begin{DoxyParamCaption}
+\item[{list$<$ {\bf Gene} $\ast$ $>$}]{genes}
+\end{DoxyParamCaption}
+)}\hypertarget{classNode_ab87adc5bb0779015e43a1494d7286ad9}{}\label{classNode_ab87adc5bb0779015e43a1494d7286ad9}
+My function doing something... \begin{DoxyReturn}{Returns}
+thread$\ast$ returns a pointer to a new thread. 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
