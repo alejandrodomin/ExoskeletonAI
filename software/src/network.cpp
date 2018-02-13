@@ -22,8 +22,6 @@ Network::Network(){
    for(int i = 0; i < NUM_INPUTS; i++)
         out_nodes[i] = new Node(output);
 
-   in_threads   = new thread*[NUM_INPUTS];
-   out_threads   = new thread*[NUM_OUTPUTS];
    cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
 }
 
@@ -44,16 +42,11 @@ Network::~Network(){
       out_nodes = NULL;
       cout << "[INFO][NETWORK]: Dealocated out_nodes." << endl;
    }
-   if(in_threads != NULL){
-       delete [] in_threads;
-       in_threads = NULL;
-       cout << "[INFO][NETWORK]: Dealocated in_threads." << endl;
+   if(threads.size() != 0){
+       threads.clear();
+       cout << "[INFO][NETWORK]: Dealocated threads." << endl;
    }
-   if(out_threads != NULL){
-       delete [] out_threads;
-       out_threads = NULL;
-       cout << "[INFO][NETWORK]: Dealocated out_threads." << endl;
-   }
+   
    if(hidden_nodes.size() != 0){
         cout << "[INFO][NETWORK]: Dealocated hidden_nodes." << endl;
         hidden_nodes.clear();
@@ -82,27 +75,30 @@ void Network::run(){				// there is alot of safety measures that need to be put 
 void Network::input_run(){
     cout << "[INFO][NETWORK]: Entering Network::input_run()" << endl;
 
-    int index = 0;
-    int thread_ind = 0;
-    
-    while(index < NUM_INPUTS){
-        if(thread_ind >= MAX_THREADS){
-            for(int indx = 0; indx < MAX_THREADS; indx++){
-                cout << "[INFO][NETWORK]: Waiting for thread to join." << endl;
-                if(in_threads[indx]->joinable())
-                    in_threads[indx]->join();
-            }
-            
-            thread_ind = 0;
-            in_threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
-        }
-        else{
-            in_threads[thread_ind] = in_nodes[index]->spawn_thread(genes);
-        }
+    list<Gene *> &copy_genes = genes;
 
-        thread_ind++;
-        index++;
+    for(int index = 0; index < NUM_INPUTS; index++){
+        threads.push_back(in_nodes[index]->spawn_thread(copy_genes));
+
+        if(threads.size() >= MAX_THREADS){
+            for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
+                if((*it)->joinable())
+                    cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    (*it)->join();
+            }
+            threads.clear();
+        }
     }
+
+    if(threads.size() >= 0){
+        for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
+            if((*it)->joinable())
+                cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                (*it)->join();
+        }
+        threads.clear();
+    }
+
     cout << "[INFO][NETWORK]: Exiting Network::input_run()" << endl;
 }
 
@@ -111,8 +107,11 @@ void Network::input_run(){
 void Network::hidden_run(){
     cout << "[INFO][NETWORK]: Entered Network::hidden_run()." << endl;
     hidden_nodes.sort(compare);
+
+    list<Gene *> &copy_genes = genes;
+
     for (list<Node* >::iterator it = hidden_nodes.begin(); it != hidden_nodes.end();++it){
-        (*it)->out_func(genes);
+        (*it)->out_func(copy_genes);
     }
     cout << "[INFO][NETWORK]: Exiting Network::hidden_run()." << endl;
 }
@@ -121,26 +120,31 @@ void Network::hidden_run(){
  */ 
 void Network::output_run(){
     cout << "[INFO][NETWORK]: Entered Network::output_run()." << endl;
-    int index = 0;
-    int thread_ind = 0;
     
-    while(index < NUM_OUTPUTS){
-        if(thread_ind >= MAX_THREADS){
-            for(int indx = 0; indx < MAX_THREADS; indx++){
-                cout << "[INFO][NETWORK]: Waiting for thread to join." << endl;
-                out_threads[indx]->join();
-            }
-            
-            thread_ind = 0;
-            out_threads[thread_ind] = out_nodes[index]->spawn_thread(genes);
-        }
-        else{
-            out_threads[thread_ind] = out_nodes[index]->spawn_thread(genes);
-        }
+    list<Gene *> &copy_genes = genes;
 
-        thread_ind++;
-        index++;
+    for(int index = 0; index < NUM_OUTPUTS; index++){
+        threads.push_back(out_nodes[index]->spawn_thread(copy_genes));
+
+        if(threads.size() >= MAX_THREADS){
+            for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
+                if((*it)->joinable())
+                    cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    (*it)->join();
+            }
+            threads.clear();
+        }
     }
+
+    if(threads.size() >= 0){
+        for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
+            if((*it)->joinable())
+                cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                (*it)->join();
+        }
+        threads.clear();
+    }
+    
     cout << "[INFO][NETWORK]: Exiting Network::output_run()." << endl;
 }
 
