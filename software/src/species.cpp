@@ -3,6 +3,7 @@
 #include <cmath>
 
 #include "species.hpp"
+#include "common.hpp"
 
 using namespace std;
 
@@ -12,6 +13,11 @@ Species::Species(){
     cout << "[INFO][SPECIES]: Entered Species::Species()." << endl;
     stale = 0;
     max_fitness = 0;
+
+    std::ofstream exoAIStats;
+    exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
+   exoAIStats << "New Species." << endl;
+   exoAIStats.close();
     cout << "[INFO][SPECIES]: Exiting Species::Species()." << endl;
 }
 

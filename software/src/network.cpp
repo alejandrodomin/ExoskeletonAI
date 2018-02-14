@@ -22,6 +22,11 @@ Network::Network(){
    for(int i = 0; i < NUM_INPUTS; i++)
         out_nodes[i] = new Node(output);
 
+    std::ofstream exoAIStats;
+    exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
+   exoAIStats << "New Network." << endl;
+   exoAIStats.close();
+
    cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
 }
 
@@ -278,4 +283,11 @@ list<Gene *> Network::get_genes() const{
     cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
     return genes;
+}
+
+list<Node *> Network::get_hiddennodes() const{
+    cout << "[INFO][NETWORK]: Entered Network::get_hiddennnodes()." << endl;
+    cout << "[INFO][NETWORK]: Exiting Network::get_hiddennnodes()." << endl;
+    
+    return hidden_nodes;
 }

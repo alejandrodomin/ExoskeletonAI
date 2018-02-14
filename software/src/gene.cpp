@@ -5,15 +5,6 @@
 
 using namespace std;
 
-/** Empty constructor, creates a Gene object.
-*/
-// Gene::Gene(){
-//    cout << "[INFO][GENE]:\t Entered Gene::Gene()." << endl;
-//    cout << "[INFO][GENE]:\t Exited  Gene::Gene()." << endl;
-
-   
-// }
-
 /** Gene constructor, creates a Gene
  *  that knows which two nodes it ties together.
 */
@@ -25,6 +16,11 @@ Gene::Gene(Node* newinput_node, Node* newoutput_node){
 
    innovation_number = global_innovation_id;
    global_innovation_id++;
+
+std::ofstream exoAIStats;
+   exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
+   exoAIStats << "New Gene." << endl;
+   exoAIStats.close();
 
    cout << "[INFO][GENE]:\t Exited  Gene::Gene(Node *, Node *)." << endl;
 }

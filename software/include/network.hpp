@@ -57,7 +57,9 @@ class Network{
 
       Node** get_input() const;       // names for these can be changed later
 
-      list<Gene *> get_genes() const;  
+      list<Gene *> get_genes() const; 
+
+      list<Node *> get_hiddennodes() const; 
 };
 
 #endif

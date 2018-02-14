@@ -19,13 +19,6 @@ class Gene;
 
 using namespace std;
 
-enum gyro {gyroX = 0, 
-            gyroY, gyroZ};   /**<Enumerated list for 
-                             the x,y, and z positions for the gyro. */
-enum type {input = 0, 
-            hidden, output}; /**<Enumerated list for 
-                             the different kinds of nodes.*/ 
-
 class Node{
     private:
         int type;       /**<The type of node it is depending on the enum type. */

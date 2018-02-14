@@ -4,6 +4,7 @@
 #include <iterator>
 
 #include "node.hpp"
+#include "common.hpp"
 
 using namespace std;
 
@@ -15,6 +16,11 @@ mutex Node::mtx;    // because it is static this tells the compiler it exists.
 Node::Node(){
     cout << "[INFO][NODE]:\t Entered Node::Node()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::Node()." << endl;
+   
+   std::ofstream exoAIStats;
+    exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
+   exoAIStats << "New Node of no type." << endl;
+   exoAIStats.close();
 }
 
 /** Constructor that sets the type of node it is.
@@ -24,6 +30,11 @@ Node::Node(int new_type){
     cout << "[INFO][NODE]:\t Entered Node::Node(int)." << endl;
     type = new_type;
     cout << "[INFO][NODE]:\t Exiting Node::Node(int)." << endl;
+
+std::ofstream exoAIStats;
+    exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
+   exoAIStats << "New Node of type: " << new_type << endl;
+   exoAIStats.close();
 }
 
 /** Destructor dealocates memory from the heap related to this class.
