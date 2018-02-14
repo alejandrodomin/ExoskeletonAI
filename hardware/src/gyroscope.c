@@ -364,7 +364,7 @@ void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, 
 
 }
 
-static void toEulerAngle(const Quaterniond& q, double& roll, double& pitch, double& yaw)
+static void toEulerAngle(float* q, double& roll, double& pitch, double& yaw)
 {
 	// roll (x-axis rotation)
 	double sinr = +2.0 * (q[0] * q[1] + q[2] * q[3]);
