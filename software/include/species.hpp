@@ -18,7 +18,7 @@ using namespace std;
 
 class Species{
    private:
-      int stale;
+      int stale;/**< Indicates how long a function has been stale.*/
       int max_fitness;/**<The maximum fitness of a species.*/
 
       Network* fittest_net;/**<Network pointer to the fittest network.*/

@@ -7,7 +7,7 @@
 
 using namespace std;
 
-/**Network constructor, initializes input nodes,
+/**Network constructor initializes input nodes,
  * output nodes, and threads.
  */
 Network::Network(){
@@ -30,7 +30,7 @@ Network::Network(){
    cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
 }
 
-/**Network destructor, deletes memory allocated to
+/**Network destructor deletes memory allocated to
  * input nodes, output nodes, threads, hidden nodes,
  * and genes.
  */ 
@@ -285,6 +285,9 @@ list<Gene *> Network::get_genes() const{
     return genes;
 }
 
+/** Returns the hidden nodes.
+ * @return list<Node *>
+ */ 
 list<Node *> Network::get_hiddennodes() const{
     cout << "[INFO][NETWORK]: Entered Network::get_hiddennnodes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_hiddennnodes()." << endl;
