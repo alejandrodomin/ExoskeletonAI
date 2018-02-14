@@ -39,7 +39,7 @@ int LSM9DS1 = 0;
 float q[4] = {1.0, 0.0, 0.0, 0.0};
 float GyroMeasError = M_PI * (40.0 / 180.0);   // gyroscope measurement error in rads/s (start at 40 deg/s)
 float GyroMeasDrift = M_PI * (0.0  / 180.0);   // gyroscope measurement drift in rad/s/s (start at 0.0 deg/s/s)
-float roll=0.0, pitch=0.0, yaw=0.0;
+double roll=0.0, pitch=0.0, yaw=0.0;
 
 void  readBlock(uint8_t command, uint8_t size, uint8_t *data)
 {
