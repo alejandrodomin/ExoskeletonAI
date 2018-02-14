@@ -39,6 +39,7 @@ int LSM9DS1 = 0;
 float q[4] = {1.0, 0.0, 0.0, 0.0};
 float GyroMeasError = M_PI * (40.0 / 180.0);   // gyroscope measurement error in rads/s (start at 40 deg/s)
 float GyroMeasDrift = M_PI * (0.0  / 180.0);   // gyroscope measurement drift in rad/s/s (start at 0.0 deg/s/s)
+float roll=0.0, pitch=0.0, yaw=0.0;
 
 void  readBlock(uint8_t command, uint8_t size, uint8_t *data)
 {
@@ -363,6 +364,25 @@ void MadgwickQuaternionUpdate(float ax, float ay, float az, float gx, float gy, 
 
 }
 
+static void toEulerAngle(const Quaterniond& q, double& roll, double& pitch, double& yaw)
+{
+	// roll (x-axis rotation)
+	double sinr = +2.0 * (q[0] * q[1] + q[2] * q[3]);
+	double cosr = +1.0 - 2.0 * (q[1] * q[1] + q[2] * q[2]);
+	roll = atan2(sinr, cosr);
+
+	// pitch (y-axis rotation)
+	double sinp = +2.0 * (q[0] * q[2] - q[3] * q[1]);
+	if (fabs(sinp) >= 1)
+		pitch = copysign(M_PI / 2, sinp); // use 90 degrees if out of range
+	else
+		pitch = asin(sinp);
+
+	// yaw (z-axis rotation)
+	double siny = +2.0 * (q[0] * q[3] + q[1] * q[2]);
+	double cosy = +1.0 - 2.0 * (q[2] * q[2] + q[3] * q[3]);  
+	yaw = atan2(siny, cosy);
+}
 
 int main(int argc, char *argv[])
 {
@@ -471,6 +491,7 @@ int main(int argc, char *argv[])
 		//printf ("   GyroX  %7.3f \t AccXangle \e[m %7.3f \t \033[22;31mCFangleX %7.3f\033[0m\t GyroY  %7.3f \t AccYangle %7.3f \t \033[22;36mCFangleY %7.3f\t\033[0m\n",gyroXangle,AccXangle,CFangleX,gyroYangle,AccYangle,CFangleY);
 		//printf ("   GyroX  %7.3f \t GyroY  %7.3f \t GyroZ  %7.3f \n",gyroXangle,gyroYangle,gyroZangle);
 		printf ("q0 = %7.3f \t q1 = %7.3f \t q2 = %7.3f \t q3 = %7.3f \n", q[0], q[1], q[2], q[3]);
+		printf ("roll = %7.3f \t pitch = %7.3f \t yaw = 7.3f \n", roll, pitch, yaw);
 
 		//Each loop should be at least 20ms.
 		while(mymillis() - startInt < (DT*60000)){
