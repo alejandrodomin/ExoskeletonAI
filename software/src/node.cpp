@@ -16,7 +16,7 @@ mutex Node::mtx;    // because it is static this tells the compiler it exists.
 Node::Node(){
     cout << "[INFO][NODE]:\t Entered Node::Node()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::Node()." << endl;
-   
+   output_func - 0;
    std::ofstream exoAIStats;
     exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
    exoAIStats << "New Node of no type." << endl;
@@ -28,7 +28,8 @@ Node::Node(){
 */
 Node::Node(int new_type){
     cout << "[INFO][NODE]:\t Entered Node::Node(int)." << endl;
-    type = new_type;
+    output_func = 0;
+	 type = new_type;
     cout << "[INFO][NODE]:\t Exiting Node::Node(int)." << endl;
 
 std::ofstream exoAIStats;
@@ -83,7 +84,8 @@ void Node::out_func(list<Gene *> genes){
 int Node::get_nodeid() const{
     cout << "[INFO][NODE]:\t Entered Node::get_nodeid()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_nodeid()." << endl;
-    return node_id;
+   
+	 	return node_id;
 }
 
 /** Returns what type of node it is.
@@ -92,7 +94,8 @@ int Node::get_nodeid() const{
 int Node::get_type() const{
     cout << "[INFO][NODE]:\t Entered Node::get_type()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_type()." << endl;
-    return type;
+       return type;
+	 
 }
 
 /** Returns the layer.
@@ -101,7 +104,8 @@ int Node::get_type() const{
 int Node::get_layer() const{
     cout << "[INFO][NODE]:\t Entered Node::get_layer()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_layer()." << endl;
-    return layer;
+   
+	    return layer;	 
 }
 
 /** Returns the ouput value of a node
@@ -111,7 +115,9 @@ int Node::get_layer() const{
 float Node::get_outputfunc() const{
     cout << "[INFO][NODE]:\t Entered Node::get_outputfunc()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_outputfunc()." << endl;
-    return output_func;
+   
+	    return output_func;
+	 
 }
 
 /** Sets the value of the variable output_func

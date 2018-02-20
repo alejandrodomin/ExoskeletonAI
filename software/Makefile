@@ -1,4 +1,4 @@
-CC = c++
+CC = mpic++
 SRC := src
 OBJ := build
 INC := include

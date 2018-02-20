@@ -246,11 +246,14 @@ bool Network::rand_connection(){
    int index = 0;
    Node *one, *two;
    while (in_nodes[index + 1] != NULL){
-      if (in_nodes[index]->get_nodeid() == node_one)
-         one = in_nodes[index];
-      else if (in_nodes[index]->get_nodeid() == node_two)
-         two = in_nodes[index];
-      index++;
+	   if(in_nodes[index] != NULL){
+		   if (in_nodes[index]->get_nodeid() == node_one)
+            one = in_nodes[index];
+         else if (in_nodes[index]->get_nodeid() == node_two)
+            two = in_nodes[index];
+         index++;
+		}
+		else index++;
    }
 
    add_gene(one, two);
