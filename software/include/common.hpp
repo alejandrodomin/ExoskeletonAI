@@ -7,9 +7,10 @@
 #define NUM_OUTPUTS 6
 #define MAX_THREADS 5
 
-static int global_innovation_id = 0; // this shit needs to be in the network.
-					// every network need to have their own global
-					// innovation id, shits wrong.
+static unsigned int num_species;
+static unsigned int num_networks;
+static unsigned int num_nodes;
+static unsigned int num_genes;
 
 enum gyro {gyroX = 0, 
             gyroY, gyroZ};   /**<Enumerated list for 

@@ -14,11 +14,17 @@ Species::Species(){
     stale = 0;
     max_fitness = 0;
 
+    num_species++;
+
     std::ofstream exoAIStats;
     exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
-   exoAIStats << "New Species." << endl;
-   exoAIStats.close();
-    cout << "[INFO][SPECIES]: Exiting Species::Species()." << endl;
+    
+    exoAIStats << "Number of Species: " << num_species << endl;
+    exoAIStats << "Number of Networks: " << num_networks << endl;
+    exoAIStats << "Number of Nodes: " << num_nodes << endl;
+    exoAIStats << "Number of Genes: " << num_genes << endl;
+    
+    exoAIStats.close();
 }
 
 /** Destructor deletes memory allocated to fittest_net and
@@ -26,6 +32,8 @@ Species::Species(){
  */ 
 Species::~Species(){
     cout << "[INFO][SPECIES]: Entered Species::~Species()." << endl; 
+    num_species--;
+
     if(fittest_net != NULL){
         delete [] fittest_net;
         fittest_net = NULL;
@@ -329,6 +337,10 @@ float Species::weight_diff_match_genes(Network *net1, Network *net2){
    average = sum / total; 
     cout << "[INFO][SPECIES]: Exiting Species::weight_diff_math_genes(Network*,Network*)." << endl;
    return average; 
+}
+
+Network* Species::get_fittest_net(){
+    return fittest_net;
 }
 
 list<Network *> Species::get_networks(){

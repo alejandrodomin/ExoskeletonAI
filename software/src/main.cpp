@@ -39,6 +39,12 @@ int main(int argc, char **argv, char **env){
 
       for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
          (*it)->run_networks();
+         
+         // if((*it)->get_networks().size() > 1){
+         //    for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
+         //       (*itr)->calculate_fit();
+         //    }
+         // }
 
          if((*it)->is_stale()){
             (*it)->add_network((*it)->mutate());
@@ -50,6 +56,10 @@ int main(int argc, char **argv, char **env){
             }
          }
       }
+
+      // for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
+      //    (*it)->get_fittest_net()->run();
+      // }
    }
 
    MPI_Finalize();

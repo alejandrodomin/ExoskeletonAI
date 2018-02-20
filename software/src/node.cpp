@@ -16,11 +16,20 @@ mutex Node::mtx;    // because it is static this tells the compiler it exists.
 Node::Node(){
     cout << "[INFO][NODE]:\t Entered Node::Node()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::Node()." << endl;
-   output_func - 0;
+   num_nodes++;
+   
+   output_func = 0;
+   node_id = num_nodes;
+   
    std::ofstream exoAIStats;
     exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
-   exoAIStats << "New Node of no type." << endl;
-   exoAIStats.close();
+    
+    exoAIStats << "Number of Species: " << num_species << endl;
+    exoAIStats << "Number of Networks: " << num_networks << endl;
+    exoAIStats << "Number of Nodes: " << num_nodes << endl;
+    exoAIStats << "Number of Genes: " << num_genes << endl;
+    
+    exoAIStats.close();
 }
 
 /** Constructor that sets the type of node it is.
@@ -28,20 +37,29 @@ Node::Node(){
 */
 Node::Node(int new_type){
     cout << "[INFO][NODE]:\t Entered Node::Node(int)." << endl;
+    num_nodes++;
+    
     output_func = 0;
-	 type = new_type;
+	type = new_type;
+    node_id = num_nodes;
     cout << "[INFO][NODE]:\t Exiting Node::Node(int)." << endl;
 
-std::ofstream exoAIStats;
+    std::ofstream exoAIStats;
     exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
-   exoAIStats << "New Node of type: " << new_type << endl;
-   exoAIStats.close();
+    
+    exoAIStats << "Number of Species: " << num_species << endl;
+    exoAIStats << "Number of Networks: " << num_networks << endl;
+    exoAIStats << "Number of Nodes: " << num_nodes << endl;
+    exoAIStats << "Number of Genes: " << num_genes << endl;
+    
+    exoAIStats.close();
 }
 
 /** Destructor dealocates memory from the heap related to this class.
 */
 Node::~Node(){
     cout << "[INFO][NODE]:\t Entered Node::~Node()." << endl;
+    num_nodes--;
     cout << "[INFO][NODE]:\t Exiting Node::~Node()." << endl;
 }
 
@@ -85,7 +103,7 @@ int Node::get_nodeid() const{
     cout << "[INFO][NODE]:\t Entered Node::get_nodeid()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_nodeid()." << endl;
    
-	 	return node_id;
+	return node_id;
 }
 
 /** Returns what type of node it is.
@@ -116,8 +134,7 @@ float Node::get_outputfunc() const{
     cout << "[INFO][NODE]:\t Entered Node::get_outputfunc()." << endl;
     cout << "[INFO][NODE]:\t Exiting Node::get_outputfunc()." << endl;
    
-	    return output_func;
-	 
+	return output_func; 
 }
 
 /** Sets the value of the variable output_func

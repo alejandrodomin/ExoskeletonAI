@@ -19,6 +19,7 @@ using namespace std;
 class Species{
    private:
       int stale;/**< Indicates how long a function has been stale.*/
+      int fit_stale;
       int max_fitness;/**<The maximum fitness of a species.*/
 
       Network* fittest_net;/**<Network pointer to the fittest network.*/
@@ -39,6 +40,8 @@ class Species{
 
       bool is_stale();
       bool test_species();
+
+      Network* get_fittest_net();  
 
       Species* new_species();
 

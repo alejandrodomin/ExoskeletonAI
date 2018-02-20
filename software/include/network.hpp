@@ -22,7 +22,10 @@ class Network{
    private:
       int fitness; /**<The fitness level of a set of input nodes.*/
       int num_nodes; /**<The number of nodes.*/
+      int crashes;  
+      int innovation_number;
 
+      float walk_distance;  
       float compatibility_distance;/**<Measures how compatible a set of nodes is.*/
 
       list<Gene *> genes; /**<List for all of the genes associated with the node. */
@@ -43,6 +46,7 @@ class Network{
       void run();
       void mutate();
       void use_output();
+      void calculate_fit();
       void add_num_nodes(int);
       void set_compatibility_distance(float);
       void add_gene(Node *, Node *);

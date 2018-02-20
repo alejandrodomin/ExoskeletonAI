@@ -10,3 +10,4 @@ gnome-terminal -e 'watch -n 1 free -m'
 
 #mpirun -np <number of processors> ./<executable>
 mpirun -np 4 ./ExoSAI
+#./ExoSAI
