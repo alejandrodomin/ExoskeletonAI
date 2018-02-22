@@ -17,35 +17,35 @@
 using namespace std;
 
 class Species{
-   private:
-      int stale;/**< Indicates how long a function has been stale.*/
-      int fit_stale;
-      int max_fitness;/**<The maximum fitness of a species.*/
+private:
+    int stale;/**< Indicates how long a function has been stale.*/
+    int fit_stale;
+    int max_fitness;/**<The maximum fitness of a species.*/
 
-      Network* fittest_net;/**<Network pointer to the fittest network.*/
+    Network* fittest_net;/**<Network pointer to the fittest network.*/
 
-      list<Network *> networks;/**<A list of network pointers that stores networks.*/
-   protected:
-      int compute_excess(Network *, Network *);
-      int compute_disjoint(Network *, Network *);
+    list<Network *> networks;/**<A list of network pointers that stores networks.*/
+protected:
+    int compute_excess(Network *, Network *);
+    int compute_disjoint(Network *, Network *);
       
-      float weight_diff_match_genes(Network *, Network *);
-   public:
-      Species();
-      ~Species();
+    float weight_diff_match_genes(Network *, Network *);
+public:
+    Species();
+    ~Species();
 
-      Network* mutate();
-      void run_networks();
-      void add_network(Network *);
+    void run_networks();
+    void add_network(Network *);
 
-      bool is_stale();
-      bool test_species();
+    bool is_stale();
+    bool test_species();
 
-      Network* get_fittest_net();  
+    Network* mutate();
+    Network* get_fittest_net();  
 
-      Species* new_species();
+    Species* new_species();
 
-      list<Network *> get_networks();
+    list<Network *> get_networks();
 };
 
 #endif

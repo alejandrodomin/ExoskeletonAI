@@ -10,28 +10,6 @@ using namespace std;
 
 mutex Node::mtx;    // because it is static this tells the compiler it exists.
 
-/** Constructor with no parameters.
- *  Creates a new node with nothing initialized.
-*/
-Node::Node(){
-    cout << "[INFO][NODE]:\t Entered Node::Node()." << endl;
-    cout << "[INFO][NODE]:\t Exiting Node::Node()." << endl;
-   num_nodes++;
-   
-   output_func = 0;
-   node_id = num_nodes;
-   
-   std::ofstream exoAIStats;
-    exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
-    
-    exoAIStats << "Number of Species: " << num_species << endl;
-    exoAIStats << "Number of Networks: " << num_networks << endl;
-    exoAIStats << "Number of Nodes: " << num_nodes << endl;
-    exoAIStats << "Number of Genes: " << num_genes << endl;
-    
-    exoAIStats.close();
-}
-
 /** Constructor that sets the type of node it is.
     @param new_type type of node it is, based on the enum list.    
 */

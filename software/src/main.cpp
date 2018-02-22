@@ -13,6 +13,8 @@
 using namespace std;
 
 int main(int argc, char **argv, char **env){
+   cout << "[INFO][MAIN]:\t Entered main." << endl;
+   
    ofstream info_proc;
    info_proc.open("info_proc.txt", ios::trunc | ios::out);
 
@@ -24,8 +26,6 @@ int main(int argc, char **argv, char **env){
    char processor_name[MPI_MAX_PROCESSOR_NAME];
    int name_len;
    MPI_Get_processor_name(processor_name, &name_len);
-
-   cout << "[INFO][MAIN]:\t Entered main." << endl;
 
    list<Species *> exoAI;
    exoAI.push_back(new Species());

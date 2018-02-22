@@ -20,32 +20,31 @@ class Gene;
 using namespace std;
 
 class Node{
-    private:
-        int type;       /**<The type of node it is depending on the enum type. */
-        int layer;      /**<If it is a hidden node this says which layer it is in. */
-        int node_id;    /**<The identification number for the node. */
+private:
+    int type;       /**<The type of node it is depending on the enum type. */
+    int layer;      /**<If it is a hidden node this says which layer it is in. */
+    int node_id;    /**<The identification number for the node. */
 
-        float bias;         /**<The weight we put on a node in the network. */
-        float output_func;  /**<The output of the node after we apply forward propogation. */
+    float bias;         /**<The weight we put on a node in the network. */
+    float output_func;  /**<The output of the node after we apply forward propogation. */
 
-        static mutex mtx;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
-    protected:
-    public:
-        Node();
-        Node(int);
-        ~Node();
+    static mutex mtx;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
+protected:
+public:
+    Node(int);
+    ~Node();
 
-        void out_func(list<Gene *>);
-        void find_layer(list<Gene *>);
-        void set_outputfunc(float);
+    void out_func(list<Gene *>);
+    void find_layer(list<Gene *>);
+    void set_outputfunc(float);
 
-        int get_layer() const;
-        int get_type() const;
-        int get_nodeid() const;
+    int get_layer() const;
+    int get_type() const;
+    int get_nodeid() const;
 
-        float get_bias() const;
-        float get_outputfunc() const;
+    float get_bias() const;
+    float get_outputfunc() const;
 
-        thread* spawn_thread(list<Gene *>);
+    thread* spawn_thread(list<Gene *>);
 };
 #endif
