@@ -39,8 +39,9 @@ int main(int argc, char **argv, char **env){
    ***************************************************/
 
    list<Species *> ExoSpec;
+   list<Network *> FitNets;
    ExoSpec.push_back(new Species());
-   ExoSpec.front()->add_network(new Network());
+   ExoSpec.front()->add_network(new Network()); 
 
    while(true){
       for(list<Species *>::iterator it = ExoSpec.begin(); it != ExoSpec; ++it){
@@ -51,12 +52,25 @@ int main(int argc, char **argv, char **env){
 
          (*it)->get_networks().sort(compare);
          for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
-            (*it)->get_networks().pushback(breed(itr, itr++));
+            (*it)->get_networks().pushback(breed(*itr, *(itr++)));
          }
          kill_unfit((*it)->get_networks());
+
+         FitNets.push_back((*it)->get_fittest_net());
       }
 
-      // compete the fittest nets from each species
+      list<Network *>::iterator it = FitNets.begin();
+      list<Species *>::iterator itr = ExoSpec.begin();
+
+      while(it != FitNets.end() && itr != ExoSpec.end()){   
+         Network *fitNet = breed(*it, *(it++));
+
+         (*itr)->get_networks().pushback(fitNet);
+         (*(itr++))->get_networks().pushback(fitNet);
+
+         it++;
+         itr++;
+      }
    }
 
    /***************************************************
