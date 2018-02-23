@@ -34,13 +34,13 @@ public:
     Species();
     ~Species();
 
+    void mutate();
     void run_networks();
     void add_network(Network *);
 
     bool is_stale();
     bool test_species();
 
-    Network* mutate();
     Network* get_fittest_net();  
 
     Species* new_species();

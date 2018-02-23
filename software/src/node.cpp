@@ -15,12 +15,12 @@ mutex Node::mtx;    // because it is static this tells the compiler it exists.
 */
 Node::Node(int new_type){
     cout << "[INFO][NODE]:\t Entered Node::Node(int)." << endl;
+    
     num_nodes++;
     
     output_func = 0;
 	type = new_type;
     node_id = num_nodes;
-    cout << "[INFO][NODE]:\t Exiting Node::Node(int)." << endl;
 
     std::ofstream exoAIStats;
     exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
@@ -31,6 +31,8 @@ Node::Node(int new_type){
     exoAIStats << "Number of Genes: " << num_genes << endl;
     
     exoAIStats.close();
+
+    cout << "[INFO][NODE]:\t Exiting Node::Node(int)." << endl;
 }
 
 /** Destructor dealocates memory from the heap related to this class.

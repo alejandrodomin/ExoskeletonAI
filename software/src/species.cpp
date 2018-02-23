@@ -49,21 +49,14 @@ Species::~Species(){
 
 /** Mutate function which mutates every item in list<Network *>
 */
-Network* Species::mutate(){
+void Species::mutate(){
     cout << "[INFO][SPECIES]: Entered Species::mutate()." << endl;
-    fittest_net = networks.front();
-   for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
-      if((*it)->get_fitness() > fittest_net->get_fitness()){
-          fittest_net = *it;
-      }
-   }
+   
+    for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
+        (*it)->mutate();
+    }
 
-    if(networks.size() != 0)
-        networks.clear();
-
-   fittest_net->mutate();
-   return fittest_net;
-   cout << "[INFO][SPECIES]: Exiting Species::mutate()." << endl;
+    cout << "[INFO][SPECIES]: Exiting Species::mutate()." << endl;
 }
 
 /** This function runs every item in list<Network *>

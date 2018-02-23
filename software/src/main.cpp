@@ -10,6 +10,9 @@
 #include "node.hpp"
 #include "gene.hpp"
 
+#define COIN_FLIP 2
+#define QUARTER_KILL 0.25
+
 using namespace std;
 
 void kill_unfit(list<Network *>);
@@ -50,6 +53,9 @@ int main(int argc, char **argv, char **env){
             (*itr)->calculate_fit();
          }
 
+         if((*it)->is_stale())
+            (*it)->mutate();
+
          (*it)->get_networks().sort(compare);
          for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
             (*it)->get_networks().pushback(breed(*itr, *(itr++)));
@@ -88,7 +94,7 @@ int main(int argc, char **argv, char **env){
 void kill_unfit(list<Network *> *net){
    (*it)->get_networks().sort(compare);
 
-   int size = net.size() / 4;
+   int size = net.size() * QUARTER_KILL;
 
    list<Network *>::iterator it = net.begin();
    for(int index = 0; index < size; index++){
@@ -116,7 +122,7 @@ Network* breed(Network *one, Network *two){
    Network *newNet = new Network();
 
    while(itone != one->get_genes().end() && ittwo != two->get_genes().end()){
-      randNum = rand() % 2;
+      randNum = rand() % COIN_FLIP;
 
       if(randNum)
          newNet.add_gene(ittwo.get_input_node(), ittwo.get_ouput_node());
