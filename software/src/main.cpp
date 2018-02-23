@@ -12,6 +12,13 @@
 
 using namespace std;
 
+void kill_unfit(list<Network *>);
+
+bool compare(Gene *one, Gene *two);
+bool compare(Network *, Network *);
+
+Network* breed(Network *, Network *);
+
 int main(int argc, char **argv, char **env){
    cout << "[INFO][MAIN]:\t Entered main." << endl;
    
@@ -26,45 +33,84 @@ int main(int argc, char **argv, char **env){
    char processor_name[MPI_MAX_PROCESSOR_NAME];
    int name_len;
    MPI_Get_processor_name(processor_name, &name_len);
+   
+   /***************************************************
+   * This is where the neural network begins.         *   
+   ***************************************************/
 
-   list<Species *> exoAI;
-   exoAI.push_back(new Species());
-   exoAI.front()->add_network(new Network());
-
+   list<Species *> ExoSpec;
+   ExoSpec.push_back(new Species());
+   ExoSpec.front()->add_network(new Network());
 
    while(true){
-      info_proc << "Processor name: " << processor_name;
-      info_proc << "\tWorld rank: " << world_rank;
-      info_proc << "\tWorld size: " << world_size << endl;
-
-      for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
-         (*it)->run_networks();
-         
-         // if((*it)->get_networks().size() > 1){
-         //    for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
-         //       (*itr)->calculate_fit();
-         //    }
-         // }
-
-         if((*it)->is_stale()){
-            (*it)->add_network((*it)->mutate());
+      for(list<Species *>::iterator it = ExoSpec.begin(); it != ExoSpec; ++it){
+         for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
+            (*itr)->run();
+            (*itr)->calculate_fit();
          }
 
-         if((*it)->get_networks().size() > 1){
-            if((*it)->test_species()){
-               exoAI.push_back((*it)->new_species());
-            }
+         (*it)->get_networks().sort(compare);
+         for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
+            (*it)->get_networks().pushback(breed(itr, itr++));
          }
+         kill_unfit((*it)->get_networks());
       }
 
-      // for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
-      //    (*it)->get_fittest_net()->run();
-      // }
+      // compete the fittest nets from each species
    }
+
+   /***************************************************
+   * This is where the neural network ends.           *   
+   ***************************************************/
 
    MPI_Finalize();
    info_proc.close();
 
    cout << "[INFO][MAIN]:\t Exiting main." << endl;
    return 0;
+}
+
+
+void kill_unfit(list<Network *> *net){
+   (*it)->get_networks().sort(compare);
+
+   int size = net.size() / 4;
+
+   list<Network *>::iterator it = net.begin();
+   for(int index = 0; index < size; index++){
+      net.erase(it);
+      it++; 
+   }
+}
+
+bool compare(Gene *one, Gene *two){
+   return one->get_inov_id() < two->get_inov_id();
+}
+
+bool compare(Network *one, Network *two){
+   return one->get_fitness() < two->get_fitness();
+}
+
+Network* breed(Network *one, Network *two){
+   one->get_genes().sort(compare);
+   two->get_genes().sort(compare);
+
+   list<Gene *>::iterator itone = one->get_genes().begin();
+   list<Gene *>::iterator ittwo = two->get_genes().begin();
+
+   int randNum;
+   Network *newNet = new Network();
+
+   while(itone != one->get_genes().end() && ittwo != two->get_genes().end()){
+      randNum = rand() % 2;
+
+      if(randNum)
+         newNet.add_gene(ittwo.get_input_node(), ittwo.get_ouput_node());
+      else newNet.add_gene(itone.get_input_node(), itone.get_ouput_node());
+
+      itone++;
+      ittwo++;
+   }
+
+   return newNet;
 }

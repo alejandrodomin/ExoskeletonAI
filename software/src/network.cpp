@@ -247,12 +247,14 @@ void Network::input_run(){
  */ 
 void Network::hidden_run(){
     cout << "[INFO][NETWORK]: Entered Network::hidden_run()." << endl;
-    hidden_nodes.sort(compare);
+    if(hidden_nodes.size() > 0){
+        hidden_nodes.sort(compare);
 
-    list<Gene *> &copy_genes = genes;
+        list<Gene *> &copy_genes = genes;
 
-    for (list<Node* >::iterator it = hidden_nodes.begin(); it != hidden_nodes.end();++it){
-        (*it)->out_func(copy_genes);
+        for (list<Node* >::iterator it = hidden_nodes.begin(); it != hidden_nodes.end();++it){
+            (*it)->out_func(copy_genes);
+        }
     }
     cout << "[INFO][NETWORK]: Exiting Network::hidden_run()." << endl;
 }
