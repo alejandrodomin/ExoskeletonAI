@@ -187,32 +187,23 @@ bool Network::rand_node(){
  */ 
 bool Network::rand_connection(){
     cout << "[INFO][NETWORK]: Entered Network::rand_connection()." << endl;
-//    int node_one, node_two;
-   
-//    if(num_nodes > 0){
-//         node_one = rand()% num_nodes;
-//         node_two = rand()% num_nodes;
-//    }
-//    else exit(1);
 
-//    if(node_one == node_two)
-//       node_two = rand()% num_nodes;
+    int node_one = rand() % num_nodes + 1;
+    int node_two = rand() % num_nodes + 1;
 
-//    int index = 0;
-//    Node *one, *two;
-//    while (in_nodes[index + 1] != NULL){
-// 	   if(in_nodes[index] != NULL){
-// 		   if (in_nodes[index]->get_nodeid() == node_one)
-//             one = in_nodes[index];
-//          else if (in_nodes[index]->get_nodeid() == node_two)
-//             two = in_nodes[index];
-//          index++;
-// 		}
-// 		else index++;
-//    }
+    for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.emd(); ++it){
+        if((*it)->get_input_node() == node_one && (*it)->get_output_node() == node_two){
+            genes.push_back(new Gene(node_one, node_two, (*it)->get_inov_id()));
+            return true;
+        }
+    }
 
-//    add_gene(one, two);
-   cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
+    genes.push_back(new Gene(node_one, node_two, innovation_number));
+    unique_genes.push_back(new Gene(node_one, node_two, innovation_number));
+
+    innovation_number++;
+
+    cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
 }
 
 /** Network compare checks if layer of first node is 
