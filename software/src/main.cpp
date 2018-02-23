@@ -17,8 +17,8 @@ using namespace std;
 
 void kill_unfit(list<Network *>);
 
-bool compare(Gene *one, Gene *two);
-bool compare(Network *, Network *);
+bool compareGenes(Gene *one, Gene *two);
+bool compareNets(Network *, Network *);
 
 Network* breed(Network *, Network *);
 
@@ -47,7 +47,7 @@ int main(int argc, char **argv, char **env){
    ExoSpec.front()->add_network(new Network()); 
 
    while(true){
-      for(list<Species *>::iterator it = ExoSpec.begin(); it != ExoSpec; ++it){
+      for(list<Species *>::iterator it = ExoSpec.begin(); it != ExoSpec.end(); ++it){
          for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
             (*itr)->run();
             (*itr)->calculate_fit();
@@ -56,9 +56,9 @@ int main(int argc, char **argv, char **env){
          if((*it)->is_stale())
             (*it)->mutate();
 
-         (*it)->get_networks().sort(compare);
+         (*it)->get_networks().sort(compareNets);
          for(list<Network *>::iterator itr = (*it)->get_networks().begin(); itr != (*it)->get_networks().end(); ++itr){
-            (*it)->get_networks().pushback(breed(*itr, *(itr++)));
+            (*it)->get_networks().push_back(breed(*itr, *(itr++)));
          }
          kill_unfit((*it)->get_networks());
 
@@ -71,8 +71,8 @@ int main(int argc, char **argv, char **env){
       while(it != FitNets.end() && itr != ExoSpec.end()){   
          Network *fitNet = breed(*it, *(it++));
 
-         (*itr)->get_networks().pushback(fitNet);
-         (*(itr++))->get_networks().pushback(fitNet);
+         (*itr)->get_networks().push_back(fitNet);
+         (*(itr++))->get_networks().push_back(fitNet);
 
          it++;
          itr++;
@@ -91,8 +91,8 @@ int main(int argc, char **argv, char **env){
 }
 
 
-void kill_unfit(list<Network *> *net){
-   (*it)->get_networks().sort(compare);
+void kill_unfit(list<Network *> net){
+   net.sort(compareNets);
 
    int size = net.size() * QUARTER_KILL;
 
@@ -103,17 +103,17 @@ void kill_unfit(list<Network *> *net){
    }
 }
 
-bool compare(Gene *one, Gene *two){
+bool compareGenes(Gene *one, Gene *two){
    return one->get_inov_id() < two->get_inov_id();
 }
 
-bool compare(Network *one, Network *two){
+bool compareNets(Network *one, Network *two){
    return one->get_fitness() < two->get_fitness();
 }
 
 Network* breed(Network *one, Network *two){
-   one->get_genes().sort(compare);
-   two->get_genes().sort(compare);
+   one->get_genes().sort(compareGenes);
+   two->get_genes().sort(compareGenes);
 
    list<Gene *>::iterator itone = one->get_genes().begin();
    list<Gene *>::iterator ittwo = two->get_genes().begin();
@@ -125,8 +125,8 @@ Network* breed(Network *one, Network *two){
       randNum = rand() % COIN_FLIP;
 
       if(randNum)
-         newNet.add_gene(ittwo.get_input_node(), ittwo.get_ouput_node());
-      else newNet.add_gene(itone.get_input_node(), itone.get_ouput_node());
+         newNet->add_gene((*ittwo)->get_input_node(), (*ittwo)->get_output_node());
+      else newNet->add_gene((*itone)->get_input_node(), (*itone)->get_output_node());
 
       itone++;
       ittwo++;

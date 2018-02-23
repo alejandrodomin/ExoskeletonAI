@@ -13,7 +13,7 @@ SOURCES := $(wildcard $(SRC)/*.cpp)
 OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
 
 $(PROJ): $(OBJECTS)
-	$(CC) $(DEBUG) $(LFLAGS) $^ -o $@`
+	$(CC) $(DEBUG) $(LFLAGS) $^ -o $@
 
 $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@

@@ -13,16 +13,19 @@ using namespace std;
 Network::Network(){
    cout << "[INFO][NETWORK]: Entered Network::Network()." << endl;
    num_networks++;
-   
-   num_nodes = NUM_INPUTS + NUM_OUTPUTS;
+   num_nodes = 0;
 
    in_nodes  = new Node*[NUM_INPUTS];
-   for(int i = 0; i < NUM_INPUTS; i++)
-       in_nodes[i] = new Node(input);
+   for(int i = 0; i < NUM_INPUTS; i++){
+       num_nodes++;
+       in_nodes[i] = new Node(input, num_nodes);
+   }
 
    out_nodes = new Node*[NUM_OUTPUTS];
-   for(int i = 0; i < NUM_INPUTS; i++)
-        out_nodes[i] = new Node(output);
+   for(int i = 0; i < NUM_INPUTS; i++){
+       num_nodes++;
+        out_nodes[i] = new Node(output, num_nodes);
+   }
 
     std::ofstream exoAIStats;
     exoAIStats.open("exoAIStats.txt", ios::out | ios::trunc);
@@ -135,9 +138,18 @@ void Network::set_compatibility_distance(float newcomp_distance){
     @param onode* pointer to the output node usually the node that 
                     calls this function.
 */
-void Network::add_gene(Node *snode, Node * onode){
+void Network::add_gene(int snode, int onode){
     cout << "[INFO][NETWORK]: Entered Network::add_gene(Node*, Node*)" << endl;
+    for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
+        if((*it)->get_input_node() == snode && (*it)->get_output_node() == onode){
+            genes.push_back(new Gene(snode, onode, (*it)->get_inov_id()));
+            return;
+        }
+    }
+
     genes.push_back(new Gene(snode, onode, innovation_number));
+    unique_genes.push_back(new Gene(snode, onode, innovation_number));
+
     innovation_number++;
     cout << "[INFO][NETOWRK]: Exiting Network::add_gene(Node*, Node*)" << endl;
 }
@@ -164,8 +176,10 @@ int Network::get_num_nodes() const{
  */ 
 bool Network::rand_node(){
     cout << "[INFO][NETWORK]: Entered Network::rand_node()." << endl;
-    hidden_nodes.push_back(new Node(hidden));
-    add_num_nodes(1);
+
+    num_nodes++;
+    hidden_nodes.push_back(new Node(hidden, num_nodes));
+    
     cout << "[INFO][NETWORK]: Exiting Network::rand_node()." << endl;
 }
 
@@ -173,31 +187,31 @@ bool Network::rand_node(){
  */ 
 bool Network::rand_connection(){
     cout << "[INFO][NETWORK]: Entered Network::rand_connection()." << endl;
-   int node_one, node_two;
+//    int node_one, node_two;
    
-   if(num_nodes > 0){
-        node_one = rand()% num_nodes;
-        node_two = rand()% num_nodes;
-   }
-   else exit(1);
+//    if(num_nodes > 0){
+//         node_one = rand()% num_nodes;
+//         node_two = rand()% num_nodes;
+//    }
+//    else exit(1);
 
-   if(node_one == node_two)
-      node_two = rand()% num_nodes;
+//    if(node_one == node_two)
+//       node_two = rand()% num_nodes;
 
-   int index = 0;
-   Node *one, *two;
-   while (in_nodes[index + 1] != NULL){
-	   if(in_nodes[index] != NULL){
-		   if (in_nodes[index]->get_nodeid() == node_one)
-            one = in_nodes[index];
-         else if (in_nodes[index]->get_nodeid() == node_two)
-            two = in_nodes[index];
-         index++;
-		}
-		else index++;
-   }
+//    int index = 0;
+//    Node *one, *two;
+//    while (in_nodes[index + 1] != NULL){
+// 	   if(in_nodes[index] != NULL){
+// 		   if (in_nodes[index]->get_nodeid() == node_one)
+//             one = in_nodes[index];
+//          else if (in_nodes[index]->get_nodeid() == node_two)
+//             two = in_nodes[index];
+//          index++;
+// 		}
+// 		else index++;
+//    }
 
-   add_gene(one, two);
+//    add_gene(one, two);
    cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
 }
 

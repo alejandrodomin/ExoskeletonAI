@@ -13,14 +13,14 @@ mutex Node::mtx;    // because it is static this tells the compiler it exists.
 /** Constructor that sets the type of node it is.
     @param new_type type of node it is, based on the enum list.    
 */
-Node::Node(int new_type){
+Node::Node(int new_type, int id){
     cout << "[INFO][NODE]:\t Entered Node::Node(int)." << endl;
     
     num_nodes++;
     
     output_func = 0;
 	type = new_type;
-    node_id = num_nodes;
+    node_id = id;
 
     std::ofstream exoAIStats;
     exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
@@ -56,23 +56,20 @@ thread* Node::spawn_thread(list<Gene *> genes){
  *  based on the forward propagation function.
 */
 void Node::out_func(list<Gene *> genes){
-    std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
-    cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
+    // std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
+    // cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
 
-    int index = 0;
-    double total = 0;
+    // int index = 0;
+    // double total = 0;
 
-    if(genes.size() > 0){
-        for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
-            if((*it)->get_input_node() != NULL){
-                total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
-            }
-            else return;
+    // if(genes.size() > 0){
+    //     for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
+    //         total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
 
-        total += get_bias();
-        set_outputfunc(total);      // problem in seg fault lies here
-                                // goes out of scope mutex is unlocked others try to acces the same data, seg fault
-    }
+    //     total += get_bias();
+    //     set_outputfunc(total);      // problem in seg fault lies here
+    //                             // goes out of scope mutex is unlocked others try to acces the same data, seg fault
+    // }
     cout << "[INFO][NODE]:\t Exiting Node::out_func()." << endl;
 }
 
@@ -131,23 +128,23 @@ void Node::set_outputfunc(float num){
 */
 void Node::find_layer(list<Gene *> genes){   // the logic in this function seems iffy check it later
     cout << "[INFO][NODE]:\t Entered Node::find_layer(list<Gene*>)." << endl;
-    bool allInput = true;
-    int maxLayer = 0;
-    int index = 0;
+    // bool allInput = true;
+    // int maxLayer = 0;
+    // int index = 0;
    
-    for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it){
-        if((*it)->get_input_node()->get_type() == hidden){
-            allInput = false;
+    // for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it){
+    //     if((*it)->get_input_node()->get_type() == hidden){
+    //         allInput = false;
          
-            if (maxLayer < (*it)->get_input_node()->layer)
-                maxLayer = (*it)->get_input_node()->layer;
-        }
-        index++;
-    }
+    //         if (maxLayer < (*it)->get_input_node()->layer)
+    //             maxLayer = (*it)->get_input_node()->layer;
+    //     }
+    //     index++;
+    // }
     
-    if (allInput)
-        layer = 1;
-    else layer = maxLayer + 1;
+    // if (allInput)
+    //     layer = 1;
+    // else layer = maxLayer + 1;
     cout << "[INFO][NODE]:\t Exiting Node::find_layer(list<Gene*>)." << endl;
 }
 

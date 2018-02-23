@@ -20,23 +20,21 @@ class Gene{
 private:
     int innovation_number;  /**<The number in which the gene poped up. */
 
-    float weight;     /**<The weight a gene carries in the forward propagation function. */
+    float weight;
 
-    Node* input_node;   /**<A pointer corresponding to the node that holds this gene. */
-    Node* output_node; /**<A pointer to the Node that is connected to the you_node. */
+    int input_node;   /**<A pointer corresponding to the node that holds this gene. */
+    int output_node; /**<A pointer to the Node that is connected to the you_node. */
 protected:
 public:
-    Gene(Node *, Node *, int);
+    Gene(int,int,int);
     ~Gene();
-
-    void set_weight(float);
 
     int get_inov_id() const;
 
     float get_weight() const;
 
-    Node* get_input_node() const;
-    Node* get_ouput_node() const;
+    int get_input_node() const;
+    int get_output_node() const;
 };
 
 #endif

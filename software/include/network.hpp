@@ -23,7 +23,6 @@ private:
     int crashes; 
     int fitness; /**<The fitness level of a set of input nodes.*/
     int num_nodes; /**<The number of nodes.*/ 
-    int innovation_number;
 
     float walk_distance;  
     float compatibility_distance;/**<Measures how compatible a set of nodes is.*/
@@ -48,8 +47,8 @@ public:
     void use_output();
     void calculate_fit();
     void add_num_nodes(int);
+    void add_gene(int, int);
     void set_compatibility_distance(float);
-    void add_gene(Node *, Node *);
 
     int get_fitness() const;
     int get_num_nodes() const;

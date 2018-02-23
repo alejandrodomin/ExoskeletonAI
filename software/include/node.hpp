@@ -31,7 +31,7 @@ private:
     static mutex mtx;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
 protected:
 public:
-    Node(int);
+    Node(int,int);
     ~Node();
 
     void out_func(list<Gene *>);
