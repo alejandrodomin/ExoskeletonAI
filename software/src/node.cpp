@@ -3,8 +3,8 @@
 #include <list>
 #include <iterator>
 
-#include "node.hpp"
-#include "common.hpp"
+#include <node.hpp>
+#include <common.hpp>
 
 using namespace std;
 
@@ -43,6 +43,10 @@ Node::~Node(){
     cout << "[INFO][NODE]:\t Exiting Node::~Node()." << endl;
 }
 
+void Node::set_layer(int layer){
+    this->layer = layer;
+}
+
 /** My function doing something...
     @return thread* returns a pointer to a new thread.
 */
@@ -56,20 +60,22 @@ thread* Node::spawn_thread(list<Gene *> genes){
  *  based on the forward propagation function.
 */
 void Node::out_func(list<Gene *> genes){
-    // std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
-    // cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
+    cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
 
-    // int index = 0;
-    // double total = 0;
+    std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
 
-    // if(genes.size() > 0){
-    //     for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
-    //         total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
+    int index = 0;
+    double total = 0;
 
-    //     total += get_bias();
-    //     set_outputfunc(total);      // problem in seg fault lies here
-    //                             // goes out of scope mutex is unlocked others try to acces the same data, seg fault
-    // }
+    if(genes.size() > 0){
+        for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it)
+            total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
+
+        total += get_bias();
+        set_outputfunc(total);      // problem in seg fault lies here
+                                // goes out of scope mutex is unlocked others try to acces the same data, seg fault
+    }
+
     cout << "[INFO][NODE]:\t Exiting Node::out_func()." << endl;
 }
 
@@ -128,23 +134,25 @@ void Node::set_outputfunc(float num){
 */
 void Node::find_layer(list<Gene *> genes){   // the logic in this function seems iffy check it later
     cout << "[INFO][NODE]:\t Entered Node::find_layer(list<Gene*>)." << endl;
-    // bool allInput = true;
-    // int maxLayer = 0;
-    // int index = 0;
    
-    // for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it){
-    //     if((*it)->get_input_node()->get_type() == hidden){
-    //         allInput = false;
+    bool allInput = true;
+    int maxLayer = 0;
+    int index = 0;
+   
+    for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); ++it){
+        if((*it)->get_input_node()->get_type() == hidden){
+            allInput = false;
          
-    //         if (maxLayer < (*it)->get_input_node()->layer)
-    //             maxLayer = (*it)->get_input_node()->layer;
-    //     }
-    //     index++;
-    // }
+            if (maxLayer < (*it)->get_input_node()->layer)
+                maxLayer = (*it)->get_input_node()->layer;
+        }
+        index++;
+    }
     
-    // if (allInput)
-    //     layer = 1;
-    // else layer = maxLayer + 1;
+    if (allInput)
+        layer = 1;
+else layer = maxLayer + 1;
+
     cout << "[INFO][NODE]:\t Exiting Node::find_layer(list<Gene*>)." << endl;
 }
 

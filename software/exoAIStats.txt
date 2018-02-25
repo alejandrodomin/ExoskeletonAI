@@ -1,4 +1,4 @@
 Number of Species: 0
-Number of Networks: 1
-Number of Nodes: 15
+Number of Networks: 29
+Number of Nodes: 18
 Number of Genes: 0

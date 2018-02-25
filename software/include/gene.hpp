@@ -18,23 +18,28 @@ class Node;
 
 class Gene{
 private:
+    int in_node;
+    int out_node;
     int innovation_number;  /**<The number in which the gene poped up. */
 
     float weight;
 
-    int input_node;   /**<A pointer corresponding to the node that holds this gene. */
-    int output_node; /**<A pointer to the Node that is connected to the you_node. */
+    Node* input_node;   /**<A pointer corresponding to the node that holds this gene. */
+    Node* output_node; /**<A pointer to the Node that is connected to the you_node. */
 protected:
 public:
-    Gene(int,int,int);
+    Gene(Node*,Node*,int);
     ~Gene();
 
     int get_inov_id() const;
+    int get_in_node() const;
+    int get_out_node() const;
 
     float get_weight() const;
 
-    int get_input_node() const;
-    int get_output_node() const;
+
+    Node* get_input_node() const;
+    Node* get_output_node() const;
 };
 
 #endif

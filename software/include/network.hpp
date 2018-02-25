@@ -13,8 +13,8 @@
 #include <thread>
 #include <list>
 
-#include "node.hpp"
-#include "gene.hpp"
+#include <node.hpp>
+#include <gene.hpp>
 
 using namespace std;
 
@@ -47,8 +47,8 @@ public:
     void use_output();
     void calculate_fit();
     void add_num_nodes(int);
-    void add_gene(int, int);
     void set_compatibility_distance(float);
+    void add_gene(Node*, Node*);
 
     int get_fitness() const;
     int get_num_nodes() const;
@@ -60,9 +60,9 @@ public:
 
     Node** get_input() const;       // names for these can be changed later
 
-    list<Gene *> get_genes() const; 
+    list<Gene *>* get_genes(); 
 
-    list<Node *> get_hiddennodes() const; 
+    list<Node *>* get_hiddennodes(); 
 };
 
 #endif

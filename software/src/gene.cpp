@@ -1,16 +1,19 @@
 #include <iostream>
 #include <cstdlib>
 
-#include "common.hpp"
-#include "gene.hpp"
+#include <common.hpp>
+#include <gene.hpp>
 
 using namespace std;
 
 /** Gene constructor, creates a Gene
  *  that knows which two nodes it ties together.
 */
-Gene::Gene(int input_node, int output_node, int inov_number){
+Gene::Gene(Node* input_node, Node* output_node, int inov_number){
     cout << "[INFO][GENE]:\t Entered Gene::Gene(Node *, Node *)." << endl;
+
+    in_node = input_node->get_nodeid();
+    out_node = output_node->get_nodeid();
 
     this->input_node = input_node;
     this->output_node = output_node;
@@ -19,15 +22,15 @@ Gene::Gene(int input_node, int output_node, int inov_number){
 
     weight = ((float)(rand() % 100 + 1)) / 100.0;
 
-    // std::ofstream exoAIStats;
-    // exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
+    std::ofstream exoAIStats;
+    exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
     
-    // exoAIStats << "Number of Species: " << num_species << endl;
-    // exoAIStats << "Number of Networks: " << num_networks << endl;
-    // exoAIStats << "Number of Nodes: " << num_nodes << endl;
-    // exoAIStats << "Number of Genes: " << num_genes << endl;
+    exoAIStats << "Number of Species: " << num_species << endl;
+    exoAIStats << "Number of Networks: " << num_networks << endl;
+    exoAIStats << "Number of Nodes: " << num_nodes << endl;
+    exoAIStats << "Number of Genes: " << num_genes << endl;
     
-    // exoAIStats.close();
+    exoAIStats.close();
 
     cout << "[INFO][GENE]:\t Exited  Gene::Gene(Node *, Node *)." << endl;
 }
@@ -37,6 +40,15 @@ Gene::Gene(int input_node, int output_node, int inov_number){
 */
 Gene::~Gene(){
     cout << "[INFO][GENE]:\t Entered Gene::~Gene()." << endl;
+
+    if(input_node != NULL){
+        delete input_node;
+        input_node = NULL;
+    }
+    if(output_node != NULL){
+        delete output_node;
+        output_node = NULL;
+    }
 
     cout << "[INFO][GENE]:\t Exited  Gene::~Gene()." << endl;
 }
@@ -57,6 +69,14 @@ int Gene::get_inov_id() const{
     return innovation_number;
 }
 
+int Gene::get_in_node() const{
+    return in_node;
+}
+
+int Gene::get_out_node() const{
+    return out_node;
+}
+
 /** Returns the value of the weight variable.
     @return float returns weight 
 */
@@ -69,7 +89,7 @@ float Gene::get_weight() const{
 /** Returns a node pointer to the input node.
     @return Node* node pointer
 */
-int Gene::get_input_node() const{
+Node* Gene::get_input_node() const{
     cout << "[INFO][GENE]:\t Entered Gene::get_input_node()." << endl;
     cout << "[INFO][GENE]:\t Exited  Gene::get_input_node()." << endl;
     return input_node;
@@ -79,7 +99,7 @@ int Gene::get_input_node() const{
  *  gene function.
     @return Node* node pointer
 */
-int Gene::get_output_node() const{
+Node* Gene::get_output_node() const{
    cout << "[INFO][GENE]:\t Entered Gene::get_you_node()." << endl;
    cout << "[INFO][GENE]:\t Exited  Gene::get_you_node()." << endl;
    return output_node;

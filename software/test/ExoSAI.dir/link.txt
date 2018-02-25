@@ -1,0 +1,1 @@
+/usr/bin/c++      CMakeFiles/../ExoSAI.dir/test_node.cpp.o  -o ../ExoSAI -rdynamic -Wl,-Bstatic -lgtest -Wl,-Bdynamic -lpthread 

@@ -12,7 +12,7 @@
 #include <iostream>
 #include <list>
 
-#include "network.hpp"
+#include <network.hpp>
 
 using namespace std;
 
@@ -45,7 +45,7 @@ public:
 
     Species* new_species();
 
-    list<Network *> get_networks();
+    list<Network *>* get_networks();
 };
 
 #endif

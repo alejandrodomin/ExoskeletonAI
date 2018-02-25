@@ -2,8 +2,8 @@
 #include <cstdlib>
 #include <thread>
 
-#include "common.hpp"
-#include "network.hpp"
+#include <common.hpp>
+#include <network.hpp>
 
 using namespace std;
 
@@ -138,10 +138,10 @@ void Network::set_compatibility_distance(float newcomp_distance){
     @param onode* pointer to the output node usually the node that 
                     calls this function.
 */
-void Network::add_gene(int snode, int onode){
+void Network::add_gene(Node* snode, Node* onode){
     cout << "[INFO][NETWORK]: Entered Network::add_gene(Node*, Node*)" << endl;
     for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
-        if((*it)->get_input_node() == snode && (*it)->get_output_node() == onode){
+        if((*it)->get_in_node() == snode->get_nodeid() && (*it)->get_out_node() == onode->get_nodeid()){
             genes.push_back(new Gene(snode, onode, (*it)->get_inov_id()));
             return;
         }
@@ -191,17 +191,46 @@ bool Network::rand_connection(){
     int node_one = rand() % num_nodes + 1;
     int node_two = rand() % num_nodes + 1;
 
-    for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.emd(); ++it){
-        if((*it)->get_input_node() == node_one && (*it)->get_output_node() == node_two){
-            genes.push_back(new Gene(node_one, node_two, (*it)->get_inov_id()));
+    Node *nodeOne, *nodeTwo;
+
+    for(int index = 0; index < NUM_INPUTS; index++){
+        if(in_nodes[index]->get_nodeid() == node_one){
+            nodeOne = in_nodes[index];
+        }
+        else if(in_nodes[index]->get_nodeid() == node_two){
+            nodeTwo = in_nodes[index];
+        }
+    }
+    for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); ++it){
+        if((*it)->get_nodeid() == node_one){
+            nodeOne = *it;
+        }
+        else if((*it)->get_nodeid() == node_two){
+            nodeTwo = *it;
+        }
+    }
+    for(int index = 0; index < NUM_OUTPUTS; index++){
+        if(out_nodes[index]->get_nodeid() == node_one){
+            nodeOne = out_nodes[index];
+        }
+        else if(out_nodes[index]->get_nodeid() == node_two){
+            nodeTwo = out_nodes[index];
+        }
+    }
+
+    for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
+        if((*it)->get_in_node() == node_one && (*it)->get_out_node() == node_two){
+            genes.push_back(new Gene(nodeOne, nodeTwo, (*it)->get_inov_id()));
             return true;
         }
     }
 
-    genes.push_back(new Gene(node_one, node_two, innovation_number));
-    unique_genes.push_back(new Gene(node_one, node_two, innovation_number));
+    genes.push_back(new Gene(nodeOne, nodeTwo, innovation_number));
+    unique_genes.push_back(new Gene(nodeOne, nodeTwo, innovation_number));
 
     innovation_number++;
+
+    return true;
 
     cout << "[INFO][NETWORK]: Exiting Network::rand_connection()." << endl;
 }
@@ -308,18 +337,18 @@ Node** Network::get_input() const{
 /** Returns the list of gene pointers.
  * @return list<Gene *>
  */ 
-list<Gene *> Network::get_genes() const{
+list<Gene *>* Network::get_genes(){
     cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
-    return genes;
+    return &genes;
 }
 
 /** Returns the hidden nodes.
  * @return list<Node *>
  */ 
-list<Node *> Network::get_hiddennodes() const{
+list<Node *>* Network::get_hiddennodes(){
     cout << "[INFO][NETWORK]: Entered Network::get_hiddennnodes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_hiddennnodes()." << endl;
     
-    return hidden_nodes;
+    return &hidden_nodes;
 }

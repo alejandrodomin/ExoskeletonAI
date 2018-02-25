@@ -1,0 +1,14 @@
+#IncludeRegexLine: ^[ 	]*#[ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/cooldude101/ExoskeletonAI/software/test/test_main.cpp
+main.cpp
+/home/cooldude101/ExoskeletonAI/software/test/main.cpp
+gtest/gtest.h
+-
+

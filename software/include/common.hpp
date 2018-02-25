@@ -4,7 +4,7 @@
 #include <fstream>
 #include <list>
 
-#include "gene.hpp"
+#include <gene.hpp>
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
@@ -20,6 +20,6 @@ static unsigned int num_genes;
 enum gyro {gyroX = 0, gyroY, gyroZ};   /**<Enumerated list for the x,y, and z positions for the gyro. */
 enum type {input = 0, hidden, output}; /**<Enumerated list for the different kinds of nodes.*/ 
 
-std::list<Gene *> unique_genes;
+static std::list<Gene *> unique_genes;
 
 #endif

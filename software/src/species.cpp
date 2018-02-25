@@ -2,8 +2,8 @@
 #include <iterator>
 #include <cmath>
 
-#include "species.hpp"
-#include "common.hpp"
+#include <species.hpp>
+#include <common.hpp>
 
 using namespace std;
 
@@ -145,12 +145,12 @@ int Species::compute_excess(Network *net1, Network *net2){
    int biggestnet1 = 0;
    int biggestnet2 = 0;
    
-   for(list<Gene *>::iterator it = net1->get_genes().begin(); it != net1->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net1->get_genes()->begin(); it != net1->get_genes()->end(); ++it){
        if((*it)->get_inov_id() > biggestnet1)
           biggestnet1 = (*it)->get_inov_id();
    }
    
-   for(list<Gene *>::iterator it = net2->get_genes().begin(); it != net2->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net2->get_genes()->begin(); it != net2->get_genes()->end(); ++it){
        if((*it)->get_inov_id() > biggestnet2)
           biggestnet2 = (*it)->get_inov_id();
    }
@@ -166,11 +166,11 @@ int Species::compute_excess(Network *net1, Network *net2){
        net2Arry = new int[biggestnet2];
    }
 
-   for(list<Gene *>::iterator it = net1->get_genes().begin(); it != net1->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net1->get_genes()->begin(); it != net1->get_genes()->end(); ++it){
        net1Arry[(*it)->get_inov_id()] = (*it)->get_inov_id(); 
    }
    
-   for(list<Gene *>::iterator it = net2->get_genes().begin(); it != net2->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net2->get_genes()->begin(); it != net2->get_genes()->end(); ++it){
        net1Arry[(*it)->get_inov_id()] = (*it)->get_inov_id();
    }
 
@@ -225,12 +225,12 @@ int Species::compute_disjoint(Network *net1, Network *net2){
    int biggestnet1 = 0;
    int biggestnet2 = 0;
    
-   for(list<Gene *>::iterator it = net1->get_genes().begin(); it != net1->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net1->get_genes()->begin(); it != net1->get_genes()->end(); ++it){
        if((*it)->get_inov_id() > biggestnet1)
           biggestnet1 = (*it)->get_inov_id();
    }
    
-   for(list<Gene *>::iterator it = net2->get_genes().begin(); it != net2->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net2->get_genes()->begin(); it != net2->get_genes()->end(); ++it){
        if((*it)->get_inov_id() > biggestnet2)
           biggestnet2 = (*it)->get_inov_id();
    }
@@ -245,11 +245,11 @@ int Species::compute_disjoint(Network *net1, Network *net2){
        net2Arry = new int[biggestnet2];
    }
 
-   for(list<Gene *>::iterator it = net1->get_genes().begin(); it != net1->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net1->get_genes()->begin(); it != net1->get_genes()->end(); ++it){
        net1Arry[(*it)->get_inov_id()] = (*it)->get_inov_id(); 
    }
    
-   for(list<Gene *>::iterator it = net2->get_genes().begin(); it != net2->get_genes().end(); ++it){
+   for(list<Gene *>::iterator it = net2->get_genes()->begin(); it != net2->get_genes()->end(); ++it){
        net1Arry[(*it)->get_inov_id()] = (*it)->get_inov_id();
    }
 
@@ -314,10 +314,10 @@ float Species::weight_diff_match_genes(Network *net1, Network *net2){
    float sum;
    float average;
 
-   list<Gene *>::iterator it  = net1->get_genes().begin();
-   list<Gene *>::iterator itr = net2->get_genes().begin();
+   list<Gene *>::iterator it  = net1->get_genes()->begin();
+   list<Gene *>::iterator itr = net2->get_genes()->begin();
 
-   while(it != net1->get_genes().end() || itr != net2->get_genes().end()){
+   while(it != net1->get_genes()->end() || itr != net2->get_genes()->end()){
        if((*it)->get_inov_id() == (*itr)->get_inov_id()){
            sum += abs((*it)->get_weight() - (*itr)->get_weight());
            total++;
@@ -336,6 +336,6 @@ Network* Species::get_fittest_net(){
     return fittest_net;
 }
 
-list<Network *> Species::get_networks(){
-    return networks;
+list<Network *>* Species::get_networks(){
+    return &networks;
 }

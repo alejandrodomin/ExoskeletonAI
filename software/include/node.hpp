@@ -14,7 +14,7 @@
 #include <thread>
 #include <list>
 
-#include "gene.hpp"
+#include <gene.hpp>
 class Gene;
 
 using namespace std;
@@ -34,9 +34,10 @@ public:
     Node(int,int);
     ~Node();
 
+    void set_layer(int);
+    void set_outputfunc(float);
     void out_func(list<Gene *>);
     void find_layer(list<Gene *>);
-    void set_outputfunc(float);
 
     int get_layer() const;
     int get_type() const;
