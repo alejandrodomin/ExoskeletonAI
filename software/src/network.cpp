@@ -14,6 +14,7 @@ Network::Network(){
    cout << "[INFO][NETWORK]: Entered Network::Network()." << endl;
    num_networks++;
    num_nodes = 0;
+   fitness = 0;
 
    in_nodes  = new Node*[NUM_INPUTS];
    for(int i = 0; i < NUM_INPUTS; i++){
