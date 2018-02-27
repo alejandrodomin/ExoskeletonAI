@@ -341,7 +341,9 @@ Node** Network::get_input() const{
 list<Gene *>* Network::get_genes(){
     cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
-    return &genes;
+    if(genes.size() > 0)
+        return &genes;
+    else return NULL;
 }
 
 /** Returns the hidden nodes.

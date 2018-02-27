@@ -20,8 +20,8 @@ using namespace std;
 
 void kill_unfit(list<Network *>*);
 
-bool compareGenes(Gene *, Gene *);
-bool compareNets(Network *, Network *);
+bool compareGenes(const Gene *, const Gene *);
+bool compareNets(const Network *, const Network *);
 
 Network* breed(Network *, Network *);
 
@@ -98,29 +98,34 @@ int main(int argc, char **argv, char **env){
         FitNets.push_back((*species_iter)->get_fittest_net());
       }
 
-      if(FitNets.size() > 0 && ExoSpec.size() > 0){
-        it = FitNets.begin();
-        iter = ExoSpec.begin();
+      // if(FitNets.size() > 0 && ExoSpec.size() > 0){
+      //   it = FitNets.begin();
+      //   iter = ExoSpec.begin();
 
-        while(it != FitNets.end() || iter != ExoSpec.end()){   
-          next_iter = it;
-          if(++next_iter != FitNets.end())
-            fitNet = breed(*it, *next_iter);
+      //   while(it != FitNets.end() || iter != ExoSpec.end()){   
+      //     next_iter = it;
+      //     if(++next_iter != FitNets.end())
+      //       fitNet = breed(*it, *next_iter);
 
-          if(fitNet != NULL){
-            (*iter)->get_networks()->push_back(fitNet);
-            (*(iter++))->get_networks()->push_back(fitNet);
-          }
+      //     if(fitNet != NULL){
+      //       (*iter)->get_networks()->push_back(fitNet);
+      //       (*(iter++))->get_networks()->push_back(fitNet);
+      //     }
 
-          it++;
-          iter++;
-        }
-      }
+      //     it++;
+      //     iter++;
+      //   }
+      // }
    }
 
    /***************************************************
    * This is where the neural network ends.           *   
    ***************************************************/
+
+  if(ExoSpec.size() > 0)
+    ExoSpec.clear();
+  if(ExoSpec.size() > 0) 
+    FitNets.clear();
 
    MPI_Finalize();
    info_proc.close();
@@ -146,13 +151,11 @@ void kill_unfit(list<Network *> *net){
    net->erase(from,to);
 }
 
-bool compareGenes(Gene *one, Gene *two){
-  if(one != NULL && two != NULL)
-   return one->get_inov_id() < two->get_inov_id();
-   else return false;
+bool compareGenes(const Gene *one, const Gene *two){
+  return one->get_inov_id() < two->get_inov_id();
 }
 
-bool compareNets(Network *one, Network *two){ // sorts less fit first to more fit later.
+bool compareNets(const Network *one, const Network *two){ // sorts less fit first to more fit later.
    return one->get_fitness() < two->get_fitness();
 }
 
@@ -160,13 +163,14 @@ Network* breed(Network *one, Network *two){
    if(one == NULL || two == NULL)
     return NULL;
 
-   if(one->get_genes()->size() > 1 && two->get_genes()->size() > 1){
-      if(one->get_genes() != NULL && two->get_genes() != NULL){
+   if(one->get_genes() != NULL && two->get_genes() != NULL){
+      if(one->get_genes()->size() > 1 && two->get_genes()->size() > 1){
         one->get_genes()->sort(compareGenes);
         two->get_genes()->sort(compareGenes);
       }
       else return NULL;
    }
+   else return NULL;
 
    list<Gene *>::iterator itone = one->get_genes()->begin();
    list<Gene *>::iterator ittwo = two->get_genes()->begin();
