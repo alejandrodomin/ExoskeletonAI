@@ -1,5 +1,6 @@
 {
    "files.associations": {
-      "slist": "cpp"
+      "slist": "cpp",
+      "*.ipp": "cpp"
    }
 }

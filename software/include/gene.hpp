@@ -10,6 +10,7 @@
     */
 
 #include <iostream>
+#include <memory>
 
 using namespace std;
 
@@ -28,7 +29,7 @@ private:
     Node* output_node; /**<A pointer to the Node that is connected to the you_node. */
 protected:
 public:
-    Gene(Node*,Node*,int);
+    Gene(unique_ptr<Node>,unique_ptr<Node>,int);
     ~Gene();
 
     int get_inov_id() const;

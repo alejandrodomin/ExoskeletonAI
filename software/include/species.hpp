@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <list>
+#include <memory>
 
 #include <network.hpp>
 
@@ -24,7 +25,7 @@ private:
 
     Network* fittest_net;/**<Network pointer to the fittest network.*/
 
-    list<Network *> networks;/**<A list of network pointers that stores networks.*/
+    list<unique_ptr<Network>> networks;/**<A list of network pointers that stores networks.*/
 protected:
     int compute_excess(Network *, Network *);
     int compute_disjoint(Network *, Network *);
@@ -45,7 +46,7 @@ public:
 
     Species* new_species();
 
-    list<Network *>* get_networks();
+    list<unique_ptr<Network>>* get_networks();
 };
 
 #endif

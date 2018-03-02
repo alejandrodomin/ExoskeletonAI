@@ -14,33 +14,20 @@ mutex Node::mtx;    // because it is static this tells the compiler it exists.
     @param new_type type of node it is, based on the enum list.    
 */
 Node::Node(int new_type, int id){
-    cout << "[INFO][NODE]:\t Entered Node::Node(int)." << endl;
-    
-    num_nodes++;
+    cout << "[INFO][NODE]: Entered Node::Node(int)." << endl;
     
     output_func = 0;
 	type = new_type;
     node_id = id;
-
-    std::ofstream exoAIStats;
-    exoAIStats.open("exoAIStats.txt", ios::out | ios::app);
     
-    exoAIStats << "Number of Species: " << num_species << endl;
-    exoAIStats << "Number of Networks: " << num_networks << endl;
-    exoAIStats << "Number of Nodes: " << num_nodes << endl;
-    exoAIStats << "Number of Genes: " << num_genes << endl;
-    
-    exoAIStats.close();
-
-    cout << "[INFO][NODE]:\t Exiting Node::Node(int)." << endl;
+    cout << "[INFO][NODE]: Exiting Node::Node(int)." << endl;
 }
 
 /** Destructor dealocates memory from the heap related to this class.
 */
 Node::~Node(){
-    cout << "[INFO][NODE]:\t Entered Node::~Node()." << endl;
-    num_nodes--;
-    cout << "[INFO][NODE]:\t Exiting Node::~Node()." << endl;
+    cout << "[INFO][NODE]: Entered Node::~Node()." << endl;
+    cout << "[INFO][NODE]: Exiting Node::~Node()." << endl;
 }
 
 void Node::set_layer(int layer){
@@ -50,17 +37,18 @@ void Node::set_layer(int layer){
 /** My function doing something...
     @return thread* returns a pointer to a new thread.
 */
-thread* Node::spawn_thread(list<Gene *> genes){
-    cout << "[INFO][NODE]:\t Entered Node::spawn_thread()" << endl;
-    cout << "[INFO][NODE]:\t Exiting Node::spawn_thread()" << endl;
+thread* Node::spawn_thread(list<unique_ptr<Gene>> genes){
+    cout << "[INFO][NODE]: Entered Node::spawn_thread()" << endl;
+    cout << "[INFO][NODE]: Exiting Node::spawn_thread()" << endl;
+
     return new thread(&Node::out_func, this, genes);
 }
 
 /** Calculates the value of the node
  *  based on the forward propagation function.
 */
-void Node::out_func(list<Gene *> genes){
-    cout << "[INFO][NODE]:\t Entered Node::out_func()" << endl;
+void Node::out_func(list<unique_ptr<Gene>> genes){
+    cout << "[INFO][NODE]: Entered Node::out_func()" << endl;
 
     std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
 
@@ -72,19 +60,18 @@ void Node::out_func(list<Gene *> genes){
             total += (*it)->get_input_node()->get_outputfunc() * (*it)->get_weight();
 
         total += get_bias();
-        set_outputfunc(total);      // problem in seg fault lies here
-                                // goes out of scope mutex is unlocked others try to acces the same data, seg fault
+        set_outputfunc(total);      // problem in seg fault lies here goes out of scope mutex is unlocked others try to acces the same data, seg fault
     }
 
-    cout << "[INFO][NODE]:\t Exiting Node::out_func()." << endl;
+    cout << "[INFO][NODE]: Exiting Node::out_func()." << endl;
 }
 
 /** Returns the node identification number.
     @return int identification number
 */
 int Node::get_nodeid() const{
-    cout << "[INFO][NODE]:\t Entered Node::get_nodeid()." << endl;
-    cout << "[INFO][NODE]:\t Exiting Node::get_nodeid()." << endl;
+    cout << "[INFO][NODE]: Entered Node::get_nodeid()." << endl;
+    cout << "[INFO][NODE]: Exiting Node::get_nodeid()." << endl;
    
 	return node_id;
 }
@@ -93,20 +80,20 @@ int Node::get_nodeid() const{
  *  @return int type
 */
 int Node::get_type() const{
-    cout << "[INFO][NODE]:\t Entered Node::get_type()." << endl;
-    cout << "[INFO][NODE]:\t Exiting Node::get_type()." << endl;
-       return type;
-	 
+    cout << "[INFO][NODE]: Entered Node::get_type()." << endl;
+    cout << "[INFO][NODE]: Exiting Node::get_type()." << endl;
+    
+    return type; 
 }
 
 /** Returns the layer.
  * @return int type
  */ 
 int Node::get_layer() const{
-    cout << "[INFO][NODE]:\t Entered Node::get_layer()." << endl;
-    cout << "[INFO][NODE]:\t Exiting Node::get_layer()." << endl;
+    cout << "[INFO][NODE]: Entered Node::get_layer()." << endl;
+    cout << "[INFO][NODE]: Exiting Node::get_layer()." << endl;
    
-	    return layer;	 
+	return layer;	 
 }
 
 /** Returns the ouput value of a node
@@ -114,8 +101,8 @@ int Node::get_layer() const{
     @return float output value of the node
 */
 float Node::get_outputfunc() const{
-    cout << "[INFO][NODE]:\t Entered Node::get_outputfunc()." << endl;
-    cout << "[INFO][NODE]:\t Exiting Node::get_outputfunc()." << endl;
+    cout << "[INFO][NODE]: Entered Node::get_outputfunc()." << endl;
+    cout << "[INFO][NODE]: Exiting Node::get_outputfunc()." << endl;
    
 	return output_func; 
 }
@@ -124,16 +111,18 @@ float Node::get_outputfunc() const{
     @param num the number for the output_func
 */
 void Node::set_outputfunc(float num){
-    cout << "[INFO][NODE]:\t Entered Node::set_outputfunc(float)." << endl;
+    cout << "[INFO][NODE]: Entered Node::set_outputfunc(float)." << endl;
+
     output_func = num;
-    cout << "[INFO][NODE]:\t Exiting Node::set_outputfunc(float)." << endl;
+
+    cout << "[INFO][NODE]: Exiting Node::set_outputfunc(float)." << endl;
 }
 
 /** Finds the layer the node is located in, 
  *  if it is a hidden node.
 */
-void Node::find_layer(list<Gene *> genes){   // the logic in this function seems iffy check it later
-    cout << "[INFO][NODE]:\t Entered Node::find_layer(list<Gene*>)." << endl;
+void Node::find_layer(list<unique_ptr<Gene>> genes){   // the logic in this function seems iffy check it later
+    cout << "[INFO][NODE]: Entered Node::find_layer(list<Gene*>)." << endl;
    
     bool allInput = true;
     int maxLayer = 0;
@@ -151,16 +140,17 @@ void Node::find_layer(list<Gene *> genes){   // the logic in this function seems
     
     if (allInput)
         layer = 1;
-else layer = maxLayer + 1;
+    else layer = maxLayer + 1;
 
-    cout << "[INFO][NODE]:\t Exiting Node::find_layer(list<Gene*>)." << endl;
+    cout << "[INFO][NODE]: Exiting Node::find_layer(list<Gene*>)." << endl;
 }
 
 /** Returns the bias.
  * @return float output value of bias.
  */ 
 float Node::get_bias() const{
-    cout << "[INFO][NODE]:\t Entered Node::get_bias()." << endl;
-    cout << "[INFO][NODE]:\t Exiting Node::get_bias()." << endl;
+    cout << "[INFO][NODE]: Entered Node::get_bias()." << endl;
+    cout << "[INFO][NODE]: Exiting Node::get_bias()." << endl;
+    
     return bias;
 }

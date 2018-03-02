@@ -6,8 +6,6 @@ make
 rm info/exoAIStats.txt
 touch info/exoAIStats.txt
 
-gnome-terminal -e 'tail -f info/exoAIStats.txt'
-gnome-terminal -e 'tail -f info/info_proc.txt'
 gnome-terminal -e 'watch -n 1 free -m'
 
 #mpirun -np <number of processors> ./<executable>
