@@ -47,19 +47,29 @@ Network::~Network(){
         out_nodes = NULL;
         cout << "[INFO][NETWORK]: Dealocated out_nodes." << endl;
     }
-    if(threads.size() != 0){
-        threads.clear();
-        cout << "[INFO][NETWORK]: Dealocated threads." << endl;
+    for(list<thread *>::iterator it = threads.begin(); it != threads.end(); it++){
+        if(*it != NULL){
+            delete [] *it;
+            *it = NULL;
+        }   
     }
+    threads.clear();
    
-    if(hidden_nodes.size() != 0){
-        cout << "[INFO][NETWORK]: Dealocated hidden_nodes." << endl;
-        hidden_nodes.clear();
+    for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); it++){
+        if(*it != NULL){
+            delete [] *it;
+            *it = NULL;
+        }
     }
-    if(genes.size() != 0){
-        cout << "[INFO][NETWORK]: Dealocated genes." << endl;
-        genes.clear();
+    hidden_nodes.clear();
+
+    for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); it++){
+        if(*it != NULL){
+            delete [] *it;
+            *it = NULL;
+        }
     }
+    genes.clear();
 
     cout << "[INFO][NETWORK]: Exiting Network::~Network()." << endl;
 }
@@ -135,28 +145,22 @@ void Network::set_compatibility_distance(float newcomp_distance){
     @param onode* pointer to the output node usually the node that 
                     calls this function.
 */
-void Network::add_gene(unique_ptr<Node> snode, unique_ptr<Node> onode){
+void Network::add_gene(Node * snode, Node * onode){
     cout << "[INFO][NETWORK]: Entered Network::add_gene(Node*, Node*)" << endl;
-    
-    unique_ptr<Gene> instance;
 
     if(snode != NULL && onode != NULL){
-        for(list<unique_ptr<Gene>>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
+        for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
             if((*it)->get_in_node() == snode->get_nodeid() && (*it)->get_out_node() == onode->get_nodeid()){
-                instance.reset(new Gene(snode, onode, (*it)->get_inov_id()));
-                genes.push_back(instance);
+                genes.push_back(new Gene(snode, onode, (*it)->get_inov_id()));
                 return;
             }
         }
 
-        instance.reset(new Gene(snode, onode, innovation_number));
-        genes.push_back(instance);
-        unique_genes.push_back(instance);
+        genes.push_back(new Gene(snode, onode, innovation_number));
+        unique_genes.push_back(new Gene(snode, onode, innovation_number));
 
         innovation_number++;
     }
-
-    instance.reset();
     
     cout << "[INFO][NETOWRK]: Exiting Network::add_gene(Node*, Node*)" << endl;
 }
@@ -187,10 +191,7 @@ bool Network::rand_node(){
     cout << "[INFO][NETWORK]: Entered Network::rand_node()." << endl;
 
     num_nodes++;
-
-    unique_ptr<Node> instance(new Node(hidden, num_nodes));
-    hidden_nodes.push_back(instance);
-    instance.reset();
+    hidden_nodes.push_back(new Node(hidden, num_nodes));
     
     cout << "[INFO][NETWORK]: Exiting Network::rand_node()." << endl;
 }
@@ -203,50 +204,43 @@ bool Network::rand_connection(){
     int node_one = rand() % num_nodes + 1;
     int node_two = rand() % num_nodes + 1;
 
-    unique_ptr<Node> nodeOne, nodeTwo;
+    Node * nodeOne, *nodeTwo;
 
     for(int index = 0; index < NUM_INPUTS; index++){
         if(in_nodes[index]->get_nodeid() == node_one){
-            nodeOne.reset(in_nodes[index]);
+            nodeOne = in_nodes[index];
         }
         else if(in_nodes[index]->get_nodeid() == node_two){
-            nodeTwo.reset(in_nodes[index]);
+            nodeTwo = in_nodes[index];
         }
     }
-    for(list<unique_ptr<Node>>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); ++it){
+    for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); ++it){
         if((*it)->get_nodeid() == node_one){
-            nodeOne = move(*it);
+            nodeOne = *it;
         }
         else if((*it)->get_nodeid() == node_two){
-            nodeTwo = move(*it);
+            nodeTwo = *it;
         }
     }
     for(int index = 0; index < NUM_OUTPUTS; index++){
         if(out_nodes[index]->get_nodeid() == node_one){
-            nodeOne.reset(out_nodes[index]);
+            nodeOne = out_nodes[index];
         }
         else if(out_nodes[index]->get_nodeid() == node_two){
-            nodeTwo.reset(out_nodes[index]);
+            nodeTwo = out_nodes[index];
         }
     }
 
-    unique_ptr<Gene> instance;
-
-    for(list<unique_ptr<Gene>>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
+    for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
         if((*it)->get_in_node() == node_one && (*it)->get_out_node() == node_two){
-            instance.reset(new Gene(nodeOne, nodeTwo, (*it)->get_inov_id()))
-            genes.push_back(instance);
+            genes.push_back(new Gene(nodeOne, nodeTwo, (*it)->get_inov_id()));
             return true;
         }
     }
 
-    instance.reset(new Gene(nodeOne, nodeTwo, innovation_number))
-    genes.push_back(instance);
-    unique_genes.push_back(instance);
 
-    instance.reset();
-    nodeOne.reset();
-    nodeTwo.reset();
+    genes.push_back(new Gene(nodeOne, nodeTwo, innovation_number));
+    unique_genes.push_back(new Gene(nodeOne, nodeTwo, innovation_number));
 
     innovation_number++;
 
@@ -305,7 +299,7 @@ void Network::hidden_run(){
     if(hidden_nodes.size() > 0){
         hidden_nodes.sort(compare);
 
-        list<unique_ptr<Gene>> &copy_genes = genes;
+        list<Gene *> &copy_genes = genes;
 
         for (list<Node* >::iterator it = hidden_nodes.begin(); it != hidden_nodes.end();++it){
             (*it)->out_func(copy_genes);
@@ -360,7 +354,7 @@ Node** Network::get_input() const{
 /** Returns the list of gene pointers.
  * @return list<Gene *>
  */ 
-list<unique_ptr<Gene>>* Network::get_genes(){
+list<Gene *>* Network::get_genes(){
     cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
 
@@ -372,7 +366,7 @@ list<unique_ptr<Gene>>* Network::get_genes(){
 /** Returns the hidden nodes.
  * @return list<Node *>
  */ 
-list<unique_ptr<Node>>* Network::get_hiddennodes(){
+list<Node *>* Network::get_hiddennodes(){
     cout << "[INFO][NETWORK]: Entered Network::get_hiddennnodes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_hiddennnodes()." << endl;
     

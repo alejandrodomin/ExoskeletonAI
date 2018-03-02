@@ -13,7 +13,6 @@
 #include <mutex>
 #include <thread>
 #include <list>
-#include <memory>
 
 #include <gene.hpp>
 class Gene;
@@ -37,8 +36,8 @@ public:
 
     void set_layer(int);
     void set_outputfunc(float);
-    void out_func(list<unique_ptr<Gene>>);
-    void find_layer(list<unique_ptr<Gene>>);
+    void out_func(list<Gene *>);
+    void find_layer(list<Gene *>);
 
     int get_layer() const;
     int get_type() const;
@@ -47,6 +46,6 @@ public:
     float get_bias() const;
     float get_outputfunc() const;
 
-    thread* spawn_thread(list<unique_ptr<Gene>>);
+    thread* spawn_thread(list<Gene *>);
 };
 #endif

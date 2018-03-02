@@ -24,10 +24,21 @@ Ecosystem::Ecosystem(int num_species, int num_nets){
 Ecosystem::~Ecosystem(){
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::~Ecosystem()." << endl;
 
-  if(organisms.size() > 0)
-    organisms.clear();
-  if(strongest.size() > 0)
-    strongest.clear();
+  for(list<Species *>::iterator it = organisms.begin(); it != organisms.end(); it++){
+    if(*it != NULL){
+      delete [] *it;
+      *it = NULL;
+    }
+  }
+  organisms.clear();
+
+  for(list<Network *>::iterator it = strongest.begin(); it != strongest.end(); it++){
+    if(*it != NULL){
+      delete [] *it;
+      *it = NULL;
+    }
+  }
+  strongest.clear();
 
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::~Ecosystem()." << endl;
 }
@@ -76,7 +87,7 @@ bool Ecosystem::live(){
   return true;
 }
 
-bool Ecosystem::kill_unfit(list<unique_ptr<Network>> *unfit){
+bool Ecosystem::kill_unfit(list<Network *> *unfit){
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::kill_unfit(list<Network*>*)." << endl;
 
   if(unfit->size() > 0)
@@ -99,14 +110,14 @@ bool Ecosystem::kill_unfit(list<unique_ptr<Network>> *unfit){
   return true;
 }
 
-bool Ecosystem::compareGenes(const unique_ptr<Gene> one, const unique_ptr<Gene> two){
+bool Ecosystem::compareGenes(const Gene * one, const Gene * two){
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
 
   return one->get_inov_id() < two->get_inov_id();
 }
 
-bool Ecosystem::compareNets(const unique_ptr<Network> one, const unique_ptr<Network> two){ // sorts less fit first to more fit later.
+bool Ecosystem::compareNets(const Network * one, const Network * two){ // sorts less fit first to more fit later.
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareNets(const Network *, const Network *)." << endl;
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareNets(const Network *, const Network *)." << endl;
 

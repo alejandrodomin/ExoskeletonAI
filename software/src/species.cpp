@@ -34,6 +34,7 @@ Species::~Species(){
             *it = NULL;
         }
     }
+    networks.clear();
 
     cout << "[INFO][SPECIES]: Exiting Species::~Species()." << endl;
 }
@@ -334,6 +335,6 @@ Network* Species::get_fittest_net(){
     return fittest_net;
 }
 
-list<unique_ptr<Network>>* Species::get_networks(){
+list<Network *>* Species::get_networks(){
     return &networks;
 }

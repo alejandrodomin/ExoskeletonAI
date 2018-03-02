@@ -37,7 +37,7 @@ void Node::set_layer(int layer){
 /** My function doing something...
     @return thread* returns a pointer to a new thread.
 */
-thread* Node::spawn_thread(list<unique_ptr<Gene>> genes){
+thread* Node::spawn_thread(list<Gene *> genes){
     cout << "[INFO][NODE]: Entered Node::spawn_thread()" << endl;
     cout << "[INFO][NODE]: Exiting Node::spawn_thread()" << endl;
 
@@ -47,7 +47,7 @@ thread* Node::spawn_thread(list<unique_ptr<Gene>> genes){
 /** Calculates the value of the node
  *  based on the forward propagation function.
 */
-void Node::out_func(list<unique_ptr<Gene>> genes){
+void Node::out_func(list<Gene *> genes){
     cout << "[INFO][NODE]: Entered Node::out_func()" << endl;
 
     std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
@@ -121,7 +121,7 @@ void Node::set_outputfunc(float num){
 /** Finds the layer the node is located in, 
  *  if it is a hidden node.
 */
-void Node::find_layer(list<unique_ptr<Gene>> genes){   // the logic in this function seems iffy check it later
+void Node::find_layer(list<Gene *> genes){   // the logic in this function seems iffy check it later
     cout << "[INFO][NODE]: Entered Node::find_layer(list<Gene*>)." << endl;
    
     bool allInput = true;

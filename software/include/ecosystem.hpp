@@ -2,7 +2,6 @@
 #define ECOSYSTEM_HPP
 
 #include <list>
-#include <memory>
 
 #include <common.hpp>
 #include <species.hpp>
@@ -13,8 +12,8 @@ using namespace std;
 
 class Ecosystem{
 private:
-   list<unique_ptr<Species>> organisms;
-   list<unique_ptr<Network>> strongest;
+   list<Species *> organisms;
+   list<Network *> strongest;
 protected:
 public:
    Ecosystem(int,int);
@@ -22,10 +21,10 @@ public:
 
    bool live();
 
-   bool kill_unfit(list<unique_ptr<Network>>*);
+   bool kill_unfit(list<Network *>*);
    
-   static bool compareGenes(const unique_ptr<Gene>, const unique_ptr<Gene>);
-   static bool compareNets(const unique_ptr<Network>, const unique_ptr<Network>);
+   static bool compareGenes(const Gene *, const Gene *);
+   static bool compareNets(const Network *, const Network *);
 
    Network* breed(Network *, Network *);
 };

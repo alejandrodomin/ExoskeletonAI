@@ -12,7 +12,6 @@
 #include <iostream>
 #include <thread>
 #include <list>
-#include <memory>
 
 #include <node.hpp>
 #include <gene.hpp>
@@ -28,13 +27,13 @@ private:
     float walk_distance;  
     float compatibility_distance;/**<Measures how compatible a set of nodes is.*/
 
-    list<unique_ptr<Gene>> genes; /**<List for all of the genes associated with the node. */
+    list<Gene *> genes; /**<List for all of the genes associated with the node. */
 
     Node **in_nodes; /**<the input nodes*/
     Node **out_nodes; /**<output nodes*/
-    list<unique_ptr<Node>> hidden_nodes; /**<hidden nodes*/
+    list<Node *> hidden_nodes; /**<hidden nodes*/
 
-    list<unique_ptr<thread>> threads;/**<A double pointer to the threads that have been created.*/  
+    list<thread *> threads;/**<A double pointer to the threads that have been created.*/  
 protected:
     void input_run();
     void hidden_run();
@@ -49,7 +48,7 @@ public:
     void calculate_fit();
     void add_num_nodes(int);
     void set_compatibility_distance(float);
-    void add_gene(unique_ptr<Node>, unique_ptr<Node>);
+    void add_gene(Node *, Node *);
 
     int get_fitness() const;
     int get_num_nodes() const;
@@ -61,9 +60,9 @@ public:
 
     Node** get_input() const;       // names for these can be changed later
 
-    list<unique_ptr<Gene>>* get_genes(); 
+    list<Gene *>* get_genes(); 
 
-    list<unique_ptr<Node>>* get_hiddennodes(); 
+    list<Node *>* get_hiddennodes(); 
 };
 
 #endif

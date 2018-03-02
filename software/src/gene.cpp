@@ -9,7 +9,7 @@ using namespace std;
 /** Gene constructor, creates a Gene
  *  that knows which two nodes it ties together.
 */
-Gene::Gene(unique_ptr<Node> input_node, unique_ptr<Node> output_node, int inov_number){
+Gene::Gene(Node * input_node, Node * output_node, int inov_number){
     cout << "[INFO][GENE]: Entered Gene::Gene(Node *, Node *)." << endl;
 
     if(input_node != NULL && output_node != NULL){

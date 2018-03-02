@@ -3,7 +3,6 @@
 
 #include <fstream>
 #include <list>
-#include <memory>
 
 #include <gene.hpp>
 
@@ -16,6 +15,6 @@ static int innovation_number;
 enum gyro {gyroX = 0, gyroY, gyroZ};   /**<Enumerated list for the x,y, and z positions for the gyro. */
 enum type {input = 0, hidden, output}; /**<Enumerated list for the different kinds of nodes.*/ 
 
-static std::list<unique_ptr<Gene>> unique_genes;
+static std::list<Gene *> unique_genes;
 
 #endif

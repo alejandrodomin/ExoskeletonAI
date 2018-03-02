@@ -22,9 +22,9 @@ int main(int argc, char **argv, char **env){
   bool alive = true;
   Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
 
-  while(alive){
+  // while(alive){
     alive = life->live();
-  }
+  // }
 
   if(life != NULL){
     delete life;
