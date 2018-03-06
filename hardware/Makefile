@@ -24,7 +24,6 @@ $(LIB)liblsm9ds1.so: LSM9DS1.o
 	mkdir -p $(LIB)
 	$(CC) -I$(INCLUDE) -Wall -O2 -fexceptions $(SRC)LSM9DS1.cpp -lwiringPi -shared -o $(LIB)liblsm9ds1.so
 
-
 LSM9DS1_c_wrapper.o: $(SRC)LSM9DS1_c_wrapper.cpp
 	$(CC) -I$(INCLUDE) -Wall -O2 -fPIC -c -lwiringPi $(SRC)LSM9DS1_c_wrapper.cpp -o LSM9DS1_c_wrapper.o
 
@@ -35,7 +34,7 @@ $(LIB)liblsm9ds1cwrapper.so: LSM9DS1_c_wrapper.o LSM9DS1.o
 
 
 clean:
-	rm -f *.o $(LIB)liblsm9ds1.a $(LIB)liblsm9ds1.so
+	rm -f *.o $(LIB)liblsm9ds1.a $(LIB)liblsm9ds1.so gyro
 
 
 install:
