@@ -34,7 +34,7 @@ $(LIB)liblsm9ds1cwrapper.so: LSM9DS1_c_wrapper.o LSM9DS1.o
 
 
 clean:
-	rm -f *.o $(LIB)liblsm9ds1.a $(LIB)liblsm9ds1.so
+	rm -f *.o $(LIB)liblsm9ds1.a $(LIB)liblsm9ds1.so gyro
 
 
 install:
