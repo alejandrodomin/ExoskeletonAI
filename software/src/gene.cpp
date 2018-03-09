@@ -9,16 +9,14 @@ using namespace std;
 /** Gene constructor, creates a Gene
  *  that knows which two nodes it ties together.
 */
-Gene::Gene(Node * input_node, Node * output_node, int inov_number){
+Gene::Gene(Node *input_node, Node *output_node, int inov_number){
     cout << "[INFO][GENE]: Entered Gene::Gene(Node *, Node *)." << endl;
 
-    if(input_node != NULL && output_node != NULL){
-        this->input_node = input_node;
-        this->output_node = output_node;
+    this->input_node = input_node;
+    this->output_node = output_node;
     
-        in_node = input_node->get_nodeid();
-        out_node = output_node->get_nodeid();
-    }
+    in_node = input_node->get_nodeid();
+    out_node = output_node->get_nodeid();
 
     innovation_number = inov_number;
     weight = ((float)(rand() % 100 + 1)) / 100.0;

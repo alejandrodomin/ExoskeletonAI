@@ -13,6 +13,7 @@ Species::Species(){
     cout << "[INFO][SPECIES]: Entered Species::Species()." << endl;
     
     stale = 0;
+    fit_stale = 0;
     max_fitness = 0;
 
     cout << "[INFO][SPECIES]: Exiting Species::Species()." << endl;
@@ -25,12 +26,12 @@ Species::~Species(){
     cout << "[INFO][SPECIES]: Entered Species::~Species()." << endl; 
 
     if(fittest_net != NULL){
-        delete [] fittest_net;
+        delete fittest_net;
         fittest_net = NULL;
     }
-    for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
+    for(list<Network *>::iterator it = this->networks.begin(); it != this->networks.end(); it++){
         if(*it != NULL){
-            delete [] *it;
+            delete *it;
             *it = NULL;
         }
     }
@@ -120,16 +121,6 @@ bool Species::test_species(){
     }
 
     cout << "[INFO][SPECIES]: Exiting Species::test_species()." << endl;
-}
-
-/** This function returns a new species pointer.
- * @return Species* new Species()
- */ 
-Species* Species::new_species(){
-    cout << "[INFO][SPECIES]: Entered Species::new_species()." << endl;
-    cout << "[INFO][SPECIES]: Exiting Species::new_species()." << endl;
-
-    return new Species();
 }
 
 /** This function computes biggestnet1 and biggestnet2.
@@ -328,7 +319,7 @@ float Species::weight_diff_match_genes(Network *net1, Network *net2){
     }
 
     cout << "[INFO][SPECIES]: Exiting Species::weight_diff_math_genes(Network*,Network*)." << endl;
-    return average; 
+    return average;
 }   
 
 Network* Species::get_fittest_net(){

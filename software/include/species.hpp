@@ -41,9 +41,7 @@ public:
     bool is_stale();
     bool test_species();
 
-    Network* get_fittest_net();  
-
-    Species* new_species();
+    Network* get_fittest_net();
 
     list<Network *>* get_networks();
 };

@@ -31,13 +31,14 @@ private:
     static mutex mtx;  /**<Locks the functions that the threads will be accessing to avoid seg faults. */
 protected:
 public:
+    Node();
     Node(int,int);
     ~Node();
 
-    void set_layer(int);
-    void set_outputfunc(float);
-    void out_func(list<Gene *>);
-    void find_layer(list<Gene *>);
+    bool set_layer(int);
+    bool set_outputfunc(float);
+    bool out_func(list<Gene *>);
+    bool find_layer(list<Gene *>);
 
     int get_layer() const;
     int get_type() const;

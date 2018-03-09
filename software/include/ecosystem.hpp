@@ -21,7 +21,7 @@ public:
 
    bool live();
 
-   bool kill_unfit(list<Network *>*);
+   bool kill_unfit(list<Network *> *);
    
    static bool compareGenes(const Gene *, const Gene *);
    static bool compareNets(const Network *, const Network *);

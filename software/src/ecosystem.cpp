@@ -26,7 +26,7 @@ Ecosystem::~Ecosystem(){
 
   for(list<Species *>::iterator it = organisms.begin(); it != organisms.end(); it++){
     if(*it != NULL){
-      delete [] *it;
+      delete *it;
       *it = NULL;
     }
   }
@@ -34,7 +34,7 @@ Ecosystem::~Ecosystem(){
 
   for(list<Network *>::iterator it = strongest.begin(); it != strongest.end(); it++){
     if(*it != NULL){
-      delete [] *it;
+      delete *it;
       *it = NULL;
     }
   }
@@ -68,12 +68,13 @@ bool Ecosystem::live(){
     itr = (*species_iter)->get_networks()->begin();
     for(int index = 0; index < size_of_nets; index++){
       next_itr = itr;
+
       if(++next_itr != (*species_iter)->get_networks()->end()){
-        child = breed(*itr, *next_itr);
-        if(child != NULL)
-          (*species_iter)->get_networks()->push_back(child);
-        }
-        itr++;
+        child = breed(*itr, *next_itr);  
+        (*species_iter)->add_network(child);
+      }
+
+      itr++;
     }
 
     kill_unfit((*species_iter)->get_networks());
@@ -102,22 +103,27 @@ bool Ecosystem::kill_unfit(list<Network *> *unfit){
   for(int index = 0; index < size; index++){
     to++;
   }
-
-  unfit->erase(from,to);
+  
+  for(list<Network *>::iterator it = from; it != to; it++){
+    if(*it != NULL){
+      delete *it;
+      *it = NULL;
+    } 
+  }
 
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::kill_unfit(list<Network*>*)." << endl;
 
   return true;
 }
 
-bool Ecosystem::compareGenes(const Gene * one, const Gene * two){
+bool Ecosystem::compareGenes(const Gene *one, const Gene *two){
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
 
   return one->get_inov_id() < two->get_inov_id();
 }
 
-bool Ecosystem::compareNets(const Network * one, const Network * two){ // sorts less fit first to more fit later.
+bool Ecosystem::compareNets(const Network *one, const Network *two){ // sorts less fit first to more fit later.
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareNets(const Network *, const Network *)." << endl;
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareNets(const Network *, const Network *)." << endl;
 
@@ -128,23 +134,22 @@ Network* Ecosystem::breed(Network *one, Network *two){
 
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::breed(Network *, Network *)." << endl;
    
-  if(one == NULL || two == NULL)
-    return NULL;
+  Network *newNet = new Network();
 
-  if(one->get_genes() != NULL && two->get_genes() != NULL){
-    if(one->get_genes()->size() > 1 && two->get_genes()->size() > 1){
-      one->get_genes()->sort(compareGenes);
-      two->get_genes()->sort(compareGenes);
-    }
-    else return NULL;
+  if(one == NULL || two == NULL)
+    return newNet;
+
+
+  if(one->get_genes()->size() > 1 && two->get_genes()->size() > 1){
+    one->get_genes()->sort(compareGenes);
+    two->get_genes()->sort(compareGenes);
   }
-  else return NULL;
+  else return newNet;
 
   list<Gene *>::iterator itone = one->get_genes()->begin();
   list<Gene *>::iterator ittwo = two->get_genes()->begin();
 
   int randNum;
-  Network *newNet = new Network();
 
   while(itone != one->get_genes()->end() && ittwo != two->get_genes()->end()){
     randNum = rand() % COIN_FLIP;

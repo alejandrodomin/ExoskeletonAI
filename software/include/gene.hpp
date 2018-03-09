@@ -28,6 +28,7 @@ private:
     Node* output_node; /**<A pointer to the Node that is connected to the you_node. */
 protected:
 public:
+    Gene();
     Gene(Node*,Node*,int);
     ~Gene();
 

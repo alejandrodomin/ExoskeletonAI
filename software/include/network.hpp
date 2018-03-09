@@ -29,8 +29,8 @@ private:
 
     list<Gene *> genes; /**<List for all of the genes associated with the node. */
 
-    Node **in_nodes; /**<the input nodes*/
-    Node **out_nodes; /**<output nodes*/
+    list<Node *> in_nodes; /**<the input nodes*/
+    list<Node *> out_nodes; /**<output nodes*/
     list<Node *> hidden_nodes; /**<hidden nodes*/
 
     list<thread *> threads;/**<A double pointer to the threads that have been created.*/  
@@ -56,12 +56,11 @@ public:
     bool rand_node();
     bool rand_connection();
       
-    static bool compare(Node *, Node *);
-
-    Node** get_input() const;       // names for these can be changed later
+    static bool compare(const Node *, const Node *);
 
     list<Gene *>* get_genes(); 
 
+    list<Node *>* get_input();       // names for these can be changed later
     list<Node *>* get_hiddennodes(); 
 };
 

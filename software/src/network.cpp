@@ -12,19 +12,16 @@ using namespace std;
  */
 Network::Network(){
     cout << "[INFO][NETWORK]: Entered Network::Network()." << endl;
-    num_nodes = 0;
+    crashes = 0;
     fitness = 0;
+    num_nodes = 0;
 
-    in_nodes  = new Node*[NUM_INPUTS];
     for(int i = 0; i < NUM_INPUTS; i++){
-        num_nodes++;
-        in_nodes[i] = new Node(input, num_nodes);
+        in_nodes.push_back(new Node(input, num_nodes));
     }
 
-    out_nodes = new Node*[NUM_OUTPUTS];
     for(int i = 0; i < NUM_INPUTS; i++){
-        num_nodes++;
-        out_nodes[i] = new Node(output, num_nodes);
+        out_nodes.push_back(new Node(output, num_nodes));
     }
 
     cout << "[INFO][NETWORK]: Exiting Network::Network()." << endl;
@@ -37,19 +34,25 @@ Network::Network(){
 Network::~Network(){
     cout << "[INFO][NETWORK]: Entered Network::~Network()." << endl;
 
-    if(in_nodes != NULL){
-        delete [] in_nodes;
-        in_nodes = NULL;
-        cout << "[INFO][NETWORK]: Dealocated in_nodes." << endl;
+    for(list<Node *>::iterator it = in_nodes.begin(); it != in_nodes.end(); it++){
+        if(*it != NULL){
+            delete *it;
+            *it = NULL;
+        }   
     }
-    if(out_nodes != NULL){
-        delete [] out_nodes;
-        out_nodes = NULL;
-        cout << "[INFO][NETWORK]: Dealocated out_nodes." << endl;
+    in_nodes.clear();
+
+    for(list<Node *>::iterator it = out_nodes.begin(); it != out_nodes.end(); it++){
+        if(*it != NULL){
+            delete *it;
+            *it = NULL;
+        }   
     }
+    out_nodes.clear();
+
     for(list<thread *>::iterator it = threads.begin(); it != threads.end(); it++){
         if(*it != NULL){
-            delete [] *it;
+            delete *it;
             *it = NULL;
         }   
     }
@@ -57,7 +60,7 @@ Network::~Network(){
    
     for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); it++){
         if(*it != NULL){
-            delete [] *it;
+            delete *it;
             *it = NULL;
         }
     }
@@ -65,7 +68,7 @@ Network::~Network(){
 
     for(list<Gene *>::iterator it = genes.begin(); it != genes.end(); it++){
         if(*it != NULL){
-            delete [] *it;
+            delete *it;
             *it = NULL;
         }
     }
@@ -145,22 +148,20 @@ void Network::set_compatibility_distance(float newcomp_distance){
     @param onode* pointer to the output node usually the node that 
                     calls this function.
 */
-void Network::add_gene(Node * snode, Node * onode){
+void Network::add_gene(Node *snode, Node *onode){
     cout << "[INFO][NETWORK]: Entered Network::add_gene(Node*, Node*)" << endl;
 
-    if(snode != NULL && onode != NULL){
-        for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
-            if((*it)->get_in_node() == snode->get_nodeid() && (*it)->get_out_node() == onode->get_nodeid()){
-                genes.push_back(new Gene(snode, onode, (*it)->get_inov_id()));
-                return;
-            }
+    for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
+        if((*it)->get_in_node() == snode->get_nodeid() && (*it)->get_out_node() == onode->get_nodeid()){
+            genes.push_back(new Gene(snode, onode, (*it)->get_inov_id()));
+            return;
         }
-
-        genes.push_back(new Gene(snode, onode, innovation_number));
-        unique_genes.push_back(new Gene(snode, onode, innovation_number));
-
-        innovation_number++;
     }
+
+    genes.push_back(new Gene(snode, onode, innovation_number));
+    unique_genes.push_back(new Gene(snode, onode, innovation_number));
+
+    innovation_number++;
     
     cout << "[INFO][NETOWRK]: Exiting Network::add_gene(Node*, Node*)" << endl;
 }
@@ -204,14 +205,14 @@ bool Network::rand_connection(){
     int node_one = rand() % num_nodes + 1;
     int node_two = rand() % num_nodes + 1;
 
-    Node * nodeOne, *nodeTwo;
+    Node *nodeOne, *nodeTwo;
 
-    for(int index = 0; index < NUM_INPUTS; index++){
-        if(in_nodes[index]->get_nodeid() == node_one){
-            nodeOne = in_nodes[index];
+    for(list<Node *>::iterator it = in_nodes.begin(); it != in_nodes.end(); ++it){
+        if((*it)->get_nodeid() == node_one){
+            nodeOne = *it;
         }
-        else if(in_nodes[index]->get_nodeid() == node_two){
-            nodeTwo = in_nodes[index];
+        else if((*it)->get_nodeid() == node_two){
+            nodeTwo = *it;
         }
     }
     for(list<Node *>::iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); ++it){
@@ -222,12 +223,12 @@ bool Network::rand_connection(){
             nodeTwo = *it;
         }
     }
-    for(int index = 0; index < NUM_OUTPUTS; index++){
-        if(out_nodes[index]->get_nodeid() == node_one){
-            nodeOne = out_nodes[index];
+    for(list<Node *>::iterator it = out_nodes.begin(); it != out_nodes.end(); ++it){
+        if((*it)->get_nodeid() == node_one){
+            nodeOne = *it;
         }
-        else if(out_nodes[index]->get_nodeid() == node_two){
-            nodeTwo = out_nodes[index];
+        else if((*it)->get_nodeid() == node_two){
+            nodeTwo = *it;
         }
     }
 
@@ -237,7 +238,6 @@ bool Network::rand_connection(){
             return true;
         }
     }
-
 
     genes.push_back(new Gene(nodeOne, nodeTwo, innovation_number));
     unique_genes.push_back(new Gene(nodeOne, nodeTwo, innovation_number));
@@ -255,25 +255,27 @@ bool Network::rand_connection(){
  * @param Node *two second node
  * @return bool
  */ 
-bool Network::compare(Node *one,Node *two){
+bool Network::compare(const Node *one, const Node *two){
     return one->get_layer() < two->get_layer();
 }
-
 /** Network input_run spawns threads that run the input nodes.
  */ 
 void Network::input_run(){
     cout << "[INFO][NETWORK]: Entering Network::input_run()" << endl;
 
-    list<Gene *> &copy_genes = genes;
-
-    for(int index = 0; index < NUM_INPUTS; index++){
-        threads.push_back(in_nodes[index]->spawn_thread(copy_genes));
+    for(list<Node *>::iterator itr = in_nodes.begin(); itr != in_nodes.end(); itr++){
+        threads.push_back((*itr)->spawn_thread(genes));
 
         if(threads.size() >= MAX_THREADS){
             for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
-                if((*it)->joinable())
+                if((*it)->joinable()){
                     cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                     (*it)->join();
+                    if(*it != NULL){
+                        delete *it;
+                        *it = NULL;
+                    }
+                }
             }
             threads.clear();
         }
@@ -281,9 +283,14 @@ void Network::input_run(){
 
     if(threads.size() >= 0){
         for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
-            if((*it)->joinable())
+            if((*it)->joinable()){
                 cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                 (*it)->join();
+                if(*it != NULL){
+                    delete *it;
+                    *it = NULL;
+                }
+            }
         }
         threads.clear();
     }
@@ -313,17 +320,20 @@ void Network::hidden_run(){
  */ 
 void Network::output_run(){
     cout << "[INFO][NETWORK]: Entered Network::output_run()." << endl;
-    
-    list<Gene *> &copy_genes = genes;
 
-    for(int index = 0; index < NUM_OUTPUTS; index++){
-        threads.push_back(out_nodes[index]->spawn_thread(copy_genes));
+    for(list<Node *>::iterator itr = out_nodes.begin(); itr != out_nodes.end(); itr++){
+        threads.push_back((*itr)->spawn_thread(genes));
 
         if(threads.size() >= MAX_THREADS){
             for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
-                if((*it)->joinable())
+                if((*it)->joinable()){
                     cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                     (*it)->join();
+                    if(*it != NULL){
+                        delete *it;
+                        *it = NULL;
+                    }
+                }
             }
             threads.clear();
         }
@@ -331,9 +341,14 @@ void Network::output_run(){
 
     if(threads.size() >= 0){
         for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
-            if((*it)->joinable())
+            if((*it)->joinable()){
                 cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                 (*it)->join();
+                if(*it != NULL){
+                    delete *it;
+                    *it = NULL;
+                }
+            }
         }
         threads.clear();
     }
@@ -344,11 +359,11 @@ void Network::output_run(){
 /** Returns the number of input nodes.
  * @return Node**
  */ 
-Node** Network::get_input() const{
+list<Node *>* Network::get_input(){
     cout << "[INFO][NETWORK]: Entered Network::get_input()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_input()." << endl;
 
-    return in_nodes;
+    return &in_nodes;
 }
 
 /** Returns the list of gene pointers.
@@ -358,9 +373,7 @@ list<Gene *>* Network::get_genes(){
     cout << "[INFO][NETWORK]: Entered Network::get_genes()." << endl;
     cout << "[INFO][NETWORK]: Exiting Network::get_genes()." << endl;
 
-    if(genes.size() > 0)
-        return &genes;
-    else return NULL;
+    return &genes;
 }
 
 /** Returns the hidden nodes.
