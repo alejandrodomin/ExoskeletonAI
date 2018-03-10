@@ -5,7 +5,7 @@ INC := include
 
 DEBUG = -g
 LFLAGS = -pthread
-CFLAGS = -Wfatal-errors -std=c++14
+CFLAGS = -Wfatal-errors -std=c++11
 
 PROJ = ExoSAI
 

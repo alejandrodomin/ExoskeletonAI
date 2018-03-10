@@ -55,8 +55,10 @@ bool Ecosystem::live(){
 
   for(list<Species *>::iterator species_iter= organisms.begin(); species_iter!= organisms.end(); ++species_iter){
     for(list<Network *>::iterator network_iter = (*species_iter)->get_networks()->begin(); network_iter != (*species_iter)->get_networks()->end(); ++network_iter){
-      (*network_iter)->run(); 
-      (*network_iter)->calculate_fit();
+      if(*network_iter != NULL){
+        (*network_iter)->run(); 
+        (*network_iter)->calculate_fit();
+      }
     }
 
     if((*species_iter)->is_stale())
@@ -126,8 +128,9 @@ bool Ecosystem::compareGenes(const Gene *one, const Gene *two){
 bool Ecosystem::compareNets(const Network *one, const Network *two){ // sorts less fit first to more fit later.
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareNets(const Network *, const Network *)." << endl;
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareNets(const Network *, const Network *)." << endl;
-
-  return one->get_fitness() < two->get_fitness();
+  if(one != NULL && two != NULL)
+    return one->get_fitness() < two->get_fitness();
+  else return false;
 }
 
 Network* Ecosystem::breed(Network *one, Network *two){

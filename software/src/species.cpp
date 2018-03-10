@@ -82,9 +82,11 @@ void Species::add_network(Network *net){
 bool Species::is_stale(){
     cout << "[INFO][SPECIES]: Entered Species::is_stale()." << endl;
     for(list<Network *>::iterator it = networks.begin(); it != networks.end(); ++it){
-        if((*it)->get_fitness() > max_fitness){
-            stale = 0;
-            return false;
+        if(*it != NULL){
+            if((*it)->get_fitness() > max_fitness){
+                stale = 0;
+                return false;
+            }
         }
     }
 

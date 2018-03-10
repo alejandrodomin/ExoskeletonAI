@@ -20,11 +20,14 @@ int main(int argc, char **argv, char **env){
   cout << "[INFO][MAIN]: Entered main." << endl;
 
   bool alive = true;
+  int numRuns = 0;
   Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
 
-  // while(alive){
+  while(alive){
+    cout << "The program has run " << numRuns << " times." << endl;
     alive = life->live();
-  // }
+    numRuns++;
+  }
 
   if(life != NULL){
     delete life;

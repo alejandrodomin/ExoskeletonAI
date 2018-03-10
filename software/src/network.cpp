@@ -262,7 +262,7 @@ bool Network::compare(const Node *one, const Node *two){
  */ 
 void Network::input_run(){
     cout << "[INFO][NETWORK]: Entering Network::input_run()" << endl;
-
+     
     for(list<Node *>::iterator itr = in_nodes.begin(); itr != in_nodes.end(); itr++){
         threads.push_back((*itr)->spawn_thread(genes));
 
@@ -294,7 +294,7 @@ void Network::input_run(){
         }
         threads.clear();
     }
-
+    	
     cout << "[INFO][NETWORK]: Exiting Network::input_run()" << endl;
 }
 
