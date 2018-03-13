@@ -3,36 +3,164 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-void {\bfseries mutate} ()\hypertarget{classSpecies_ab4c037683307c828083dde00cd7e673d}{}\label{classSpecies_ab4c037683307c828083dde00cd7e673d}
-
+\hyperlink{classSpecies_abb0f8e3208b0cc676157b7dff837c0be}{Species} ()
 \item 
-void {\bfseries run\+\_\+networks} ()\hypertarget{classSpecies_ae79d188cf5cb0ef1d6b82e44632ebf94}{}\label{classSpecies_ae79d188cf5cb0ef1d6b82e44632ebf94}
-
+\hyperlink{classSpecies_af36f93648e2dedc2f05b6fb0c067f35e}{$\sim$\+Species} ()
 \item 
-void {\bfseries add\+\_\+network} (\hyperlink{classNetwork}{Network} $\ast$)\hypertarget{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}{}\label{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}
-
+\hyperlink{classNetwork}{Network} $\ast$ \hyperlink{classSpecies_abfce3627718863b576acc7c9de058091}{mutate} ()
 \item 
-bool {\bfseries is\+\_\+stale} ()\hypertarget{classSpecies_a716e5737f0367dc4f908bab1e47cf5ac}{}\label{classSpecies_a716e5737f0367dc4f908bab1e47cf5ac}
-
+void \hyperlink{classSpecies_ae79d188cf5cb0ef1d6b82e44632ebf94}{run\+\_\+networks} ()
 \item 
-bool {\bfseries test\+\_\+species} ()\hypertarget{classSpecies_ad8a5df4740c1a7ac43d2f4d6e47a8092}{}\label{classSpecies_ad8a5df4740c1a7ac43d2f4d6e47a8092}
-
+void \hyperlink{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}{add\+\_\+network} (\hyperlink{classNetwork}{Network} $\ast$)
 \item 
-\hyperlink{classSpecies}{Species} $\ast$ {\bfseries new\+\_\+species} ()\hypertarget{classSpecies_ad8caa0f1a2c1655483240591512a1065}{}\label{classSpecies_ad8caa0f1a2c1655483240591512a1065}
+bool \hyperlink{classSpecies_a716e5737f0367dc4f908bab1e47cf5ac}{is\+\_\+stale} ()
+\item 
+bool \hyperlink{classSpecies_ad8a5df4740c1a7ac43d2f4d6e47a8092}{test\+\_\+species} ()
+\item 
+\hyperlink{classSpecies}{Species} $\ast$ \hyperlink{classSpecies_ad8caa0f1a2c1655483240591512a1065}{new\+\_\+species} ()
+\item 
+list$<$ \hyperlink{classNetwork}{Network} $\ast$ $>$ {\bfseries get\+\_\+networks} ()\hypertarget{classSpecies_aaa15bac5b5edf27f763fc45526821a3c}{}\label{classSpecies_aaa15bac5b5edf27f763fc45526821a3c}
 
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-float {\bfseries compute\+\_\+excess} (\hyperlink{classNetwork}{Network} $\ast$, \hyperlink{classNetwork}{Network} $\ast$)\hypertarget{classSpecies_a2e078a85f8a79ad28bca731bb9d14c23}{}\label{classSpecies_a2e078a85f8a79ad28bca731bb9d14c23}
-
+int \hyperlink{classSpecies_ae2d126bd948f511a31f20322cd2a0c37}{compute\+\_\+excess} (\hyperlink{classNetwork}{Network} $\ast$, \hyperlink{classNetwork}{Network} $\ast$)
 \item 
-float {\bfseries compute\+\_\+disjoint} (\hyperlink{classNetwork}{Network} $\ast$, \hyperlink{classNetwork}{Network} $\ast$)\hypertarget{classSpecies_ade428d94ad7729e79422c5473b1f6cf6}{}\label{classSpecies_ade428d94ad7729e79422c5473b1f6cf6}
-
+int \hyperlink{classSpecies_a942e1e1958fb5251ef0786ce6199a17f}{compute\+\_\+disjoint} (\hyperlink{classNetwork}{Network} $\ast$, \hyperlink{classNetwork}{Network} $\ast$)
 \item 
-float {\bfseries weight\+\_\+diff\+\_\+match\+\_\+genes} (\hyperlink{classNetwork}{Network} $\ast$, \hyperlink{classNetwork}{Network} $\ast$)\hypertarget{classSpecies_a732289d5916f65785694da76a26ff957}{}\label{classSpecies_a732289d5916f65785694da76a26ff957}
-
+float \hyperlink{classSpecies_a732289d5916f65785694da76a26ff957}{weight\+\_\+diff\+\_\+match\+\_\+genes} (\hyperlink{classNetwork}{Network} $\ast$, \hyperlink{classNetwork}{Network} $\ast$)
 \end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Species@{Species}!Species@{Species}}
+\index{Species@{Species}!Species@{Species}}
+\subsubsection[{\texorpdfstring{Species()}{Species()}}]{\setlength{\rightskip}{0pt plus 5cm}Species\+::\+Species (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_abb0f8e3208b0cc676157b7dff837c0be}{}\label{classSpecies_abb0f8e3208b0cc676157b7dff837c0be}
+Constructor initializes stale and max\+\_\+fitness variables. \index{Species@{Species}!````~Species@{$\sim$\+Species}}
+\index{````~Species@{$\sim$\+Species}!Species@{Species}}
+\subsubsection[{\texorpdfstring{$\sim$\+Species()}{~Species()}}]{\setlength{\rightskip}{0pt plus 5cm}Species\+::$\sim$\+Species (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_af36f93648e2dedc2f05b6fb0c067f35e}{}\label{classSpecies_af36f93648e2dedc2f05b6fb0c067f35e}
+Destructor deletes memory allocated to fittest\+\_\+net and list$<$\+Network $\ast$$>$. 
+
+\subsection{Member Function Documentation}
+\index{Species@{Species}!add\+\_\+network@{add\+\_\+network}}
+\index{add\+\_\+network@{add\+\_\+network}!Species@{Species}}
+\subsubsection[{\texorpdfstring{add\+\_\+network(\+Network $\ast$)}{add_network(Network *)}}]{\setlength{\rightskip}{0pt plus 5cm}void Species\+::add\+\_\+network (
+\begin{DoxyParamCaption}
+\item[{{\bf Network} $\ast$}]{net}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}{}\label{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}
+This function adds a network. 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classNetwork}{Network}} & $\ast$net net pointer \\
+\hline
+\end{DoxyParams}
+\index{Species@{Species}!compute\+\_\+disjoint@{compute\+\_\+disjoint}}
+\index{compute\+\_\+disjoint@{compute\+\_\+disjoint}!Species@{Species}}
+\subsubsection[{\texorpdfstring{compute\+\_\+disjoint(\+Network $\ast$, Network $\ast$)}{compute_disjoint(Network *, Network *)}}]{\setlength{\rightskip}{0pt plus 5cm}int Species\+::compute\+\_\+disjoint (
+\begin{DoxyParamCaption}
+\item[{{\bf Network} $\ast$}]{net1, }
+\item[{{\bf Network} $\ast$}]{net2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSpecies_a942e1e1958fb5251ef0786ce6199a17f}{}\label{classSpecies_a942e1e1958fb5251ef0786ce6199a17f}
+This function computes disjointed networks. 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classNetwork}{Network}} & $\ast$net1 \\
+\hline
+{\em \hyperlink{classNetwork}{Network}} & $\ast$net2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int disjoint 
+\end{DoxyReturn}
+\index{Species@{Species}!compute\+\_\+excess@{compute\+\_\+excess}}
+\index{compute\+\_\+excess@{compute\+\_\+excess}!Species@{Species}}
+\subsubsection[{\texorpdfstring{compute\+\_\+excess(\+Network $\ast$, Network $\ast$)}{compute_excess(Network *, Network *)}}]{\setlength{\rightskip}{0pt plus 5cm}int Species\+::compute\+\_\+excess (
+\begin{DoxyParamCaption}
+\item[{{\bf Network} $\ast$}]{net1, }
+\item[{{\bf Network} $\ast$}]{net2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSpecies_ae2d126bd948f511a31f20322cd2a0c37}{}\label{classSpecies_ae2d126bd948f511a31f20322cd2a0c37}
+This function computes biggestnet1 and biggestnet2. 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classNetwork}{Network}} & $\ast$net1 \\
+\hline
+{\em \hyperlink{classNetwork}{Network}} & $\ast$net2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+int excess 
+\end{DoxyReturn}
+\index{Species@{Species}!is\+\_\+stale@{is\+\_\+stale}}
+\index{is\+\_\+stale@{is\+\_\+stale}!Species@{Species}}
+\subsubsection[{\texorpdfstring{is\+\_\+stale()}{is_stale()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Species\+::is\+\_\+stale (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_a716e5737f0367dc4f908bab1e47cf5ac}{}\label{classSpecies_a716e5737f0367dc4f908bab1e47cf5ac}
+This function checks if items in list$<$\+Network $\ast$$>$ are at maximum fitness. \begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\index{Species@{Species}!mutate@{mutate}}
+\index{mutate@{mutate}!Species@{Species}}
+\subsubsection[{\texorpdfstring{mutate()}{mutate()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Network} $\ast$ Species\+::mutate (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_abfce3627718863b576acc7c9de058091}{}\label{classSpecies_abfce3627718863b576acc7c9de058091}
+Mutate function which mutates every item in list$<$\+Network $\ast$$>$ \index{Species@{Species}!new\+\_\+species@{new\+\_\+species}}
+\index{new\+\_\+species@{new\+\_\+species}!Species@{Species}}
+\subsubsection[{\texorpdfstring{new\+\_\+species()}{new_species()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Species} $\ast$ Species\+::new\+\_\+species (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_ad8caa0f1a2c1655483240591512a1065}{}\label{classSpecies_ad8caa0f1a2c1655483240591512a1065}
+This function returns a new species pointer. \begin{DoxyReturn}{Returns}
+Species$\ast$ new \hyperlink{classSpecies_abb0f8e3208b0cc676157b7dff837c0be}{Species()} 
+\end{DoxyReturn}
+\index{Species@{Species}!run\+\_\+networks@{run\+\_\+networks}}
+\index{run\+\_\+networks@{run\+\_\+networks}!Species@{Species}}
+\subsubsection[{\texorpdfstring{run\+\_\+networks()}{run_networks()}}]{\setlength{\rightskip}{0pt plus 5cm}void Species\+::run\+\_\+networks (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_ae79d188cf5cb0ef1d6b82e44632ebf94}{}\label{classSpecies_ae79d188cf5cb0ef1d6b82e44632ebf94}
+This function runs every item in list$<$\+Network $\ast$$>$ \index{Species@{Species}!test\+\_\+species@{test\+\_\+species}}
+\index{test\+\_\+species@{test\+\_\+species}!Species@{Species}}
+\subsubsection[{\texorpdfstring{test\+\_\+species()}{test_species()}}]{\setlength{\rightskip}{0pt plus 5cm}bool Species\+::test\+\_\+species (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classSpecies_ad8a5df4740c1a7ac43d2f4d6e47a8092}{}\label{classSpecies_ad8a5df4740c1a7ac43d2f4d6e47a8092}
+This function tests a species for disjoint genes and excess genes. \begin{DoxyReturn}{Returns}
+bool 
+\end{DoxyReturn}
+\index{Species@{Species}!weight\+\_\+diff\+\_\+match\+\_\+genes@{weight\+\_\+diff\+\_\+match\+\_\+genes}}
+\index{weight\+\_\+diff\+\_\+match\+\_\+genes@{weight\+\_\+diff\+\_\+match\+\_\+genes}!Species@{Species}}
+\subsubsection[{\texorpdfstring{weight\+\_\+diff\+\_\+match\+\_\+genes(\+Network $\ast$, Network $\ast$)}{weight_diff_match_genes(Network *, Network *)}}]{\setlength{\rightskip}{0pt plus 5cm}float Species\+::weight\+\_\+diff\+\_\+match\+\_\+genes (
+\begin{DoxyParamCaption}
+\item[{{\bf Network} $\ast$}]{net1, }
+\item[{{\bf Network} $\ast$}]{net2}
+\end{DoxyParamCaption}
+)\hspace{0.3cm}{\ttfamily [protected]}}\hypertarget{classSpecies_a732289d5916f65785694da76a26ff957}{}\label{classSpecies_a732289d5916f65785694da76a26ff957}
+This function sums the weights of genes with the same innovation number and then computes their average. 
+\begin{DoxyParams}{Parameters}
+{\em \hyperlink{classNetwork}{Network}} & $\ast$net1 \\
+\hline
+{\em \hyperlink{classNetwork}{Network}} & $\ast$net2 \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+float average 
+\end{DoxyReturn}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

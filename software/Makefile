@@ -1,11 +1,11 @@
-CC = c++
+CC = mpic++
 SRC := src
 OBJ := build
 INC := include
 
 DEBUG = -g
 LFLAGS = -pthread
-CFLAGS = -std=c++11 
+CFLAGS = -Wfatal-errors -std=c++11
 
 PROJ = ExoSAI
 
@@ -16,7 +16,7 @@ $(PROJ): $(OBJECTS)
 	$(CC) $(DEBUG) $(LFLAGS) $^ -o $@
 
 $(OBJ)/%.o: $(SRC)/%.cpp
-	$(CC) $(CFLAGS) -I$(INC) -c $< -o $@
+	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
-	rm build/*.o $(PROJ)
+	rm $(OBJECTS) $(PROJ)

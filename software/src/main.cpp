@@ -1,35 +1,36 @@
-#include <iostream>
+#include <mpi.h>
 
-#include "species.hpp"
-#include "network.hpp"
+#include <iostream>
+#include <fstream>
+#include <thread>
+
+#include <common.hpp>
+#include <ecosystem.hpp>
+#include <species.hpp>
+#include <network.hpp>
+#include <node.hpp>
+#include <gene.hpp>
+
+#define INIT_SPECIES 5
+#define INIT_NETWORK 5
 
 using namespace std;
 
-static int global_innovation_id = 0; // this shit needs to be in the network.
-					// every network need to have their own global
-					// innovation id, shits wrong.
-
 int main(int argc, char **argv, char **env){
-   cout << "[INFO][MAIN]:\t Entered main." << endl;
-   
-   list<Species *> exoAI;
-   exoAI.push_back(new Species());
+  cout << "[INFO][MAIN]: Entered main." << endl;
 
-   while(true){   
-      for(list<Species *>::iterator it = exoAI.begin(); it != exoAI.end(); ++it){
-         (*it)->add_network(new Network());
-         (*it)->run_networks();
+  bool alive = true;
+  Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
 
-         if((*it)->is_stale()){
-            (*it)->mutate();
-         }
+  while(alive){
+    alive = life->live();
+  }
 
-         if((*it)->test_species()){
-            exoAI.push_back((*it)->new_species());
-         }
-      }
-   }
+  if(life != NULL){
+    delete life;
+    life = NULL;
+  }
 
-   cout << "[INFO][MAIN]:\t Exiting main." << endl;
-   return 0;
+  cout << "[INFO][MAIN]: Exiting main." << endl;
+  return 0;
 }

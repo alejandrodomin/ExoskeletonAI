@@ -3,21 +3,93 @@
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-{\bfseries Gene} (\hyperlink{classNode}{Node} $\ast$, \hyperlink{classNode}{Node} $\ast$)\hypertarget{classGene_abacd374458e9a04430780c5feeb5006b}{}\label{classGene_abacd374458e9a04430780c5feeb5006b}
-
+\hyperlink{classGene_abacd374458e9a04430780c5feeb5006b}{Gene} (\hyperlink{classNode}{Node} $\ast$, \hyperlink{classNode}{Node} $\ast$)
 \item 
-void {\bfseries set\+\_\+weight} (float)\hypertarget{classGene_aefc88f9e290c83c7e7434ed5cf36f240}{}\label{classGene_aefc88f9e290c83c7e7434ed5cf36f240}
-
+\hyperlink{classGene_a484db8c57339433d3555475ef4ad2a61}{$\sim$\+Gene} ()
 \item 
-float {\bfseries get\+\_\+weight} ()\hypertarget{classGene_a8d914163177d863dc21aac1ed0558970}{}\label{classGene_a8d914163177d863dc21aac1ed0558970}
-
+void \hyperlink{classGene_aefc88f9e290c83c7e7434ed5cf36f240}{set\+\_\+weight} (float)
 \item 
-\hyperlink{classNode}{Node} $\ast$ {\bfseries get\+\_\+input\+\_\+node} ()\hypertarget{classGene_a7dbcc3567c632f3e3e24a5ba869f9199}{}\label{classGene_a7dbcc3567c632f3e3e24a5ba869f9199}
-
+int \hyperlink{classGene_a36f987c7862d5a9cebce9dd59b91bfe3}{get\+\_\+inov\+\_\+id} () const 
 \item 
-\hyperlink{classNode}{Node} $\ast$ {\bfseries get\+\_\+you\+\_\+node} ()\hypertarget{classGene_aff0525f14e7feb09726f6ce2a3bdb31a}{}\label{classGene_aff0525f14e7feb09726f6ce2a3bdb31a}
-
+float \hyperlink{classGene_a2b925cbc18eb7568ddcf8f710f17d87c}{get\+\_\+weight} () const 
+\item 
+\hyperlink{classNode}{Node} $\ast$ \hyperlink{classGene_ac67bd8023cb756cbebc5c398b772d11f}{get\+\_\+input\+\_\+node} () const 
+\item 
+\hyperlink{classNode}{Node} $\ast$ \hyperlink{classGene_a0b58b3dccf38ae2950660395c18c034a}{get\+\_\+ouput\+\_\+node} () const 
 \end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\index{Gene@{Gene}!Gene@{Gene}}
+\index{Gene@{Gene}!Gene@{Gene}}
+\subsubsection[{\texorpdfstring{Gene(\+Node $\ast$, Node $\ast$)}{Gene(Node *, Node *)}}]{\setlength{\rightskip}{0pt plus 5cm}Gene\+::\+Gene (
+\begin{DoxyParamCaption}
+\item[{{\bf Node} $\ast$}]{newinput\+\_\+node, }
+\item[{{\bf Node} $\ast$}]{newoutput\+\_\+node}
+\end{DoxyParamCaption}
+)}\hypertarget{classGene_abacd374458e9a04430780c5feeb5006b}{}\label{classGene_abacd374458e9a04430780c5feeb5006b}
+\hyperlink{classGene}{Gene} constructor, creates a \hyperlink{classGene}{Gene} that knows which two nodes it ties together. \index{Gene@{Gene}!````~Gene@{$\sim$\+Gene}}
+\index{````~Gene@{$\sim$\+Gene}!Gene@{Gene}}
+\subsubsection[{\texorpdfstring{$\sim$\+Gene()}{~Gene()}}]{\setlength{\rightskip}{0pt plus 5cm}Gene\+::$\sim$\+Gene (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classGene_a484db8c57339433d3555475ef4ad2a61}{}\label{classGene_a484db8c57339433d3555475ef4ad2a61}
+Destructor, deletes memory allocated by the class in the heap. 
+
+\subsection{Member Function Documentation}
+\index{Gene@{Gene}!get\+\_\+inov\+\_\+id@{get\+\_\+inov\+\_\+id}}
+\index{get\+\_\+inov\+\_\+id@{get\+\_\+inov\+\_\+id}!Gene@{Gene}}
+\subsubsection[{\texorpdfstring{get\+\_\+inov\+\_\+id() const }{get_inov_id() const }}]{\setlength{\rightskip}{0pt plus 5cm}int Gene\+::get\+\_\+inov\+\_\+id (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGene_a36f987c7862d5a9cebce9dd59b91bfe3}{}\label{classGene_a36f987c7862d5a9cebce9dd59b91bfe3}
+Returns the value of the innovation number variable. \begin{DoxyReturn}{Returns}
+int returns innovation\+\_\+number 
+\end{DoxyReturn}
+\index{Gene@{Gene}!get\+\_\+input\+\_\+node@{get\+\_\+input\+\_\+node}}
+\index{get\+\_\+input\+\_\+node@{get\+\_\+input\+\_\+node}!Gene@{Gene}}
+\subsubsection[{\texorpdfstring{get\+\_\+input\+\_\+node() const }{get_input_node() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node} $\ast$ Gene\+::get\+\_\+input\+\_\+node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGene_ac67bd8023cb756cbebc5c398b772d11f}{}\label{classGene_ac67bd8023cb756cbebc5c398b772d11f}
+Returns a node pointer to the input node. \begin{DoxyReturn}{Returns}
+Node$\ast$ node pointer 
+\end{DoxyReturn}
+\index{Gene@{Gene}!get\+\_\+ouput\+\_\+node@{get\+\_\+ouput\+\_\+node}}
+\index{get\+\_\+ouput\+\_\+node@{get\+\_\+ouput\+\_\+node}!Gene@{Gene}}
+\subsubsection[{\texorpdfstring{get\+\_\+ouput\+\_\+node() const }{get_ouput_node() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node} $\ast$ Gene\+::get\+\_\+ouput\+\_\+node (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGene_a0b58b3dccf38ae2950660395c18c034a}{}\label{classGene_a0b58b3dccf38ae2950660395c18c034a}
+Returns a node pointer to the node that called this gene function. \begin{DoxyReturn}{Returns}
+Node$\ast$ node pointer 
+\end{DoxyReturn}
+\index{Gene@{Gene}!get\+\_\+weight@{get\+\_\+weight}}
+\index{get\+\_\+weight@{get\+\_\+weight}!Gene@{Gene}}
+\subsubsection[{\texorpdfstring{get\+\_\+weight() const }{get_weight() const }}]{\setlength{\rightskip}{0pt plus 5cm}float Gene\+::get\+\_\+weight (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+) const}\hypertarget{classGene_a2b925cbc18eb7568ddcf8f710f17d87c}{}\label{classGene_a2b925cbc18eb7568ddcf8f710f17d87c}
+Returns the value of the weight variable. \begin{DoxyReturn}{Returns}
+float returns weight 
+\end{DoxyReturn}
+\index{Gene@{Gene}!set\+\_\+weight@{set\+\_\+weight}}
+\index{set\+\_\+weight@{set\+\_\+weight}!Gene@{Gene}}
+\subsubsection[{\texorpdfstring{set\+\_\+weight(float)}{set_weight(float)}}]{\setlength{\rightskip}{0pt plus 5cm}void Gene\+::set\+\_\+weight (
+\begin{DoxyParamCaption}
+\item[{float}]{newweight}
+\end{DoxyParamCaption}
+)}\hypertarget{classGene_aefc88f9e290c83c7e7434ed5cf36f240}{}\label{classGene_aefc88f9e290c83c7e7434ed5cf36f240}
+Sets the weight variable to a new value. 
+\begin{DoxyParams}{Parameters}
+{\em newweight} & the new weight \\
+\hline
+\end{DoxyParams}
 
 
 The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}

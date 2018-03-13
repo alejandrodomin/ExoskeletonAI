@@ -17,27 +17,30 @@ using namespace std;
 class Node;
 
 class Gene{
-   private:
-      int innovation_number;  /**<The number in which the gene poped up. */
+private:
+    int in_node;
+    int out_node;
+    int innovation_number;  /**<The number in which the gene poped up. */
 
-      float weight;     /**<The weight a gene carries in the forward propagation function. */
+    float weight;
 
-      Node* input_node;   /**<A pointer corresponding to the node that holds this gene. */
-      Node* output_node; /**<A pointer to the Node that is connected to the you_node. */
-   protected:
-   public:
-      Gene();
-      Gene(Node *, Node *);
-      ~Gene();
+    Node* input_node;   /**<A pointer corresponding to the node that holds this gene. */
+    Node* output_node; /**<A pointer to the Node that is connected to the you_node. */
+protected:
+public:
+    Gene();
+    Gene(Node*,Node*,int);
+    ~Gene();
 
-      void set_weight(float);
+    int get_inov_id() const;
+    int get_in_node() const;
+    int get_out_node() const;
 
-      int get_inov_id();
+    float get_weight() const;
 
-      float get_weight();
 
-      Node* get_input_node();
-      Node* get_ouput_node();
+    Node* get_input_node() const;
+    Node* get_output_node() const;
 };
 
 #endif

@@ -5,7 +5,7 @@
             "includePath": [
                 "/usr/include",
                 "/usr/local/include",
-                "${workspaceRoot}/software/include"
+                "${workspaceRoot}"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -36,7 +36,7 @@
                 "/usr/include",
                 "${workspaceRoot}",
                 "${workspaceRoot}/software/include",
-                "/usr/include/nodejs/src"
+                "/usr/lib/openmpi/include"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",
@@ -60,12 +60,12 @@
             "name": "Win32",
             "includePath": [
                 "C:/Program Files (x86)/Microsoft Visual Studio 14.0/VC/include",
-                "${workspaceRoot}",
-                "${workspaceRoot}/software/include"
+                "${workspaceRoot}"
             ],
             "defines": [
                 "_DEBUG",
-                "UNICODE"
+                "UNICODE",
+                "_UNICODE"
             ],
             "intelliSenseMode": "msvc-x64",
             "browse": {
