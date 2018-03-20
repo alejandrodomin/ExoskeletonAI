@@ -202,8 +202,10 @@ bool Network::rand_node(){
 bool Network::rand_connection(){
     cout << "[INFO][NETWORK]: Entered Network::rand_connection()." << endl;
 
-    int node_one = rand() % num_nodes + 1;
-    int node_two = rand() % num_nodes + 1;
+    int node_one, node_two;
+
+    node_one = rand() % num_nodes + 1;
+    node_two = rand() % num_nodes + 1;
 
     Node *nodeOne, *nodeTwo;
 
@@ -303,13 +305,42 @@ void Network::input_run(){
 void Network::hidden_run(){
     cout << "[INFO][NETWORK]: Entered Network::hidden_run()." << endl;
 
+    int last_layer = 1;
+
     if(hidden_nodes.size() > 0){
         hidden_nodes.sort(compare);
 
-        list<Gene *> &copy_genes = genes;
+        for (list<Node* >::iterator itr = hidden_nodes.begin(); itr != hidden_nodes.end(); ++itr){
+            if(threads.size() >= MAX_THREADS || (*itr)->get_layer() > last_layer){
+                last_layer = (*itr)->get_layer();
 
-        for (list<Node* >::iterator it = hidden_nodes.begin(); it != hidden_nodes.end();++it){
-            (*it)->out_func(copy_genes);
+                for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
+                    if((*it)->joinable()){
+                        cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                        (*it)->join();
+                        if(*it != NULL){
+                            delete *it;
+                            *it = NULL;
+                        }
+                    }
+                }
+                threads.clear();
+            }
+            else threads.push_back((*itr)->spawn_thread(genes));
+        }
+
+        if(threads.size() >= 0){
+            for(list<thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
+                if((*it)->joinable()){
+                    cout << "[INFO][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    (*it)->join();
+                    if(*it != NULL){
+                        delete *it;
+                        *it = NULL;
+                    }
+                }
+            }
+            threads.clear();
         }
     }
 

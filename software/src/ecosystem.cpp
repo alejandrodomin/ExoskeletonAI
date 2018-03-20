@@ -46,6 +46,7 @@ Ecosystem::~Ecosystem(){
 bool Ecosystem::live(){
   cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::live()." << endl;
 
+  int num_networks = 0;
   int size_of_nets = 0;
 
   Network *child;
@@ -57,6 +58,8 @@ bool Ecosystem::live(){
     for(list<Network *>::iterator network_iter = (*species_iter)->get_networks()->begin(); network_iter != (*species_iter)->get_networks()->end(); ++network_iter){
       (*network_iter)->run(); 
       (*network_iter)->calculate_fit();
+
+      num_networks++;
     }
 
     if((*species_iter)->is_stale())
@@ -84,6 +87,14 @@ bool Ecosystem::live(){
 
 
   cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::live()." << endl;
+  
+  cout << "\033[1;32m[INFO][ECOSYSTEM]: Number of species: " << organisms.size() << endl;
+  int counter = 1;
+  for(list<Species *>::iterator species_iter= organisms.begin(); species_iter!= organisms.end(); ++species_iter){
+    cout << "\tNumber of networks for species #" << counter << " : " << (*species_iter)->get_networks()->size() << endl;
+    counter++;
+  }
+  cout << "\033[0m";
 
   return true;
 }

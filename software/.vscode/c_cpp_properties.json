@@ -35,7 +35,8 @@
                 "/usr/include/x86_64-linux-gnu",
                 "/usr/include",
                 "${workspaceRoot}",
-                "${workspaceRoot}/include"
+                "${workspaceRoot}/include",
+                "/usr/lib/openmpi/include"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",

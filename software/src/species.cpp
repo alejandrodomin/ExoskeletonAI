@@ -5,6 +5,8 @@
 #include <species.hpp>
 #include <common.hpp>
 
+#define MAX_SIZE 200
+
 using namespace std;
 
 /**Constructor initializes stale and max_fitness variables.
@@ -67,10 +69,14 @@ void Species::run_networks(){
 /** This function adds a network.
 * @param Network *net net pointer
 */
-void Species::add_network(Network *net){
+bool Species::add_network(Network *net){
     cout << "[INFO][SPECIES]: Entered Species::add_network(Network*)." << endl;
     
-    networks.push_back(net);
+    if(networks.size() < MAX_SIZE){
+        networks.push_back(net);
+        return true;
+    }
+    else return false;
 
     cout << "[INFO][SPECIES]: Exiting Species::add_network(Network*)." << endl;
 }

@@ -36,10 +36,10 @@ public:
 
     void mutate();
     void run_networks();
-    void add_network(Network *);
 
     bool is_stale();
     bool test_species();
+    bool add_network(Network *);
 
     Network* get_fittest_net();
 
