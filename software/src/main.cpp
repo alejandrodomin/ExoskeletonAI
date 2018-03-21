@@ -1,4 +1,4 @@
-#include <mpi.h>
+// #include <mpi.h>
 
 #include <iostream>
 #include <fstream>
@@ -33,25 +33,30 @@ int main(int argc, char **argv, char **env){
       return 0;
     }
     else if(strcmp(argv[index],"-c") == 0){
-      cout << "[INFO][MAIN]: Entered main." << endl;
-
-      bool alive = true;
-      Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
-
-      while(alive){
-        alive = life->live();
-      }
-
-      if(life != NULL){
-        delete life;
-        life = NULL;
-      }
-
-      cout << "[INFO][MAIN]: Exiting main." << endl;
-      return 0;
+      comment = true;
+    }
+    else if(strcmp(argv[index],"-nc") == 0){
+      comment = false;
     }
   }
 
-  cout << "Invalid arguments.\nTry the \033[1;31m-h\033[0m argument to see a list of valid arguments." << endl;
+  if(comment == true)
+    cout << "[INFO][MAIN]: Entered main." << endl;
+
+  bool alive = true;
+  Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
+
+  while(alive){
+    alive = life->live();
+  }
+
+  if(life != NULL){
+    delete life;
+    life = NULL;
+  }
+
+  if(comment == true)
+    cout << "[INFO][MAIN]: Exiting main." << endl;
+    
   return 0;
 }

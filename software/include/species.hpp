@@ -12,6 +12,7 @@
 #include <iostream>
 #include <list>
 
+#include <common.hpp>
 #include <network.hpp>
 
 using namespace std;

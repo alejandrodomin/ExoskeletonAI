@@ -3,6 +3,10 @@
 
 #include <fstream>
 #include <list>
+#include <vector>
+#include <algorithm>
+
+#include <boost/thread.hpp>
 
 #include <gene.hpp>
 
@@ -10,6 +14,7 @@
 #define NUM_OUTPUTS 6
 #define MAX_THREADS 5
 
+static bool comment;
 static int innovation_number;
 
 enum gyro {gyroX = 0, gyroY, gyroZ};   /**<Enumerated list for the x,y, and z positions for the gyro. */

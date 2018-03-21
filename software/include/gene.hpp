@@ -13,7 +13,8 @@
 
 using namespace std;
 
-#include "node.hpp"
+#include <common.hpp>
+#include <node.hpp>
 class Node;
 
 class Gene{

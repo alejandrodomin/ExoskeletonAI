@@ -13,6 +13,7 @@
 #include <thread>
 #include <list>
 
+#include <common.hpp>
 #include <node.hpp>
 #include <gene.hpp>
 
@@ -33,7 +34,7 @@ private:
     list<Node *> out_nodes; /**<output nodes*/
     list<Node *> hidden_nodes; /**<hidden nodes*/
 
-    list<thread *> threads;/**<A double pointer to the threads that have been created.*/  
+    list<boost::thread *> threads;/**<A double pointer to the threads that have been created.*/  
 protected:
     void input_run();
     void hidden_run();
@@ -52,6 +53,8 @@ public:
 
     int get_fitness() const;
     int get_num_nodes() const;
+
+    float get_compatibility_distance() const;
 
     bool rand_node();
     bool rand_connection();

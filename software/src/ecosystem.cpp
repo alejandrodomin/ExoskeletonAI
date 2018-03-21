@@ -1,5 +1,6 @@
 #include <iterator>
 
+#include <common.hpp>
 #include <ecosystem.hpp>
 
 #define COIN_FLIP 2
@@ -8,7 +9,8 @@
 using namespace std;
 
 Ecosystem::Ecosystem(int num_species, int num_nets){
-  cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::Ecosystem(int)." << endl;
+  if(comment == true)
+    cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::Ecosystem(int,int)." << endl;
 
   for(int index = 0; index < num_species; index++){
     organisms.push_back(new Species());
@@ -18,11 +20,13 @@ Ecosystem::Ecosystem(int num_species, int num_nets){
       (*it)->add_network(new Network());
   }
 
-  cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::Ecosystem(int)." << endl;
+  if(comment == true)     
+    cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::Ecosystem(int,int)." << endl;
 }
 
 Ecosystem::~Ecosystem(){
-  cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::~Ecosystem()." << endl;
+  if(comment == true)
+    cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::~Ecosystem()." << endl;
 
   for(list<Species *>::iterator it = organisms.begin(); it != organisms.end(); it++){
     if(*it != NULL){
@@ -40,11 +44,13 @@ Ecosystem::~Ecosystem(){
   }
   strongest.clear();
 
-  cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::~Ecosystem()." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::~Ecosystem()." << endl;
 }
 
 bool Ecosystem::live(){
-  cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::live()." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::live()." << endl;
 
   int num_networks = 0;
   int size_of_nets = 0;
@@ -53,7 +59,9 @@ bool Ecosystem::live(){
 
   list<Network * >::iterator itr;
   list<Network * >::iterator next_itr;
-
+  /********************************************/
+  /* Run Individual networks of every species */
+  /********************************************/
   for(list<Species *>::iterator species_iter= organisms.begin(); species_iter!= organisms.end(); ++species_iter){
     for(list<Network *>::iterator network_iter = (*species_iter)->get_networks()->begin(); network_iter != (*species_iter)->get_networks()->end(); ++network_iter){
       (*network_iter)->run(); 
@@ -85,13 +93,29 @@ bool Ecosystem::live(){
     strongest.push_back((*species_iter)->get_fittest_net());
   }
 
+  /************************************************/
+  /* Figure out if you need to make a new species */
+  /************************************************/
+  list<Network *> newSpecies;
+  for(list<Species *>::iterator it = organisms.begin(); it != organisms.end(); it++){
+    for(list<Network *>::iterator itr = (*it)->get_networks()->begin(); itr != (*it)->get_networks()->end(); itr++){
+      if(comment == true)   
+        cout << "Compatibility number: " << (*itr)->get_compatibility_distance() << endl;
+    }
+  }
 
-  cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::live()." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::live()." << endl;
   
   cout << "\033[1;32m[INFO][ECOSYSTEM]: Number of species: " << organisms.size() << endl;
-  int counter = 1;
+  int counter = 1, numNodes = 0;
   for(list<Species *>::iterator species_iter= organisms.begin(); species_iter!= organisms.end(); ++species_iter){
     cout << "\tNumber of networks for species #" << counter << " : " << (*species_iter)->get_networks()->size() << endl;
+    for(list<Network *>::iterator itr = (*species_iter)->get_networks()->begin(); itr != (*species_iter)->get_networks()->end(); itr++){
+      numNodes += (*itr)->get_num_nodes();
+    }
+    cout << "\t\tTotal number of nodes: " << numNodes << endl;
+    numNodes = 0;
     counter++;
   }
   cout << "\033[0m";
@@ -100,7 +124,8 @@ bool Ecosystem::live(){
 }
 
 bool Ecosystem::kill_unfit(list<Network *> *unfit){
-  cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::kill_unfit(list<Network*>*)." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::kill_unfit(list<Network*>*)." << endl;
 
   if(unfit->size() > 0)
     unfit->sort(compareNets);
@@ -132,28 +157,34 @@ bool Ecosystem::kill_unfit(list<Network *> *unfit){
 
   *unfit = temp;
 
-  cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::kill_unfit(list<Network*>*)." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::kill_unfit(list<Network*>*)." << endl;
 
   return true;
 }
 
 bool Ecosystem::compareGenes(const Gene *one, const Gene *two){
-  cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
-  cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareGenes(const Gene *, const Gene *)." << endl;
 
   return one->get_inov_id() < two->get_inov_id();
 }
 
 bool Ecosystem::compareNets(const Network *one, const Network *two){ // sorts less fit first to more fit later.
-  cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareNets(const Network *, const Network *)." << endl;
-  cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareNets(const Network *, const Network *)." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::compareNets(const Network *, const Network *)." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::compareNets(const Network *, const Network *)." << endl;
   
   return one->get_fitness() < two->get_fitness();
 }
 
 Network* Ecosystem::breed(Network *one, Network *two){
 
-  cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::breed(Network *, Network *)." << endl;
+  if(comment == true)    
+    cout << "[INFO][ECOSYSTEM]: Entered Ecosystem::breed(Network *, Network *)." << endl;
    
   Network *newNet = new Network();
 
@@ -183,7 +214,8 @@ Network* Ecosystem::breed(Network *one, Network *two){
     ittwo++;
   }
 
-  cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::breed(Network *, Network *)." << endl;
+  if(comment == true)   
+    cout << "[INFO][ECOSYSTEM]: Exiting Ecosystem::breed(Network *, Network *)." << endl;
 
   return newNet;
 }

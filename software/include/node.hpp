@@ -14,6 +14,9 @@
 #include <thread>
 #include <list>
 
+#include <boost/thread.hpp>
+
+#include <common.hpp>
 #include <gene.hpp>
 class Gene;
 
@@ -47,6 +50,6 @@ public:
     float get_bias() const;
     float get_outputfunc() const;
 
-    thread* spawn_thread(list<Gene *>);
+    boost::thread* spawn_thread(list<Gene *>);
 };
 #endif
