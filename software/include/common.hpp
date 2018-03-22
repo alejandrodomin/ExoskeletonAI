@@ -12,7 +12,7 @@
 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6
-#define MAX_THREADS 5
+#define MAX_THREADS 100
 
 static bool comment;
 static int innovation_number;

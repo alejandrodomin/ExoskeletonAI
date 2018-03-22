@@ -40,23 +40,18 @@ int main(int argc, char **argv, char **env){
     }
   }
 
-  if(comment == true)
-    cout << "[INFO][MAIN]: Entered main." << endl;
-
   bool alive = true;
   Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
 
-  while(alive){
+  // while(alive){
+  for(int i = 0; i < 10; i++)
     alive = life->live();
-  }
+  // }
 
   if(life != NULL){
     delete life;
     life = NULL;
   }
-
-  if(comment == true)
-    cout << "[INFO][MAIN]: Exiting main." << endl;
     
   return 0;
 }

@@ -11,14 +11,22 @@ fstream
 -
 list
 -
+vector
+-
+algorithm
+-
+boost/thread.hpp
+-
 gene.hpp
 -
 
 ../include/gene.hpp
 iostream
 -
+common.hpp
+-
 node.hpp
-../include/node.hpp
+-
 
 ../include/network.hpp
 iostream
@@ -26,6 +34,8 @@ iostream
 thread
 -
 list
+-
+common.hpp
 -
 node.hpp
 -
@@ -41,6 +51,10 @@ thread
 -
 list
 -
+boost/thread.hpp
+-
+common.hpp
+-
 gene.hpp
 -
 
@@ -48,6 +62,8 @@ gene.hpp
 iostream
 -
 list
+-
+common.hpp
 -
 network.hpp
 -
