@@ -8,7 +8,13 @@
  **************************************************************/
 
 #include "ExoGUIMain.hpp"
+
+#include <vector>
+
 #include <wx/msgdlg.h>
+#include <wx/chartype.h> 
+#include <wx/wx.h>
+#include <wx/sizer.h>
 
 //(*InternalHeaders(ExoGUIFrame)
 #include <wx/string.h>
@@ -59,6 +65,8 @@ const long ExoGUIFrame::ID_STATUSBAR1 = wxNewId();
 
 BEGIN_EVENT_TABLE(ExoGUIFrame,wxFrame)
     //(*EventTable(ExoGUIFrame)
+    EVT_COMBOBOX(ID_COMBOBOX1, ExoGUIFrame::OnComboBox1Selected)
+    EVT_COMBOBOX(ID_COMBOBOX2, ExoGUIFrame::OnComboBox2Selected)
     //*)
 END_EVENT_TABLE()
 
@@ -131,17 +139,73 @@ void ExoGUIFrame::OnButton1Click(wxCommandEvent& event)
 
   int range = Slider1->GetValue();
 
+  Gauge1->SetValue(0);  
   for(int i = 0; i < range; i++){
     life->live();
     Gauge1->SetValue(((float)i/range)*100);
   }
   Gauge1->SetValue(100);
+
+  int counter = 0; 
+  for(list<Species *>::iterator it = life->get_organisms()->begin(); it != life->get_organisms()->end(); it++){
+    counter++;
+    wxString a = wxString::Format(wxT("%i"),counter);
+    ComboBox1->Append(a);
+  }  
 }
 
 void ExoGUIFrame::OnComboBox1Selected(wxCommandEvent& event)
 {
+    list<Species *>::iterator it = life->get_organisms()->begin();
+    for(int index = 0; index < ComboBox1->GetSelection(); index++)
+        it++;
+
+    int counter = 0;
+    for(list<Network *>::iterator itr = (*it)->get_networks()->begin(); itr != (*it)->get_networks()->end(); itr++){
+        counter++;
+        wxString a = wxString::Format(wxT("%i"),counter);
+        ComboBox2->Append(a);
+    }
 }
 
 void ExoGUIFrame::OnComboBox2Selected(wxCommandEvent& event)
 {
+    wxClientDC dc(Panel2);
+    dc.SetBrush(*wxGREEN_BRUSH); // green filling
+    dc.SetPen( wxPen( wxColor(255,0,0), 5 ) ); // 5-pixels-thick red outline
+
+    list<Species *>::iterator it = life->get_organisms()->begin();
+    for(int index = 0; index < ComboBox1->GetSelection(); index++)
+        it++;
+    list<Network *>::iterator itr = (*it)->get_networks()->begin();
+    for(int index = 0; index < ComboBox2->GetSelection(); index++)
+        itr++;
+
+    int radius = (Panel2->GetCharWidth() / (((*itr)->get_maxlayer() + 2) * 2)) / 2;
+
+    int counter = 10*radius;
+    for(list<Node *>::iterator iter = (*itr)->get_input()->begin(); iter != (*itr)->get_input()->end(); iter++){
+        dc.DrawCircle( wxPoint(10*radius, counter), radius /* radius */ );
+        counter += 10*radius;
+    }
+
+    list<Node *> *hidden = (*itr)->get_hiddennodes();
+    hidden->sort(Network::compare);
+    int hidden_move = 10*radius;
+    int last_layer = 1;
+    for(list<Node *>::iterator iter = hidden->begin(); iter != hidden->end(); iter++){
+        if(!(*iter)->get_layer() == last_layer){
+            hidden_move *= 2;
+            last_layer++;
+        }
+        
+        dc.DrawCircle( wxPoint(hidden_move, counter), radius /* radius */ );
+        counter += 10*radius;
+    }
+
+    counter = 10*radius;
+    for(list<Node *>::iterator iter = (*itr)->get_output()->begin(); iter != (*itr)->get_output()->end(); iter++){
+        dc.DrawCircle( wxPoint(hidden_move * 2, counter), radius /* radius */ );
+        counter += 10*radius;
+    }
 }

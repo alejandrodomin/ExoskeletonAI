@@ -183,3 +183,7 @@ Network* Ecosystem::breed(Network *one, Network *two){
 
   return newNet;
 }
+
+list<Species *>* Ecosystem::get_organisms(){
+  return &organisms;
+}

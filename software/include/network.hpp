@@ -52,6 +52,7 @@ public:
     void add_gene(Node *, Node *);
 
     int get_fitness() const;
+    int get_maxlayer() const;
     int get_num_nodes() const;
 
     float get_compatibility_distance() const;
@@ -64,6 +65,7 @@ public:
     list<Gene *>* get_genes(); 
 
     list<Node *>* get_input();       // names for these can be changed later
+    list<Node *>* get_output();
     list<Node *>* get_hiddennodes(); 
 };
 

@@ -1,3 +1,9 @@
 {
-   "C_Cpp.errorSquiggles": "Enabled"
+   "C_Cpp.errorSquiggles": "Enabled",
+   "files.associations": {
+      "array": "cpp",
+      "hash_map": "cpp",
+      "slist": "cpp",
+      "initializer_list": "cpp"
+   }
 }

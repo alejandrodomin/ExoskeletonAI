@@ -140,6 +140,17 @@ int Network::get_fitness() const{
     return fitness;
 }
 
+int Network::get_maxlayer() const{
+    int maxlayer = 0;
+    for(list<Node *>::const_iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); it++){
+        if((*it)->get_layer() > maxlayer){
+            maxlayer = (*it)->get_layer();
+        }
+    }
+
+    return maxlayer;
+}
+
 /** Returns number of nodes.
  * @return int type.
  */ 
@@ -338,6 +349,10 @@ void Network::output_run(){
  */ 
 list<Node *>* Network::get_input(){
     return &in_nodes;
+}
+
+list<Node *>* Network::get_output(){
+    return &out_nodes;
 }
 
 /** Returns the list of gene pointers.

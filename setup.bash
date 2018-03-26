@@ -21,6 +21,13 @@ elif [ "$CONT" = "y" ]; then
 		echo "Aborting instalation of VSCode."
 	fi
 
+	read -p "Would you like to install wxWidgets support: (y/n)" ANSW
+	if [ "$ANSW" = "y" ]; then
+		sudo apt install libwx*
+	else
+		echo "Aborting instalation of wxWidgets."
+	fi
+
 	echo "Installing Boost C++ Library"
 	sudo apt install libboost-all-dev
 

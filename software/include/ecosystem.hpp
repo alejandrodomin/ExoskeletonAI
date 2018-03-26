@@ -20,13 +20,14 @@ public:
    ~Ecosystem();
 
    bool live();
-
    bool kill_unfit(list<Network *> *);
    
    static bool compareGenes(const Gene *, const Gene *);
    static bool compareNets(const Network *, const Network *);
 
    Network* breed(Network *, Network *);
+
+   list<Species *>* get_organisms();
 };
 
 #endif 

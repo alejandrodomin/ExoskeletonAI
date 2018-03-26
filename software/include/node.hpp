@@ -43,8 +43,8 @@ public:
     bool out_func(list<Gene *>);
     bool find_layer(list<Gene *>);
 
-    int get_layer() const;
     int get_type() const;
+    int get_layer() const;
     int get_nodeid() const;
 
     float get_bias() const;

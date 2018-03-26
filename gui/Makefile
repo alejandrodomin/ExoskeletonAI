@@ -1,7 +1,9 @@
 CC = mpic++
-SRC := src
+SRC := ../software/src
+INC := ../software/include
+WXSRC := src
+WXINC := include
 OBJ := build
-INC := include
 
 DEBUG = -g
 
@@ -16,11 +18,17 @@ PROJ = ExoGUI
 SOURCES := $(wildcard $(SRC)/*.cpp)
 OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
 
-$(PROJ): $(OBJECTS)
+WXSOURCES := $(wildcard $(WXSRC)/*.cpp)
+WXOBJECTS := $(patsubst $(WXSRC)/%.cpp, $(OBJ)/%.o, $(WXSOURCES))
+
+$(PROJ): $(OBJECTS) $(WXOBJECTS)
 	$(CC) $(DEBUG) $^ $(WXLFLAGS) -o $@ $(LFLAGS)
 
 $(OBJ)/%.o: $(SRC)/%.cpp
-	$(CC) $(WXCFLAGS) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@
+	$(CC) $(WXCFLAGS) $(DEBUG) $(CFLAGS) -I$(INC) -I$(WXINC) -c $< -o $@
+
+$(OBJ)/%.o: $(WXSRC)/%.cpp
+	$(CC) $(WXCFLAGS) $(DEBUG) $(CFLAGS) -I$(INC) -I$(WXINC) -c $< -o $@
 
 clean:
-	rm $(OBJECTS) $(PROJ)
+	rm $(OBJECTS) $(WXOBJECTS) $(PROJ)
