@@ -1,7 +1,7 @@
 CC = mpic++
-SRC := ./
-OBJ := ./
-INC := ./
+SRC := src
+OBJ := build
+INC := include
 
 DEBUG = -g
 
