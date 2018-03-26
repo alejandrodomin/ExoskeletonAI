@@ -78,13 +78,24 @@ bool Ecosystem::live(){
   }
 
   /* Figure out if you need to make a new species */
-  list<Network *> newSpecies;
+  Species *newSpecies = new Species();
+
   for(list<Species *>::iterator it = organisms.begin(); it != organisms.end(); it++){
-    for(list<Network *>::iterator itr = (*it)->get_networks()->begin(); itr != (*it)->get_networks()->end(); itr++){   
+    for(list<Network *>::iterator itr = (*it)->get_networks()->begin(); itr != (*it)->get_networks()->end(); itr++){      
+      if((*itr)->get_compatibility_distance() > 0.25){
+        (*it)->get_networks()->splice(itr, *(newSpecies->get_networks()));
+      }
+
       cout<< "Compatibility number: " << (*itr)->get_compatibility_distance() << endl;
     }
   }
 
+  if(newSpecies->get_networks()->size() > 0){
+    organisms.push_back(newSpecies);
+  }
+
+
+  /* Simple statistics displayed after each run */
   int counter = 1, numNodes = 0;
   for(list<Species *>::iterator species_iter= organisms.begin(); species_iter!= organisms.end(); ++species_iter){
     cout<< "\tNumber of networks for species #" << counter << " : " << (*species_iter)->get_networks()->size() << endl;

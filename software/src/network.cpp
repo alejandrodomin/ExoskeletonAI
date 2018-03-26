@@ -227,7 +227,7 @@ void Network::input_run(){
         if(threads.size() >= MAX_THREADS){
             for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                 if((*it)->joinable()){
-                    cout << "\033[1;33m[THREAD][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join.\033[0m" << endl;
+                    cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                     (*it)->join();
                     if(*it != NULL){
                         delete *it;
@@ -242,7 +242,7 @@ void Network::input_run(){
     if(threads.size() >= 0){
         for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
             if((*it)->joinable()){
-                cout << "\033[1;33m[THREAD][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join.\033[0m" << endl;
+                cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                 (*it)->join();
                 if(*it != NULL){
                     delete *it;
@@ -268,7 +268,7 @@ void Network::hidden_run(){
 
                 for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                     if((*it)->joinable()){
-                        cout << "\033[1;33m[THREAD][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join.\033[0m" << endl;
+                        cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                         (*it)->join();
                         if(*it != NULL){
                             delete *it;
@@ -284,7 +284,7 @@ void Network::hidden_run(){
         if(threads.size() >= 0){
             for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                 if((*it)->joinable()){
-                    cout << "\033[1;33m[THREAD][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join.\033[0m" << endl;
+                    cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                     (*it)->join();
                     if(*it != NULL){
                         delete *it;
@@ -306,7 +306,7 @@ void Network::output_run(){
         if(threads.size() >= MAX_THREADS){
             for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                 if((*it)->joinable()){    
-                    cout << "\033[1;33m[THREAD][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join.\033[0m" << endl;
+                    cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                     (*it)->join();
                     if(*it != NULL){
                         delete *it;
@@ -321,7 +321,7 @@ void Network::output_run(){
     if(threads.size() >= 0){
         for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
             if((*it)->joinable()){
-                cout << "\033[1;33m[THREAD][NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join.\033[0m" << endl;
+                cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
                 (*it)->join();
                 if(*it != NULL){
                     delete *it;
