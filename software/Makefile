@@ -5,9 +5,8 @@ OBJ := build
 INC := include
 
 DEBUG = -g
-LFLAGS = -lboost_thread -lboost_system
-CFLAGS = -Wfatal-errors -std=c++11
-
+LFLAGS = -lboost_thread -lboost_system -llsm9ds1
+CFLAGS = -Wall -std=c++11 
 PROJ = ExoSAI
 
 SOURCES := $(wildcard $(SRC)/*.cpp)
