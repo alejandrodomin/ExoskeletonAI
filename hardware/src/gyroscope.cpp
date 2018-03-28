@@ -35,18 +35,7 @@ int main(int argc, char *argv[]) {
 }
 */
 
-void gyroInit(float *gyro, float *accel, float *mag);
-
-int main (int argc, char **argv){
-	float a[3] = {0}, b[3] = {0}, c[3] = {0};
-	gyroInit(a,b,c);
-	printf("%f, %f, %f [deg/s]\n", a[0], a[1], a[2]);
-
-exit(0);
-}
-
-void gyroInit(float *gyro, float *accel, float *mag){
-	float *loc = NULL;
+LSM9DS1 imuInit(float* gyro, float* accel, float* mag){
 
 	LSM9DS1 imu(IMU_MODE_I2C, 0x6a, 0x1c);
 	imu.begin();
@@ -55,8 +44,12 @@ void gyroInit(float *gyro, float *accel, float *mag){
 		exit(EXIT_FAILURE);
 	}
 	imu.calibrate();
+	return imu;
+}
 
-	for(;;){
+void imuRead(float* gyro, float* accel, float* mag, LSM9DS1 imu){
+	float* loc = NULL;
+	//for(;;){
 		while (!imu.gyroAvailable());
 		imu.readGyro();
 		while (!imu.accelAvailable());
@@ -65,11 +58,47 @@ void gyroInit(float *gyro, float *accel, float *mag){
 		imu.readMag();
 
 		*gyro = imu.calcGyro(imu.gx);
-		*loc = *gyro + 1;
+		loc = gyro + 1;
 		*loc = imu.calcGyro(imu.gy);
-		*loc = *gyro + 2;
+		loc = gyro + 2;
 		*loc = imu.calcGyro(imu.gz);
+
+		*accel = imu.calcAccel(imu.ax);
+		loc = accel + 1;
+		*loc = imu.calcAccel(imu.ay);
+		loc = accel + 2;
+		*loc = imu.calcAccel(imu.az);
+
+		*mag = imu.calcMag(imu.mx);
+		loc = mag + 1;
+		*loc = imu.calcMag(imu.my);
+		loc = mag + 2;
+		*loc = imu.calcMag(imu.mz);
 		sleep(1.0);
-	}
-	exit(EXIT_SUCCESS);
+	//}
 }
+
+int main (int argc, char **argv){
+	float g[3] = {0}, a[3] = {0}, m[3] = {0};
+	LSM9DS1 imu = imuInit(g,a,m);
+	imuRead(g,a,m,imu);
+	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+	
+	imuRead(g,a,m,imu);
+	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+
+	imuRead(g,a,m,imu);
+	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+
+
+
+exit(EXIT_SUCCESS);
+}
+
+
