@@ -22,7 +22,7 @@
 
 #include <LSM9DS1_Types.hpp>
 #include <LSM9DS1.hpp>
-#include <gyrscope.hpp>
+#include <gyroscope.hpp>
 
 #include <common.hpp>
 #include <node.hpp>

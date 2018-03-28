@@ -1,3 +1,5 @@
+#include <gyroscope.hpp>
+
 LSM9DS1 imuInit(float* gyro, float* accel, float* mag, int index){
 
 	LSM9DS1 imu(IMU_MODE_I2C, 0x6a, 0x1c);
