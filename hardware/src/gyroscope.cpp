@@ -7,7 +7,8 @@
 #include "LSM9DS1_Types.h"
 #include "LSM9DS1.h"
 
-/*int main(int argc, char *argv[]) {
+/*
+int main(int argc, char *argv[]) {
     LSM9DS1 imu(IMU_MODE_I2C, 0x6a, 0x1c);
     imu.begin();
     if (!imu.begin()) {
@@ -31,7 +32,8 @@
     }
 
     exit(EXIT_SUCCESS);
-}*/
+}
+*/
 
 void gyroInit(float *gyro, float *accel, float *mag);
 
