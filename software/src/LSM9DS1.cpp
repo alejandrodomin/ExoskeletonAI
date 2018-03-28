@@ -25,9 +25,9 @@ Distributed as-is; no warranty is given.
 #include <unistd.h>
 #include <wiringPi.h>
 #include <wiringPiI2C.h>
-#include "LSM9DS1.h"
-#include "LSM9DS1_Registers.h"
-#include "LSM9DS1_Types.h"
+#include "LSM9DS1.hpp"
+#include "LSM9DS1_Registers.hpp"
+#include "LSM9DS1_Types.hpp"
 
 float magSensitivity[4] = {0.00014, 0.00029, 0.00043, 0.00058};
 
