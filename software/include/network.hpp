@@ -13,6 +13,17 @@
 #include <thread>
 #include <list>
 
+#include <stdio.h>
+#include <stdlib.h>
+#include <errno.h>
+#include <time.h>
+#include <sys/time.h>
+#include <unistd.h>
+
+#include <LSM9DS1_Types.hpp>
+#include <LSM9DS1.hpp>
+#include <gyrscope.hpp>
+
 #include <common.hpp>
 #include <node.hpp>
 #include <gene.hpp>
@@ -27,6 +38,12 @@ private:
 
     float walk_distance;  
     float compatibility_distance;/**<Measures how compatible a set of nodes is.*/
+
+    float **gyro;
+    float **accel;
+    float **magno;
+
+    LSM9DS1 *gyros;
 
     list<Gene *> genes; /**<List for all of the genes associated with the node. */
 

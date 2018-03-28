@@ -10,8 +10,9 @@
 
 #include <gene.hpp>
 
+#define NUM_GYROS   3 
 #define NUM_INPUTS  9
-#define NUM_OUTPUTS 6
+#define NUM_OUTPUTS 6 
 #define MAX_THREADS 100
 
 static bool comment;

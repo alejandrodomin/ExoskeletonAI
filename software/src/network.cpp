@@ -15,6 +15,15 @@ Network::Network(){
     fitness = 0;
     num_nodes = 0;
 
+    gyro = new float*[NUM_GYROS];
+    accel = new float*[NUM_GYROS];
+    magno = new float*[NUM_GYROS];
+
+    gyros = new LSM9DS1[NUM_GYROS];
+    for(int i = 0; i < NUM_GYROS; i++){
+        gyros[i] = imuInit(gyro[i], accel[i], magno[i], i);
+    }
+
     for(int i = 0; i < NUM_INPUTS; i++){
         in_nodes.push_back(new Node(input, num_nodes));
     }
@@ -68,6 +77,24 @@ Network::~Network(){
         }
     }
     genes.clear();
+
+    if(gyro != NULL){
+        delete [] gyro;
+        gyro = NULL;
+    }
+    if(accel != NULL){
+        delete [] accel;
+        accel = NULL;
+    }
+    if(magno != NULL){
+        delete [] magno;
+        magno = NULL;
+    }
+
+    if(gyros != NULL){
+        delete gyros;
+        gyros = NULL;
+    }
 }
 
 /**Network run function runs the input,
