@@ -15,14 +15,16 @@ Network::Network(){
     fitness = 0;
     num_nodes = 0;
 
-    gyro = new float*[NUM_GYROS];
-    accel = new float*[NUM_GYROS];
-    magno = new float*[NUM_GYROS];
+    #if HARDWARE
+        gyro = new float*[NUM_GYROS];
+        accel = new float*[NUM_GYROS];
+        magno = new float*[NUM_GYROS];
 
-    gyros = new LSM9DS1[NUM_GYROS];
-    for(int i = 0; i < NUM_GYROS; i++){
-        gyros[i] = imuInit(gyro[i], accel[i], magno[i], i);
-    }
+        gyros = new LSM9DS1[NUM_GYROS];
+        for(int i = 0; i < NUM_GYROS; i++){
+            gyros[i] = imuInit(gyro[i], accel[i], magno[i], i);
+        }
+    #endif
 
     for(int i = 0; i < NUM_INPUTS; i++){
         in_nodes.push_back(new Node(input, num_nodes));
@@ -78,23 +80,25 @@ Network::~Network(){
     }
     genes.clear();
 
-    if(gyro != NULL){
-        delete [] gyro;
-        gyro = NULL;
-    }
-    if(accel != NULL){
-        delete [] accel;
-        accel = NULL;
-    }
-    if(magno != NULL){
-        delete [] magno;
-        magno = NULL;
-    }
+    #if HARDWARE
+        if(gyro != NULL){
+            delete [] gyro;
+            gyro = NULL;
+        }
+        if(accel != NULL){
+            delete [] accel;
+            accel = NULL;
+        }
+        if(magno != NULL){
+            delete [] magno;
+            magno = NULL;
+        }
 
-    if(gyros != NULL){
-        delete gyros;
-        gyros = NULL;
-    }
+        if(gyros != NULL){
+            delete gyros;
+            gyros = NULL;
+        }
+    #endif
 }
 
 /**Network run function runs the input,
@@ -265,7 +269,10 @@ void Network::input_run(){
         if(threads.size() >= MAX_THREADS){
             for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                 if((*it)->joinable()){
-                    // cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    #if DEBUG
+                        cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    #endif
+
                     (*it)->join();
                     if(*it != NULL){
                         delete *it;
@@ -280,7 +287,10 @@ void Network::input_run(){
     if(threads.size() >= 0){
         for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
             if((*it)->joinable()){
-                // cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                #if DEBUG
+                    cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                #endif
+
                 (*it)->join();
                 if(*it != NULL){
                     delete *it;
@@ -306,7 +316,10 @@ void Network::hidden_run(){
 
                 for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                     if((*it)->joinable()){
-                        // cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                        #if DEBUG
+                            cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                        #endif
+
                         (*it)->join();
                         if(*it != NULL){
                             delete *it;
@@ -322,7 +335,10 @@ void Network::hidden_run(){
         if(threads.size() >= 0){
             for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                 if((*it)->joinable()){
-                    // cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    #if DEBUG
+                        cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    #endif
+
                     (*it)->join();
                     if(*it != NULL){
                         delete *it;
@@ -344,7 +360,10 @@ void Network::output_run(){
         if(threads.size() >= MAX_THREADS){
             for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
                 if((*it)->joinable()){    
-                    // cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    #if DEBUG
+                        cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                    #endif
+
                     (*it)->join();
                     if(*it != NULL){
                         delete *it;
@@ -359,7 +378,10 @@ void Network::output_run(){
     if(threads.size() >= 0){
         for(list<boost::thread *>::iterator it = threads.begin(); it != threads.end(); ++it){
             if((*it)->joinable()){
-                // cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                #if DEBUG
+                    cout << "\033[33m[THREAD]\033[0m[NETWORK]: Waiting for thread, " << (*it)->get_id() << " to join." << endl;
+                #endif
+
                 (*it)->join();
                 if(*it != NULL){
                     delete *it;

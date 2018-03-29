@@ -10,12 +10,14 @@
 
 #include <gene.hpp>
 
+#define DEBUG 0
+#define HARDWARE 0
+
 #define NUM_GYROS   3 
 #define NUM_INPUTS  9
 #define NUM_OUTPUTS 6 
 #define MAX_THREADS 100
 
-static bool comment;
 static int innovation_number;
 
 enum gyro {gyroX = 0, gyroY, gyroZ};   /**<Enumerated list for the x,y, and z positions for the gyro. */

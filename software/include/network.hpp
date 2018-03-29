@@ -20,9 +20,11 @@
 #include <sys/time.h>
 #include <unistd.h>
 
+#if DEBUG
 #include <LSM9DS1_Types.hpp>
 #include <LSM9DS1.hpp>
 #include <gyroscope.hpp>
+#endif
 
 #include <common.hpp>
 #include <node.hpp>
@@ -39,11 +41,13 @@ private:
     float walk_distance;  
     float compatibility_distance;/**<Measures how compatible a set of nodes is.*/
 
+    #if DEBUG
     float **gyro;
     float **accel;
     float **magno;
 
     LSM9DS1 *gyros;
+    #endif
 
     list<Gene *> genes; /**<List for all of the genes associated with the node. */
 

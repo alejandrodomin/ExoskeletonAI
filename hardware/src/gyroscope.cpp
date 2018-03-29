@@ -93,28 +93,28 @@ void imuRead(float* gyro, float* accel, float* mag, LSM9DS1 imu){
 	//}
 }
 
-int main (int argc, char **argv){
-	float g[3] = {0}, a[3] = {0}, m[3] = {0};
-	LSM9DS1 imu1 = imuInit(0);
-	LSM9DS1 imu2 = imuInit(1);
-	imuRead(g,a,m,imu1);
-	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
-	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
-	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+// int main (int argc, char **argv){
+// 	float g[3] = {0}, a[3] = {0}, m[3] = {0};
+// 	LSM9DS1 imu1 = imuInit(0);
+// 	LSM9DS1 imu2 = imuInit(1);
+// 	imuRead(g,a,m,imu1);
+// 	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+// 	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+// 	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
 	
-	imuRead(g,a,m,imu2);
-	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
-	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
-	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+// 	imuRead(g,a,m,imu2);
+// 	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+// 	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+// 	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
 
-	imuRead(g,a,m,imu1);
-	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
-	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
-	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+// 	imuRead(g,a,m,imu1);
+// 	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+// 	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+// 	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
 
 
 
-exit(EXIT_SUCCESS);
-}
+// exit(EXIT_SUCCESS);
+// }
 
 
