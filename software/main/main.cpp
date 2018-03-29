@@ -22,21 +22,23 @@ int main(int argc, char **argv, char **env){
   while(index + 1 != argc){
     index++;
 
-    if(strcmp(argv[index],"-h") == 0){
+    if(strcmp(argv[index],"--help") == 0){
       cout << "ExoAI 2.0" << endl;
       cout << "Usage: ExoAI [Options]" << endl;
       cout << "OPTIONS:" << endl;
-      cout << "   -h:   Shows the help page." << endl;
-      cout << "   -c:   Displays the cout comments in the program." << endl;
-      cout << "   -nc:  Doesn't display the cout comments in the program." << endl;
+      cout << "   --help:       Shows the help page." << endl;
+      cout << "   --comments:   Displays the cout comments in the program." << endl;
+      cout << "   --hardware:   Run the program with the hardware." << endl;
 
       return 0;
     }
-    else if(strcmp(argv[index],"-c") == 0){
-      comment = true;
+    else if(strcmp(argv[index],"--comments") == 0){
+      #undef DEBUG
+      #define DEBUG 1
     }
-    else if(strcmp(argv[index],"-nc") == 0){
-      comment = false;
+    else if(strcmp(argv[index],"--hardware") == 0){
+      #undef HARDWARE
+      #define HARDWARE 1
     }
   }
 

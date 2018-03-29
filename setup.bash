@@ -37,15 +37,15 @@ elif [ "$CONT" = "y" ]; then
 	echo "Installing Doxygen."
 	sudo apt install doxygen
 
-	echo "Installing Google Test support."
-	sudo apt install libgtest-dev
-	sudo apt install cmake
-	cd /usr/src/gtest
-	sudo cmake CMakeLists.txt
-	sudo make
-	sudo cp *.a /usr/lib
+#	echo "Installing Google Test support."
+#	sudo apt install libgtest-dev
+#	sudo apt install cmake
+#	cd /usr/src/gtest
+#	sudo cmake CMakeLists.txt
+#	sudo make
+#	sudo cp *.a /usr/lib
 
-	sudo reboot
+#	sudo reboot
 else
 	echo "Command not recognized, aborting setup."
 fi

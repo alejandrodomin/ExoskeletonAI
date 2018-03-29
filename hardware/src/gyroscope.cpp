@@ -40,24 +40,26 @@ LSM9DS1 imuInit(int imuNum){
 	if (imuNum == 0){
 		LSM9DS1 imu(IMU_MODE_I2C, 0x6a, 0x1c);
 		imu.begin();
+		imu.calibrate();
 		if (!imu.begin()){
 			fprintf(stderr, "Failed to communicate with LSM9DS1.\n");
 			exit(EXIT_FAILURE);
 		}
+		return imu;
 	}
 	else if (imuNum == 1){
 		LSM9DS1 imu(IMU_MODE_I2C, 0x6b, 0x1e);
 		imu.begin();
+		imu.calibrate();
 		if (!imu.begin()){
 			fprintf(stderr, "Failed to communicate with LSM9DS1.\n");
 			exit(EXIT_FAILURE);
 		}
+		return imu;
 	}
-	else{
-		fprintf(stderr, "Incorrect imu choice, chose 0,1,2.\n");
-	}
-	imu.calibrate();
-	return imu;
+	
+	fprintf(stderr, "Incorrect imu choice, chose 0,1,2.\n");
+	exit(EXIT_SUCCESS);
 }
 
 void imuRead(float* gyro, float* accel, float* mag, LSM9DS1 imu){
@@ -91,28 +93,28 @@ void imuRead(float* gyro, float* accel, float* mag, LSM9DS1 imu){
 	//}
 }
 
-int main (int argc, char **argv){
-	float g[3] = {0}, a[3] = {0}, m[3] = {0};
-	LSM9DS1 imu1 = imuInit(0);
-	LSM9DS1 imu2 = imuInit(1);
-	imuRead(g,a,m,imu1);
-	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
-	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
-	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+// int main (int argc, char **argv){
+// 	float g[3] = {0}, a[3] = {0}, m[3] = {0};
+// 	LSM9DS1 imu1 = imuInit(0);
+// 	LSM9DS1 imu2 = imuInit(1);
+// 	imuRead(g,a,m,imu1);
+// 	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+// 	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+// 	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
 	
-	imuRead(g,a,m,imu2);
-	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
-	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
-	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+// 	imuRead(g,a,m,imu2);
+// 	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+// 	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+// 	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
 
-	imuRead(g,a,m,imu1);
-	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
-	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
-	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
+// 	imuRead(g,a,m,imu1);
+// 	printf("%f, %f, %f [deg/s]\n", g[0], g[1], g[2]);
+// 	printf("%f, %f, %f [Gs]\n", a[0], a[1], a[2]);
+// 	printf("%f, %f, %f [gauss]\n", m[0], m[1], m[2]);
 
 
 
-exit(EXIT_SUCCESS);
-}
+// exit(EXIT_SUCCESS);
+// }
 
 
