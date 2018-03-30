@@ -36,7 +36,8 @@
                 "/usr/include",
                 "${workspaceRoot}",
                 "${workspaceRoot}/software/include",
-                "/usr/lib/openmpi/include"
+                "/usr/lib/openmpi/include",
+                "${workspaceFolder}/hardware/include"
             ],
             "defines": [],
             "intelliSenseMode": "clang-x64",

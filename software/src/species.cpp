@@ -279,7 +279,6 @@ int Species::compute_disjoint(Network *net1, Network *net2){
 float Species::weight_diff_match_genes(Network *net1, Network *net2){
     int total;
     float sum;
-    float average;
 
     list<Gene *>::iterator it  = net1->get_genes()->begin();
     list<Gene *>::iterator itr = net2->get_genes()->begin();
@@ -294,7 +293,7 @@ float Species::weight_diff_match_genes(Network *net1, Network *net2){
         itr++;
     }
 
-    return average;
+    return sum / total;
 }   
 
 Network* Species::get_fittest_net(){

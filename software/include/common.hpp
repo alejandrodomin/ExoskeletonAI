@@ -10,7 +10,7 @@
 
 #include <gene.hpp>
 
-#define DEBUG 0
+#define DEBUG 1
 #define HARDWARE 0
 
 #define NUM_GYROS   3 

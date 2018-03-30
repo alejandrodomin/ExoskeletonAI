@@ -24,8 +24,10 @@ WXOBJECTS := $(patsubst $(WXSRC)/%.cpp, $(OBJ)/%.o, $(WXSOURCES))
 $(PROJ): $(OBJECTS) $(WXOBJECTS)
 	$(CC) $(DEBUG) $^ $(WXLFLAGS) -o $@ $(LFLAGS)
 
+ifeq ($(SOFTWARE), "1")
 $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(WXCFLAGS) $(DEBUG) $(CFLAGS) -I$(INC) -I$(WXINC) -c $< -o $@
+endif
 
 $(OBJ)/%.o: $(WXSRC)/%.cpp
 	$(CC) $(WXCFLAGS) $(DEBUG) $(CFLAGS) -I$(INC) -I$(WXINC) -c $< -o $@

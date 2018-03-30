@@ -2,39 +2,30 @@ CC = mpic++
 
 SRC := src
 MSRC := main
-HSRC := ../hardware/src
 
 OBJ := build
-INC := include
-HINC := 
+INC := include 
 
-DEBUG = -g
-LFLAGS = -lboost_thread -lboost_system -llsm9ds1
-CFLAGS = -Wall -std=c++11 
+DEBUG = -g -Og
+
+LFLAGS = -lboost_thread -lboost_system
+CFLAGS = -Wall -std=c++11 # -O3 for largest amount of optimization
 PROJ = ExoSAI
 
 SOURCES := $(wildcard $(SRC)/*.cpp)
 OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
 
-SOURCES += $(wildcard $(MSRC)/*.cpp)
-OBJECTS += $(patsubst $(MSRC)/%.cpp, $(OBJ)/%.o, $(MSOURCES))
-
-ifeq ($(HARDWARE),"1")
-	SOURCES += $(wildcard $(HSRC)/*.cpp)
-	OBJECTS += $(patsubst $(HSRC)/%.cpp, $(OBJ)/%.o, $(HSOURCES))
-
-	HINC = ../hardware/include
-else
-endif
+MSOURCES := $(wildcard $(MSRC)/*.cpp)
+MOBJECTS := $(patsubst $(MSRC)/%.cpp, $(OBJ)/%.o, $(MSOURCES))
 
 $(PROJ): $(OBJECTS) $(MOBJECTS)
 	$(CC) $(DEBUG) $^ -o $@ $(LFLAGS)
 
 $(OBJ)/%.o: $(SRC)/%.cpp
-	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -I$(HINC) -c $< -o $@
+	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@
 
 $(OBJ)/%.o: $(MSRC)/%.cpp
-	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -I$(HINC) -c $< -o $@
+	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
 	rm $(OBJECTS) $(MOBJECTS) $(PROJ)

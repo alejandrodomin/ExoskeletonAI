@@ -44,7 +44,6 @@ boost::thread * Node::spawn_thread(list<Gene *> genes){
 bool Node::out_func(list<Gene *> genes){
     std::lock_guard<std::mutex> lock(mtx); // doesn't need to be unlocked, will automatically unlock when out of function scope
 
-    int index = 0;
     double total = 0;
 
     if(genes.size() > 0){
@@ -92,6 +91,7 @@ float Node::get_outputfunc() const{
 */
 bool Node::set_outputfunc(float num){
     output_func = num;
+    return true;
 }
 
 /** Finds the layer the node is located in, 

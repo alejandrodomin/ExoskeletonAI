@@ -9,6 +9,10 @@
 using namespace std;
 
 Ecosystem::Ecosystem(int num_species, int num_nets){
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered consturctor." << endl;
+  #endif
+
   for(int index = 0; index < num_species; index++){
     organisms.push_back(new Species());
   }
@@ -16,9 +20,17 @@ Ecosystem::Ecosystem(int num_species, int num_nets){
     for(int index = 0; index < num_nets; index++)
       (*it)->add_network(new Network());
   }
+
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Exiting consturctor." << endl;
+  #endif
 }
 
 Ecosystem::~Ecosystem(){
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered de-consturctor." << endl;
+  #endif
+
   for(list<Species *>::iterator it = organisms.begin(); it != organisms.end(); it++){
     if(*it != NULL){
       delete *it;
@@ -34,9 +46,17 @@ Ecosystem::~Ecosystem(){
     }
   }
   strongest.clear();
+
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Exiting de-consturctor." << endl;
+  #endif
 }
 
 bool Ecosystem::live(){
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered live." << endl;
+  #endif
+
   int num_networks = 0;
   int size_of_nets = 0;
 
@@ -100,29 +120,42 @@ bool Ecosystem::live(){
   /* Simple statistics displayed after each run */
   int counter = 1, numNodes = 0;
   for(list<Species *>::iterator species_iter= organisms.begin(); species_iter!= organisms.end(); ++species_iter){
-    #if DEBUG
-      cout<< "\tNumber of networks for species #" << counter << " : " << (*species_iter)->get_networks()->size() << endl;
-    #endif
+    // #if DEBUG
+      cout<< "Number of networks for species #" << counter << " : " << (*species_iter)->get_networks()->size() << endl;
+    // #endif
     
     for(list<Network *>::iterator itr = (*species_iter)->get_networks()->begin(); itr != (*species_iter)->get_networks()->end(); itr++){
       numNodes += (*itr)->get_num_nodes();
     }
     
-    #if DEBUG
-      cout<< "\t\tTotal number of nodes: " << numNodes << endl;
-    #endif
+    // #if DEBUG
+      cout << "\tTotal number of nodes: " << numNodes << endl;
+    // #endif
     
     numNodes = 0;
     counter++;
   }
 
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Exiting live." << endl;
+  #endif
+
   return true;
 }
 
 bool Ecosystem::kill_unfit(list<Network *> *unfit){
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered kill_unfit." << endl;
+  #endif
+
   if(unfit->size() > 0)
     unfit->sort(compareNets);
-  else return false;
+  else{
+    #if DEBUG
+      cout << "[INFO][ECOSYSTEM]: Exiting kill_unfit." << endl;
+    #endif
+    return false;
+  }
 
   int size = unfit->size() * QUARTER_KILL;
 
@@ -150,29 +183,56 @@ bool Ecosystem::kill_unfit(list<Network *> *unfit){
 
   *unfit = temp;
 
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Exiting kill_unfit." << endl;
+  #endif
+
   return true;
 }
 
 bool Ecosystem::compareGenes(const Gene *one, const Gene *two){
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered compareGenes." << endl;
+    cout << "[INFO][ECOSYSTEM]: Exiting compareGenes." << endl;
+  #endif
+
   return one->get_inov_id() < two->get_inov_id();
 }
 
 bool Ecosystem::compareNets(const Network *one, const Network *two){ // sorts less fit first to more fit later.
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered compareNets." << endl;
+    cout << "[INFO][ECOSYSTEM]: Exiting compareNets." << endl;
+  #endif
+
   return one->get_fitness() < two->get_fitness();
 }
 
 Network* Ecosystem::breed(Network *one, Network *two){
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered breed." << endl;
+  #endif
+
   Network *newNet = new Network();
 
-  if(one == NULL || two == NULL)
+  if(one == NULL || two == NULL){
+    #if DEBUG
+      cout << "[INFO][ECOSYSTEM]: Exiting breed." << endl;
+    #endif
     return newNet;
+  }
 
 
   if(one->get_genes()->size() > 1 && two->get_genes()->size() > 1){
     one->get_genes()->sort(compareGenes);
     two->get_genes()->sort(compareGenes);
   }
-  else return newNet;
+  else{
+    #if DEBUG
+      cout << "[INFO][ECOSYSTEM]: Exiting breed." << endl;
+    #endif
+    return newNet;
+  }
 
   list<Gene *>::iterator itone = one->get_genes()->begin();
   list<Gene *>::iterator ittwo = two->get_genes()->begin();
@@ -190,9 +250,18 @@ Network* Ecosystem::breed(Network *one, Network *two){
     ittwo++;
   }
 
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Exiting breed." << endl;
+  #endif
+
   return newNet;
 }
 
 list<Species *>* Ecosystem::get_organisms(){
+  #if DEBUG
+    cout << "[INFO][ECOSYSTEM]: Entered get_organisms." << endl;
+    cout << "[INFO][ECOSYSTEM]: Exiting get_organisms." << endl;
+  #endif
+
   return &organisms;
 }

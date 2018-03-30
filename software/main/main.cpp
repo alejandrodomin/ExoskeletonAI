@@ -18,6 +18,10 @@
 using namespace std;
 
 int main(int argc, char **argv, char **env){
+  #if DEBUG
+    cout << "[INFO][MAIN]: Entered main." << endl;
+  #endif
+
   int index = 0;
   while(index + 1 != argc){
     index++;
@@ -42,12 +46,12 @@ int main(int argc, char **argv, char **env){
     }
   }
 
-  bool alive = true;
+  // bool alive = true;
   Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
 
   // while(alive){
   for(int i = 0; i < 10; i++)
-    alive = life->live();
+    /* alive = */ life->live();
   // }
 
   if(life != NULL){
@@ -55,5 +59,9 @@ int main(int argc, char **argv, char **env){
     life = NULL;
   }
     
+  #if DEBUG
+    cout << "[INFO][MAIN]: Exiting main." << endl;
+  #endif
+
   return 0;
 }

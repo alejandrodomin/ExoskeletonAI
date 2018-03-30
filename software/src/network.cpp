@@ -11,6 +11,10 @@ using namespace std;
  * output nodes, and threads.
  */
 Network::Network(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered constructor." << endl;
+    #endif
+
     crashes = 0;
     fitness = 0;
     num_nodes = 0;
@@ -33,6 +37,10 @@ Network::Network(){
     for(int i = 0; i < NUM_INPUTS; i++){
         out_nodes.push_back(new Node(output, num_nodes));
     }
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting constructor." << endl;
+    #endif
 }
 
 /**Network destructor deletes memory allocated to
@@ -40,6 +48,10 @@ Network::Network(){
  * and genes.
  */ 
 Network::~Network(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered de-constructor." << endl;
+    #endif
+
     for(list<Node *>::iterator it = in_nodes.begin(); it != in_nodes.end(); it++){
         if(*it != NULL){
             delete *it;
@@ -99,15 +111,27 @@ Network::~Network(){
             gyros = NULL;
         }
     #endif
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting de-constructor." << endl;
+    #endif
 }
 
 /**Network run function runs the input,
  * hidden, and output nodes.
  */ 
 void Network::run(){				// there is alot of safety measures that need to be put into here
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered run." << endl;
+    #endif
+    
     input_run();
     hidden_run();
     output_run();
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting run." << endl;
+    #endif
 }
 
 /**Network mutate assigns a random value.
@@ -198,15 +222,23 @@ float Network::get_compatibility_distance() const{
 bool Network::rand_node(){
     num_nodes++;
     hidden_nodes.push_back(new Node(hidden, num_nodes));
+    return true;
 }
 
 /** Network rand_connection creates a random connection between two nodes.
  */ 
 bool Network::rand_connection(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered rand_connection." << endl;
+    #endif
+
     int node_one, node_two;
 
-    node_one = rand() % num_nodes + 1;
-    node_two = rand() % num_nodes + 1;
+    if(num_nodes > 0){
+        node_one = rand() % num_nodes + 1;
+        node_two = rand() % num_nodes + 1;
+    }
+    else return false;
 
     Node *nodeOne, *nodeTwo;
 
@@ -238,6 +270,11 @@ bool Network::rand_connection(){
     for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
         if((*it)->get_in_node() == node_one && (*it)->get_out_node() == node_two){
             genes.push_back(new Gene(nodeOne, nodeTwo, (*it)->get_inov_id()));
+
+            #if DEBUG
+                cout << "[INFO][NETWORK]: Exiting rand_connection." << endl;
+            #endif    
+
             return true;
         }
     }
@@ -246,6 +283,10 @@ bool Network::rand_connection(){
     unique_genes.push_back(new Gene(nodeOne, nodeTwo, innovation_number));
 
     innovation_number++;
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting rand_connection." << endl;
+    #endif
 
     return true;    
 }
@@ -263,6 +304,10 @@ bool Network::compare(const Node *one, const Node *two){
 /** Network input_run spawns threads that run the input nodes.
  */ 
 void Network::input_run(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered input_run." << endl;
+    #endif
+
     for(list<Node *>::iterator itr = in_nodes.begin(); itr != in_nodes.end(); itr++){
         threads.push_back((*itr)->spawn_thread(genes));
 
@@ -300,11 +345,19 @@ void Network::input_run(){
         }
         threads.clear();
     }
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting input_run." << endl;
+    #endif
 }
 
 /**Network hidden_run sorts the hidden nodes by layer and runs them.
  */ 
 void Network::hidden_run(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered hidden_run." << endl;
+    #endif
+
     int last_layer = 1;
 
     if(hidden_nodes.size() > 0){
@@ -349,11 +402,19 @@ void Network::hidden_run(){
             threads.clear();
         }
     }
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting hidden_run." << endl;
+    #endif
 }
 
 /**Network output_run spawns threads that run the output nodes.
  */ 
 void Network::output_run(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered output_run." << endl;
+    #endif
+
     for(list<Node *>::iterator itr = out_nodes.begin(); itr != out_nodes.end(); itr++){
         threads.push_back((*itr)->spawn_thread(genes));
 
@@ -391,6 +452,10 @@ void Network::output_run(){
         }
         threads.clear();
     }
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting output_run." << endl;
+    #endif
 }
 
 /** Returns the number of input nodes.

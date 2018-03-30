@@ -20,10 +20,10 @@
 #include <sys/time.h>
 #include <unistd.h>
 
-#if DEBUG
-#include <LSM9DS1_Types.hpp>
-#include <LSM9DS1.hpp>
-#include <gyroscope.hpp>
+#if HARDWARE
+#include <LSM9DS1_Types.h>
+#include <LSM9DS1.h>
+#include <gyroscope.h>
 #endif
 
 #include <common.hpp>
@@ -41,7 +41,7 @@ private:
     float walk_distance;  
     float compatibility_distance;/**<Measures how compatible a set of nodes is.*/
 
-    #if DEBUG
+    #if HARDWARE
     float **gyro;
     float **accel;
     float **magno;
