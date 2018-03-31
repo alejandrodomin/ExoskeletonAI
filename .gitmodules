@@ -4,3 +4,6 @@
 [submodule "lib/doxygen"]
 	path = lib/doxygen
 	url = https://github.com/doxygen/doxygen.git
+[submodule "lib/wiringPi"]
+	path = lib/wiringPi
+	url = https://github.com/WiringPi/WiringPi

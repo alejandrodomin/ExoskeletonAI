@@ -46,4 +46,4 @@ $(OBJ)/%.o: $(GSRC)/%.cpp
 endif
 
 clean:
-	rm $(SOBJECTS) $(HOBJECTS) $(PROJ)
+	rm $(SOBJECTS) $(HOBJECTS) $(GOBJECTS) $(PROJ)
