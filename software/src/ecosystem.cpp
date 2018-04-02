@@ -103,11 +103,12 @@ bool Ecosystem::live(){
   for(list<Species *>::iterator it = organisms.begin(); it != organisms.end(); it++){
     for(list<Network *>::iterator itr = (*it)->get_networks()->begin(); itr != (*it)->get_networks()->end(); itr++){      
       if((*itr)->get_compatibility_distance() > 0.25){
-        (*it)->get_networks()->splice(itr, *(newSpecies->get_networks()));
+        if((*it)->get_networks()->size() > 0)
+          (*it)->get_networks()->splice(itr, *(newSpecies->get_networks()));
       }
 
       #if DEBUG
-        cout<< "Compatibility number: " << (*itr)->get_compatibility_distance() << endl;
+        cout << "Compatibility number: " << (*itr)->get_compatibility_distance() << endl;
       #endif
     }
   }
@@ -115,22 +116,28 @@ bool Ecosystem::live(){
   if(newSpecies->get_networks()->size() > 0){
     organisms.push_back(newSpecies);
   }
+  else{
+    if(newSpecies != NULL){
+      delete newSpecies;
+      newSpecies = NULL;
+    }
+  }  
 
 
   /* Simple statistics displayed after each run */
   int counter = 1, numNodes = 0;
   for(list<Species *>::iterator species_iter= organisms.begin(); species_iter!= organisms.end(); ++species_iter){
-    // #if DEBUG
-      cout<< "Number of networks for species #" << counter << " : " << (*species_iter)->get_networks()->size() << endl;
-    // #endif
+    #if DEBUG
+      cout << "Number of networks for species #" << counter << " : " << (*species_iter)->get_networks()->size() << endl;
+    #endif
     
     for(list<Network *>::iterator itr = (*species_iter)->get_networks()->begin(); itr != (*species_iter)->get_networks()->end(); itr++){
       numNodes += (*itr)->get_num_nodes();
     }
     
-    // #if DEBUG
+    #if DEBUG
       cout << "\tTotal number of nodes: " << numNodes << endl;
-    // #endif
+    #endif
     
     numNodes = 0;
     counter++;

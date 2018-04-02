@@ -17,7 +17,6 @@ Network::Network(){
 
     crashes = 0;
     fitness = 0;
-    num_nodes = 0;
 
     #if HARDWARE
         gyro = new float*[NUM_GYROS];
@@ -31,11 +30,11 @@ Network::Network(){
     #endif
 
     for(int i = 0; i < NUM_INPUTS; i++){
-        in_nodes.push_back(new Node(input, num_nodes));
+        in_nodes.push_back(new Node(input, get_num_nodes()));
     }
 
-    for(int i = 0; i < NUM_INPUTS; i++){
-        out_nodes.push_back(new Node(output, num_nodes));
+    for(int i = 0; i < NUM_OUTPUTS; i++){
+        out_nodes.push_back(new Node(output, get_num_nodes()));
     }
 
     #if DEBUG
@@ -137,36 +136,57 @@ void Network::run(){				// there is alot of safety measures that need to be put 
 /**Network mutate assigns a random value.
  */ 
 void Network::mutate(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered mutate." << endl;
+    #endif
+
     int num = (rand() % 3) + 1;
 
     if(num % 3 == 0)
         rand_node();
     else rand_connection();
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting mutate." << endl;
+    #endif
 }
 
 /**Network use_output has not been implemented.
  */ 
 void Network::use_output(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered use_output." << endl;
+        cout << "[INFO][NETWORK]: Exiting use_output." << endl;
+    #endif
 }
 
 void Network::calculate_fit(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered calculate_fit." << endl;
+    #endif
+
     if(crashes == 0)
         fitness = walk_distance;
     else fitness = walk_distance / crashes;
-}
 
-/**Network set_num_nodes sets the number of nodes.
- * @param num_nodes the number of nodes.
- */ 
-void Network::add_num_nodes(int num_nodes){
-    this->num_nodes += num_nodes;
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting calculate_fit." << endl;
+    #endif
 }
 
 /**Network set_compatibility_distance sets the compatibility distance.
  * @param newcomp_distance the new compatibility distance.
  */ 
 void Network::set_compatibility_distance(float newcomp_distance){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered set_compatibility_distance." << endl;
+    #endif
+
     compatibility_distance = newcomp_distance;
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting set_compatibility_distance." << endl;
+    #endif
 }
 
 /** My function doing something...
@@ -175,6 +195,10 @@ void Network::set_compatibility_distance(float newcomp_distance){
                     calls this function.
 */
 void Network::add_gene(Node *snode, Node *onode){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered add_gene." << endl;
+    #endif
+
     for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
         if((*it)->get_in_node() == snode->get_nodeid() && (*it)->get_out_node() == onode->get_nodeid()){
             genes.push_back(new Gene(snode, onode, (*it)->get_inov_id()));
@@ -186,22 +210,39 @@ void Network::add_gene(Node *snode, Node *onode){
     unique_genes.push_back(new Gene(snode, onode, innovation_number));
 
     innovation_number++;
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting add_gene." << endl;
+    #endif
 }
 
 /** Returns fitness value.
  * @return int type.
  */ 
 int Network::get_fitness() const{
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_fitness." << endl;
+        cout << "[INFO][NETWORK]: Exiting get_fitness." << endl;
+    #endif
+
     return fitness;
 }
 
 int Network::get_maxlayer() const{
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_maxlayer." << endl;
+    #endif
+
     int maxlayer = 0;
     for(list<Node *>::const_iterator it = hidden_nodes.begin(); it != hidden_nodes.end(); it++){
         if((*it)->get_layer() > maxlayer){
             maxlayer = (*it)->get_layer();
         }
     }
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting get_maxlayer." << endl;
+    #endif
 
     return maxlayer;
 }
@@ -210,18 +251,36 @@ int Network::get_maxlayer() const{
  * @return int type.
  */ 
 int Network::get_num_nodes() const{
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_num_nodes." << endl;
+        cout << "[INFO][NETWORK]: Exiting get_num_nodes." << endl;
+    #endif
+
     return in_nodes.size() + out_nodes.size() + hidden_nodes.size();
 }
 
 float Network::get_compatibility_distance() const{
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_compatibility_distance." << endl;
+        cout << "[INFO][NETWORK]: Exiting get_compatibility_distance." << endl;
+    #endif
+
     return compatibility_distance;
 }
 
 /** Network rand_node creates a random hidden node.
  */ 
 bool Network::rand_node(){
-    num_nodes++;
-    hidden_nodes.push_back(new Node(hidden, num_nodes));
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered rand_node." << endl;
+    #endif
+
+    hidden_nodes.push_back(new Node(hidden, get_num_nodes()));
+
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Exiting rand_node." << endl;
+    #endif
+
     return true;
 }
 
@@ -234,13 +293,11 @@ bool Network::rand_connection(){
 
     int node_one, node_two;
 
-    if(num_nodes > 0){
-        node_one = rand() % num_nodes + 1;
-        node_two = rand() % num_nodes + 1;
-    }
-    else return false;
+    node_one = rand() % get_num_nodes() + 1;
+    node_two = rand() % get_num_nodes() + 1;
 
-    Node *nodeOne, *nodeTwo;
+    Node *nodeOne = NULL;
+    Node *nodeTwo = NULL;
 
     for(list<Node *>::iterator it = in_nodes.begin(); it != in_nodes.end(); ++it){
         if((*it)->get_nodeid() == node_one){
@@ -267,9 +324,16 @@ bool Network::rand_connection(){
         }
     }
 
+    if(nodeOne == NULL || nodeTwo == NULL){
+        #if DEBUG
+            cout << "\033[31m[ERROR]\033[0m[NETWORK]: Exiting rand_connection." << endl;
+        #endif
+        return false;
+    }
+
     for(list<Gene *>::iterator it = unique_genes.begin(); it != unique_genes.end(); ++it){
         if((*it)->get_in_node() == node_one && (*it)->get_out_node() == node_two){
-            genes.push_back(new Gene(nodeOne, nodeTwo, (*it)->get_inov_id()));
+           genes.push_back(new Gene(nodeOne, nodeTwo, (*it)->get_inov_id()));
 
             #if DEBUG
                 cout << "[INFO][NETWORK]: Exiting rand_connection." << endl;
@@ -298,6 +362,11 @@ bool Network::rand_connection(){
  * @return bool
  */ 
 bool Network::compare(const Node *one, const Node *two){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered compare." << endl;
+        cout << "[INFO][NETWORK]: Exiting compare." << endl;
+    #endif
+
     return one->get_layer() < two->get_layer();
 }
 
@@ -462,10 +531,20 @@ void Network::output_run(){
  * @return Node**
  */ 
 list<Node *>* Network::get_input(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_input." << endl;
+        cout << "[INFO][NETWORK]: Exiting get_input." << endl;
+    #endif
+
     return &in_nodes;
 }
 
 list<Node *>* Network::get_output(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_output." << endl;
+        cout << "[INFO][NETWORK]: Exiting get_output." << endl;
+    #endif
+
     return &out_nodes;
 }
 
@@ -473,6 +552,11 @@ list<Node *>* Network::get_output(){
  * @return list<Gene *>
  */ 
 list<Gene *>* Network::get_genes(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_genes." << endl;
+        cout << "[INFO][NETWORK]: Exiting get_genes." << endl;
+    #endif
+
     return &genes;
 }
 
@@ -480,5 +564,10 @@ list<Gene *>* Network::get_genes(){
  * @return list<Node *>
  */ 
 list<Node *>* Network::get_hiddennodes(){
+    #if DEBUG
+        cout << "[INFO][NETWORK]: Entered get_hiddennodes." << endl;
+        cout << "[INFO][NETWORK]: Exiting get_hiddennodes." << endl;
+    #endif
+
     return &hidden_nodes;
 }

@@ -9,7 +9,7 @@ INC := include
 DEBUG = -g -Og
 
 LFLAGS = -lboost_thread -lboost_system
-CFLAGS = -Wall -std=c++11 # -O3 for largest amount of optimization
+CFLAGS = -Wall -Wunused-variable -std=c++11 # -O3 for largest amount of optimization
 PROJ = ExoSAI
 
 SOURCES := $(wildcard $(SRC)/*.cpp)

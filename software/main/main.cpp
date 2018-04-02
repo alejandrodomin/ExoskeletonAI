@@ -46,13 +46,12 @@ int main(int argc, char **argv, char **env){
     }
   }
 
-  // bool alive = true;
+  bool alive = true;
   Ecosystem *life = new Ecosystem(INIT_SPECIES, INIT_NETWORK);
 
-  // while(alive){
-  for(int i = 0; i < 10; i++)
-    /* alive = */ life->live();
-  // }
+  while(alive){
+      alive = life->live();
+  }
 
   if(life != NULL){
     delete life;
