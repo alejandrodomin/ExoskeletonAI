@@ -4,7 +4,7 @@ OBJ := build
 INC := include
 
 DEBUG = -g
-LFLAGS = -llsm9ds1
+LFLAGS = -llsm9ds1 -lwiringPi
 CFLAGS = -Wfatal-errors -std=c++11
 
 PROJ = ExoHAI

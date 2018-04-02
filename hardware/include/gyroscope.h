@@ -10,7 +10,7 @@
 #include "LSM9DS1_Types.h"
 #include "LSM9DS1.h"
 
-LSM9DS1 imuInit(float* gyro, float* accel, float* mag, int index);
+LSM9DS1 imuInit(int index);
 void imuRead(float* gyro, float* accel, float* mag, LSM9DS1 imu);
 
 #endif

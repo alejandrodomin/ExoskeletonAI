@@ -25,7 +25,7 @@ Network::Network(){
 
         gyros = new LSM9DS1[NUM_GYROS];
         for(int i = 0; i < NUM_GYROS; i++){
-            gyros[i] = imuInit(gyro[i], accel[i], magno[i], i);
+            gyros[i] = imuInit(i);
         }
     #endif
 

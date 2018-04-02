@@ -7,3 +7,6 @@
 [submodule "lib/wiringPi"]
 	path = lib/wiringPi
 	url = https://github.com/WiringPi/WiringPi
+[submodule "lib/wiringPI"]
+	path = lib/wiringPI
+	url = https://github.com/WiringPi/WiringPi

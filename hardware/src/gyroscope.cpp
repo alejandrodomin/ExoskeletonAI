@@ -92,7 +92,7 @@ void imuRead(float* gyro, float* accel, float* mag, LSM9DS1 imu){
 		sleep(1.0);
 	//}
 }
-
+/*
 int main (int argc, char **argv){
 	float g[3] = {0}, a[3] = {0}, m[3] = {0};
 	LSM9DS1 imu1 = imuInit(0);
@@ -117,4 +117,4 @@ int main (int argc, char **argv){
 exit(EXIT_SUCCESS);
 }
 
-
+*/

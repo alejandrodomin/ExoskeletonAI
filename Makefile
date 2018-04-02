@@ -15,7 +15,7 @@ GINC := gui/include
 endif
 
 CFLAGS = -Wall -Wfatal-errors -std=c++11
-LFLAGS = -lboost_thread -lboost_system -llsm9ds1
+LFLAGS = -lboost_thread -lboost_system -llsm9ds1 -lwiringPi
 
 ifeq ($(GUI), "1")
 CFLAGS += $(shell wx-config --cxxflags)
@@ -31,7 +31,10 @@ SOBJECTS := $(patsubst $(SSRC)/%.cpp, $(OBJ)/%.o, $(SSOURCES))
 HSOURCES := $(wildcard $(HSRC)/*.cpp)
 HOBJECTS := $(patsubst $(HSRC)/%.cpp, $(OBJ)/%.o, $(HSOURCES))
 
-$(PROJ): $(SOBJECTS) $(HOBJECTS)
+MSOURCES := $(wildcard software/main/*.cpp)
+MOBJECTS := $(patsubst software/main/%.cpp, $(OBJ)/%.o, $(MSOURCES))
+
+$(PROJ): $(SOBJECTS) $(HOBJECTS) $(MOBJECTS)
 	$(CC) $(DEBUG) $^ -o $@ $(LFLAGS)
 
 $(OBJ)/%.o: $(SSRC)/%.cpp
@@ -44,6 +47,9 @@ ifeq ($(GUI), "1")
 $(OBJ)/%.o: $(GSRC)/%.cpp
 	$(CC) $(CFLAGS) -I$(GINC) -I$(SINC) -I$(HINC) -c $< -o $@
 endif
+
+$(OBJ)/%.o: software/main/*.cpp
+	$(CC) $(CFLAGS) -I$(SINC) -I$(HINC) -c $< -o $@
 
 clean:
 	rm $(SOBJECTS) $(HOBJECTS) $(GOBJECTS) $(PROJ)
