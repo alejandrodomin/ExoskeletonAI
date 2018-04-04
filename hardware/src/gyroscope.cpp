@@ -58,7 +58,7 @@ LSM9DS1 imuInit(int imuNum){
 		return imu;
 	}
 	
-	fprintf(stderr, "Incorrect imu choice, chose 0,1,2.\n");
+	fprintf(stderr, "Incorrect imu choice, chose 0 or 1.\n");
 	exit(EXIT_SUCCESS);
 }
 
@@ -116,5 +116,5 @@ int main (int argc, char **argv){
 
 exit(EXIT_SUCCESS);
 }
-
 */
+
