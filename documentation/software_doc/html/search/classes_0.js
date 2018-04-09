@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['gene',['Gene',['../classGene.html',1,'']]]
+  ['ecosystem',['Ecosystem',['../classEcosystem.html',1,'']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['mutate',['mutate',['../classNetwork.html#aee08409aeb49afa57118ecd46fe78860',1,'Network::mutate()'],['../classSpecies.html#abfce3627718863b576acc7c9de058091',1,'Species::mutate()']]]
+  ['input_5frun',['input_run',['../classNetwork.html#ab86fd33a8f5a6eeb4536fedcc9303d36',1,'Network']]],
+  ['is_5fstale',['is_stale',['../classSpecies.html#a716e5737f0367dc4f908bab1e47cf5ac',1,'Species']]]
 ];

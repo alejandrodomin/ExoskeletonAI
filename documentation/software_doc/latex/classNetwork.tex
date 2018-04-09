@@ -13,7 +13,8 @@ void \hyperlink{classNetwork_aee08409aeb49afa57118ecd46fe78860}{mutate} ()
 \item 
 void \hyperlink{classNetwork_a7ed4519d18b5a0ef1609c0bcb5293eac}{use\+\_\+output} ()
 \item 
-void \hyperlink{classNetwork_a4a5894f93aa47d4a39f3709d1f828758}{add\+\_\+num\+\_\+nodes} (int)
+void {\bfseries calculate\+\_\+fit} ()\hypertarget{classNetwork_ac1aac2085b9f0ca80d3876a76d5e5bd4}{}\label{classNetwork_ac1aac2085b9f0ca80d3876a76d5e5bd4}
+
 \item 
 void \hyperlink{classNetwork_a05aacf7dc8b0a5f5ad450a8967a23bcd}{set\+\_\+compatibility\+\_\+distance} (float)
 \item 
@@ -21,23 +22,31 @@ void \hyperlink{classNetwork_a3e94eace0d502e87c88bc33cac84cfc4}{add\+\_\+gene} (
 \item 
 int \hyperlink{classNetwork_a1dc09e49b864fdd2cf44530b765c924b}{get\+\_\+fitness} () const 
 \item 
+int {\bfseries get\+\_\+maxlayer} () const \hypertarget{classNetwork_a4704867444987554fc7fe24f0a0c4e73}{}\label{classNetwork_a4704867444987554fc7fe24f0a0c4e73}
+
+\item 
 int \hyperlink{classNetwork_afaeeda0548935cc3da97b1978884c851}{get\+\_\+num\+\_\+nodes} () const 
+\item 
+float {\bfseries get\+\_\+compatibility\+\_\+distance} () const \hypertarget{classNetwork_a678c0957f0995c31d06bfb3a19446ccb}{}\label{classNetwork_a678c0957f0995c31d06bfb3a19446ccb}
+
 \item 
 bool \hyperlink{classNetwork_a29676c0b42a6123b441e7f1fcba522b4}{rand\+\_\+node} ()
 \item 
 bool \hyperlink{classNetwork_a5f85af3cb52fcab5b15b226496686e77}{rand\+\_\+connection} ()
 \item 
-\hyperlink{classNode}{Node} $\ast$$\ast$ \hyperlink{classNetwork_a40d0e94071662469e6cacafbd6f42f07}{get\+\_\+input} () const 
+list$<$ \hyperlink{classGene}{Gene} $\ast$ $>$ $\ast$ \hyperlink{classNetwork_a5c44d0a8c6c866df44d58becdde9fd18}{get\+\_\+genes} ()
 \item 
-list$<$ \hyperlink{classGene}{Gene} $\ast$ $>$ \hyperlink{classNetwork_aa55b25f282057ae47e0de0eeea39445f}{get\+\_\+genes} () const 
+list$<$ \hyperlink{classNode}{Node} $\ast$ $>$ $\ast$ \hyperlink{classNetwork_ac348d720cf84bd0cea6b1530e8afe7fa}{get\+\_\+input} ()
 \item 
-list$<$ \hyperlink{classNode}{Node} $\ast$ $>$ {\bfseries get\+\_\+hiddennodes} () const \hypertarget{classNetwork_a44a5bc55c678e26d8644012a0da88a68}{}\label{classNetwork_a44a5bc55c678e26d8644012a0da88a68}
+list$<$ \hyperlink{classNode}{Node} $\ast$ $>$ $\ast$ {\bfseries get\+\_\+output} ()\hypertarget{classNetwork_aa6aa0b2129738127f715a2841c07331c}{}\label{classNetwork_aa6aa0b2129738127f715a2841c07331c}
 
+\item 
+list$<$ \hyperlink{classNode}{Node} $\ast$ $>$ $\ast$ \hyperlink{classNetwork_a5c004b11400079855ed37a932732f6b8}{get\+\_\+hiddennodes} ()
 \end{DoxyCompactItemize}
 \subsection*{Static Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
-static bool \hyperlink{classNetwork_a2783710245a6e6e47a5a69b649aa79fe}{compare} (\hyperlink{classNode}{Node} $\ast$, \hyperlink{classNode}{Node} $\ast$)
+static bool \hyperlink{classNetwork_a243d53ec51b12215d7c5709c93642d88}{compare} (const \hyperlink{classNode}{Node} $\ast$, const \hyperlink{classNode}{Node} $\ast$)
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
 \begin{DoxyCompactItemize}
@@ -58,14 +67,14 @@ void \hyperlink{classNetwork_a4bf0d1ed13ea2e8d09072809655e1727}{output\+\_\+run}
 {}
 \end{DoxyParamCaption}
 )}\hypertarget{classNetwork_a3cc2fb4f8fa4d507077e8da85ce5a1c8}{}\label{classNetwork_a3cc2fb4f8fa4d507077e8da85ce5a1c8}
-\hyperlink{classNetwork}{Network} constructor, initializes input nodes, output nodes, and threads. \index{Network@{Network}!````~Network@{$\sim$\+Network}}
+\hyperlink{classNetwork}{Network} constructor initializes input nodes, output nodes, and threads. \index{Network@{Network}!````~Network@{$\sim$\+Network}}
 \index{````~Network@{$\sim$\+Network}!Network@{Network}}
 \subsubsection[{\texorpdfstring{$\sim$\+Network()}{~Network()}}]{\setlength{\rightskip}{0pt plus 5cm}Network\+::$\sim$\+Network (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
 )}\hypertarget{classNetwork_a7a4e19cdb4bf0c7ecf82baa643831492}{}\label{classNetwork_a7a4e19cdb4bf0c7ecf82baa643831492}
-\hyperlink{classNetwork}{Network} destructor, deletes memory allocated to input nodes, output nodes, threads, hidden nodes, and genes. 
+\hyperlink{classNetwork}{Network} destructor deletes memory allocated to input nodes, output nodes, threads, hidden nodes, and genes. 
 
 \subsection{Member Function Documentation}
 \index{Network@{Network}!add\+\_\+gene@{add\+\_\+gene}}
@@ -83,26 +92,14 @@ My function doing something...
 {\em onode$\ast$} & pointer to the output node usually the node that calls this function. \\
 \hline
 \end{DoxyParams}
-\index{Network@{Network}!add\+\_\+num\+\_\+nodes@{add\+\_\+num\+\_\+nodes}}
-\index{add\+\_\+num\+\_\+nodes@{add\+\_\+num\+\_\+nodes}!Network@{Network}}
-\subsubsection[{\texorpdfstring{add\+\_\+num\+\_\+nodes(int)}{add_num_nodes(int)}}]{\setlength{\rightskip}{0pt plus 5cm}void Network\+::add\+\_\+num\+\_\+nodes (
-\begin{DoxyParamCaption}
-\item[{int}]{num\+\_\+nodes}
-\end{DoxyParamCaption}
-)}\hypertarget{classNetwork_a4a5894f93aa47d4a39f3709d1f828758}{}\label{classNetwork_a4a5894f93aa47d4a39f3709d1f828758}
-\hyperlink{classNetwork}{Network} set\+\_\+num\+\_\+nodes sets the number of nodes. 
-\begin{DoxyParams}{Parameters}
-{\em num\+\_\+nodes} & the number of nodes. \\
-\hline
-\end{DoxyParams}
 \index{Network@{Network}!compare@{compare}}
 \index{compare@{compare}!Network@{Network}}
-\subsubsection[{\texorpdfstring{compare(\+Node $\ast$, Node $\ast$)}{compare(Node *, Node *)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Network\+::compare (
+\subsubsection[{\texorpdfstring{compare(const Node $\ast$, const Node $\ast$)}{compare(const Node *, const Node *)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Network\+::compare (
 \begin{DoxyParamCaption}
-\item[{{\bf Node} $\ast$}]{one, }
-\item[{{\bf Node} $\ast$}]{two}
+\item[{const {\bf Node} $\ast$}]{one, }
+\item[{const {\bf Node} $\ast$}]{two}
 \end{DoxyParamCaption}
-)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classNetwork_a2783710245a6e6e47a5a69b649aa79fe}{}\label{classNetwork_a2783710245a6e6e47a5a69b649aa79fe}
+)\hspace{0.3cm}{\ttfamily [static]}}\hypertarget{classNetwork_a243d53ec51b12215d7c5709c93642d88}{}\label{classNetwork_a243d53ec51b12215d7c5709c93642d88}
 \hyperlink{classNetwork}{Network} compare checks if layer of first node is less than layer of second node. 
 \begin{DoxyParams}{Parameters}
 {\em \hyperlink{classNode}{Node}} & $\ast$one first node \\
@@ -125,21 +122,31 @@ int type.
 \end{DoxyReturn}
 \index{Network@{Network}!get\+\_\+genes@{get\+\_\+genes}}
 \index{get\+\_\+genes@{get\+\_\+genes}!Network@{Network}}
-\subsubsection[{\texorpdfstring{get\+\_\+genes() const }{get_genes() const }}]{\setlength{\rightskip}{0pt plus 5cm}list$<$ {\bf Gene} $\ast$ $>$ Network\+::get\+\_\+genes (
+\subsubsection[{\texorpdfstring{get\+\_\+genes()}{get_genes()}}]{\setlength{\rightskip}{0pt plus 5cm}list$<$ {\bf Gene} $\ast$ $>$ $\ast$ Network\+::get\+\_\+genes (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\hypertarget{classNetwork_aa55b25f282057ae47e0de0eeea39445f}{}\label{classNetwork_aa55b25f282057ae47e0de0eeea39445f}
+)}\hypertarget{classNetwork_a5c44d0a8c6c866df44d58becdde9fd18}{}\label{classNetwork_a5c44d0a8c6c866df44d58becdde9fd18}
 Returns the list of gene pointers. \begin{DoxyReturn}{Returns}
 list$<$\+Gene $\ast$$>$ 
 \end{DoxyReturn}
-\index{Network@{Network}!get\+\_\+input@{get\+\_\+input}}
-\index{get\+\_\+input@{get\+\_\+input}!Network@{Network}}
-\subsubsection[{\texorpdfstring{get\+\_\+input() const }{get_input() const }}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Node} $\ast$$\ast$ Network\+::get\+\_\+input (
+\index{Network@{Network}!get\+\_\+hiddennodes@{get\+\_\+hiddennodes}}
+\index{get\+\_\+hiddennodes@{get\+\_\+hiddennodes}!Network@{Network}}
+\subsubsection[{\texorpdfstring{get\+\_\+hiddennodes()}{get_hiddennodes()}}]{\setlength{\rightskip}{0pt plus 5cm}list$<$ {\bf Node} $\ast$ $>$ $\ast$ Network\+::get\+\_\+hiddennodes (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-) const}\hypertarget{classNetwork_a40d0e94071662469e6cacafbd6f42f07}{}\label{classNetwork_a40d0e94071662469e6cacafbd6f42f07}
+)}\hypertarget{classNetwork_a5c004b11400079855ed37a932732f6b8}{}\label{classNetwork_a5c004b11400079855ed37a932732f6b8}
+Returns the hidden nodes. \begin{DoxyReturn}{Returns}
+list$<$\+Node $\ast$$>$ 
+\end{DoxyReturn}
+\index{Network@{Network}!get\+\_\+input@{get\+\_\+input}}
+\index{get\+\_\+input@{get\+\_\+input}!Network@{Network}}
+\subsubsection[{\texorpdfstring{get\+\_\+input()}{get_input()}}]{\setlength{\rightskip}{0pt plus 5cm}list$<$ {\bf Node} $\ast$ $>$ $\ast$ Network\+::get\+\_\+input (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classNetwork_ac348d720cf84bd0cea6b1530e8afe7fa}{}\label{classNetwork_ac348d720cf84bd0cea6b1530e8afe7fa}
 Returns the number of input nodes. \begin{DoxyReturn}{Returns}
 Node$\ast$$\ast$ 
 \end{DoxyReturn}

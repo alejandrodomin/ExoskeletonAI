@@ -7,19 +7,20 @@
 \item 
 \hyperlink{classSpecies_af36f93648e2dedc2f05b6fb0c067f35e}{$\sim$\+Species} ()
 \item 
-\hyperlink{classNetwork}{Network} $\ast$ \hyperlink{classSpecies_abfce3627718863b576acc7c9de058091}{mutate} ()
+void \hyperlink{classSpecies_ab4c037683307c828083dde00cd7e673d}{mutate} ()
 \item 
 void \hyperlink{classSpecies_ae79d188cf5cb0ef1d6b82e44632ebf94}{run\+\_\+networks} ()
-\item 
-void \hyperlink{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}{add\+\_\+network} (\hyperlink{classNetwork}{Network} $\ast$)
 \item 
 bool \hyperlink{classSpecies_a716e5737f0367dc4f908bab1e47cf5ac}{is\+\_\+stale} ()
 \item 
 bool \hyperlink{classSpecies_ad8a5df4740c1a7ac43d2f4d6e47a8092}{test\+\_\+species} ()
 \item 
-\hyperlink{classSpecies}{Species} $\ast$ \hyperlink{classSpecies_ad8caa0f1a2c1655483240591512a1065}{new\+\_\+species} ()
+bool \hyperlink{classSpecies_affa8963fa8100c32641ce74d3db74727}{add\+\_\+network} (\hyperlink{classNetwork}{Network} $\ast$)
 \item 
-list$<$ \hyperlink{classNetwork}{Network} $\ast$ $>$ {\bfseries get\+\_\+networks} ()\hypertarget{classSpecies_aaa15bac5b5edf27f763fc45526821a3c}{}\label{classSpecies_aaa15bac5b5edf27f763fc45526821a3c}
+\hyperlink{classNetwork}{Network} $\ast$ {\bfseries get\+\_\+fittest\+\_\+net} ()\hypertarget{classSpecies_a6803c4d940e7c446c7d460881c396476}{}\label{classSpecies_a6803c4d940e7c446c7d460881c396476}
+
+\item 
+list$<$ \hyperlink{classNetwork}{Network} $\ast$ $>$ $\ast$ {\bfseries get\+\_\+networks} ()\hypertarget{classSpecies_a77b60e856161f623e3dd7808739bd7b6}{}\label{classSpecies_a77b60e856161f623e3dd7808739bd7b6}
 
 \end{DoxyCompactItemize}
 \subsection*{Protected Member Functions}
@@ -53,11 +54,11 @@ Destructor deletes memory allocated to fittest\+\_\+net and list$<$\+Network $\a
 \subsection{Member Function Documentation}
 \index{Species@{Species}!add\+\_\+network@{add\+\_\+network}}
 \index{add\+\_\+network@{add\+\_\+network}!Species@{Species}}
-\subsubsection[{\texorpdfstring{add\+\_\+network(\+Network $\ast$)}{add_network(Network *)}}]{\setlength{\rightskip}{0pt plus 5cm}void Species\+::add\+\_\+network (
+\subsubsection[{\texorpdfstring{add\+\_\+network(\+Network $\ast$)}{add_network(Network *)}}]{\setlength{\rightskip}{0pt plus 5cm}bool Species\+::add\+\_\+network (
 \begin{DoxyParamCaption}
 \item[{{\bf Network} $\ast$}]{net}
 \end{DoxyParamCaption}
-)}\hypertarget{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}{}\label{classSpecies_a85517a1d67aad99838e5bfbe9f920aa0}
+)}\hypertarget{classSpecies_affa8963fa8100c32641ce74d3db74727}{}\label{classSpecies_affa8963fa8100c32641ce74d3db74727}
 This function adds a network. 
 \begin{DoxyParams}{Parameters}
 {\em \hyperlink{classNetwork}{Network}} & $\ast$net net pointer \\
@@ -111,22 +112,12 @@ bool
 \end{DoxyReturn}
 \index{Species@{Species}!mutate@{mutate}}
 \index{mutate@{mutate}!Species@{Species}}
-\subsubsection[{\texorpdfstring{mutate()}{mutate()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Network} $\ast$ Species\+::mutate (
+\subsubsection[{\texorpdfstring{mutate()}{mutate()}}]{\setlength{\rightskip}{0pt plus 5cm}void Species\+::mutate (
 \begin{DoxyParamCaption}
 {}
 \end{DoxyParamCaption}
-)}\hypertarget{classSpecies_abfce3627718863b576acc7c9de058091}{}\label{classSpecies_abfce3627718863b576acc7c9de058091}
-Mutate function which mutates every item in list$<$\+Network $\ast$$>$ \index{Species@{Species}!new\+\_\+species@{new\+\_\+species}}
-\index{new\+\_\+species@{new\+\_\+species}!Species@{Species}}
-\subsubsection[{\texorpdfstring{new\+\_\+species()}{new_species()}}]{\setlength{\rightskip}{0pt plus 5cm}{\bf Species} $\ast$ Species\+::new\+\_\+species (
-\begin{DoxyParamCaption}
-{}
-\end{DoxyParamCaption}
-)}\hypertarget{classSpecies_ad8caa0f1a2c1655483240591512a1065}{}\label{classSpecies_ad8caa0f1a2c1655483240591512a1065}
-This function returns a new species pointer. \begin{DoxyReturn}{Returns}
-Species$\ast$ new \hyperlink{classSpecies_abb0f8e3208b0cc676157b7dff837c0be}{Species()} 
-\end{DoxyReturn}
-\index{Species@{Species}!run\+\_\+networks@{run\+\_\+networks}}
+)}\hypertarget{classSpecies_ab4c037683307c828083dde00cd7e673d}{}\label{classSpecies_ab4c037683307c828083dde00cd7e673d}
+Mutate function which mutates every item in list$<$\+Network $\ast$$>$ \index{Species@{Species}!run\+\_\+networks@{run\+\_\+networks}}
 \index{run\+\_\+networks@{run\+\_\+networks}!Species@{Species}}
 \subsubsection[{\texorpdfstring{run\+\_\+networks()}{run_networks()}}]{\setlength{\rightskip}{0pt plus 5cm}void Species\+::run\+\_\+networks (
 \begin{DoxyParamCaption}

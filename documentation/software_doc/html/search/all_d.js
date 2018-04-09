@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['weight_5fdiff_5fmatch_5fgenes',['weight_diff_match_genes',['../classSpecies.html#a732289d5916f65785694da76a26ff957',1,'Species']]]
+  ['use_5foutput',['use_output',['../classNetwork.html#a7ed4519d18b5a0ef1609c0bcb5293eac',1,'Network']]]
 ];

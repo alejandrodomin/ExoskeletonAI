@@ -1,8 +1,7 @@
 var searchData=
 [
-  ['set_5fcompatibility_5fdistance',['set_compatibility_distance',['../classNetwork.html#a05aacf7dc8b0a5f5ad450a8967a23bcd',1,'Network']]],
-  ['set_5foutputfunc',['set_outputfunc',['../classNode.html#aee405792704c95b3e6b4be9dcaa87ac0',1,'Node']]],
-  ['set_5fweight',['set_weight',['../classGene.html#aefc88f9e290c83c7e7434ed5cf36f240',1,'Gene']]],
-  ['spawn_5fthread',['spawn_thread',['../classNode.html#ab87adc5bb0779015e43a1494d7286ad9',1,'Node']]],
-  ['species',['Species',['../classSpecies.html',1,'Species'],['../classSpecies.html#abb0f8e3208b0cc676157b7dff837c0be',1,'Species::Species()']]]
+  ['rand_5fconnection',['rand_connection',['../classNetwork.html#a5f85af3cb52fcab5b15b226496686e77',1,'Network']]],
+  ['rand_5fnode',['rand_node',['../classNetwork.html#a29676c0b42a6123b441e7f1fcba522b4',1,'Network']]],
+  ['run',['run',['../classNetwork.html#acc13a2e54ee332bb9f288f953ae141ed',1,'Network']]],
+  ['run_5fnetworks',['run_networks',['../classSpecies.html#ae79d188cf5cb0ef1d6b82e44632ebf94',1,'Species']]]
 ];

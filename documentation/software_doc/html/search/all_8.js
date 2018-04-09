@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['out_5ffunc',['out_func',['../classNode.html#a62682fdb6f8d50b879ea2fa61b8727de',1,'Node']]],
-  ['output_5frun',['output_run',['../classNetwork.html#a4bf0d1ed13ea2e8d09072809655e1727',1,'Network']]]
+  ['network',['Network',['../classNetwork.html',1,'Network'],['../classNetwork.html#a3cc2fb4f8fa4d507077e8da85ce5a1c8',1,'Network::Network()']]],
+  ['node',['Node',['../classNode.html',1,'Node'],['../classNode.html#a6c6394094966c834cdd4f45cfda2377c',1,'Node::Node()']]]
 ];

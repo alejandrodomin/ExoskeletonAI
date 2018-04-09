@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['species',['Species',['../classSpecies.html',1,'']]]
+  ['network',['Network',['../classNetwork.html',1,'']]],
+  ['node',['Node',['../classNode.html',1,'']]]
 ];
