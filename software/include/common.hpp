@@ -11,7 +11,7 @@
 #include <gene.hpp>
 
 #define DEBUG    1
-#define HARDWARE 1
+#define HARDWARE 0
 
 #define NUM_GYROS   3 
 #define NUM_INPUTS  9
