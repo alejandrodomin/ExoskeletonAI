@@ -2,6 +2,7 @@ CC = mpic++
 SRC := src
 OBJ := build
 INC := include
+MSRC := main
 
 DEBUG = -g
 LFLAGS = -llsm9ds1 -pthread -L/usr//lib -L/usr/lib/arm-linux-gnueabihf/openmpi/lib -lmpi_cxx -lmpi -L/usr/local/lib -lwiringPi
@@ -13,11 +14,17 @@ PROJ = ExoHAI
 SOURCES := $(wildcard $(SRC)/*.cpp)
 OBJECTS := $(patsubst $(SRC)/%.cpp, $(OBJ)/%.o, $(SOURCES))
 
+MSOURCES := $(wildcard $(MSRC)/*.cpp)
+MOBJECTS := $(patsubst $(MSRC)/%.cpp, $(OBJ)/%.o, $(MSOURCES))
+
 $(PROJ): $(OBJECTS)
 	$(CC) $(DEBUG) $^ -o $@ $(LFLAGS)
 
 $(OBJ)/%.o: $(SRC)/%.cpp
 	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) $(INCFLAGS) -c $< -o $@
+	
+$(OBJ)/%.o: $(MSRC)/%.cpp
+	$(CC) $(DEBUG) $(CFLAGS) -I$(INC) -c $< -o $@
 
 clean:
 	rm $(OBJECTS) $(PROJ)

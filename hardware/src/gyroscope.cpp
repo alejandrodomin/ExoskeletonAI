@@ -1,15 +1,4 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <errno.h>
-#include <time.h>
-#include <sys/time.h>
-#include <unistd.h>
-#include "LSM9DS1_Types.h"
-#include "LSM9DS1.h"
-#include <mpi.h>
-#include <wiringPi.h>
-
-#define IRSensor 4
+#include <gyroscope.h>
 
 /*
 int main(int argc, char *argv[]) {
@@ -38,8 +27,6 @@ int main(int argc, char *argv[]) {
     exit(EXIT_SUCCESS);
 }
 */
-
-static bool master = false;
 
 LSM9DS1 imuInit(int imuNum){
 
