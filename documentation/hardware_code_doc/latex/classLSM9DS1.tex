@@ -1,0 +1,294 @@
+\hypertarget{classLSM9DS1}{}\section{L\+S\+M9\+D\+S1 Class Reference}
+\label{classLSM9DS1}\index{L\+S\+M9\+D\+S1@{L\+S\+M9\+D\+S1}}
+
+
+Collaboration diagram for L\+S\+M9\+D\+S1\+:
+% FIG 0
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+{\bfseries L\+S\+M9\+D\+S1} (interface\+\_\+mode interface, uint8\+\_\+t xg\+Addr, uint8\+\_\+t m\+Addr)\hypertarget{classLSM9DS1_ab62923063ffc49dca82e6f311c5c8764}{}\label{classLSM9DS1_ab62923063ffc49dca82e6f311c5c8764}
+
+\item 
+uint16\+\_\+t \hyperlink{classLSM9DS1_a8728e560c76bd120b3711af15a6ecbd6}{begin} ()
+\item 
+void {\bfseries calibrate} (bool auto\+Calc=true)\hypertarget{classLSM9DS1_a97939cb15fcb7e33abcd6d3a9230d943}{}\label{classLSM9DS1_a97939cb15fcb7e33abcd6d3a9230d943}
+
+\item 
+void {\bfseries calibrate\+Mag} (bool load\+In=true)\hypertarget{classLSM9DS1_afb45f0bcbcbeb15d4bd1a28821b24d14}{}\label{classLSM9DS1_afb45f0bcbcbeb15d4bd1a28821b24d14}
+
+\item 
+void {\bfseries mag\+Offset} (uint8\+\_\+t axis, int16\+\_\+t offset)\hypertarget{classLSM9DS1_a0d461614bd058b082c94481dc916c18b}{}\label{classLSM9DS1_a0d461614bd058b082c94481dc916c18b}
+
+\item 
+uint8\+\_\+t {\bfseries accel\+Available} ()\hypertarget{classLSM9DS1_a515ce6f5c199a86c6aa5be353b2a3a13}{}\label{classLSM9DS1_a515ce6f5c199a86c6aa5be353b2a3a13}
+
+\item 
+uint8\+\_\+t {\bfseries gyro\+Available} ()\hypertarget{classLSM9DS1_a65b71a03a30f4e8ed1ffd46de3db0560}{}\label{classLSM9DS1_a65b71a03a30f4e8ed1ffd46de3db0560}
+
+\item 
+uint8\+\_\+t {\bfseries temp\+Available} ()\hypertarget{classLSM9DS1_aaf6683c6f3f0281d5222b74f580f321b}{}\label{classLSM9DS1_aaf6683c6f3f0281d5222b74f580f321b}
+
+\item 
+uint8\+\_\+t {\bfseries mag\+Available} (lsm9ds1\+\_\+axis axis=A\+L\+L\+\_\+\+A\+X\+IS)\hypertarget{classLSM9DS1_a85afd29e95bead7b3f0083a9a235d1df}{}\label{classLSM9DS1_a85afd29e95bead7b3f0083a9a235d1df}
+
+\item 
+void {\bfseries read\+Gyro} ()\hypertarget{classLSM9DS1_a56e9710cb538a4c7f7ab94c2ca256ce9}{}\label{classLSM9DS1_a56e9710cb538a4c7f7ab94c2ca256ce9}
+
+\item 
+int16\+\_\+t {\bfseries read\+Gyro} (lsm9ds1\+\_\+axis axis)\hypertarget{classLSM9DS1_adc1b37609a6c850328b16da4f911cefd}{}\label{classLSM9DS1_adc1b37609a6c850328b16da4f911cefd}
+
+\item 
+void {\bfseries read\+Accel} ()\hypertarget{classLSM9DS1_a9953684a1ff652a7d3a4d91e72bccaa1}{}\label{classLSM9DS1_a9953684a1ff652a7d3a4d91e72bccaa1}
+
+\item 
+int16\+\_\+t {\bfseries read\+Accel} (lsm9ds1\+\_\+axis axis)\hypertarget{classLSM9DS1_acbe3bfc0b8db7fe3f77893d22c394594}{}\label{classLSM9DS1_acbe3bfc0b8db7fe3f77893d22c394594}
+
+\item 
+void {\bfseries read\+Mag} ()\hypertarget{classLSM9DS1_ae127cf75aa5f3c5421e49363795dcd38}{}\label{classLSM9DS1_ae127cf75aa5f3c5421e49363795dcd38}
+
+\item 
+int16\+\_\+t {\bfseries read\+Mag} (lsm9ds1\+\_\+axis axis)\hypertarget{classLSM9DS1_a615fd3ab32a9af833ef9899663100330}{}\label{classLSM9DS1_a615fd3ab32a9af833ef9899663100330}
+
+\item 
+void {\bfseries read\+Temp} ()\hypertarget{classLSM9DS1_aca21a51dc79a1287b97ed9c326e2080b}{}\label{classLSM9DS1_aca21a51dc79a1287b97ed9c326e2080b}
+
+\item 
+float {\bfseries calc\+Gyro} (int16\+\_\+t gyro)\hypertarget{classLSM9DS1_a76707323565bc4170ea8e27a932c95e4}{}\label{classLSM9DS1_a76707323565bc4170ea8e27a932c95e4}
+
+\item 
+float {\bfseries calc\+Accel} (int16\+\_\+t accel)\hypertarget{classLSM9DS1_a54e2a7888b67b47cf0dd986c5b91a3c5}{}\label{classLSM9DS1_a54e2a7888b67b47cf0dd986c5b91a3c5}
+
+\item 
+float {\bfseries calc\+Mag} (int16\+\_\+t mag)\hypertarget{classLSM9DS1_a7d0b0740497b1a10cd3e46a282a143ec}{}\label{classLSM9DS1_a7d0b0740497b1a10cd3e46a282a143ec}
+
+\item 
+void {\bfseries set\+Gyro\+Scale} (uint16\+\_\+t g\+Scl)\hypertarget{classLSM9DS1_a115d304ebcdc8c701f3e5a5d397250aa}{}\label{classLSM9DS1_a115d304ebcdc8c701f3e5a5d397250aa}
+
+\item 
+void {\bfseries set\+Accel\+Scale} (uint8\+\_\+t a\+Scl)\hypertarget{classLSM9DS1_a8656d2de1ff9cc4cb76214e4561d02c4}{}\label{classLSM9DS1_a8656d2de1ff9cc4cb76214e4561d02c4}
+
+\item 
+void {\bfseries set\+Mag\+Scale} (uint8\+\_\+t m\+Scl)\hypertarget{classLSM9DS1_ad7604159a07b0d088cdfb6ba4a0093b0}{}\label{classLSM9DS1_ad7604159a07b0d088cdfb6ba4a0093b0}
+
+\item 
+void {\bfseries set\+Gyro\+O\+DR} (uint8\+\_\+t g\+Rate)\hypertarget{classLSM9DS1_ab8fc33c8da4fc5c379e880ff57d331fa}{}\label{classLSM9DS1_ab8fc33c8da4fc5c379e880ff57d331fa}
+
+\item 
+void {\bfseries set\+Accel\+O\+DR} (uint8\+\_\+t a\+Rate)\hypertarget{classLSM9DS1_a76d72839cdecc3f1c4ee6fff578182c5}{}\label{classLSM9DS1_a76d72839cdecc3f1c4ee6fff578182c5}
+
+\item 
+void {\bfseries set\+Mag\+O\+DR} (uint8\+\_\+t m\+Rate)\hypertarget{classLSM9DS1_a8bc672fba680edc468a643fd58046b41}{}\label{classLSM9DS1_a8bc672fba680edc468a643fd58046b41}
+
+\item 
+void {\bfseries config\+Inactivity} (uint8\+\_\+t duration, uint8\+\_\+t threshold, bool sleep\+On)\hypertarget{classLSM9DS1_a1e318c5e7c1d500c3ab2602c46265354}{}\label{classLSM9DS1_a1e318c5e7c1d500c3ab2602c46265354}
+
+\item 
+void {\bfseries config\+Accel\+Int} (uint8\+\_\+t generator, bool and\+Interrupts=false)\hypertarget{classLSM9DS1_a1e8ebc6c1e3876d8936197dc93f76717}{}\label{classLSM9DS1_a1e8ebc6c1e3876d8936197dc93f76717}
+
+\item 
+void {\bfseries config\+Accel\+Ths} (uint8\+\_\+t threshold, lsm9ds1\+\_\+axis axis, uint8\+\_\+t duration=0, bool wait=0)\hypertarget{classLSM9DS1_acebcf64ab4e6ea7ed7a23c09ef16afe9}{}\label{classLSM9DS1_acebcf64ab4e6ea7ed7a23c09ef16afe9}
+
+\item 
+void {\bfseries config\+Gyro\+Int} (uint8\+\_\+t generator, bool aoi, bool latch)\hypertarget{classLSM9DS1_a19a341728c4e5b454de045c8a531cf06}{}\label{classLSM9DS1_a19a341728c4e5b454de045c8a531cf06}
+
+\item 
+void {\bfseries config\+Gyro\+Ths} (int16\+\_\+t threshold, lsm9ds1\+\_\+axis axis, uint8\+\_\+t duration, bool wait)\hypertarget{classLSM9DS1_ad865cc972960ed476fabd54f698adf6e}{}\label{classLSM9DS1_ad865cc972960ed476fabd54f698adf6e}
+
+\item 
+void {\bfseries config\+Int} (interrupt\+\_\+select interupt, uint8\+\_\+t generator, h\+\_\+lactive active\+Low=I\+N\+T\+\_\+\+A\+C\+T\+I\+V\+E\+\_\+\+L\+OW, pp\+\_\+od push\+Pull=I\+N\+T\+\_\+\+P\+U\+S\+H\+\_\+\+P\+U\+LL)\hypertarget{classLSM9DS1_a5b6948b9d4caf57cfe9e0559a0c7f54c}{}\label{classLSM9DS1_a5b6948b9d4caf57cfe9e0559a0c7f54c}
+
+\item 
+void {\bfseries config\+Mag\+Int} (uint8\+\_\+t generator, h\+\_\+lactive active\+Low, bool latch=true)\hypertarget{classLSM9DS1_a54a521668eb63d504d227c6d460723e0}{}\label{classLSM9DS1_a54a521668eb63d504d227c6d460723e0}
+
+\item 
+void {\bfseries config\+Mag\+Ths} (uint16\+\_\+t threshold)\hypertarget{classLSM9DS1_a87cf3dd3a4d9ca79106eb7c1c866a224}{}\label{classLSM9DS1_a87cf3dd3a4d9ca79106eb7c1c866a224}
+
+\item 
+uint8\+\_\+t {\bfseries get\+Gyro\+Int\+Src} ()\hypertarget{classLSM9DS1_aaba6696754df62a411a6a190100f9ca3}{}\label{classLSM9DS1_aaba6696754df62a411a6a190100f9ca3}
+
+\item 
+uint8\+\_\+t {\bfseries get\+Accel\+Int\+Src} ()\hypertarget{classLSM9DS1_ae42ae3b368370f977d090ba0e53c7f5c}{}\label{classLSM9DS1_ae42ae3b368370f977d090ba0e53c7f5c}
+
+\item 
+uint8\+\_\+t {\bfseries get\+Mag\+Int\+Src} ()\hypertarget{classLSM9DS1_a2bc92a37db982059b89e0a06e7d05a95}{}\label{classLSM9DS1_a2bc92a37db982059b89e0a06e7d05a95}
+
+\item 
+uint8\+\_\+t {\bfseries get\+Inactivity} ()\hypertarget{classLSM9DS1_a9dab029d1d24e49709258d893042d28f}{}\label{classLSM9DS1_a9dab029d1d24e49709258d893042d28f}
+
+\item 
+void {\bfseries sleep\+Gyro} (bool enable=true)\hypertarget{classLSM9DS1_a13b61812069b399547f177b0b0af8fe3}{}\label{classLSM9DS1_a13b61812069b399547f177b0b0af8fe3}
+
+\item 
+void {\bfseries enable\+F\+I\+FO} (bool enable=true)\hypertarget{classLSM9DS1_a5f01141131318697838f15d7e5d10f2c}{}\label{classLSM9DS1_a5f01141131318697838f15d7e5d10f2c}
+
+\item 
+void {\bfseries set\+F\+I\+FO} (fifo\+Mode\+\_\+type fifo\+Mode, uint8\+\_\+t fifo\+Ths)\hypertarget{classLSM9DS1_a0ec4a93a34545af1acc336bae9b360f1}{}\label{classLSM9DS1_a0ec4a93a34545af1acc336bae9b360f1}
+
+\item 
+uint8\+\_\+t {\bfseries get\+F\+I\+F\+O\+Samples} ()\hypertarget{classLSM9DS1_ac03ef2ff928a25c4a80af7707cd92dc8}{}\label{classLSM9DS1_ac03ef2ff928a25c4a80af7707cd92dc8}
+
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structIMUSettings}{I\+M\+U\+Settings} {\bfseries settings}\hypertarget{classLSM9DS1_a8397fc6c94a11a8a09f3dd17b28cf2a4}{}\label{classLSM9DS1_a8397fc6c94a11a8a09f3dd17b28cf2a4}
+
+\item 
+int16\+\_\+t {\bfseries gx}\hypertarget{classLSM9DS1_abf02b4544b5d529036adbac02e7b9f02}{}\label{classLSM9DS1_abf02b4544b5d529036adbac02e7b9f02}
+
+\item 
+int16\+\_\+t {\bfseries gy}\hypertarget{classLSM9DS1_a0c351823fd094ff24ff245dd951cf783}{}\label{classLSM9DS1_a0c351823fd094ff24ff245dd951cf783}
+
+\item 
+int16\+\_\+t {\bfseries gz}\hypertarget{classLSM9DS1_ad4d0f0585398ff917afcba1b4a73e519}{}\label{classLSM9DS1_ad4d0f0585398ff917afcba1b4a73e519}
+
+\item 
+int16\+\_\+t {\bfseries ax}\hypertarget{classLSM9DS1_adac13514d176cfb54aed8cda9a056335}{}\label{classLSM9DS1_adac13514d176cfb54aed8cda9a056335}
+
+\item 
+int16\+\_\+t {\bfseries ay}\hypertarget{classLSM9DS1_a978a357dedfa574d6e0fad33ad71e23f}{}\label{classLSM9DS1_a978a357dedfa574d6e0fad33ad71e23f}
+
+\item 
+int16\+\_\+t {\bfseries az}\hypertarget{classLSM9DS1_aa631c8a90b90130b5be147dd4fae0841}{}\label{classLSM9DS1_aa631c8a90b90130b5be147dd4fae0841}
+
+\item 
+int16\+\_\+t {\bfseries mx}\hypertarget{classLSM9DS1_a0e68eb9e44969070b6d84a93ba252f71}{}\label{classLSM9DS1_a0e68eb9e44969070b6d84a93ba252f71}
+
+\item 
+int16\+\_\+t {\bfseries my}\hypertarget{classLSM9DS1_a773f80f9b7cdf8375c84a4209895d732}{}\label{classLSM9DS1_a773f80f9b7cdf8375c84a4209895d732}
+
+\item 
+int16\+\_\+t {\bfseries mz}\hypertarget{classLSM9DS1_aafe23993500ece9efd161e564787dce2}{}\label{classLSM9DS1_aafe23993500ece9efd161e564787dce2}
+
+\item 
+int16\+\_\+t {\bfseries temperature}\hypertarget{classLSM9DS1_a92791effe47c0f8c93505e53496266e5}{}\label{classLSM9DS1_a92791effe47c0f8c93505e53496266e5}
+
+\item 
+float {\bfseries g\+Bias} \mbox{[}3\mbox{]}\hypertarget{classLSM9DS1_a8c0354ee78e029b6715ee7110bcd8753}{}\label{classLSM9DS1_a8c0354ee78e029b6715ee7110bcd8753}
+
+\item 
+float {\bfseries a\+Bias} \mbox{[}3\mbox{]}\hypertarget{classLSM9DS1_abe998fcc50cfe729c13ab535337849c7}{}\label{classLSM9DS1_abe998fcc50cfe729c13ab535337849c7}
+
+\item 
+float {\bfseries m\+Bias} \mbox{[}3\mbox{]}\hypertarget{classLSM9DS1_aab3753b958a1eaabfb48ffaf837dfadc}{}\label{classLSM9DS1_aab3753b958a1eaabfb48ffaf837dfadc}
+
+\item 
+int16\+\_\+t {\bfseries g\+Bias\+Raw} \mbox{[}3\mbox{]}\hypertarget{classLSM9DS1_ab2e59e0460cf88a12765238506031f2a}{}\label{classLSM9DS1_ab2e59e0460cf88a12765238506031f2a}
+
+\item 
+int16\+\_\+t {\bfseries a\+Bias\+Raw} \mbox{[}3\mbox{]}\hypertarget{classLSM9DS1_ae42dc2f2b9f2df223c853e233191313a}{}\label{classLSM9DS1_ae42dc2f2b9f2df223c853e233191313a}
+
+\item 
+int16\+\_\+t {\bfseries m\+Bias\+Raw} \mbox{[}3\mbox{]}\hypertarget{classLSM9DS1_ad0e3ab0b7eeee5378ab91dd20270a9b5}{}\label{classLSM9DS1_ad0e3ab0b7eeee5378ab91dd20270a9b5}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+void {\bfseries init} (interface\+\_\+mode interface, uint8\+\_\+t xg\+Addr, uint8\+\_\+t m\+Addr)\hypertarget{classLSM9DS1_aa4f74e09e93c0133dc30545d4492849e}{}\label{classLSM9DS1_aa4f74e09e93c0133dc30545d4492849e}
+
+\item 
+void {\bfseries init\+Gyro} ()\hypertarget{classLSM9DS1_a66a7b02acb28964ffc9362f25988e270}{}\label{classLSM9DS1_a66a7b02acb28964ffc9362f25988e270}
+
+\item 
+void {\bfseries init\+Accel} ()\hypertarget{classLSM9DS1_a143ff5abf4f7ba8e1c42325859106f84}{}\label{classLSM9DS1_a143ff5abf4f7ba8e1c42325859106f84}
+
+\item 
+void {\bfseries init\+Mag} ()\hypertarget{classLSM9DS1_a492aa6edcf891f273d932636e3cc470d}{}\label{classLSM9DS1_a492aa6edcf891f273d932636e3cc470d}
+
+\item 
+uint8\+\_\+t {\bfseries m\+Read\+Byte} (uint8\+\_\+t sub\+Address)\hypertarget{classLSM9DS1_ae4e470321567e4f93fc09f4cc6cd9efa}{}\label{classLSM9DS1_ae4e470321567e4f93fc09f4cc6cd9efa}
+
+\item 
+void {\bfseries m\+Read\+Bytes} (uint8\+\_\+t sub\+Address, uint8\+\_\+t $\ast$dest, uint8\+\_\+t count)\hypertarget{classLSM9DS1_acfdf9862cad1e66c9fb61a17bfbe7477}{}\label{classLSM9DS1_acfdf9862cad1e66c9fb61a17bfbe7477}
+
+\item 
+void {\bfseries m\+Write\+Byte} (uint8\+\_\+t sub\+Address, uint8\+\_\+t data)\hypertarget{classLSM9DS1_afc171c924102c97fa1d88fa7f48bd167}{}\label{classLSM9DS1_afc171c924102c97fa1d88fa7f48bd167}
+
+\item 
+uint8\+\_\+t {\bfseries xg\+Read\+Byte} (uint8\+\_\+t sub\+Address)\hypertarget{classLSM9DS1_af7f9789df6f0178764c815a3380c202a}{}\label{classLSM9DS1_af7f9789df6f0178764c815a3380c202a}
+
+\item 
+void {\bfseries xg\+Read\+Bytes} (uint8\+\_\+t sub\+Address, uint8\+\_\+t $\ast$dest, uint8\+\_\+t count)\hypertarget{classLSM9DS1_ae0a9cbfd74b1f4676f091c2d8e491d77}{}\label{classLSM9DS1_ae0a9cbfd74b1f4676f091c2d8e491d77}
+
+\item 
+void {\bfseries xg\+Write\+Byte} (uint8\+\_\+t sub\+Address, uint8\+\_\+t data)\hypertarget{classLSM9DS1_a263eed4b52ad087a1195755c6ba49e62}{}\label{classLSM9DS1_a263eed4b52ad087a1195755c6ba49e62}
+
+\item 
+void {\bfseries calcg\+Res} ()\hypertarget{classLSM9DS1_a303e0dd33e000579dc3917aecedb6e63}{}\label{classLSM9DS1_a303e0dd33e000579dc3917aecedb6e63}
+
+\item 
+void {\bfseries calcm\+Res} ()\hypertarget{classLSM9DS1_a830dfc95c7e2d8524720d78357b053cb}{}\label{classLSM9DS1_a830dfc95c7e2d8524720d78357b053cb}
+
+\item 
+void {\bfseries calca\+Res} ()\hypertarget{classLSM9DS1_a31597c9ae6c5a7de64a50cbbbcd24297}{}\label{classLSM9DS1_a31597c9ae6c5a7de64a50cbbbcd24297}
+
+\item 
+void {\bfseries constrain\+Scales} ()\hypertarget{classLSM9DS1_a5aadcd09cf9157de817c359e49304ca7}{}\label{classLSM9DS1_a5aadcd09cf9157de817c359e49304ca7}
+
+\item 
+void {\bfseries init\+S\+PI} ()\hypertarget{classLSM9DS1_a4286d5803ab028c657e007ae99acc60a}{}\label{classLSM9DS1_a4286d5803ab028c657e007ae99acc60a}
+
+\item 
+void {\bfseries S\+P\+Iwrite\+Byte} (uint8\+\_\+t cs\+Pin, uint8\+\_\+t sub\+Address, uint8\+\_\+t data)\hypertarget{classLSM9DS1_a83321c9d6ec50f6b9944907d2be482cd}{}\label{classLSM9DS1_a83321c9d6ec50f6b9944907d2be482cd}
+
+\item 
+uint8\+\_\+t {\bfseries S\+P\+Iread\+Byte} (uint8\+\_\+t cs\+Pin, uint8\+\_\+t sub\+Address)\hypertarget{classLSM9DS1_a6f0f50bb5e9b702d5a19c7441a3f9d8b}{}\label{classLSM9DS1_a6f0f50bb5e9b702d5a19c7441a3f9d8b}
+
+\item 
+void {\bfseries S\+P\+Iread\+Bytes} (uint8\+\_\+t cs\+Pin, uint8\+\_\+t sub\+Address, uint8\+\_\+t $\ast$dest, uint8\+\_\+t count)\hypertarget{classLSM9DS1_a26c0f164454eba84e6486033b7061d11}{}\label{classLSM9DS1_a26c0f164454eba84e6486033b7061d11}
+
+\item 
+void {\bfseries init\+I2C} ()\hypertarget{classLSM9DS1_ae60332c2836bd3f19846b7a44c015ddd}{}\label{classLSM9DS1_ae60332c2836bd3f19846b7a44c015ddd}
+
+\item 
+void {\bfseries I2\+Cwrite\+Byte} (uint8\+\_\+t address, uint8\+\_\+t sub\+Address, uint8\+\_\+t data)\hypertarget{classLSM9DS1_a8e66108a002cc15ec4c0db0a608d20c6}{}\label{classLSM9DS1_a8e66108a002cc15ec4c0db0a608d20c6}
+
+\item 
+uint8\+\_\+t {\bfseries I2\+Cread\+Byte} (uint8\+\_\+t address, uint8\+\_\+t sub\+Address)\hypertarget{classLSM9DS1_a7fc046d4b335494331905fdeb5c81c9e}{}\label{classLSM9DS1_a7fc046d4b335494331905fdeb5c81c9e}
+
+\item 
+uint8\+\_\+t {\bfseries I2\+Cread\+Bytes} (uint8\+\_\+t address, uint8\+\_\+t sub\+Address, uint8\+\_\+t $\ast$dest, uint8\+\_\+t count)\hypertarget{classLSM9DS1_adfc9a22290daddd7787e8023fa8f12cc}{}\label{classLSM9DS1_adfc9a22290daddd7787e8023fa8f12cc}
+
+\end{DoxyCompactItemize}
+\subsection*{Protected Attributes}
+\begin{DoxyCompactItemize}
+\item 
+int {\bfseries \+\_\+fd}\hypertarget{classLSM9DS1_a8a6a3c8b294acfcf11342f602864dc42}{}\label{classLSM9DS1_a8a6a3c8b294acfcf11342f602864dc42}
+
+\item 
+uint8\+\_\+t {\bfseries \+\_\+m\+Address}\hypertarget{classLSM9DS1_a7141933a2ccde95976e4eecd598ecb17}{}\label{classLSM9DS1_a7141933a2ccde95976e4eecd598ecb17}
+
+\item 
+uint8\+\_\+t {\bfseries \+\_\+xg\+Address}\hypertarget{classLSM9DS1_ac78b7fab605570a16433a4636f91451e}{}\label{classLSM9DS1_ac78b7fab605570a16433a4636f91451e}
+
+\item 
+float {\bfseries g\+Res}\hypertarget{classLSM9DS1_a2d8654ebb35177088a67e67a944bd998}{}\label{classLSM9DS1_a2d8654ebb35177088a67e67a944bd998}
+
+\item 
+float {\bfseries a\+Res}\hypertarget{classLSM9DS1_acdc1f9b300b3c349e17dd21c9bb37c40}{}\label{classLSM9DS1_acdc1f9b300b3c349e17dd21c9bb37c40}
+
+\item 
+float {\bfseries m\+Res}\hypertarget{classLSM9DS1_aac7ae43adf399e8052464b966aec8472}{}\label{classLSM9DS1_aac7ae43adf399e8052464b966aec8472}
+
+\item 
+bool {\bfseries \+\_\+auto\+Calc}\hypertarget{classLSM9DS1_a8460d00ea0bb496c5d49190a34e54588}{}\label{classLSM9DS1_a8460d00ea0bb496c5d49190a34e54588}
+
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\index{L\+S\+M9\+D\+S1@{L\+S\+M9\+D\+S1}!begin@{begin}}
+\index{begin@{begin}!L\+S\+M9\+D\+S1@{L\+S\+M9\+D\+S1}}
+\subsubsection[{\texorpdfstring{begin()}{begin()}}]{\setlength{\rightskip}{0pt plus 5cm}uint16\+\_\+t L\+S\+M9\+D\+S1\+::begin (
+\begin{DoxyParamCaption}
+{}
+\end{DoxyParamCaption}
+)}\hypertarget{classLSM9DS1_a8728e560c76bd120b3711af15a6ecbd6}{}\label{classLSM9DS1_a8728e560c76bd120b3711af15a6ecbd6}
+Todo\+: don\textquotesingle{}t use \+\_\+xg\+Address or \+\_\+m\+Address, duplicating memory 
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+/home/cooldude101/\+Exoskeleton\+A\+I/hardware/include/L\+S\+M9\+D\+S1.\+h\item 
+/home/cooldude101/\+Exoskeleton\+A\+I/hardware/src/L\+S\+M9\+D\+S1.\+cpp\end{DoxyCompactItemize}

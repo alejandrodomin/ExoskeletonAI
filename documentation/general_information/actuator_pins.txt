@@ -1,0 +1,19 @@
+Left Leg
+	Top Actuator Power:	Physical pin 16
+	Top Actuator Switch:	Physical pin 32
+	
+	Middle Actuator Power: 	Physical pin 22
+	Middle Actuator Switch: Physical pin 38
+	
+	Bottom Actuator Power:	Physical pin 12
+	Bottom Actuator Switch: Physical pin 40
+	
+Left Leg
+	Top Actuator Power:	Physical pin 15
+	Top Actuator Switch:	Physical pin 29
+	
+	Middle Actuator Power: 	Physical pin 13
+	Middle Actuator Switch: Physical pin 33
+	
+	Bottom Actuator Power:	Physical pin 11
+	Bottom Actuator Switch: Physical pin 37

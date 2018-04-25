@@ -1,0 +1,18 @@
+digraph "LSM9DS1"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  Node1 [label="LSM9DS1",height=0.2,width=0.4,color="black", fillcolor="grey75", style="filled", fontcolor="black"];
+  Node2 -> Node1 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" settings" ];
+  Node2 [label="IMUSettings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structIMUSettings.html"];
+  Node3 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" mag" ];
+  Node3 [label="magSettings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structmagSettings.html"];
+  Node4 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" gyro" ];
+  Node4 [label="gyroSettings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structgyroSettings.html"];
+  Node5 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" device" ];
+  Node5 [label="deviceSettings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structdeviceSettings.html"];
+  Node6 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" accel" ];
+  Node6 [label="accelSettings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structaccelSettings.html"];
+  Node7 -> Node2 [dir="back",color="darkorchid3",fontsize="10",style="dashed",label=" temp" ];
+  Node7 [label="temperatureSettings",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$structtemperatureSettings.html"];
+}

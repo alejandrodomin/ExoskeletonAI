@@ -1,0 +1,29 @@
+\hypertarget{structIMUSettings}{}\section{I\+M\+U\+Settings Struct Reference}
+\label{structIMUSettings}\index{I\+M\+U\+Settings@{I\+M\+U\+Settings}}
+
+
+Collaboration diagram for I\+M\+U\+Settings\+:
+% FIG 0
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{structdeviceSettings}{device\+Settings} {\bfseries device}\hypertarget{structIMUSettings_a22b2648befc58307b43edc9e74acd583}{}\label{structIMUSettings_a22b2648befc58307b43edc9e74acd583}
+
+\item 
+\hyperlink{structgyroSettings}{gyro\+Settings} {\bfseries gyro}\hypertarget{structIMUSettings_afab65feef7d0ca778b035a8805b1e4bf}{}\label{structIMUSettings_afab65feef7d0ca778b035a8805b1e4bf}
+
+\item 
+\hyperlink{structaccelSettings}{accel\+Settings} {\bfseries accel}\hypertarget{structIMUSettings_aa8c7bf392c70397ae02ee1f5ad0ea474}{}\label{structIMUSettings_aa8c7bf392c70397ae02ee1f5ad0ea474}
+
+\item 
+\hyperlink{structmagSettings}{mag\+Settings} {\bfseries mag}\hypertarget{structIMUSettings_aca08359dfa3b8120aa687680d6c06ba7}{}\label{structIMUSettings_aca08359dfa3b8120aa687680d6c06ba7}
+
+\item 
+\hyperlink{structtemperatureSettings}{temperature\+Settings} {\bfseries temp}\hypertarget{structIMUSettings_a55a77555f1843c186db02080078632f2}{}\label{structIMUSettings_a55a77555f1843c186db02080078632f2}
+
+\end{DoxyCompactItemize}
+
+
+The documentation for this struct was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+/home/cooldude101/\+Exoskeleton\+A\+I/hardware/include/L\+S\+M9\+D\+S1\+\_\+\+Types.\+h\end{DoxyCompactItemize}
